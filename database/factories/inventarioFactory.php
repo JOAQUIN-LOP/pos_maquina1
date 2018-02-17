@@ -5,12 +5,13 @@ use Faker\Generator;
 
 $factory->define(inventario::class, function (Generator $faker) {
     $array = [
-        'mes' => $faker->name,
-    	'anio' => $faker->address,
-        'fecha' => $faker->name,
+        'mes' => $faker->monthName,
+    	'anio' => $faker->year,
+        'fecha' => $faker->date,
+        'cantidad' => $faker->randomFloat,
         'descripcion_inventario' => $faker->name,
-    	'precio_compra' => $faker->address,    
-    	'stock' => $faker->address, 
-        'total_inventario' => $faker->name,
+    	'precio_compra' => $faker->randomFloat,    
+    	'stock' => $faker->randomFloat, 
+        'total_inventario' => $faker->randomFloat,
     ];
 });

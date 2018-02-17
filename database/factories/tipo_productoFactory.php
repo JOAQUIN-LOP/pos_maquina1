@@ -1,9 +1,10 @@
 <?php
 
-use Faker\Generator as Faker;
+use App\tipo_producto;
+use Faker\Generator;
 
-$factory->define(App\tipo_producto::class, function (Faker $faker) {
-    return [
-        //
+$factory->define(tipo_producto::class, function (Generator $faker) {
+    $array = [
+        'tipoProducto' => $faker->name, 
     ];
 });

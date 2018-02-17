@@ -1,9 +1,13 @@
 <?php
 
-use Faker\Generator as Faker;
+use App\detalle_factura;
+use Faker\Generator;
 
-$factory->define(App\detalle_factura::class, function (Faker $faker) {
-    return [
-        //
+$factory->define(detalle_factura::class, function (Generator $faker) {
+    $array = [
+    	'cantidad' => $faker->randomFloat,
+        'descripcion' => $faker->name,
+    	'precio_unit' => $faker->randomFloat,    
+        'total_venta' => $faker->randomFloat,
     ];
 });
