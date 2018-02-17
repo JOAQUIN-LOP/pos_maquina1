@@ -11,6 +11,6 @@ class productoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\producto::class, 90)->create();
     }
 }

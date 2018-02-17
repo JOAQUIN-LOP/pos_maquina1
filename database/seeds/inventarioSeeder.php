@@ -11,6 +11,6 @@ class inventarioSeeder extends Seeder
      */
     public function run()
     {
-        //
+       factory(App\inventario::class, 90)->create();
     }
 }

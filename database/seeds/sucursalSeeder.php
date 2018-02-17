@@ -11,6 +11,6 @@ class sucursalSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\sucursal::class, 90)->create();
     }
 }

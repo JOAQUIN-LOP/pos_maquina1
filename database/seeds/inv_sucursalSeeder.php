@@ -11,6 +11,6 @@ class inv_sucursalSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\inv_sucursal::class, 90)->create();
     }
 }

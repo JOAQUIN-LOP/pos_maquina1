@@ -11,6 +11,6 @@ class facturaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\factura::class, 90)->create();
     }
 }

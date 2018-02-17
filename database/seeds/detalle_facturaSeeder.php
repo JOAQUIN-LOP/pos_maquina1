@@ -11,6 +11,6 @@ class detalle_facturaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\detalle_factura::class, 90)->create();
     }
 }
