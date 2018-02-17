@@ -5,6 +5,7 @@ use Faker\Generator;
 
 $factory->define(sucursal::class, function (Generator $faker) {
     $array = [
-        'nom_sucursal' => $faker->name,
+        'nom_sucursal' => $faker->name
     ];
+    return $array;
 });

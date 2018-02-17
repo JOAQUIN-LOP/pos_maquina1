@@ -8,6 +8,7 @@ $factory->define(usuario::class, function (Generator $faker) {
         'nom_usuario' => $faker->name,
     	'apellidos' => $faker->lastName,
     	'user' => $faker->userName,
-    	'password' => $faker->password,
+    	'password' => $faker->password
     ];
+    return $array;
 });

@@ -5,6 +5,7 @@ use Faker\Generator;
 
 $factory->define(tipo_producto::class, function (Generator $faker) {
     $array = [
-        'tipoProducto' => $faker->name, 
+        'tipoProducto' => $faker->name
     ];
+    return $array;
 });

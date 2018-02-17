@@ -8,6 +8,8 @@ $factory->define(detalle_factura::class, function (Generator $faker) {
     	'cantidad' => $faker->randomFloat,
         'descripcion' => $faker->name,
     	'precio_unit' => $faker->randomFloat,    
-        'total_venta' => $faker->randomFloat,
+        'total_venta' => $faker->randomFloat
     ];
+
+    return $array;
 });

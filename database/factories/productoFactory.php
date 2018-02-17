@@ -8,6 +8,7 @@ $factory->define(producto::class, function (Generator $faker) {
         'nomProducto' => $faker->name,
     	'unidad' => $faker->randomFloat,
     	'precio_compra' => $faker->randomFloat,    
-        'existencia' => $faker->randomFloat,
+        'existencia' => $faker->randomFloat
     ];
+    return $array;
 });

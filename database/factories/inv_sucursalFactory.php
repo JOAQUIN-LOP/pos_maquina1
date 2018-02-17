@@ -11,6 +11,7 @@ $factory->define(inv_sucursal::class, function (Generator $faker) {
     	'cantidad' => $faker->randomFloat,
         'descripcion' => $faker->name,
     	'precio_compra' => $faker->randomFloat,    
-        'total_inv_sucursal' => $faker->randomFloat,
+        'total_inv_sucursal' => $faker->randomFloat
     ];
+    return $array;
 });

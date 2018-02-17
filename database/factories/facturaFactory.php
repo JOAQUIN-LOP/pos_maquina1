@@ -10,6 +10,7 @@ $factory->define(factura::class, function (Generator $faker) {
         'fecha' => $faker->date,
         'hora' => $faker->dateTime,
         'direccion' => $faker->address,
-    	'total_factura' => $faker->randomFloat,    
+    	'total_factura' => $faker->randomFloat
     ];
+    return $array;
 });
