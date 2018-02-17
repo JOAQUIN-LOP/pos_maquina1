@@ -1,10 +1,9 @@
 <?php
 
-use App\inventario;
-use Faker\Generator;
+use Faker\Generator as Faker;
 
-$factory->define(inventario::class, function (Generator $faker) {
-    $array = [
+$factory->define(App\inventario::class, function (Faker $faker) {
+    return [
         'mes' => $faker->monthName,
     	'anio' => $faker->year,
         'fecha' => $faker->date,
@@ -12,7 +11,6 @@ $factory->define(inventario::class, function (Generator $faker) {
         'descripcion_inventario' => $faker->name,
     	'precio_compra' => $faker->randomFloat,    
     	'stock' => $faker->randomFloat, 
-        'total_inventario' => $faker->randomFloat
+        'total_inventario' => $faker->randomFloat,
     ];
-    return $array;
 });

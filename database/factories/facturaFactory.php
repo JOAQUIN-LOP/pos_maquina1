@@ -1,16 +1,14 @@
 <?php
 
-use App\factura;
-use Faker\Generator;
+use Faker\Generator as Faker;
 
-$factory->define(factura::class, function (Generator $faker) {
-    $array = [
+$factory->define(App\factura::class, function (Faker $faker) {
+    return [
         'mes' => $faker->monthName,
     	'anio' => $faker->year,
         'fecha' => $faker->date,
         'hora' => $faker->dateTime,
         'direccion' => $faker->address,
-    	'total_factura' => $faker->randomFloat
+    	'total_factura' => $faker->randomFloat,
     ];
-    return $array;
 });

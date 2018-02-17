@@ -1,14 +1,12 @@
 <?php
 
-use App\usuario;
-use Faker\Generator;
+use Faker\Generator as Faker;
 
-$factory->define(usuario::class, function (Generator $faker) {
-    $array = [
+$factory->define(App\usuario::class, function (Faker $faker) {
+    return [
         'nom_usuario' => $faker->name,
     	'apellidos' => $faker->lastName,
     	'user' => $faker->userName,
-    	'password' => $faker->password
+    	'password' => $faker->password,
     ];
-    return $array;
 });

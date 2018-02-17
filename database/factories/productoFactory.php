@@ -1,14 +1,12 @@
 <?php
 
-use App\producto;
-use Faker\Generator;
+use Faker\Generator as Faker;
 
-$factory->define(producto::class, function (Generator $faker) {
-    $array = [
+$factory->define(App\producto::class, function (Faker $faker) {
+    return [
         'nomProducto' => $faker->name,
     	'unidad' => $faker->randomFloat,
     	'precio_compra' => $faker->randomFloat,    
-        'existencia' => $faker->randomFloat
+        'existencia' => $faker->randomFloat,
     ];
-    return $array;
 });

@@ -1,17 +1,15 @@
 <?php
 
-use App\inv_sucursal;
-use Faker\Generator;
+use Faker\Generator as Faker;
 
-$factory->define(inv_sucursal::class, function (Generator $faker) {
-    $array = [
+$factory->define(App\inv_sucursal::class, function (Faker $faker) {
+    return [
         'mes' => $faker->monthName,
     	'anio' => $faker->year,
         'fecha' => $faker->date,
     	'cantidad' => $faker->randomFloat,
         'descripcion' => $faker->name,
     	'precio_compra' => $faker->randomFloat,    
-        'total_inv_sucursal' => $faker->randomFloat
+        'total_inv_sucursal' => $faker->randomFloat,
     ];
-    return $array;
 });

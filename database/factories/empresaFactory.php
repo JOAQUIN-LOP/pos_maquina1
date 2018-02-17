@@ -1,12 +1,10 @@
 <?php
 
-use App\empresa;
-use Faker\Generator;
+use Faker\Generator as Faker;
 
-$factory->define(empresa::class, function (Generator $faker) {
-    $array = [
+$factory->define(App\empresa::class, function (Faker $faker) {
+    return [
         'nom_empresa' => $faker->name,
-    	'direccion' => $faker->address
+    	'direccion' => $faker->address,
     ];
-    return $array;
 });
