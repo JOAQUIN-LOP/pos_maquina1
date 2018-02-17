@@ -1,9 +1,10 @@
 <?php
 
-use Faker\Generator as Faker;
+use App\sucursal;
+use Faker\Generator;
 
-$factory->define(App\sucursal::class, function (Faker $faker) {
-    return [
-        //
+$factory->define(sucursal::class, function (Generator $faker) {
+    $array = [
+        'nom_sucursal' => $faker->name,
     ];
 });

@@ -16,6 +16,7 @@ class DetalleFacturaMigration extends Migration
         Schema::create('detalle_factura', function (Blueprint $table) {
             $table->increments('idDetalle');
             $table->float('cantidad',8,2);
+            $table->string('descripcion',75);
             $table->float('precio_unit',8,2);
             $table->float('total_venta',8,2);
 
