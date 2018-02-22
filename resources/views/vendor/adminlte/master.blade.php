@@ -17,7 +17,7 @@
 
     @if(config('adminlte.plugins.select2'))
         <!-- Select2 -->
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/select2/css/select2.min.css') }}">
     @endif
 
     <!-- Theme style -->
@@ -48,7 +48,7 @@
 
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/select2/js/select2.min.js') }}"></script>
 @endif
 
 @if(config('adminlte.plugins.datatables'))

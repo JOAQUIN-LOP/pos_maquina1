@@ -3,7 +3,7 @@
 return [
 
     'full_name'                   => 'Nombre completo',
-    'last_name'                 => 'Apellidos',
+    'last_name'                   => 'Apellidos',
     'email'                       => 'Email',
     'password'                    => 'Contraseña',
     'retype_password'             => 'Confirme la contraseña',
@@ -22,6 +22,6 @@ return [
     'send_password_reset_link'    => 'Enviar link de restablecimiento de contraseña',
     'user'                        => 'Usuario',
     'status'                    => 'Estado',
-    'bussiness'                 => 'Seleccionar Empresa'
-
+    'business'                  => 'Seleccionar Empresa',
+    'log_in'                    => 'Iniciar Sesión'
 ];

@@ -3,17 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
-    use SoftDeletes;
+    //use SoftDeletes;
     protected $table = 'usuario';
 
     protected $fillable = array('nom_usuario','apellidos', 'user','password','ACTIVO','empresa_id');                                                                          
 
-    protected $hidden = ['deleted_at', 'created_at','updated_at'];
+    protected $hidden = ['created_at','updated_at','password','remember_token'];
 
-    protected $dates = ['deleted_at'];
+    //protected $dates = ['deleted_at'];
 }

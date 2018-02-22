@@ -29,7 +29,7 @@
                     @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('apellidos') ? 'has-error' : '' }}">
-                    <input type="email" name="apellidos" class="form-control" value="{{ old('apellidos') }}"
+                    <input type="text" name="apellidos" class="form-control" value="{{ old('apellidos') }}"
                            placeholder="{{ trans('adminlte::adminlte.last_name') }}">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     @if ($errors->has('apellidos'))
