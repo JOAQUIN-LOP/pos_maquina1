@@ -12,5 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('vendor/adminlte/login');
 });
+
+Route::post('do_login', array('uses' => 'HomeController@doLogin'));
+
+Route::post('do_logout', array('uses' => 'HomeController@doLogout'));
+
+Auth::routes();
+
+Route::resource('usuario','UsuarioController');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
