@@ -7,6 +7,8 @@ use App\Usuario;
 use Validator;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
@@ -63,6 +65,15 @@ class HomeController extends Controller
                 return Redirect::to('login');
             }
         }
+    }
+
+    public function doLogout(){
+
+        Auth::logout();
+
+        Session::flush();
+
+        return Redirect::to('login');
 
     }
 }
