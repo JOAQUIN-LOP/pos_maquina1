@@ -21,23 +21,17 @@ class FacturaMigration extends Migration
             $table->dateTime('hora');
             $table->string('direccion',75);
             $table->float('total_factura',8,2);
-            $table->boolean('ACTIVO')->default(true);
+            $table->boolean('estado')->default(true);
 
             $table->integer('empresa_id')->unsigned();
             $table->integer('sucursal_id')->unsigned();
 
             //creando la relacion con la tabla empresa
-            $table->foreign('empresa_id')
-                ->references('idEmpresa')
-                ->on('empresa')
-                ->onDelete('cascade');
+            $table->foreign('empresa_id')->references('idEmpresa')->on('empresa')->onDelete('cascade');
 
 
             //creando la relacion con la tabla sucursal
-            $table->foreign('sucursal_id')
-                ->references('idSucursal')
-                ->on('sucursal')
-                ->onDelete('cascade');
+            $table->foreign('sucursal_id')->references('idSucursal')->on('sucursal')->onDelete('cascade');
 
             $table->timestamps();
         });

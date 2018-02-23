@@ -23,16 +23,13 @@ class InventarioMigration extends Migration
             $table->float('precio_compra',8,2);
             $table->float('stock',8,2);
             $table->float('total_inventario',8,2);
-            $table->boolean('ACTIVO')->default(true);
+            $table->boolean('estado')->default(true);
 
 
             $table->integer('empresa_id')->unsigned();
 
             //creando la relacion con la tabla empresa
-            $table->foreign('empresa_id')
-                ->references('idEmpresa')
-                ->on('empresa')
-                ->onDelete('cascade');
+            $table->foreign('empresa_id')->references('idEmpresa')->on('empresa')->onDelete('cascade');
 
             $table->timestamps();
         });

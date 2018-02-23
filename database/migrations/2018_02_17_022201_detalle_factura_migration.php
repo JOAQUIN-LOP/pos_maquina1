@@ -24,16 +24,10 @@ class DetalleFacturaMigration extends Migration
             $table->integer('factura_num')->unsigned();
 
             //creando la relacion con la tabla producto
-            $table->foreign('producto_id')
-                ->references('idProducto')
-                ->on('producto')
-                ->onDelete('cascade');
+            $table->foreign('producto_id')->references('idProducto')->on('producto')->onDelete('cascade');
 
             //creando la relacion con la tabla factura
-            $table->foreign('factura_num')
-                ->references('num_factura')
-                ->on('factura')
-                ->onDelete('cascade');
+            $table->foreign('factura_num')->references('num_factura')->on('factura')->onDelete('cascade');
 
             $table->timestamps();
         });

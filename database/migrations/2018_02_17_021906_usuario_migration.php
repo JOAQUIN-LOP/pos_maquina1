@@ -19,16 +19,14 @@ class UsuarioMigration extends Migration
             $table->string('apellidos',75);
             $table->string('user',75)->unique();
             $table->string('password',75);
-            $table->boolean('ACTIVO')->default(true);
+            $table->string('rol',75),
+            $table->boolean('estado')->default(true);
 
 
             $table->integer('empresa_id')->unsigned();
 
             //creando la relacion con la tabla empresa
-            $table->foreign('empresa_id')
-                ->references('idEmpresa')
-                ->on('empresa')
-                ->onDelete('cascade');
+            $table->foreign('empresa_id')->references('idEmpresa')->on('empresa')->onDelete('cascade');
 
             $table->timestamps();
         });
