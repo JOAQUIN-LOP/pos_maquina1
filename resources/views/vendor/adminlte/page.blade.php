@@ -1,8 +1,12 @@
 @extends('adminlte::master')
 
 @section('adminlte_css')
-    <link rel="stylesheet"
-          href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 'blue') . '.min.css')}} ">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 'blue') . '.min.css')}} ">
+    <!-- icheck -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/icheck/skins/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/icheck/skins/square/blue.css') }}">
+    <!-- Personal Css -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/articulos.css') }}">
     @stack('css')
     @yield('css')
 @stop
@@ -132,6 +136,7 @@
 
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/dist/icheck/icheck.js?v=1.0.2') }}"></script>
     @stack('js')
     @yield('js')
 @stop
