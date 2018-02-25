@@ -25,14 +25,11 @@ Route::resource('usuario','UsuarioController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-<<<<<<< HEAD
 Route::get('/admin/products', function(){
 	return view('data_products');
 });
 
-=======
-//Route::get('/home', 'ArticulosController@index')->name('articulos');
->>>>>>> a8db79ad120fe41f8dac67256902268ee962cb27
+
 
 Route::get('/home/articulos', function()
 {

@@ -128,6 +128,11 @@ return [
             'url'           => 'admin/products',
             'icon'          => 'file',            
         ],
+        [
+            'text'          => 'Registro nuevo Producto',
+            'url'           => '/home/articulos',
+            'icon'          => 'file',
+        ],
         /*'ACCOUNT SETTINGS',
         [
             'text' => 'Articulos',
