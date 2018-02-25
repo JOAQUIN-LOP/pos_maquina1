@@ -46,7 +46,7 @@
       </div>
     </div>  
 
-    <div class="row form-group altura-30">
+    <div class="row form-group ">
       <div class="col-xs-1">
         <label>Tipo</label>
       </div>
@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div class="row form-group altura-30">
+    <div class="row form-group ">
       <div class="col-xs-1">
         <label>Estado</label>
       </div>
@@ -71,6 +71,21 @@
                 </label>
       </div>
     </div>
+
+    <div class="row form-group ">
+      <div class="col-xs-4">
+        <button type="button" class="btn btn-block btn-success btn-lg">Primary</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" class="btn btn-block btn-warning btn-lg">Primary</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" class="btn btn-block btn-danger btn-lg">Primary</button>
+      </div>
+    </div>
+    
+    
+
 
   </div>
   <!-- /.box-body -->
