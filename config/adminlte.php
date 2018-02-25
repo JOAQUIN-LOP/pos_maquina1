@@ -87,6 +87,8 @@ return [
 
     'dashboard_url' => 'home',
 
+    'articulos_url' => 'articulos',
+
     'logout_url' => 'logout',
 
     'logout_method' => null,
@@ -122,6 +124,11 @@ return [
             'label_color' => 'success',
         ],
         'ACCOUNT SETTINGS',
+        [
+            'text' => 'Articulos',
+            'url'  => 'home/articulos',
+            'icon' => 'user',
+        ],
         [
             'text' => 'Profile',
             'url'  => 'admin/settings',
