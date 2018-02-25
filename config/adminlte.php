@@ -121,7 +121,12 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        'ACCOUNT SETTINGS',
+        [
+            'text'          => 'Todos los Productos',
+            'url'           => 'admin/products',
+            'icon'          => 'file',            
+        ],
+        /*'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
             'url'  => 'admin/settings',
@@ -182,7 +187,7 @@ return [
         [
             'text'       => 'Information',
             'icon_color' => 'aqua',
-        ],
+        ],*/
     ],
 
     /*
