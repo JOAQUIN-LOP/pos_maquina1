@@ -87,6 +87,8 @@ return [
 
     'dashboard_url' => 'home',
 
+    'articulos_url' => 'articulos',
+
     'logout_url' => 'logout',
 
     'logout_method' => null,
@@ -121,7 +123,22 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        'ACCOUNT SETTINGS',
+        [
+            'text'          => 'Todos los Productos',
+            'url'           => 'admin/products',
+            'icon'          => 'file',            
+        ],
+        [
+            'text'          => 'Registro nuevo Producto',
+            'url'           => '/home/articulos',
+            'icon'          => 'file',
+        ],
+        /*'ACCOUNT SETTINGS',
+        [
+            'text' => 'Articulos',
+            'url'  => 'home/articulos',
+            'icon' => 'user',
+        ],
         [
             'text' => 'Profile',
             'url'  => 'admin/settings',
@@ -182,7 +199,7 @@ return [
         [
             'text'       => 'Information',
             'icon_color' => 'aqua',
-        ],
+        ],*/
     ],
 
     /*

@@ -62,7 +62,9 @@
 @endif
 
 <script>
-    $('#empresa').select2();
+    $(document).ready(function(){
+        $('#tableProduct').DataTable();
+    });
 </script>
 @yield('adminlte_js')
 
