@@ -13,6 +13,12 @@ class empresaSeeder extends Seeder
      */
     public function run()
     {
-          factory(Empresa::class, 90)->create();
+          DB::table('empresa')->insert([
+
+
+          		'nom_empresa' => 'Tienda Maldonado',
+          		'direccion' => 'San Jose La Maquina',
+
+          ]);
     }
 }
