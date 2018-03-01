@@ -14,7 +14,13 @@ class DetalleProducto extends Migration
     public function up()
     {
         Schema::create('detalle_producto', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_detalle_producto');
+            $table->float('precio_total_compras',8,2);
+            $table->float('cantidad_unidades',8,2);
+            $table->float('precio_unidad',8,2);
+            $table->date('fecha');
+            $table->boolean('estado')->default(true);
+
             $table->timestamps();
         });
     }
