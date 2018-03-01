@@ -17,9 +17,9 @@ class UsuarioMigration extends Migration
             $table->increments('idUsuario');
             $table->string('nom_usuario',75);
             $table->string('apellidos',75);
+            $table->string('rol',75);
             $table->string('user',75)->unique();
             $table->string('password',75);
-            $table->string('rol',75);
             $table->boolean('estado')->default(true);
             $table->string('remember_token', 100)->nullable();
 
