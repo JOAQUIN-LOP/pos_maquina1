@@ -20,6 +20,7 @@ class usuarioSeeder extends Seeder
     		'apellidos'			=> 'Lara',
     		'user'				=> 'admin',
     		'password'			=> Hash::make('123456'),
+            'rol'               => 'admin',
     		'empresa_id'		=> 1,
         ));
     }
