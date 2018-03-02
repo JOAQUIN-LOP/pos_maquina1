@@ -12,6 +12,15 @@ class detalle_facturaSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\detalle_factura::class, 90)->create();
+        DB::table('detalle_factura')->insert(array(
+        	'factura_num'		=>	'1',
+            'cantidad' 			=>  '2',
+            'idProducto' 		=>  '1',
+            'descripcion' 		=>  'productos',
+            'precio_unit'		=>  '11.80',
+        	'total_venta' 		=>  '23.60',
+            'created_at' 		=>  date('Y-m-d H:m:s'),
+            'updated_at'		=>  date('Y-m-d H:m:s') 
+        )); 
     }
 }

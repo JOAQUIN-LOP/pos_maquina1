@@ -12,6 +12,16 @@ class inventarioSeeder extends Seeder
      */
     public function run()
     {
-       factory(App\inventario::class, 90)->create();
+        DB::table('inventario')->insert(array(
+            'empresa_id' 					=> '1',
+            'mes' 							=> 'diciembre',
+        	'anio' 							=> '2017',
+        	'fecha' 						=> '2017-04-25',
+        	'total_cantidad_productos' 		=> '800',
+        	'total_cantidad_inventario'		=> '200',
+        	'estado' 						=> '1',
+            'created_at' 					=> date('Y-m-d H:m:s'),
+            'updated_at' 					=> date('Y-m-d H:m:s') 
+        ));  
     }
 }
