@@ -13,37 +13,30 @@ class sucursalSeeder extends Seeder
     public function run()
     {
           DB::table('sucursal')->insert(array(
-
-          		'nom_sucursal'        =>  'La surtidora',
+              'idEmpresa'           => '1',
+          		'nom_sucursal'        => 'La surtidora',
               'estado'              => '1',
-              'empresa_id'          =>  1,
               'created_at'          => date('Y-m-d H:m:s'),
               'updated_at'          => date('Y-m-d H:m:s') 
           ));
-
           DB::table('sucursal')->insert(array(
-
-              'nom_sucursal'        =>  'La rendidora',
+              'idEmpresa'           => '1',
+              'nom_sucursal'        => 'La rendidora',
               'estado'              => '1',
-              'empresa_id'          =>  1,
               'created_at'          => date('Y-m-d H:m:s'),
               'updated_at'          => date('Y-m-d H:m:s') 
           ));
-
           DB::table('sucursal')->insert(array(
-
-              'nom_sucursal'        =>  'La ABC',
+              'idEmpresa'           => '1',
+              'nom_sucursal'        => 'La ABC',
               'estado'              => '1',
-              'empresa_id'          =>  1,
               'created_at'          => date('Y-m-d H:m:s'),
               'updated_at'          => date('Y-m-d H:m:s') 
           ));
-
           DB::table('sucursal')->insert(array(
-
-              'nom_sucursal'        =>  'La Maxi surtidora',
+              'idEmpresa'           => '1',
+              'nom_sucursal'        => 'La Maxi surtidora',
               'estado'              => '1',
-              'empresa_id'          =>  1,
               'created_at'          => date('Y-m-d H:m:s'),
               'updated_at'          => date('Y-m-d H:m:s') 
           ));

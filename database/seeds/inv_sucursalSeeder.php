@@ -13,7 +13,7 @@ class inv_sucursalSeeder extends Seeder
     public function run()
     {
         DB::table('inventario_sucursal')->insert(array(
-            'sucursal_id' 					=> '1',
+            'idSucursal' 					=> '1',
             'mes' 							=> 'diciembre',
         	'anio' 							=> '2017',
         	'fecha' 						=> '2017-04-25',

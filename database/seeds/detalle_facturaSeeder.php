@@ -13,7 +13,7 @@ class detalle_facturaSeeder extends Seeder
     public function run()
     {
         DB::table('detalle_factura')->insert(array(
-        	'factura_num'		=>	'1',
+        	'num_factura'		=>	'1',
             'cantidad' 			=>  '2',
             'idProducto' 		=>  '1',
             'descripcion' 		=>  'productos',
