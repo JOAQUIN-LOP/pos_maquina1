@@ -23,7 +23,7 @@ class ProductoMigration extends Migration
             $table->integer('tipo_id')->unsigned();
 
             //creando la relacion con la tabla tipo_producto
-            $table->foreign('tipo_id')->references('idTipoProducto')->on('tipo_producto')->onDelete('cascade');
+            $table->foreign('tipo_id')->references('idTipoProducto')->on('tipo_producto');
 
             $table->timestamps();
         });

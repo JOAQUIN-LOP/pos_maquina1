@@ -21,7 +21,7 @@ class SucursalMigration extends Migration
 
 
             //creando la relacion con la tabla empresa
-            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa')->onDelete('cascade');
+            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa');
 
             $table->timestamps();
         });

@@ -13,13 +13,17 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(empresaSeeder::class);
         $this->call(usuarioSeeder::class);
-        /*$this->call(sucursalSeeder::class);
+        $this->call(sucursalSeeder::class);
         $this->call(inv_sucursalSeeder::class);
         $this->call(facturaSeeder::class);
         $this->call(tipo_productoSeeder::class);
         $this->call(inventarioSeeder::class);
         $this->call(productoSeeder::class);
         $this->call(detalle_facturaSeeder::class);
-*/
+        $this->call(detalle_productoSeeder::class);
+        $this->call(tabla_calculo_sucursalSeeder::class);
+        $this->call(tabla_calculoSeeder::class);
+        $this->call(detalle_inventarioSeeder::class);
+        $this->call(detalle_inventario_sucursalSeeder::class);
     }
 }

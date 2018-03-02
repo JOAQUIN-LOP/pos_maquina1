@@ -23,9 +23,9 @@ class DetalleInventarioSucursal extends Migration
 
 
              //creando la relacion con la tabla inventario sucursal
-            $table->foreign('num_inventario_sucursal')->references('num_inventario_sucursal')->on('inventario_sucursal')->onDelete('cascade');
+            $table->foreign('num_inventario_sucursal')->references('num_inventario_sucursal')->on('inventario_sucursal');
             //creando la relacion con la tabla inventario sucursal
-            $table->foreign('id_calculo_sucursal')->references('id_tabla_calculo_sucursal')->on('tabla_calculo_sucursal')->onDelete('cascade');
+            $table->foreign('id_calculo_sucursal')->references('id_tabla_calculo_sucursal')->on('tabla_calculo_sucursal');
             $table->timestamps();
         });
     }

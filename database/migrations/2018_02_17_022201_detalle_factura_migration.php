@@ -15,18 +15,18 @@ class DetalleFacturaMigration extends Migration
     {
         Schema::create('detalle_factura', function (Blueprint $table) {
             $table->increments('idDetalle');
-            $table->integer('num_factura')->unsigned();
-            $table->float('cantidad',8,2);
+            $table->integer('idFactura')->unsigned();
+            $table->decimal('cantidad',8,2);
             $table->integer('idProducto')->unsigned();
             $table->string('descripcion',75);
-            $table->float('precio_unit',8,2);
-            $table->float('total_venta',8,2);
+            $table->decimal('precio_unit',8,2);
+            $table->decimal('total_venta',8,2);
 
             //creando la relacion con la tabla factura
-            $table->foreign('num_factura')->references('num_factura')->on('factura')->onDelete('cascade');
+            $table->foreign('idFactura')->references('idFactura')->on('factura');
 
             //creando la relacion con la tabla producto
-            $table->foreign('idProducto')->references('idProducto')->on('producto')->onDelete('cascade');
+            $table->foreign('idProducto')->references('idProducto')->on('producto');
 
             $table->timestamps();
         });

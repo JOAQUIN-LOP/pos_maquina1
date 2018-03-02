@@ -14,7 +14,8 @@ class FacturaMigration extends Migration
     public function up()
     {
         Schema::create('factura', function (Blueprint $table) {
-            $table->increments('num_factura');
+            $table->increments('idFactura');
+            $table->integer('num_factura')->unique();
             $table->integer('idEmpresa')->unsigned();
             $table->integer('idSucursal')->unsigned();
             $table->string('mes',12);
@@ -22,15 +23,15 @@ class FacturaMigration extends Migration
             $table->date('fecha');
             $table->dateTime('hora');
             $table->string('direccion',75);
-            $table->float('total_factura',8,2);
+            $table->decimal('total_factura',8,2);
             $table->boolean('estado')->default(true);
 
             //creando la relacion con la tabla empresa
-            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa')->onDelete('cascade');
+            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa');
 
 
             //creando la relacion con la tabla sucursal
-            $table->foreign('idSucursal')->references('idSucursal')->on('sucursal')->onDelete('cascade');
+            $table->foreign('idSucursal')->references('idSucursal')->on('sucursal');
 
             $table->timestamps();
         });

@@ -21,7 +21,7 @@ class usuarioSeeder extends Seeder
     		'user'				=> 'admin',
     		'password'			=> Hash::make('123456'),
             'rol'               => 'admin',
-    		'empresa_id'		=> 1,
+    		'idEmpresa'		=> 1,
         ));
     }
 }
