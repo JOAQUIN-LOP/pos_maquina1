@@ -15,7 +15,7 @@ class InventarioMigration extends Migration
     {
         Schema::create('inventario', function (Blueprint $table) {
             $table->increments('num_inventario');
-            $table->integer('empresa_id')->unsigned();
+            $table->integer('idEmpresa')->unsigned();
             $table->string('mes',12);
             $table->string('anio',10);
             $table->date('fecha');
@@ -25,7 +25,7 @@ class InventarioMigration extends Migration
 
 
             //creando la relacion con la tabla empresa
-            $table->foreign('empresa_id')->references('idEmpresa')->on('empresa')->onDelete('cascade');
+            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa')->onDelete('cascade');
 
             $table->timestamps();
         });

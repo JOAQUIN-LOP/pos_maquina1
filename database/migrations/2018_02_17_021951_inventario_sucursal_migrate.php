@@ -15,7 +15,7 @@ class InventarioSucursalMigrate extends Migration
     {
         Schema::create('inventario_sucursal', function (Blueprint $table) {
             $table->increments('num_inventario_sucursal');     
-            $table->integer('sucursal_id')->unsigned();
+            $table->integer('idSucursal')->unsigned();
             $table->string('mes',12);
             $table->string('anio',10);
             $table->date('fecha');
@@ -25,7 +25,7 @@ class InventarioSucursalMigrate extends Migration
 
 
             //creando la relacion con la tabla sucursal
-            $table->foreign('sucursal_id')->references('idSucursal')->on('sucursal')->onDelete('cascade');
+            $table->foreign('idSucursal')->references('idSucursal')->on('sucursal')->onDelete('cascade');
 
             $table->timestamps();
         });

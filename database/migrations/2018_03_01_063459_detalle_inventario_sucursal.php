@@ -15,7 +15,7 @@ class DetalleInventarioSucursal extends Migration
     {
         Schema::create('detalle_inventario_sucursal', function (Blueprint $table) {
             $table->increments('id_detalle_inventario');
-            $table->integer('inventario_numero_sucursal')->unsigned();
+            $table->integer('num_inventario_sucursal')->unsigned();
             $table->integer('id_calculo_sucursal')->unsigned();
             $table->float('cantidad_total',8,2);
             $table->float('total_inventario',8,2);
@@ -23,7 +23,7 @@ class DetalleInventarioSucursal extends Migration
 
 
              //creando la relacion con la tabla inventario sucursal
-            $table->foreign('inventario_numero_sucursal')->references('num_inventario_sucursal')->on('inventario_sucursal')->onDelete('cascade');
+            $table->foreign('num_inventario_sucursal')->references('num_inventario_sucursal')->on('inventario_sucursal')->onDelete('cascade');
             //creando la relacion con la tabla inventario sucursal
             $table->foreign('id_calculo_sucursal')->references('id_tabla_calculo_sucursal')->on('tabla_calculo_sucursal')->onDelete('cascade');
             $table->timestamps();

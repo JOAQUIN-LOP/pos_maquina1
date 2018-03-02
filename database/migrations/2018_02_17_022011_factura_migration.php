@@ -15,8 +15,8 @@ class FacturaMigration extends Migration
     {
         Schema::create('factura', function (Blueprint $table) {
             $table->increments('num_factura');
-            $table->integer('empresa_id')->unsigned();
-            $table->integer('sucursal_id')->unsigned();
+            $table->integer('idEmpresa')->unsigned();
+            $table->integer('idSucursal')->unsigned();
             $table->string('mes',12);
             $table->string('anio',10);
             $table->date('fecha');
@@ -26,11 +26,11 @@ class FacturaMigration extends Migration
             $table->boolean('estado')->default(true);
 
             //creando la relacion con la tabla empresa
-            $table->foreign('empresa_id')->references('idEmpresa')->on('empresa')->onDelete('cascade');
+            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa')->onDelete('cascade');
 
 
             //creando la relacion con la tabla sucursal
-            $table->foreign('sucursal_id')->references('idSucursal')->on('sucursal')->onDelete('cascade');
+            $table->foreign('idSucursal')->references('idSucursal')->on('sucursal')->onDelete('cascade');
 
             $table->timestamps();
         });

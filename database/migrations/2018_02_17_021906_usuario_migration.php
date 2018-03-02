@@ -14,6 +14,7 @@ class UsuarioMigration extends Migration
     public function up()
     {
         Schema::create('usuario', function (Blueprint $table) {
+            $table->integer('idEmpresa')->unsigned();
             $table->increments('idUsuario');
             $table->string('nom_usuario',75);
             $table->string('apellidos',75);
@@ -23,9 +24,8 @@ class UsuarioMigration extends Migration
             $table->boolean('estado')->default(true);
             $table->string('remember_token', 100)->nullable();
 
-            $table->integer('empresa_id')->unsigned();
             //creando la relacion con la tabla empresa
-            $table->foreign('empresa_id')->references('idEmpresa')->on('empresa');
+            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa');
 
 
             $table->timestamps();
