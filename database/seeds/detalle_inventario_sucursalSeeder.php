@@ -12,8 +12,8 @@ class detalle_inventario_sucursalSeeder extends Seeder
     public function run()
     {
         DB::table('detalle_inventario_sucursal')->insert(array(
-            'num_inventario_sucursal'		=> '1',
-            'id_calculo_sucursal' 			=> '1',
+            'idInventarioSucursal'		    => '1',
+            'idCalculoInventarioSucursal' 	=> '1',
         	'cantidad_total'				=> '1000',
         	'total_inventario' 				=> '8000',
         	'fecha' 						=> '2017-04-25',

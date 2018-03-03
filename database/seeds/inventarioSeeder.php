@@ -13,6 +13,7 @@ class inventarioSeeder extends Seeder
     public function run()
     {
         DB::table('inventario')->insert(array(
+            'num_inventario'                => '1',
             'idEmpresa' 					=> '1',
             'mes' 							=> 'diciembre',
         	'anio' 							=> '2017',
