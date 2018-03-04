@@ -13,6 +13,7 @@ class facturaSeeder extends Seeder
     public function run()
     {
         DB::table('factura')->insert(array(
+            'num_factura'       => '1',
             'idEmpresa' 		=> '1',
             'idSucursal' 		=> '1',
             'mes' 				=> 'diciembre',

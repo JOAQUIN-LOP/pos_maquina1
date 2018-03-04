@@ -11,7 +11,7 @@ class tabla_calculo_sucursalSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('calculo_inventario')->insert(array(
+        DB::table('calculo_inventario_sucursal')->insert(array(
             'idProducto'			=> '1',
             'cantidad_bodega' 		=> '20',
         	'descripcion_producto'	=> 'productos varios',
