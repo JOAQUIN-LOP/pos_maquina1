@@ -17,11 +17,11 @@ class InventarioSucursalMigrate extends Migration
             $table->increments('idInventarioSucursal');
             $table->integer('num_inventario_sucursal');     
             $table->integer('idSucursal')->unsigned();
-            $table->string('mes',12);
-            $table->string('anio',10);
+            $table->integer('mes',2);
+            $table->integer('anio',4);
             $table->date('fecha');
             $table->decimal('total_cantidad_productos',8,2);
-            $table->decimal('total_cantidad_inventario',8,2);
+            $table->decimal('total_cantidad_inventario',11,2);
             $table->boolean('estado')->default(true);
 
 

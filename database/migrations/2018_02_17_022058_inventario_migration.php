@@ -17,11 +17,11 @@ class InventarioMigration extends Migration
             $table->increments('idInventario');
             $table->integer('num_inventario');
             $table->integer('idEmpresa')->unsigned();
-            $table->string('mes',12);
-            $table->string('anio',10);
+            $table->integer('mes',2);
+            $table->integer('anio',4);
             $table->date('fecha');
             $table->decimal('total_cantidad_productos',8,2);
-            $table->decimal('total_cantidad_inventario',8,2);
+            $table->decimal('total_cantidad_inventario',11,2);
             $table->boolean('estado')->default(true);
 
 

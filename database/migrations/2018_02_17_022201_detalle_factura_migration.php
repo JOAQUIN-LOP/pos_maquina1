@@ -16,11 +16,10 @@ class DetalleFacturaMigration extends Migration
         Schema::create('detalle_factura', function (Blueprint $table) {
             $table->increments('idDetalle');
             $table->integer('idFactura')->unsigned();
-            $table->decimal('cantidad',8,2);
             $table->integer('idProducto')->unsigned();
-            $table->string('descripcion',75);
-            $table->decimal('precio_unit',8,2);
-            $table->decimal('total_venta',8,2);
+            $table->decimal('cantidad',8,2);
+            $table->decimal('precio_unit',11,2);
+            $table->decimal('total_venta',11,2);
 
             //creando la relacion con la tabla factura
             $table->foreign('idFactura')->references('idFactura')->on('factura');
