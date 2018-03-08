@@ -13,9 +13,9 @@ class detalle_productoSeeder extends Seeder
     {
         DB::table('detalle_producto')->insert(array(
           'idProducto' =>	'1',
-          'mes'         =>'02',
+          'mes'         =>'01',
           'anio'        =>'2018',
-          'fecha'       =>'2018-02-16',
+          'fecha'       =>'2018-01-16',
           'precio_total_compras' => '51',
           'cantidad_unidades' => '10',
           'precio_unidad' => '5.10',
@@ -26,9 +26,9 @@ class detalle_productoSeeder extends Seeder
 
         DB::table('detalle_producto')->insert(array(
           'idProducto' =>	'2',
-          'mes'         =>'02',
+          'mes'         =>'01',
           'anio'        =>'2018',
-          'fecha'       =>'2018-02-18',
+          'fecha'       =>'2018-01-18',
           'precio_total_compras' => '147',
           'cantidad_unidades' => '50',
           'precio_unidad' => '2.94',
