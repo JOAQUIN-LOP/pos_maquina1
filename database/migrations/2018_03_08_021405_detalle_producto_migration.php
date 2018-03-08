@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TipoProductoMigration extends Migration
+class DetalleProductoMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class TipoProductoMigration extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_producto', function (Blueprint $table) {
-            $table->increments('idTipoProducto');
-            $table->string('tipoProducto',75);
+        Schema::create('detalle_producto', function (Blueprint $table) {
+            $table->increments('id');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class TipoProductoMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_producto');
+        Schema::dropIfExists('detalle_producto');
     }
 }

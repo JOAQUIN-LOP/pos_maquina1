@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EmpresaMigration extends Migration
+class DetalleInventarioSucursalMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class EmpresaMigration extends Migration
      */
     public function up()
     {
-        Schema::create('empresa', function (Blueprint $table) {
-            $table->increments('idEmpresa');
-            $table->string('nom_empresa',75);
-            $table->string('direccion',75);
-            $table->boolean('estado')->default(true);
+        Schema::create('detalle_inventario_sucursal', function (Blueprint $table) {
+            $table->increments('id');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class EmpresaMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empresa');
+        Schema::dropIfExists('detalle_inventario_sucursal');
     }
 }

@@ -14,17 +14,7 @@ class ProductoMigration extends Migration
     public function up()
     {
         Schema::create('producto', function (Blueprint $table) {
-            $table->increments('idProducto');
-            $table->string('codProducto',75);
-            $table->string('nomProducto',75);
-            $table->string('descripcion_producto',75);
-            $table->boolean('estado')->default(true);
-
-            $table->integer('tipo_id')->unsigned();
-
-            //creando la relacion con la tabla tipo_producto
-            $table->foreign('tipo_id')->references('idTipoProducto')->on('tipo_producto');
-
+            $table->increments('id');
             $table->timestamps();
         });
     }
