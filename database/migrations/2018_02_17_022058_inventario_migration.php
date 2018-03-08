@@ -17,8 +17,8 @@ class InventarioMigration extends Migration
             $table->increments('idInventario');
             $table->integer('num_inventario');
             $table->integer('idEmpresa')->unsigned();
-            $table->integer('mes',2);
-            $table->integer('anio',4);
+            $table->integer('mes');
+            $table->integer('anio');
             $table->date('fecha');
             $table->decimal('total_cantidad_productos',8,2);
             $table->decimal('total_cantidad_inventario',11,2);

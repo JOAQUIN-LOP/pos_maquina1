@@ -19,8 +19,8 @@ class FacturaMigration extends Migration
             $table->integer('idEmpresa')->unsigned();
             $table->integer('idSucursal')->unsigned();
             $table->integer('idUsuario')->unsigned();
-            $table->integer('mes',2);
-            $table->integer('anio',4);
+            $table->integer('mes');
+            $table->integer('anio');
             $table->date('fecha');
             $table->dateTime('hora');
             $table->string('direccion',75);

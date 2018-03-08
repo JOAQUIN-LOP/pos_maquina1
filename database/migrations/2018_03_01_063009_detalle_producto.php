@@ -16,8 +16,8 @@ class DetalleProducto extends Migration
         Schema::create('detalle_producto', function (Blueprint $table) {
             $table->increments('id_detalle_producto');
             $table->integer('idProducto')->unsigned();
-            $table->integer('mes',2);
-            $table->integer('anio',4);
+            $table->integer('mes');
+            $table->integer('anio');
             $table->date('fecha');
             $table->decimal('precio_total_compras',11,2);
             $table->decimal('cantidad_unidades',8,2);

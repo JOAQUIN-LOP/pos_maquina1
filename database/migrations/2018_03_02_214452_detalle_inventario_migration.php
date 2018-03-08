@@ -17,8 +17,8 @@ class DetalleInventarioMigration extends Migration
             $table->increments('id_detalle_inventario');
             $table->integer('idInventario')->unsigned();
             $table->integer('idProducto')->unsigned();
-            $table->integer('mes',2);
-            $table->integer('anio',4);
+            $table->integer('mes');
+            $table->integer('anio');
             $table->date('fecha');
             $table->decimal('cantidad_total',8,2);
             $table->decimal('subtotal_inventario',11,2);
