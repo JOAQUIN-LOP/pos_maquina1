@@ -14,9 +14,9 @@ class detalle_inventarioSeeder extends Seeder
         DB::table('detalle_inventario')->insert(array(
             'idInventario'		             => '1',
             'idProducto'                     => '1',
-            'mes'                            => '01',
+            'mes'                            => '02',
             'anio'                           => '2018',
-            'fecha'                          => '2018-01-28',
+            'fecha'                          => '2018-02-28',
         	'cantidad_total'		         => '1000',
         	'subtotal_inventario' 		     => '8000',
             'created_at' 			         => date('Y-m-d H:m:s'),

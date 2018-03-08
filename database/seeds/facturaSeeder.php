@@ -17,6 +17,7 @@ class facturaSeeder extends Seeder
             'idEmpresa' 		=> '1',
             'idSucursal' 		=> '1',
             'idUsuario'         => '1',
+            'dia'               => '28',
             'mes' 				=> '02',
         	'anio' 				=> '2018',
         	'fecha' 			=> '2018-02-28',
