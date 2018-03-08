@@ -19,12 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(detalle_productoSeeder::class);
         $this->call(facturaSeeder::class);
         $this->call(detalle_facturaSeeder::class);
-        $this->call(inv_sucursalSeeder::class);
         $this->call(inventarioSeeder::class);
-        $this->call(tabla_calculo_sucursalSeeder::class);
-        $this->call(tabla_calculoSeeder::class);
-        $this->call(detalle_inventario_sucursalSeeder::class);
         $this->call(detalle_inventarioSeeder::class);
+        $this->call(inv_sucursalSeeder::class);
+        $this->call(detalle_inventario_sucursalSeeder::class);
 
     }
 }
