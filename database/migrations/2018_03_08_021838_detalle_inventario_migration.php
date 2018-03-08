@@ -14,7 +14,21 @@ class DetalleInventarioMigration extends Migration
     public function up()
     {
         Schema::create('detalle_inventario', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_detalle_inventario');
+            $table->integer('idInventario')->unsigned();
+            $table->integer('idProducto')->unsigned();
+            $table->integer('mes');
+            $table->integer('anio');
+            $table->date('fecha');
+            $table->decimal('cantidad_total',8,2);
+            $table->decimal('subtotal_inventario',11,2);
+
+
+             //creando la relacion con la tabla inventario sucursal
+            $table->foreign('idInventario')->references('idInventario')->on('inventario');
+            
+            //creando la relacion con la tabla inventario sucursal
+            $table->foreign('idProducto')->references('idProducto')->on('producto');
             $table->timestamps();
         });
     }

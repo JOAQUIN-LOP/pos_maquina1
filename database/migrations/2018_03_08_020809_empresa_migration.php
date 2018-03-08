@@ -14,7 +14,10 @@ class EmpresaMigration extends Migration
     public function up()
     {
         Schema::create('empresa', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('idEmpresa');
+            $table->string('nom_empresa',75);
+            $table->string('direccion',75);
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }

@@ -14,7 +14,20 @@ class InventarioMigration extends Migration
     public function up()
     {
         Schema::create('inventario', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('idInventario');
+            $table->integer('num_inventario');
+            $table->integer('idEmpresa')->unsigned();
+            $table->integer('mes');
+            $table->integer('anio');
+            $table->date('fecha');
+            $table->decimal('total_cantidad_productos',8,2);
+            $table->decimal('total_cantidad_inventario',11,2);
+            $table->boolean('estado')->default(true);
+
+
+            //creando la relacion con la tabla empresa
+            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa');
+
             $table->timestamps();
         });
     }
