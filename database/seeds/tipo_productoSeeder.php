@@ -14,7 +14,7 @@ class tipo_productoSeeder extends Seeder
     {
          DB::table('tipo_producto')->insert(array(
 
-          		'tipoProducto'    =>   'Comestibles',
+          		'tipoProducto'    =>   ' ',
           		'created_at' => date('Y-m-d H:m:s'),
               'updated_at' => date('Y-m-d H:m:s') 
 

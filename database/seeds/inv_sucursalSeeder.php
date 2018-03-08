@@ -15,9 +15,9 @@ class inv_sucursalSeeder extends Seeder
         DB::table('inventario_sucursal')->insert(array(
             'num_inventario_sucursal'       => '1',
             'idSucursal' 					=> '1',
-            'mes' 							=> 'diciembre',
-        	'anio' 							=> '2017',
-        	'fecha' 						=> '2017-04-25',
+            'mes' 							=> '2',
+        	'anio' 							=> '2018',
+        	'fecha' 						=> '2018-02-18',
         	'total_cantidad_productos' 		=> '900',
         	'total_cantidad_inventario'		=> '1000',
         	'estado' 						=> '1',

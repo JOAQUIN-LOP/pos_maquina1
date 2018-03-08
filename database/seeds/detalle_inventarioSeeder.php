@@ -13,12 +13,15 @@ class detalle_inventarioSeeder extends Seeder
     {
         DB::table('detalle_inventario')->insert(array(
             'idInventario'		             => '1',
-            'idCalculoInventario'            => '1',
+            'idProducto'                     => '1',
+            'mes'                            => '01',
+            'anio'                           => '2018',
+            'fecha'                          => '2018-01-28',
         	'cantidad_total'		         => '1000',
-        	'total_inventario' 		         => '8000',
-        	'fecha' 				         => '2017-04-25',
+        	'subtotal_inventario' 		     => '8000',
             'created_at' 			         => date('Y-m-d H:m:s'),
             'updated_at' 			         => date('Y-m-d H:m:s') 
         )); 
     }
 }
+2018-01-28

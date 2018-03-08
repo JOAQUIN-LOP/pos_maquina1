@@ -14,9 +14,8 @@ class detalle_facturaSeeder extends Seeder
     {
         DB::table('detalle_factura')->insert(array(
         	'idFactura'    		=>	'1',
+            'idProducto'        =>  '1',
             'cantidad' 			=>  '2',
-            'idProducto' 		=>  '1',
-            'descripcion' 		=>  'productos',
             'precio_unit'		=>  '11.80',
         	'total_venta' 		=>  '23.60',
             'created_at' 		=>  date('Y-m-d H:m:s'),

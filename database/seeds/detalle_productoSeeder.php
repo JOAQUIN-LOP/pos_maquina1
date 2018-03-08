@@ -13,10 +13,12 @@ class detalle_productoSeeder extends Seeder
     {
         DB::table('detalle_producto')->insert(array(
           'idProducto' =>	'1',
+          'mes'         =>'01',
+          'anio'        =>'2018',
+          'fecha'       =>'2018-01-16',
           'precio_total_compras' => '51',
           'cantidad_unidades' => '10',
           'precio_unidad' => '5.10',
-          'fecha'         => '2017-04-25',
           'estado' => '1',
           'created_at' => date('Y-m-d H:m:s'),
           'updated_at' => date('Y-m-d H:m:s') 
@@ -24,10 +26,12 @@ class detalle_productoSeeder extends Seeder
 
         DB::table('detalle_producto')->insert(array(
           'idProducto' =>	'2',
+          'mes'         =>'01',
+          'anio'        =>'2018',
+          'fecha'       =>'2018-01-18',
           'precio_total_compras' => '147',
           'cantidad_unidades' => '50',
           'precio_unidad' => '2.94',
-          'fecha'         => '2017-04-25',
           'estado' => '1',
           'created_at' => date('Y-m-d H:m:s'),
           'updated_at' => date('Y-m-d H:m:s') 
@@ -35,10 +39,12 @@ class detalle_productoSeeder extends Seeder
 
         DB::table('detalle_producto')->insert(array(
           'idProducto' =>	'3',
+          'mes'         =>'01',
+          'anio'        =>'2018',
+          'fecha'       =>'2018-01-20',
           'precio_total_compras' => '165',
           'cantidad_unidades' => '24',
           'precio_unidad' => '6.88',
-          'fecha'         => '2017-04-25',
           'estado' => '1',
           'created_at' => date('Y-m-d H:m:s'),
           'updated_at' => date('Y-m-d H:m:s') 
@@ -46,10 +52,12 @@ class detalle_productoSeeder extends Seeder
 
         DB::table('detalle_producto')->insert(array(
           'idProducto' =>	'4',
+          'mes'         =>'01',
+          'anio'        =>'2018',
+          'fecha'       =>'2018-01-21',
           'precio_total_compras' => '95',
           'cantidad_unidades' => '72',
           'precio_unidad' => '1.32',
-          'fecha'         => '2017-04-25',
           'estado' => '1',
           'created_at' => date('Y-m-d H:m:s'),
           'updated_at' => date('Y-m-d H:m:s') 
@@ -57,10 +65,12 @@ class detalle_productoSeeder extends Seeder
 
         DB::table('detalle_producto')->insert(array(
           'idProducto' =>	'5',
+          'mes'         =>'01',
+          'anio'        =>'2018',
+          'fecha'       =>'2018-01-25',
           'precio_total_compras' => '118.80',
           'cantidad_unidades' => '12',
           'precio_unidad' => '9.90',
-          'fecha'         => '2017-04-25',
           'estado' => '1',
           'created_at' => date('Y-m-d H:m:s'),
           'updated_at' => date('Y-m-d H:m:s') 

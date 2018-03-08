@@ -13,237 +13,215 @@ class productoSeeder extends Seeder
     public function run()
     {
           DB::table('producto')->insert(array(
-
-          		'codProducto' 				    => '0001',
+              'tipo_id'                 => ' ',
+          		'codProducto' 				    => ' ',
           		'nomProducto' 				    => 'Maseca Mexicana',
           		'descripcion_producto'		=> '-',
           		'estado' 					        => '1',
-          		'tipo_id'				          => '1',
        			  'created_at' 				      => date('Y-m-d H:m:s'),
         		  'updated_at' 				      => date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 				    => '0002',
+              'tipo_id'                 => ' ',
+          		'codProducto' 				    => ' ',
           		'nomProducto' 				    => 'Mosh a granel',
           		'descripcion_producto'		=> '-',
           		'estado' 					        => '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 				      => date('Y-m-d H:m:s'),
         		  'updated_at' 				      => date('Y-m-d H:m:s')
           ));
           DB::table('producto')->insert(array(
-
-          		'codProducto' 				    => '0003',
+              'tipo_id'                 => ' ',
+          		'codProducto' 				    => ' ',
           		'nomProducto' 			     	=> 'Maiz del monte',
           		'descripcion_producto'		=> '15 onz.',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '0004',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Azistin',
           		'descripcion_producto'		=> 'Sobre',
           		'estado' 					        => '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 		       		=> date('Y-m-d H:m:s'),
         		  'updated_at' 			       	=> date('Y-m-d H:m:s')
           ));
           DB::table('producto')->insert(array(
-
-          		'codProducto' 				    => '0005',
+              'tipo_id'                 => ' ',
+          		'codProducto' 				    => ' ',
           		'nomProducto' 				    => 'Azistin',
           		'descripcion_producto'		=> 'Litro',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         	   	'updated_at' 			       	=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '0006',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Avena Molida Quaker',
           		'descripcion_producto'		=> '-',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 				      => date('Y-m-d H:m:s'),
         		  'updated_at' 				      => date('Y-m-d H:m:s')
           ));
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '0007',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Avena Sobresito',
           		'descripcion_producto'	  => '-',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '0008',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Angelitos Pequeños',
           		'descripcion_producto'		=> '-',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
           DB::table('producto')->insert(array(
-
-          		'codProducto' 				    => '0009',
+              'tipo_id'                 => ' ',
+          		'codProducto' 				    => ' ',
           		'nomProducto' 				    => 'Angelitos Grandes',
           		'descripcion_producto'		=> '-',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 				      => date('Y-m-d H:m:s'),
         		  'updated_at' 				      => date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 				    => '00010',
+              'tipo_id'                 => ' ',
+          		'codProducto' 				    => ' ',
           		'nomProducto' 				    => 'Aceite Ideal',
           		'descripcion_producto'		=> 'Galon',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '00011',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Aceite Ideal',
           		'descripcion_producto'		=> 'Medio Galon',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '00012',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Aceite Ideal',
           		'descripcion_producto'		=> '1000 ml',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '00013',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Aceite Idealito',
           		'descripcion_producto'		=> '-',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 		       		=> date('Y-m-d H:m:s'),
         		  'updated_at' 		       		=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 		    		=> '00014',
+              'tipo_id'                 => ' ',
+          		'codProducto' 		    		=> ' ',
           		'nomProducto' 		    		=> 'Suavitel',
           		'descripcion_producto'		=> 'Bote 850 ml',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '00015',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Shampoo Blues baby',
           		'descripcion_producto'		=> '-',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 	      			=> date('Y-m-d H:m:s'),
         		  'updated_at' 	      			=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 		    		=> '00016',
+              'tipo_id'                 => ' ',
+          		'codProducto' 		    		=> ' ',
           		'nomProducto' 		    		=> 'Shampoo adios piojos',
           		'descripcion_producto'		=> '-',
           		'estado' 					        => '1',
-          		'tipo_id'					        => '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '00017',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Saca basura de plastico',
           		'descripcion_producto'		=> '-',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 	      			=> date('Y-m-d H:m:s'),
         		  'updated_at' 	      			=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '00018',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Sardina tentacion',
           		'descripcion_producto'		=> '-',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 		       		=> date('Y-m-d H:m:s'),
         		  'updated_at' 		       		=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '00019',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Sellador',
           		'descripcion_producto'		=> '40 yardas',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 		       		=> date('Y-m-d H:m:s'),
         		  'updated_at' 		       		=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 		     		=> '00020',
+              'tipo_id'                 => ' ',
+          		'codProducto' 		     		=> ' ',
           		'nomProducto' 		     		=> 'Azucar Mexicana',
           		'descripcion_producto'		=> '-',
           		'estado' 			        		=> '1',
-          		'tipo_id'			        		=> '1',
        			  'created_at' 		       		=> date('Y-m-d H:m:s'),
         		  'updated_at' 		       		=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 		     		=> '00021',
+              'tipo_id'                 => ' ',
+          		'codProducto' 		     		=> ' ',
           		'nomProducto' 		     		=> 'Melocoton morena',
           		'descripcion_producto'		=> '-',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 			      	=> date('Y-m-d H:m:s'),
         		  'updated_at' 			      	=> date('Y-m-d H:m:s')
           ));
 
           DB::table('producto')->insert(array(
-
-          		'codProducto' 			     	=> '00022',
+              'tipo_id'                 => ' ',
+          		'codProducto' 			     	=> ' ',
           		'nomProducto' 			     	=> 'Menta best',
           		'descripcion_producto'		=> '-',
           		'estado' 				         	=> '1',
-          		'tipo_id'				         	=> '1',
        			  'created_at' 		       		=> date('Y-m-d H:m:s'),
         		  'updated_at' 		       		=> date('Y-m-d H:m:s')
           ));

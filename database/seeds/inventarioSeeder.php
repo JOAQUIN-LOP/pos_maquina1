@@ -15,9 +15,9 @@ class inventarioSeeder extends Seeder
         DB::table('inventario')->insert(array(
             'num_inventario'                => '1',
             'idEmpresa' 					=> '1',
-            'mes' 							=> 'diciembre',
-        	'anio' 							=> '2017',
-        	'fecha' 						=> '2017-04-25',
+            'mes' 							=> '1',
+        	'anio' 							=> '2018',
+        	'fecha' 						=> '2018-01-28',
         	'total_cantidad_productos' 		=> '800',
         	'total_cantidad_inventario'		=> '200',
         	'estado' 						=> '1',
