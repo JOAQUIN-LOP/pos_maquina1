@@ -24,4 +24,3 @@ class detalle_inventarioSeeder extends Seeder
         )); 
     }
 }
-2018-01-28
