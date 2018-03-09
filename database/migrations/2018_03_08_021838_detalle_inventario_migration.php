@@ -20,7 +20,7 @@ class DetalleInventarioMigration extends Migration
             $table->integer('mes');
             $table->integer('anio');
             $table->date('fecha');
-            $table->decimal('cantidad_total',8,2);
+            $table->decimal('cant_total',8,2);
             $table->decimal('subtotal_inventario',11,2);
 
 
