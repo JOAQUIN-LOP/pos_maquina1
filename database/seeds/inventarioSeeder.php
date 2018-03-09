@@ -18,8 +18,8 @@ class inventarioSeeder extends Seeder
             'mes' 							=> '02',
         	'anio' 							=> '2018',
         	'fecha' 						=> '2018-02-28',
-        	'total_cantidad_productos' 		=> ' ',
-        	'total_cantidad_inventario'		=> ' ',
+        	'total_cantidad_productos' 		=> '0.00',
+        	'total_cantidad_inventario'		=> '0.00',
         	'estado' 						=> '1',
             'created_at' 					=> date('Y-m-d H:m:s'),
             'updated_at' 					=> date('Y-m-d H:m:s') 
