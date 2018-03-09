@@ -12,7 +12,7 @@ class detalle_inventarioSeeder extends Seeder
     public function run()
     {
         DB::table('detalle_inventario')->insert(array(
-            'idInventario'		             => '2',
+            'idInventario'		             => '1',
             'idProducto'                     => '1',
             'mes'                            => '02',
             'anio'                           => '2018',
