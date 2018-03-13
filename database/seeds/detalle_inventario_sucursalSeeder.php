@@ -22,5 +22,41 @@ class detalle_inventario_sucursalSeeder extends Seeder
             'created_at' 					=> date('Y-m-d H:m:s'),
             'updated_at' 					=> date('Y-m-d H:m:s') 
         )); 
+
+        DB::table('detalle_inventario_sucursal')->insert(array(
+            'idInventarioSucursal'          => '1',
+            'idProducto'                    => '2',
+            'mes'                           => '02', 
+            'anio'                          => '2018',  
+            'fecha'                         => '2018-02-18',       
+            'cantidad_total'                => '600',
+            'subtotal_inventario'           => '6000',
+            'created_at'                    => date('Y-m-d H:m:s'),
+            'updated_at'                    => date('Y-m-d H:m:s') 
+        )); 
+
+        DB::table('detalle_inventario_sucursal')->insert(array(
+            'idInventarioSucursal'          => '1',
+            'idProducto'                    => '3',
+            'mes'                           => '02', 
+            'anio'                          => '2018',  
+            'fecha'                         => '2018-02-18',       
+            'cantidad_total'                => '80',
+            'subtotal_inventario'           => '800',
+            'created_at'                    => date('Y-m-d H:m:s'),
+            'updated_at'                    => date('Y-m-d H:m:s') 
+        )); 
+
+        DB::table('detalle_inventario_sucursal')->insert(array(
+            'idInventarioSucursal'          => '1',
+            'idProducto'                    => '4',
+            'mes'                           => '02', 
+            'anio'                          => '2018',  
+            'fecha'                         => '2018-02-18',       
+            'cantidad_total'                => '530',
+            'subtotal_inventario'           => '5300',
+            'created_at'                    => date('Y-m-d H:m:s'),
+            'updated_at'                    => date('Y-m-d H:m:s') 
+        )); 
     }
 }

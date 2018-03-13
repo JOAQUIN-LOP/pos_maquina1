@@ -31,6 +31,7 @@ class productoSeeder extends Seeder
        			  'created_at' 				      => date('Y-m-d H:m:s'),
         		  'updated_at' 				      => date('Y-m-d H:m:s')
           ));
+          
           DB::table('producto')->insert(array(
               'tipo_id'                 => '1',
               'codProducto'             => ' ',
