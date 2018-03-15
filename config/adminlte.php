@@ -149,6 +149,7 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
+        */
         [
             'text'    => 'Multilevel',
             'icon'    => 'share',
@@ -186,7 +187,7 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
+        ],/*
         'LABELS',
         [
             'text'       => 'Important',

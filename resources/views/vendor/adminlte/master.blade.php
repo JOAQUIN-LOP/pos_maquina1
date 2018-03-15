@@ -62,9 +62,9 @@
 @endif
 
 <script>
-    $(document).ready(function(){
+    
         $('#tableProduct').DataTable();
-    });
+
 </script>
 @yield('adminlte_js')
 
