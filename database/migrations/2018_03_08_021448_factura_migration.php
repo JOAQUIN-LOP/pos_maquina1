@@ -14,30 +14,29 @@ class FacturaMigration extends Migration
     public function up()
     {
         Schema::create('factura', function (Blueprint $table) {
-            $table->increments('num_factura');
-            $table->string('mes',12);
-            $table->string('anio',10);
+            $table->increments('idFactura');
+            $table->integer('num_factura')->unique();
+            $table->integer('idEmpresa')->unsigned();
+            $table->integer('idSucursal')->unsigned();
+            $table->integer('idUsuario')->unsigned();
+            $table->integer('dia');
+            $table->integer('mes');
+            $table->integer('anio');
             $table->date('fecha');
             $table->dateTime('hora');
             $table->string('direccion',75);
-            $table->float('total_factura',8,2);
-            $table->boolean('ACTIVO')->default(true);
-
-            $table->integer('empresa_id')->unsigned();
-            $table->integer('sucursal_id')->unsigned();
+            $table->decimal('total_factura',11,2);
+            $table->boolean('estado')->default(true);
 
             //creando la relacion con la tabla empresa
-            $table->foreign('empresa_id')
-                ->references('idEmpresa')
-                ->on('empresa')
-                ->onDelete('cascade');
+            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa');
 
 
             //creando la relacion con la tabla sucursal
-            $table->foreign('sucursal_id')
-                ->references('idSucursal')
-                ->on('sucursal')
-                ->onDelete('cascade');
+            $table->foreign('idSucursal')->references('idSucursal')->on('sucursal');
+
+            //creando la relacion con la tabla usuario
+            $table->foreign('idUsuario')->references('idUsuario')->on('usuario');
 
             $table->timestamps();
         });

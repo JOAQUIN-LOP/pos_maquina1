@@ -12,6 +12,12 @@ class tipo_productoSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\tipo_producto::class, 90)->create();
+         DB::table('tipo_producto')->insert(array(
+
+          		'tipoProducto'    =>   ' ',
+          		'created_at' => date('Y-m-d H:m:s'),
+              'updated_at' => date('Y-m-d H:m:s') 
+
+          ));
     }
 }

@@ -17,7 +17,7 @@ class EmpresaMigration extends Migration
             $table->increments('idEmpresa');
             $table->string('nom_empresa',75);
             $table->string('direccion',75);
-            $table->boolean('ACTIVO')->default(true);
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }

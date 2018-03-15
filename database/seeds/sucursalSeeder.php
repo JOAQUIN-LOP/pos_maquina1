@@ -12,6 +12,33 @@ class sucursalSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\sucursal::class, 90)->create();
+          DB::table('sucursal')->insert(array(
+              'idEmpresa'           => '1',
+          		'nom_sucursal'        => 'La surtidora',
+              'estado'              => '1',
+              'created_at'          => date('Y-m-d H:m:s'),
+              'updated_at'          => date('Y-m-d H:m:s') 
+          ));
+          DB::table('sucursal')->insert(array(
+              'idEmpresa'           => '1',
+              'nom_sucursal'        => 'La rendidora',
+              'estado'              => '1',
+              'created_at'          => date('Y-m-d H:m:s'),
+              'updated_at'          => date('Y-m-d H:m:s') 
+          ));
+          DB::table('sucursal')->insert(array(
+              'idEmpresa'           => '1',
+              'nom_sucursal'        => 'La ABC',
+              'estado'              => '1',
+              'created_at'          => date('Y-m-d H:m:s'),
+              'updated_at'          => date('Y-m-d H:m:s') 
+          ));
+          DB::table('sucursal')->insert(array(
+              'idEmpresa'           => '1',
+              'nom_sucursal'        => 'La Maxi surtidora',
+              'estado'              => '1',
+              'created_at'          => date('Y-m-d H:m:s'),
+              'updated_at'          => date('Y-m-d H:m:s') 
+          ));
     }
 }

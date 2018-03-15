@@ -15,17 +15,13 @@ class SucursalMigration extends Migration
     {
         Schema::create('sucursal', function (Blueprint $table) {
             $table->increments('idSucursal');
-            $table->string('nom_sucursal',75);
-            $table->boolean('ACTIVO')->default(true);
+            $table->integer('idEmpresa')->unsigned();
+            $table->string('nom_sucursal',75)->unique();
+            $table->boolean('estado')->default(true);
 
-
-            $table->integer('empresa_id')->unsigned();
 
             //creando la relacion con la tabla empresa
-            $table->foreign('empresa_id')
-                ->references('idEmpresa')
-                ->on('empresa')
-                ->onDelete('cascade');
+            $table->foreign('idEmpresa')->references('idEmpresa')->on('empresa');
 
             $table->timestamps();
         });

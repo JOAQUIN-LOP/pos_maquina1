@@ -8,5 +8,6 @@ $factory->define(App\usuario::class, function (Faker $faker) {
     	'apellidos' => $faker->lastName,
     	'user' => $faker->userName,
     	'password' => $faker->password,
+    	'rol' => 'admin',
     ];
 });

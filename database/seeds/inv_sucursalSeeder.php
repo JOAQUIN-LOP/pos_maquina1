@@ -12,6 +12,17 @@ class inv_sucursalSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\inv_sucursal::class, 90)->create();
+        DB::table('inventario_sucursal')->insert(array(
+            'num_inventario_sucursal'       => '1',
+            'idSucursal' 					=> '1',
+            'mes' 							=> '2',
+        	'anio' 							=> '2018',
+        	'fecha' 						=> '2018-02-18',
+        	'total_cantidad_productos' 		=> '900',
+        	'total_cantidad_inventario'		=> '1000',
+        	'estado' 						=> '1',
+            'created_at' 					=> date('Y-m-d H:m:s'),
+            'updated_at' 					=> date('Y-m-d H:m:s') 
+        ));  
     }
 }

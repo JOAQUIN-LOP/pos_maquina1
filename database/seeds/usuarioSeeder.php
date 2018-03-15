@@ -16,11 +16,13 @@ class usuarioSeeder extends Seeder
         DB::table('usuario')->delete();
 
         Usuario::create(array(
+            'idEmpresa'         => 1,
     		'nom_usuario'		=> 'Pablo',
     		'apellidos'			=> 'Lara',
+            'rol'               => 'admin',
     		'user'				=> 'admin',
     		'password'			=> Hash::make('123456'),
-    		'empresa_id'		=> 1,
+            'estado'            => '1'
         ));
     }
 }
