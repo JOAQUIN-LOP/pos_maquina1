@@ -117,32 +117,34 @@
       {{--  inici box body  --}}
         <div class="box-body">
           <div class="row">
-            <table id="tableProduct" class="display" >
-              <thead>
-              <tr>
-                <th>id</th>
-                <th>Producto</th>
-                <th>Descripcion</th>
-                <th>Estado</th>
-              </tr>
-              </thead>
-              <tbody>
-                @foreach($producto as $prod) 
-                  @if ( $prod->estado == 1)
-                    <tr class="fila">
-                      <td>{{ $prod->idProducto }}</td>
-                      <td>{{ $prod->nomProducto }}</td>
-                      <td>{{ $prod->descripcion_producto }}</td>
-                      <td>
-                        @if ($prod->estado == 1)
-                          <span class="label label-success"> Activo </span>
-                        @endif                    
-                      </td>
-                    </tr> 
-                  @endif                 
-                @endforeach
-              </tbody>
-            </table>
+            <div class="col-sm-12">
+              <table id="tableProduct" class="display" >
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>Producto</th>
+                  <th>Descripcion</th>
+                  <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach($producto as $prod) 
+                    @if ( $prod->estado == 1)
+                      <tr class="fila">
+                        <td>{{ $prod->idProducto }}</td>
+                        <td>{{ $prod->nomProducto }}</td>
+                        <td>{{ $prod->descripcion_producto }}</td>
+                        <td>
+                          @if ($prod->estado == 1)
+                            <span class="label label-success"> Activo </span>
+                          @endif                    
+                        </td>
+                      </tr> 
+                    @endif                 
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
           {{--  fin box body  --}}
       </div>
@@ -160,6 +162,8 @@
               <th>Cantidad</th>
               <th>Precio Unitario</th>
               <th>Precio Total</th>
+              <th>Mes</th>
+              <th>Anio</th>
               <th>estado</th>
             </tr>
             </thead>
@@ -170,6 +174,8 @@
                 <td>{{ $dtprod->cantidad_unidades }}</td>
                 <td>{{ $dtprod->precio_unidad }}</td>
                 <td>{{ $dtprod->precio_total_compras }}</td>
+                <td>{{ $dtprod->mes }}</td>
+                <td>{{ $dtprod->anio }}</td>
                 <td>
                   @if ( $dtprod->estado == 1)
                     <span class="label label-success"> Activo </span>
