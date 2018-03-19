@@ -7,6 +7,7 @@ use App\Producto;
 use Response;
 use Validator;
 use App\DetalleProducto;
+use Carbon\Carbon;
 
 class DetalleProductoController extends Controller
 {
@@ -72,15 +73,14 @@ class DetalleProductoController extends Controller
             return Response::json($returnData, 400);
         } else {
             try {
-                dump($request);exit();
-                $newObject = new Producto();
-                $newObject->idProducto = 1;
-                $newObject->mes = 0;
-                $newObject->anio = 0;
-                $newObject->fecha = 0;
-                $newObject->precio_total_compras = 0;
-                $newObject->cantidad_unidades = $request->get('nomProducto');
-                $newObject->precio_unidad = $request->get('descripcion_producto');
+                $newObject = new DetalleProducto();
+                $newObject->idProducto = $request->get('IdProducto');
+                $newObject->mes = $request->get('mesDetalle');
+                $newObject->anio = $request->get('AnioDetalle');
+                $newObject->fecha = Carbon::now()->toDateString();
+                $newObject->precio_total_compras = $request->get('precio_total_compras');
+                $newObject->cantidad_unidades = $request->get('cantidad_unidades');
+                $newObject->precio_unidad = $request->get('precio_unidad');
                 $newObject->save();
                 return redirect('home/detalle/precio');
             }
