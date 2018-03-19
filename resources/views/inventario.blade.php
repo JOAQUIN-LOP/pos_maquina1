@@ -1,28 +1,91 @@
 @extends('adminlte::page')
 
-
-
-@section('title', 'Listado Productos')
+@section('title', 'Inventario')
 
 @section('content_header')
-    <h1>Listado de Productos</h1>
+    <h1>Inventario</h1>
 @stop
 
 @section('content')
-   <div class="box">
+
+<!-- Form Element sizes -->
+<div class="box box-success">
+  <div class="box-header with-border">
+    <h3 class="box-title">Inventario</h3>
+  </div>
+  <!-- box-body -->
+  <div class="box-body">
+    <div class="contenedor">
+    
+          <div class="row">
+            <div class="col-sm-1">
+              <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><label for="">Id</span></span>
+                        <input type="text" class="form-control" name="id" >
+                  </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><label for="">Nombre</label></span>
+                      <input type="text" class="form-control" name="pwd" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><label for="">Cantidad</label></span>
+                          <input type="text" class="form-control" name="email" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><label for="">Precio</label></span>
+                      <input type="text" class="form-control" name="pwd" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-group">
+                <button type="button" class="btn btn-block btn-primary btn-md"><i class="fa fa-calculator"></i> Calcular</button>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><label for="">Total</label></span>
+                      <input type="text" class="form-control" name="pwd" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-group">
+                <button type="button" class="btn btn-block btn-success btn-md"><i class="fa fa-repeat"></i> Cargar</button>
+              </div>
+            </div>
+          </div>
+
+        {{--  tabla  --}}
+
+        <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Productos</h3>
+              <h3 class="box-title">Data Table With Full Features</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="tableProduct" class="display" >
+              <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Plataforma</th>
-                  <th>Estado</th>
-                  <th>Nivel</th>
+                  <th>Rendering engine</th>
+                  <th>Browser</th>
+                  <th>Platform(s)</th>
+                  <th>Engine version</th>
+                  <th>CSS grade</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -447,7 +510,12 @@
             </div>
             <!-- /.box-body -->
           </div>
+          <!-- /.box -->
+
+
+  </div>  
+</div>
+  <!-- /.box-body -->
+</div>
+    
 @stop
-
-
-

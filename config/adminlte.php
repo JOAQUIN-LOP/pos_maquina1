@@ -87,7 +87,7 @@ return [
 
     'dashboard_url' => 'home',
 
-    'articulos_url' => 'articulos',
+    'articulos_url' => 'producto',
 
     'logout_url' => 'logout',
 
@@ -126,12 +126,24 @@ return [
         [
             'text'          => 'Todos los Productos',
             'url'           => 'admin/products',
-            'icon'          => 'file',            
+            'icon'          => 'cubes',            
         ],
+        
         [
-            'text'          => 'Registro nuevo Producto',
-            'url'           => '/home/articulos',
-            'icon'          => 'file',
+            'text'    => 'Producto',
+            'icon'    => 'cubes',
+            'submenu' => [
+                [
+                    'text'          => 'Registro nuevo Producto',
+                    'url'           => '/home/producto',
+                    'icon'          => 'cube',
+                ],
+                [
+                    'text'          => 'Agregar Precio Producto',
+                    'url'           => '/home/detalle/precio',
+                    'icon'          => 'cube',
+                ],
+            ],
         ],
         /*'ACCOUNT SETTINGS',
         [
