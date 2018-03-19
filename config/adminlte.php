@@ -32,7 +32,7 @@ return [
 
     'logo' => '<b>POS</b>Inventario',
 
-    'logo_mini' => '<b>Administrador</b>',
+    'logo_mini' => '<b>POS</b>',
 
     /*
     |--------------------------------------------------------------------------
