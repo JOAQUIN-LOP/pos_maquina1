@@ -123,11 +123,7 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        [
-            'text'          => 'Todos los Productos',
-            'url'           => 'admin/products',
-            'icon'          => 'cubes',            
-        ],
+        
         
         [
             'text'    => 'Producto',
@@ -142,6 +138,11 @@ return [
                     'text'          => 'Agregar Precio Producto',
                     'url'           => '/home/detalle/precio',
                     'icon'          => 'cube',
+                ],
+                [
+                    'text'          => 'Todos los Productos',
+                    'url'           => 'admin/products',
+                    'icon'          => 'cubes',            
                 ],
             ],
         ],
