@@ -1,15 +1,14 @@
 $(document).ready(function(){
 
-    $('#Productos').DataTable(
-       
-    );
+    $('#Productos').DataTable();
 
     $('#Productos').on('click','tr.fila', function(){
-            var IdProducto = $(this).find("td").get(0).innerHTML;
+            var idProducto = $(this).find("td").get(1).innerHTML;
             var nomProducto = $(this).find("td").get(1).innerHTML;
-
-            $('#IdProducto').val(IdProducto);
+            var descripcion_producto = $(this).find("td").get(2).innerHTML;
+           
             $('#nomProducto').val(nomProducto);
+            $('#descripcion_producto').val(descripcion_producto);
 
         });    
 });

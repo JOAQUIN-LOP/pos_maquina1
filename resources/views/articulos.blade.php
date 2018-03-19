@@ -31,7 +31,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Producto</span>
-                  <input type="text" class="form-control" name="nomProducto" required>
+                  <input type="text" class="form-control" name="nomProducto"  id="nomProducto" required>
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Descripcion</span>
-                  <input type="text" class="form-control" name="descripcion_producto">
+                  <input type="text" class="form-control" name="descripcion_producto" id="descripcion_producto">
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@
                 </thead>
                 <tbody>
                   @foreach($producto as $prod) 
-                  <tr>
+                  <tr class="fila">
                     <td>{{ $prod->idProducto }}</td>
                     <td>{{ $prod->nomProducto }}</td>
                     <td>{{ $prod->descripcion_producto }}</td>
