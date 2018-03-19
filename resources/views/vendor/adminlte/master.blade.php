@@ -37,6 +37,8 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    
+    <link rel="stylesheet" href="{{ asset('css/Gstyle.css') }}">
 </head>
 <body class="hold-transition @yield('body_class')">
 
@@ -60,6 +62,8 @@
     <!-- ChartJS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 @endif
+
+<script src="{{ asset('js/detalleArticulos.js') }}"></script>
 
 <script>
     $(document).ready(function(){

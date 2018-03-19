@@ -25,13 +25,10 @@ Route::resource('usuario','UsuarioController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// ARTICULOS
 Route::get('/admin/products', function(){
 	return view('data_products');
 });
 
-
-
-Route::get('/home/articulos', function()
-{
-    return view('articulos');
-});
+Route::resource('/home/producto', 'ProductoController');
+Route::resource('/home/detalle/precio', 'DetalleProductoController');
