@@ -37,7 +37,7 @@ Route::get('/home/articulos', function()
 
 Route::get('/home/factura', function(){
 	return view('factura');
-}):
+});
 
 Route::resource('/home/producto', 'ProductoController');
 Route::resource('/home/detalle/precio', 'DetalleProductoController');
