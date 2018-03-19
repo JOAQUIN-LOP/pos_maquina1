@@ -32,7 +32,7 @@ return [
 
     'logo' => '<b>POS</b>Inventario',
 
-    'logo_mini' => '<b>Administrador</b>',
+    'logo_mini' => '<b>POS</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +161,7 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
+        */
         [
             'text'    => 'Multilevel',
             'icon'    => 'share',
@@ -198,7 +199,7 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
+        ],/*
         'LABELS',
         [
             'text'       => 'Important',

@@ -67,9 +67,9 @@
 <script src="{{ asset('js/articulos.js') }}"></script>
 
 <script>
-    $(document).ready(function(){
+    
         $('#tableProduct').DataTable();
-    });
+
 </script>
 @yield('adminlte_js')
 

@@ -30,5 +30,14 @@ Route::get('/admin/products', function(){
 	return view('data_products');
 });
 
+Route::get('/home/articulos', function()
+{
+    return view('articulos');
+});
+
+Route::get('/home/factura', function(){
+	return view('factura');
+});
+
 Route::resource('/home/producto', 'ProductoController');
 Route::resource('/home/detalle/precio', 'DetalleProductoController');
