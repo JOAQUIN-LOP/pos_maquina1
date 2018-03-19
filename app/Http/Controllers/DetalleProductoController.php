@@ -127,7 +127,34 @@ class DetalleProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $objectUpdate = DetalleProducto::find($id);
+        if ($objectUpdate) {
+            try {
+                $objectUpdate->idProducto = $request->get('IdProducto');
+                $objectUpdate->mes = $request->get('mesDetalle');
+                $objectUpdate->anio = $request->get('AnioDetalle');
+                $objectUpdate->fecha = Carbon::now()->toDateString();
+                $objectUpdate->precio_total_compras = $request->get('precio_total_compras');
+                $objectUpdate->cantidad_unidades = $request->get('cantidad_unidades');
+                $objectUpdate->precio_unidad = $request->get('precio_unidad');
+                $objectUpdate->save();
+                return Response::json($objectUpdate, 200);
+            }
+            catch (Exception $e) {
+                $returnData = array(
+                    'status' => 500,
+                    'message' => $e->getMessage()
+                );
+                return Response::json($returnData, 500);
+            }
+        }
+        else {
+            $returnData = array(
+                'status' => 404,
+                'message' => 'Not found'
+            );
+            return Response::json($returnData, 404);
+        }
     }
 
     /**

@@ -26,28 +26,29 @@
         {{ csrf_field() }}      
         {{--  inicio row  --}}
         <div class="row">
-          <div class="col-sm-4">
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon">Producto</span>
-                <input type="text" class="form-control" name="nomProducto" required>
+          <div class="col-sm-12">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Producto</span>
+                  <input type="text" class="form-control" name="nomProducto" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Descripcion</span>
+                  <input type="text" class="form-control" name="descripcion_producto">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Crear</button>
               </div>
             </div>
           </div>
-          <div class="col-sm-7">
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon">Descripcion</span>
-                <input type="text" class="form-control" name="descripcion_producto">
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-1">
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Crear</button>
-            </div>
-          </div>
-
         </div>
         {{--  fin row  --}}
       </form>
@@ -55,32 +56,34 @@
       {{--  inici box body  --}}
         <div class="box-body">
           <div class="row">
-            <table id="tableProduct" class="display" >
-              <thead>
-              <tr>
-                <th>id</th>
-                <th>Producto</th>
-                <th>Descripcion</th>
-                <th>Estado</th>
-              </tr>
-              </thead>
-              <tbody>
-                @foreach($producto as $prod) 
+            <div class="col-sm-12">
+              <table id="Productos" class="display" >
+                <thead>
                 <tr>
-                  <td>{{ $prod->idProducto }}</td>
-                  <td>{{ $prod->nomProducto }}</td>
-                  <td>{{ $prod->descripcion_producto }}</td>
-                  <td>
-                    @if ( $prod->estado == 0)
-                      <span class="label label-danger"> Inactivo </span>
-                    @elseif ($prod->estado == 1)
-                      <span class="label label-success"> Activo </span>
-                    @endif                    
-                  </td>
-                </tr>                
-                @endforeach
-              </tbody>
-            </table>
+                  <th>id</th>
+                  <th>Producto</th>
+                  <th>Descripcion</th>
+                  <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach($producto as $prod) 
+                  <tr>
+                    <td>{{ $prod->idProducto }}</td>
+                    <td>{{ $prod->nomProducto }}</td>
+                    <td>{{ $prod->descripcion_producto }}</td>
+                    <td>
+                      @if ( $prod->estado == 0)
+                        <span class="label label-danger"> Inactivo </span>
+                      @elseif ($prod->estado == 1)
+                        <span class="label label-success"> Activo </span>
+                      @endif                    
+                    </td>
+                  </tr>                
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
           {{--  fin box body  --}}
       </div>

@@ -64,6 +64,7 @@
 @endif
 
 <script src="{{ asset('js/detalleArticulos.js') }}"></script>
+<script src="{{ asset('js/articulos.js') }}"></script>
 
 <script>
     
