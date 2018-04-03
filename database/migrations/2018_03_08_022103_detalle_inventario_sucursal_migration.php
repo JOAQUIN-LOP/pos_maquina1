@@ -27,7 +27,7 @@ class DetalleInventarioSucursalMigration extends Migration
              //creando la relacion con la tabla inventario sucursal
             $table->foreign('idInventarioSucursal')->references('idInventarioSucursal')->on('inventario_sucursal');
             //creando la relacion con la tabla calculo sucursal
-            $table->foreign('idProducto')->references('idProducto')->on('producto');
+            $table->foreign('idProducto')->references('id')->on('producto');
             $table->timestamps();
         });
     }

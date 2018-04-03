@@ -131,7 +131,7 @@ return [
             'submenu' => [
                 [
                     'text'          => 'Registro nuevo Producto',
-                    'url'           => '/home/producto',
+                    'url'           => '/home/producto/create',
                     'icon'          => 'cube',
                 ],
                 [

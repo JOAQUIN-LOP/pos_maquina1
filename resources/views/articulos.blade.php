@@ -11,6 +11,8 @@
 <!-- Form Element sizes -->
 <div class="box box-success">
 
+    @include('flash::message')
+
   <div class="box-header with-border">
     <h3 class="box-title">Crear Articulo</h3>
   </div>
@@ -22,7 +24,8 @@
   <!-- box-body -->
     <div class="box-body">
       {{--  inicio form  --}}
-      <form action="{{URL::to('/home/producto')}}" method="POST">
+      <form id="CrearProducto" action="{{URL::to('/home/producto')}}" method="POST">
+        <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
         {{ csrf_field() }}      
         {{--  inicio row  --}}
         <div class="row">
@@ -45,7 +48,7 @@
             </div>
             <div class="col-sm-1">
               <div class="form-group">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Crear</button>
+                <button type="submit" id="btn-Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Crear</button>
               </div>
             </div>
           </div>
@@ -67,20 +70,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach($producto as $prod) 
-                  <tr class="fila">
-                    <td>{{ $prod->idProducto }}</td>
-                    <td>{{ $prod->nomProducto }}</td>
-                    <td>{{ $prod->descripcion_producto }}</td>
-                    <td>
-                      @if ( $prod->estado == 0)
-                        <span class="label label-danger"> Inactivo </span>
-                      @elseif ($prod->estado == 1)
-                        <span class="label label-success"> Activo </span>
-                      @endif                    
-                    </td>
-                  </tr>                
-                  @endforeach
+                 
                 </tbody>
               </table>
             </div>
@@ -92,5 +82,21 @@
   <!-- /.box-body -->
   
 </div>
-    
+<div class="alert" id="notification-container" style="display:none;">
+    <div class="notification">
+        <button class="notification-close"></button>
+        <div class="notification-title"><span id="titulo"></span> !</div>
+        <div class="notification-message"><span id="mensaje"></span></div>
+    </div>
+</div>
 @stop
+@section('js')
+  <script type="text/javascript" src="{{ asset('js/articulos.js') }}"></script>
+  @stack('js')
+  @yield('js')
+@stop
+
+
+
+
+

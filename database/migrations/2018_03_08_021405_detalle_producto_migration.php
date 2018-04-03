@@ -26,7 +26,7 @@ class DetalleProductoMigration extends Migration
 
 
             //creando la relacion con la tabla producto
-            $table->foreign('idProducto')->references('idProducto')->on('producto');
+            $table->foreign('idProducto')->references('id')->on('producto');
             $table->timestamps();
         });
     }

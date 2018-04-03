@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Response;
 use Validator;
-
-
 use App\Producto;
 
 class ProductoController extends Controller
@@ -20,17 +17,9 @@ class ProductoController extends Controller
     public function index()
     {
         $producto = Producto::all();
-        if ($producto) {
-            return view('articulos', compact('producto'));
-        }
-        else {
-            $returnData = array(
-                'status' => 404,
-                'message' => 'Not found'
-            );
-            return Response::json($returnData, 404);
-        }
-        
+        return response()->json(
+            $producto->toArray()
+        );
     }
 
     /**
@@ -40,7 +29,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        return view('articulos');
     }
 
     /**
@@ -51,21 +40,21 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        
-
+        if($request->ajax()){
             $validator = Validator::make($request->all(), [
+                '_token' => 'required',
                 'nomProducto' => 'required',
                 'descripcion_producto' => 'required',
-               
+            
             ]);
             
             if ($validator->fails()) {
                 $returnData = array(
                     'status' => 400,
-                    'message' => 'Invalid Parameters',
+                    'message' => 'Parametros Invalidos',
                     'validator' => $validator->messages()->toJson()
                 );
-                return Response::json($returnData, 400);
+                return response()->json(['notification' => 'warning', 'data' => $returnData]); 
             } else {
                 try {
                     $newObject = new Producto();
@@ -74,18 +63,19 @@ class ProductoController extends Controller
                     $newObject->nomProducto = $request->get('nomProducto');
                     $newObject->descripcion_producto = $request->get('descripcion_producto');
                     $newObject->save();
-                    return redirect('home/producto');
+
+                    return response()->json(['notification' => 'success', 'producto' => $newObject->nomProducto]); 
                 }
                 catch(Exception $e) {
                     $returnData = array(
                         'status' => 500,
                         'message' => $e->getMessage()
                     );
-                    return view('articulos', array(
-                
-                    ));
+                    return response()->json(['notification' => 'danger', 'data' => $returnData]); 
                 }
             }
+        }
+       
     }
 
     /**
@@ -96,17 +86,7 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $objectSee = Producto::find($id);
-        if ($objectSee) {
-            return Response::json($objectSee, 200);
-        }
-        else {
-            $returnData = array(
-                'status' => 404,
-                'message' => 'Not found'
-            );
-            return Response::json($returnData, 404);
-        }
+
     }
 
     /**
@@ -115,9 +95,9 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+       
     }
 
     /**
@@ -129,7 +109,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -141,5 +121,5 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         //
-    }
+    }    
 }
