@@ -100,7 +100,9 @@ function indexEditProd(){
   $('#btn-Editar').click(function(e){
     e.preventDefault();
 
-    if(! confirm("Estas seguro de Modificar")){
+    Producto = $("#nomProducto").val();
+
+    if(! confirm("Estas seguro de Modificar "+ Producto)){
         return false;
     }
     var dato = $("#idProducto").val();
