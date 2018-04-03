@@ -95,9 +95,9 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit()
     {
-       
+        return view('data_products');
     }
 
     /**
@@ -109,7 +109,14 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        if($request->ajax()){
+            $update = Producto::find($id);
+            $update->nomProducto = $request->get('nomProducto');
+            $update->descripcion_producto = $request->get('descripcion_producto');
+            $update->save();
+            
+            return response()->json(['notification' => 'success', 'producto' => $update->nomProducto]); 
+           }
     }
 
     /**

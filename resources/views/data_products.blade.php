@@ -16,7 +16,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="Productos" class="display" >
+          <table id="EditProductos" class="display" >
             <thead>
             <tr>
               <th>id</th>
@@ -44,8 +44,8 @@
               </div>
               <form id="EditarProducto" action="{{URL::to('/home/producto')}}" method="put" accept-charset="UTF-8">
                   <div class="modal-body">
-                    <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}">
-                    <input type="text" class="form-control" name="idProducto" id="idProducto" placeholder="Nombre Producto" style="display:none;">
+                    <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none;">
+                    <input type="text" class="form-control" name="idProducto" id="idProducto" placeholder="id Producto" style="display:none;">
                     <div class="form-group">
                         <label>Nombre:</label>
                         <div class="input-group">
@@ -66,7 +66,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Salir</button>
-                <button type="submit" class="btn btn-outline" id="btn-Guardar">Guardar Cambios</button>
+                <button type="submit" class="btn btn-outline" id="btn-Editar">Guardar Cambios</button>
               </div>
             </form>
             </div>
@@ -76,5 +76,16 @@
         </div>
         <!-- /.modal -->
 
-@stop           
-@routes
+<div class="alert" id="notification-container" style="display:none;">
+  <div class="notification">
+      <button class="notification-close"></button>
+      <div class="notification-title"><span id="titulo"></span> !</div>
+      <div class="notification-message"><span id="mensaje"></span></div>
+  </div>
+</div>
+@stop
+@section('js')
+<script type="text/javascript" src="{{ asset('js/articulos.js') }}"></script>
+@stack('js')
+@yield('js')
+@stop

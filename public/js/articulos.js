@@ -64,61 +64,82 @@ function indexCreateProd(){
 
 
   // ---------------------------------- Seccion Modificr producto --------------------------------------
-  
+indexEditProd();
+var table = $('#EditProductos').DataTable();
+ 
+function indexEditProd(){
+    url =  $('#EditarProducto').attr('action');
+    $.get(url, function(res){
+      $(res).each(function(key, value){
+
+        $('table#EditProductos').dataTable().fnAddData( [
+          value['id'],
+          value['nomProducto'],
+          value['descripcion_producto'],
+          estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
+          "<button class='btnEdit btn btn-warning btn-sm ' data-toggle='modal' data-target='#modal-warning'><i class='fa fa-pencil'></i> Editar</button> <button class='btn btn-danger btn-sm btnDelete' data-toggle='modal' data-target='#modal-warning'><i class='fa fa-trash'></i> Eliminar</button>",
+         ] );
+         $( ".odd" ).addClass("fila");
+         $( ".even" ).addClass("fila");
+      })
+    });
+    
+  }
+
+  $('#EditProductos').on('click','tr.fila button.btnEdit', function(){
+        var idProducto = $(this).closest('tr').find('td').get(0).innerHTML;
+        var nomProducto = $(this).closest('tr').find('td').get(1).innerHTML;
+        var descripcion_producto = $(this).closest('tr').find('td').get(2).innerHTML;
+      
+        $('#idProducto').val(idProducto);
+        $('#nomProducto').val(nomProducto);
+        $('#descripcion_producto').val(descripcion_producto);
+  });
+
+
+  $('#btn-Editar').click(function(e){
+    e.preventDefault();
+
+    if(! confirm("Estas seguro de Modificar")){
+        return false;
+    }
+    var dato = $("#idProducto").val();
+    var url = $('#EditarProducto').attr('action');
+    var token = $("#token").val();
+    var method = $('#EditarProducto').attr('method');
+    $.ajax({
+        url: url+'/'+dato,
+        headers: {'X-CSRF-TOKEN': token },
+        type: method,
+        dataType: 'json',
+        data: $("#EditarProducto").serialize(),
+        success : function(response){
+
+        if (response['notification'] == "success") {
+          $('#mensaje').text(' Se Modifico '+ response['producto']+' Exitosamente ');
+        }
+        if (response['notification'] == "warning") {
+          objeto = response["data"];
+          $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> Los Campos no pueden ir vacios");
+        }
+        if (response['notification'] == "danger") {
+          objeto = response["data"];
+          $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+        }
+        $('#modal-warning').modal('toggle');
+        // notificacion
+
+        $('div#notification-container').fadeIn(350);
+        $(".notification").addClass("notification-"+response['notification']);
+        $('#titulo').text(response['notification']);
+        table.clear().draw();
+        indexEditProd();
+
+       $('div#notification-container').delay(3000).fadeOut(350);    
+
+        },
+
+      });
+    });
+
 });
-
-// var rout = $('#CrearProducto').attr('action');
-//     url = rout;
-//     $.get(url, function(res){
-//       $(res).each(function(key, value){
-//         $('table#Productos').dataTable().fnAddData( [
-//           value['id'],
-//           value['nomProducto'],
-//           value['descripcion_producto'],
-//           value['estado'],
-//           "<button class='btn btn-warning btn-sm btnEdit' data-toggle='modal' data-target='#modal-warning'><i class='fa fa-pencil'></i> Editar</button>"
-//          ] );
-//         // $('#Productos').append("<tr class='fila'><td>"+ value['id'] +"</td><td>"+ value['nomProducto'] +"</td><td>"+ value['descripcion_producto'] +"</td><<td>"+ value['estado'] +"</td><td><button class='btn btn-warning btn-sm btnEdit' data-toggle='modal' data-target='#modal-warning'><i class='fa fa-pencil'></i> Editar</button></td></tr>")
-//       })
-//     });
-  
-//     $('.odd').on('click','button.btnEdit', function(){
-//       console.log("funciona ".idProducto);
-//         var idProducto = $(this).closest('tr').find('td').get(0).innerHTML;
-//         var nomProducto = $(this).closest('tr').find('td').get(1).innerHTML;
-//         var descripcion_producto = $(this).closest('tr').find('td').get(2).innerHTML;
-      
-//         $('#idProducto').val(idProducto);
-//         $('#nomProducto').val(nomProducto);
-//         $('#descripcion_producto').val(descripcion_producto);
-//     });    
-
-
-//     $('#btn-Guardar').click(function(e){
-//       e.preventDefault();
-//       if(! confirm("Estas seguro de Modificar")){
-//           return false;
-//       }
-//       var dato = $("#idProducto").val();
-//       var url = $('#EditarProducto').attr('action');
-//       var token = $("#token").val();
-//       var method = $('#EditarProducto').attr('method');
-//       $.ajax({
-//           url: url+'/'+dato,
-//           headers: {'X-CSRF-TOKEN': token },
-//           type: method,
-//           dataType: 'json',
-//           data: $("#EditarProducto").serialize(),
-//           success : function(response){
-//           if(response['StatusCode'] == "200"){
-//             $('#modal-warning').modal('hide');
-//           }
-
-//           },
-
-//         });
-//       });
-
-      
-
-
