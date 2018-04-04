@@ -14,7 +14,7 @@ class ProductoMigration extends Migration
     public function up()
     {
         Schema::create('producto', function (Blueprint $table) {
-            $table->increments('idProducto');
+            $table->increments('id');
             $table->integer('tipo_id')->unsigned()->nullable();
             $table->string('codProducto',75)->nullable();
             $table->string('nomProducto',75)->unique();

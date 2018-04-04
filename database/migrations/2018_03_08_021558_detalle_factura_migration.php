@@ -25,7 +25,7 @@ class DetalleFacturaMigration extends Migration
             $table->foreign('idFactura')->references('idFactura')->on('factura');
 
             //creando la relacion con la tabla producto
-            $table->foreign('idProducto')->references('idProducto')->on('producto');
+            $table->foreign('idProducto')->references('id')->on('producto');
 
             $table->timestamps();
         });

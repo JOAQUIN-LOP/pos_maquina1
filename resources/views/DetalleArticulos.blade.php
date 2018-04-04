@@ -14,7 +14,6 @@
   <div class="box-header with-border">
     <h3 class="box-title">Detalle Articulo</h3>
   </div>
-  @if(Session::has('flash_message'))
   <div class="alert alert-success">
     <strong>Success!</strong> {{Session::get('flash_message')}}
   </div> 
@@ -131,7 +130,7 @@
                   @foreach($producto as $prod) 
                     @if ( $prod->estado == 1)
                       <tr class="fila">
-                        <td>{{ $prod->idProducto }}</td>
+                        <td>{{ $prod->id }}</td>
                         <td>{{ $prod->nomProducto }}</td>
                         <td>{{ $prod->descripcion_producto }}</td>
                         <td>
@@ -193,7 +192,8 @@
 
     </div>
   <!-- /.box-body -->
-  
 </div>
+
+@if(Session::has('flash_message'))
 
 @stop

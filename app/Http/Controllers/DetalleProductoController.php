@@ -127,6 +127,7 @@ class DetalleProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dump($id, $request);exit();
         $objectUpdate = DetalleProducto::find($id);
         if ($objectUpdate) {
             try {

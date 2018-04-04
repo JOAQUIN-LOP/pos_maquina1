@@ -131,18 +131,18 @@ return [
             'submenu' => [
                 [
                     'text'          => 'Registro nuevo Producto',
-                    'url'           => '/home/producto',
+                    'url'           => '/home/producto/create',
                     'icon'          => 'cube',
+                ],
+                [
+                    'text'          => 'Todos los Productos',
+                    'url'           => '/home/producto/edit',
+                    'icon'          => 'cubes',            
                 ],
                 [
                     'text'          => 'Agregar Precio Producto',
                     'url'           => '/home/detalle/precio',
                     'icon'          => 'cube',
-                ],
-                [
-                    'text'          => 'Todos los Productos',
-                    'url'           => 'admin/products',
-                    'icon'          => 'cubes',            
                 ],
             ],
         ],

@@ -41,9 +41,7 @@
     <link rel="stylesheet" href="{{ asset('css/Gstyle.css') }}">
 </head>
 <body class="hold-transition @yield('body_class')">
-
 @yield('body')
-
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -64,13 +62,7 @@
 @endif
 
 <script src="{{ asset('js/detalleArticulos.js') }}"></script>
-<script src="{{ asset('js/articulos.js') }}"></script>
 
-<script>
-    
-        $('#tableProduct').DataTable();
-
-</script>
 @yield('adminlte_js')
 
 </body>
