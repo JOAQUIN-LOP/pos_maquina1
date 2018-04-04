@@ -62,6 +62,7 @@
 @endif
 
 <script src="{{ asset('js/detalleArticulos.js') }}"></script>
+<script src="{{ asset('js/bootbox.min.js') }}"></script>
 
 @yield('adminlte_js')
 
