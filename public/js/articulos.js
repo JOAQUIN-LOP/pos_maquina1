@@ -4,7 +4,11 @@ var route = $("#route").val();
 
   if(route == "home/producto/create"){
     indexCreateProd();
-  var table = $('#Productos').DataTable();
+  var table = $('#Productos').DataTable({
+    "language":{
+      "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+      }
+});
   
   function indexCreateProd(){
       url =  $('#CrearProducto').attr('action');
@@ -95,7 +99,13 @@ var route = $("#route").val();
 if(route == "home/producto/edit"){
 
   indexEditProd();
-var table = $('#EditProductos').DataTable();
+var table = $('#EditProductos').DataTable( {
+  
+  "language":{
+    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+    }
+  
+});
  
 function indexEditProd(){
     url =  $('#EditarProducto').attr('action');
