@@ -105,44 +105,23 @@
     content: '\f071';
 }
 
-/* @-webkit-keyframes show-notification {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate(0, -100%);
-    }
-    10% {
-        opacity: 1;
-        -webkit-transform: translate(0, 0);
-    }
-    90% {
-        opacity: 1;
-        -webkit-transform: translate(0, 0);
-    }
-    100% {
-        opacity: 0;
-        -webkit-transform: translate(0, -100%);
-    }
-}
+/* color datatable dentro de modal  */
 
-@keyframes show-notification {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate(0, -100%);
-        transform: translate(0, -100%);
+#detallePrecioProducto tbody tr td{
+    color:#000 !important;    
+}
+/* modal xl */
+.modal-xl {
+    width: 95% !important;
+   max-width:1300px !important;
+   background: #e85656 !important;
+  }
+
+@media (min-width: 768px) {
+    .modal-xl {
+      width: 90%;
+     max-width:1200px;
     }
-    10% {
-        opacity: 1;
-        -webkit-transform: translate(0, 0);
-        transform: translate(0, 0);
-    }
-    90% {
-        opacity: 1;
-        -webkit-transform: translate(0, 0);
-        transform: translate(0, 0);
-    }
-    100% {
-        opacity: 0;
-        -webkit-transform: translate(0, -100%);
-        transform: translate(0, -100%);
-    }
-} */
+  }
+
+  
