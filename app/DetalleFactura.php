@@ -10,6 +10,7 @@ class DetalleFactura extends Model
 	use SoftDeletes;
 
 	protected $table = 'detalle_factura';
+
 	protected $fillable = array('idFactura','idProducto', 'cantidad','precio_unit','total_venta');
 
 	protected $hidden = ['deleted_at', 'created_at','updated_at'];
