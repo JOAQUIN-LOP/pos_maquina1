@@ -25,13 +25,6 @@ $(document).ready(function () {
         // agregamos botones para exportar la informacion 
         buttons: [
           {
-            extend: 'excelHtml5',
-            title: 'Detalle Articulos',
-            exportOptions: {
-              columns: [ 0, 1, 2, 3 ]
-            }
-          },
-          {
             extend: 'pdfHtml5',
             title: 'Detalle Articulos',
             exportOptions: {

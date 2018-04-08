@@ -2,28 +2,59 @@ $(document).ready(function(){
 // ---------------------------------- Seccion crear producto --------------------------------------
 var route = $("#route").val();
 
-  if(route == "home/producto/create"){
-    indexCreateProd();
-  var table = $('#Productos').DataTable({
-    "language":{
-      "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-      }
-});
+  if(route == "home/producto/create"){   
   
-  function indexCreateProd(){
-      url =  $('#CrearProducto').attr('action');
-      $.get(url+'/1', function(res){
-        $(res).each(function(key, value){
-          $('table#Productos').dataTable().fnAddData( [
-            value['id'],
-            value['nomProducto'],
-            value['descripcion_producto'],
-            estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
-          ] );
-        })
-      });
-    }
+  // cargamos los productos activos al datatable
+  index();
+  var tabla;
+  var tabla2;
 
+  function index() {
+    url =  $('#CrearProducto').attr('action');
+    console.log(url);
+    
+      tabla = $('#Productos').DataTable(
+      {
+        dom: 'Bfrtip',//Definimos los elementos del control de tabla
+        // agregamos botones para exportar la informacion 
+        buttons: [
+          {
+            extend: 'pdfHtml5',
+            title: 'Productos',
+            exportOptions: {
+              columns: [ 0, 1, 2, 3 ]
+            }
+          }
+        ],
+        "ajax":
+				{
+					url: url+"/1",
+          type : "get",
+          success: function(r){
+            tabla.clear();
+            // agregamos los datos al datatable 
+            $(r).each(function (key, value) {
+              tabla.row.add([
+                value['id'],
+                value['nomProducto'],
+                value['descripcion_producto'],
+                estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
+              ]).draw(false);
+              $( ".odd" ).addClass("fila");
+              $( ".even" ).addClass("fila");
+            })
+      
+            
+          },
+					error: function(e){
+						console.log(e.responseText);	
+					}
+				},
+      });
+  }   
+      
+    
+    
     $('#btn-Guardar').click(function (e) {
       e.preventDefault();
       Producto = $("#nomProducto").val();
@@ -61,7 +92,7 @@ var route = $("#route").val();
                 $('#CrearProducto').trigger("reset");
 
                 // notificacion
-
+                tabla.ajax.reload();
                 if (response['notification'] == "success") {
                   $('#mensaje').text(' Se Creo '+ response['producto']+' Exitosamente ');
                 }
@@ -77,9 +108,7 @@ var route = $("#route").val();
                 $('div#notification-container').fadeIn(350);
                 $(".notification").addClass("notification-"+response['notification']);
                 $('#titulo').text(response['notification']);
-                table.clear().draw();
-                indexCreateProd();
-
+                
                 // oculta notificacion
 
                 $('div#notification-container').delay(3000).fadeOut(350);    
@@ -99,36 +128,52 @@ var route = $("#route").val();
 if(route == "home/producto/edit"){
 
   indexEditProd();
-var table = $('#EditProductos').DataTable( {
-  
-  "language":{
-    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-    }
-  
-});
- 
-function indexEditProd(){
+    
+  function indexEditProd() {
     url =  $('#EditarProducto').attr('action');
     
-    $.get(url,function(res){
-      $(res).each(function(key, value){
-
-        $('table#EditProductos').dataTable().fnAddData( [
-          value['id'],
-          value['nomProducto'],
-          value['descripcion_producto'],
-          estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
-          
-          "<div class='btn-group'><button class='btnEdit btn btn-warning btn-sm ' data-toggle='modal' data-target='#modal-warning'><i class='fa fa-pencil'></i> Editar</button> "+
-          (estado = (value['estado'] == 1) ?"<button type='button' class='btn btn-danger btn-sm btn-Eliminar'><i class='fa fa-circle-o'></i> Desactivar</button></div>":"<button type='button' class='btn btn-success btn-sm btn-Activar'><i class='fa fa-dot-circle-o'></i> Activar</button></div>"),
-         ] );
-         $( ".odd" ).addClass("fila");
-         $( ".even" ).addClass("fila");
-      })
-    });
-    
-  }
-
+      tabla2 = $('#EditProductos').DataTable(
+      {
+        dom: 'Bfrtip',//Definimos los elementos del control de tabla
+        // agregamos botones para exportar la informacion 
+        buttons: [
+          {
+            extend: 'pdfHtml5',
+            title: 'Productos',
+            exportOptions: {
+              columns: [ 0, 1, 2, 3 ]
+            }
+          }
+        ],
+        "ajax":
+				{
+					url: url,
+          type : "get",
+          success: function(r){
+            tabla2.clear();
+            // agregamos los datos al datatable 
+            $(r).each(function (key, value) {
+              tabla2.row.add([
+                value['id'],
+                value['nomProducto'],
+                value['descripcion_producto'],
+                estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
+                "<div class='btn-group'><button class='btnEdit btn btn-warning btn-sm ' data-toggle='modal' data-target='#modal-warning'><i class='fa fa-pencil'></i> Editar</button> "+
+                (estado = (value['estado'] == 1) ?"<button type='button' class='btn btn-danger btn-sm btn-Eliminar'><i class='fa fa-circle-o'></i> Desactivar</button></div>":"<button type='button' class='btn btn-success btn-sm btn-Activar'><i class='fa fa-dot-circle-o'></i> Activar</button></div>"),                
+              ]).draw(false);
+              $( ".odd" ).addClass("fila");
+              $( ".even" ).addClass("fila");
+            })
+      
+            
+          },
+					error: function(e){
+						console.log(e.responseText);	
+					}
+				},
+      });
+  }   
+  
   $('#EditProductos').on('click','tr.fila button.btnEdit', function(){
         var idProducto = $(this).closest('tr').find('td').get(0).innerHTML;
         var nomProducto = $(this).closest('tr').find('td').get(1).innerHTML;
@@ -175,7 +220,8 @@ function indexEditProd(){
             dataType: 'json',
             data: $("#EditarProducto").serialize(),
             success : function(response){
-
+              tabla2.ajax.reload();
+              
               if (response['notification'] == "success") {
                 $('#mensaje').text(' Se Modifico '+ response['producto']+' Exitosamente ');
               }
@@ -189,12 +235,10 @@ function indexEditProd(){
               }
               $('#modal-warning').modal('toggle');
               // notificacion
-
+              tabla2.ajax.reload();
               $('div#notification-container').fadeIn(350);
               $(".notification").addClass("notification-"+response['notification']);
               $('#titulo').text(response['notification']);
-              table.clear().draw();
-              indexEditProd();
 
               $('div#notification-container').delay(3000).fadeOut(350);
 
@@ -249,12 +293,11 @@ function indexEditProd(){
                   $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
                 } 
                // notificacion
-      
+               tabla2.ajax.reload();
                 $('div#notification-container').fadeIn(350);
                 $(".notification").addClass("notification-"+response['notification']);
                 $('#titulo').text(response['notification']);
-                table.clear().draw();
-                indexEditProd();
+                
       
                 $('div#notification-container').delay(3000).fadeOut(350); 
 
@@ -313,9 +356,7 @@ function indexEditProd(){
                     $('div#notification-container').fadeIn(350);
                     $(".notification").addClass("notification-"+response['notification']);
                     $('#titulo').text(response['notification']);
-                    table.clear().draw();
-                    indexEditProd();
-          
+                    tabla2.ajax.reload();          
                     $('div#notification-container').delay(3000).fadeOut(350); 
     
                   },
@@ -324,8 +365,6 @@ function indexEditProd(){
             }
           });
         });
-    
-
 }
 
 
