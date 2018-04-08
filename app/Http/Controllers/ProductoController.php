@@ -54,7 +54,7 @@ class ProductoController extends Controller
                     'message' => 'Parametros Invalidos',
                     'validator' => $validator->messages()->toJson()
                 );
-                return response()->json(['notification' => 'warning', 'data' => $returnData]); 
+                return response()->json(['notification' => 'danger', 'data' => $returnData]); 
             } else {
                 try {
                     $newObject = new Producto();
@@ -66,12 +66,12 @@ class ProductoController extends Controller
 
                     return response()->json(['notification' => 'success', 'producto' => $newObject->nomProducto]); 
                 }
-                catch(Exception $e) {
+                catch (\Illuminate\Database\QueryException $e) {
                     $returnData = array(
                         'status' => 500,
                         'message' => $e->getMessage()
                     );
-                    return response()->json(['notification' => 'danger', 'data' => $returnData]); 
+                    return response()->json(['notification' => 'warning', 'data' => $returnData]); 
                 }
             }
         }
@@ -86,7 +86,10 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-
+        $producto = Producto::where('estado',$id)->get();
+        return response()->json(
+            $producto->toArray()
+        );
     }
 
     /**
@@ -111,12 +114,29 @@ class ProductoController extends Controller
     {
         if($request->ajax()){
             $update = Producto::find($id);
-            $update->nomProducto = $request->get('nomProducto');
-            $update->descripcion_producto = $request->get('descripcion_producto');
-            $update->save();
-            
-            return response()->json(['notification' => 'success', 'producto' => $update->nomProducto]); 
-           }
+            if ($update) {
+                try {
+                    $update->nomProducto = $request->get('nomProducto');
+                    $update->descripcion_producto = $request->get('descripcion_producto');
+                    $update->save();
+                    return response()->json(['notification' => 'success', 'producto' => $update->nomProducto]); 
+                }
+                catch (\Illuminate\Database\QueryException $e) {
+                    $returnData = array(
+                        'status' => 500,
+                        'message' => $e->getMessage()
+                    );
+                    return response()->json(['notification' => 'warning', 'data' => $returnData]); 
+                }
+            }
+            else {
+                $returnData = array(
+                    'status' => 404,
+                    'message' => 'Not found'
+                );
+                    return response()->json(['notification' => 'danger', 'data' => $returnData]); 
+            }    
+        }
     }
 
     /**
@@ -127,6 +147,60 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $objectDelete = Producto::find($id);
+        if ($objectDelete) {
+            try {
+                $objectDelete->estado = '0';
+                $objectDelete->save();
+                return response()->json(['notification' => 'success', 'producto' => $objectDelete->nomProducto]); 
+            }
+            catch (\Illuminate\Database\QueryException $e) {
+                $returnData = array(
+                    'status' => 500,
+                    'message' => $e->getMessage()
+                );
+                return response()->json(['notification' => 'warning', 'data' => $returnData]); 
+            }
+        }
+        else {
+            $returnData = array(
+                'status' => 404,
+                'message' => 'Not found'
+            );
+                return response()->json(['notification' => 'danger', 'data' => $returnData]); 
+        }    
+    }    
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function active($id)
+    {
+        $objectDelete = Producto::find($id);
+        if ($objectDelete) {
+            try {
+                $objectDelete->estado = '1';
+                $objectDelete->save();
+                return response()->json(['notification' => 'success', 'producto' => $objectDelete->nomProducto]); 
+            }
+            catch (\Illuminate\Database\QueryException $e) {
+                $returnData = array(
+                    'status' => 500,
+                    'message' => $e->getMessage()
+                );
+                return response()->json(['notification' => 'warning', 'data' => $returnData]); 
+            }
+        }
+        else {
+            $returnData = array(
+                'status' => 404,
+                'message' => 'Not found'
+            );
+                return response()->json(['notification' => 'danger', 'data' => $returnData]); 
+        }    
     }    
 }

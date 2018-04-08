@@ -23,6 +23,7 @@
   @endif
   <!-- box-body -->
     <div class="box-body">
+        <input type="text" value="{!!Request::path()!!}" id="route" hidden>
       {{--  inicio form  --}}
       <form id="CrearProducto" action="{{URL::to('/home/producto')}}" method="POST">
         <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">

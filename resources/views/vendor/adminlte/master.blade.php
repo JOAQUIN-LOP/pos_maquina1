@@ -25,7 +25,9 @@
 
     @if(config('adminlte.plugins.datatables'))
         <!-- DataTables -->
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/jquery.dataTables.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/buttons.dataTables.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/responsive.dataTables.min.css') }}" />
     @endif
 
     @yield('adminlte_css')
@@ -53,15 +55,22 @@
 
 @if(config('adminlte.plugins.datatables'))
     <!-- DataTables -->
-    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/jszip.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/vfs_fonts.js') }}"></script>
 @endif
 
 @if(config('adminlte.plugins.chartjs'))
     <!-- ChartJS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 @endif
+{{--  bootbox lib  --}}
 
-<script src="{{ asset('js/detalleArticulos.js') }}"></script>
+<script src="{{ asset('js/bootbox.min.js') }}"></script>
 
 @yield('adminlte_js')
 

@@ -32,7 +32,8 @@
         </div>
         <!-- /.box-body -->
       </div>
-      <table id="example" class="display" width="100%"></table>
+      
+      <input type="text" value="{!!Request::path()!!}" id="route" hidden>
 
       <div class="modal modal-warning fade" id="modal-warning">
           <div class="modal-dialog">

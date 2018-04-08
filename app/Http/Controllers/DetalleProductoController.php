@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Producto;
 use Response;
 use Validator;
 use App\DetalleProducto;
@@ -19,20 +18,8 @@ class DetalleProductoController extends Controller
     public function index()
     {
 
-        $producto = Producto::all();
-        $detalleproducto = DetalleProducto::with('producto')->get();
+        return view('DetalleArticulos');
 
-        // dump($detalleproducto);exit();
-        if ($producto) {
-            return view('DetalleArticulos', compact('producto', 'detalleproducto'));
-        }
-        else {
-            $returnData = array(
-                'status' => 404,
-                'message' => 'Not found'
-            );
-            return Response::json($returnData, 404);
-        }
     }
 
     /**
@@ -54,6 +41,8 @@ class DetalleProductoController extends Controller
     public function store(Request $request)
     {
         
+        if($request->ajax()){
+            
         $validator = Validator::make($request->all(), [
             'IdProducto' => 'required',
             'mesDetalle' => 'required',
@@ -70,7 +59,7 @@ class DetalleProductoController extends Controller
                 'message' => 'Invalid Parameters',
                 'validator' => $validator->messages()->toJson()
             );
-            return Response::json($returnData, 400);
+        return response()->json(['notification' => 'danger', 'data' => $returnData]); 
         } else {
             try {
                 $newObject = new DetalleProducto();
@@ -82,18 +71,18 @@ class DetalleProductoController extends Controller
                 $newObject->cantidad_unidades = $request->get('cantidad_unidades');
                 $newObject->precio_unidad = $request->get('precio_unidad');
                 $newObject->save();
-                return redirect('home/detalle/precio');
+        return response()->json(['notification' => 'success', 'producto' => $newObject->idProducto]); 
             }
             catch(Exception $e) {
                 $returnData = array(
                     'status' => 500,
                     'message' => $e->getMessage()
                 );
-                return view('articulos', array(
-            
-                ));
+        return response()->json(['notification' => 'warning', 'data' => $returnData]); 
             }
         }
+        
+        }        
     }
 
     /**
@@ -104,7 +93,10 @@ class DetalleProductoController extends Controller
      */
     public function show($id)
     {
-        //
+        $producto = DetalleProducto::with('producto')->where('idProducto',$id)->get();
+        return response()->json(
+            $producto->toArray()
+        );
     }
 
     /**
@@ -127,7 +119,6 @@ class DetalleProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dump($id, $request);exit();
         $objectUpdate = DetalleProducto::find($id);
         if ($objectUpdate) {
             try {
