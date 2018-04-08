@@ -25,18 +25,24 @@ $(document).ready(function () {
         // agregamos botones para exportar la informacion 
         buttons: [
           {
-            extend: 'excelHtml5',
-            title: 'Detalle Articulos',
-            exportOptions: {
-              columns: [ 0, 1, 2, 3 ]
-            }
-          },
-          {
             extend: 'pdfHtml5',
+            text: ' PDF',
             title: 'Detalle Articulos',
             exportOptions: {
               columns: [ 0, 1, 2, 3 ]
-            }
+            },
+            customize: function ( win ) {
+              $(win.document.body)
+                  .css( 'font-size', '10pt' )
+                  .prepend(
+                      '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                  );
+
+              $(win.document.body).find( 'table' )
+                  .addClass( 'compact' )
+                  .css( 'font-size', 'inherit' );
+          },
+            
           }
         ],
         "ajax":

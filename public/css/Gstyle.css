@@ -105,6 +105,28 @@
     content: '\f071';
 }
 
+/* color boton pdf */
+
+.button.dt-button, div.dt-button, a.dt-button {
+    border:none;
+    background: #F04B46 !important;
+    webkit-box-shadow: 0 1px #902d2a !important;
+    box-shadow: 0 1px #902d2a !important;
+    color: #fff !important;
+}
+
+.button.dt-button, div.dt-button, a.dt-button:hover {
+    color: #fff !important;
+    background-color: #c9302c !important;
+    border-color: #ac2925 !important;
+}
+
+.button.dt-button, div.dt-button, a.dt-button::before{
+    font-family: FontAwesome;
+    content:'\f1c1';
+}
+
+
 /* color datatable dentro de modal  */
 
 #detallePrecioProducto tbody tr td{
@@ -114,7 +136,6 @@
 .modal-xl {
     width: 95% !important;
    max-width:1300px !important;
-   background: #e85656 !important;
   }
 
 @media (min-width: 768px) {
