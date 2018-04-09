@@ -3,11 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquen\SofttDeletes;
 
 class Factura extends Model
 {
-	use SoftDeletes;
 
 	protected $table = 'factura';
 

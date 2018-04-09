@@ -110,7 +110,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'MENÚ PRINCIPAL',
         [
             'text' => 'Blog',
             'url'  => 'admin/blog',
@@ -144,6 +144,24 @@ return [
                     'url'           => '/home/detalle/precio',
                     'icon'          => 'cube',
                 ],
+            ],
+        ],
+
+        [
+            'text'  => 'Facturas',
+            'icon'  => 'cubes',
+            'submenu' => [
+                [
+                    'text'          => 'Ver Facturas',
+                    'url'           => '/home/factura',
+                    'icon'          => 'cube'
+                ],
+                [
+                    'text'          => 'Agregar Factura',
+                    'url'           => '/home/factura/create',
+                    'icon'          => 'cubes',          
+                ],
+                
             ],
         ],
         /*'ACCOUNT SETTINGS',
