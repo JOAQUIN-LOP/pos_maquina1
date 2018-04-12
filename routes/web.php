@@ -25,9 +25,9 @@ Route::resource('usuario','UsuarioController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home/factura', function(){
-	return view('factura');
-});
+
+Route::resource('/home/factura', 'FacturaController');
+
 
 // ARTICULOS
 Route::get('/home/producto/edit', 'ProductoController@edit')->name('EditProducto');

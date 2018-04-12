@@ -110,7 +110,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'MENÚ PRINCIPAL',
         [
             'text' => 'Blog',
             'url'  => 'admin/blog',
@@ -146,6 +146,7 @@ return [
                 ],
             ],
         ],
+<<<<<<< HEAD
         [
             'text'    => 'Inventario',
             'icon'    => 'book',
@@ -159,6 +160,24 @@ return [
                     'text' => 'Level One',
                     'url'  => '#',
                 ],
+=======
+
+        [
+            'text'  => 'Facturas',
+            'icon'  => 'cubes',
+            'submenu' => [
+                [
+                    'text'          => 'Ver Facturas',
+                    'url'           => '/home/factura',
+                    'icon'          => 'cube'
+                ],
+                [
+                    'text'          => 'Agregar Factura',
+                    'url'           => '/home/factura/create',
+                    'icon'          => 'cubes',          
+                ],
+                
+>>>>>>> 61fd960533a6544acccff87a0496805032dadd4a
             ],
         ],
         /*'ACCOUNT SETTINGS',
