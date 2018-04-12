@@ -123,8 +123,6 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        
-        
         [
             'text'    => 'Producto',
             'icon'    => 'cubes',
@@ -146,7 +144,6 @@ return [
                 ],
             ],
         ],
-<<<<<<< HEAD
         [
             'text'    => 'Inventario',
             'icon'    => 'book',
@@ -160,8 +157,8 @@ return [
                     'text' => 'Level One',
                     'url'  => '#',
                 ],
-=======
-
+            ], 
+        ],
         [
             'text'  => 'Facturas',
             'icon'  => 'cubes',
@@ -177,9 +174,9 @@ return [
                     'icon'          => 'cubes',          
                 ],
                 
->>>>>>> 61fd960533a6544acccff87a0496805032dadd4a
             ],
         ],
+       
         /*'ACCOUNT SETTINGS',
         [
             'text' => 'Articulos',

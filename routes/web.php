@@ -37,5 +37,6 @@ Route::resource('/home/detalle/precio', 'DetalleProductoController');
 
 // INVENTARIO
 Route::resource('/home/inventario', 'InventarioController');
+Route::get('/home/inventario/create', 'InventarioController@index')->name('crear');
 
 
