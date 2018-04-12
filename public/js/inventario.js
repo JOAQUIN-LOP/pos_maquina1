@@ -16,10 +16,10 @@ $('document').ready(function(){
     $('#anio').val(anio);
     
     
-    var url = $('#FormPrecioProd').attr('action');
-    console.log(url);
-    $.get(url, function (data) {
-        //success data
-        console.log(data);
-    });
+    // var url = $('#CrearInventario').attr('action');
+    // console.log(url);
+    // $.get(url,  headers = { 'X-CSRF-TOKEN': token }, function (data) {
+    //     //success data
+    //     console.log(data);
+    // });
 })
