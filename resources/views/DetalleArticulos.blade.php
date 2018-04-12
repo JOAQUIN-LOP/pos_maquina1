@@ -22,7 +22,7 @@
       <div class="box-body">
         <div class="row">
           <div class="col-sm-12">
-            <table id="TablaDetalle" class="display" >
+            <table id="TablaDetalle" class="table table-striped table-bordered" style="width:100%">
             <thead>
               <tr>
                 <th>id</th>
@@ -118,7 +118,7 @@
                       </div>
                       <div class="col-sm-2">
                           <div class="form-group">
-                            <label for="exampleInputPassword1">Precio U</label>
+                            <label for="exampleInputPassword1">Precio Unitario</label>
                             <input type="text" class="form-control" name="precio_unidad" id="precio_unidad" readonly required>
                           </div>
                       </div>
@@ -133,7 +133,7 @@
                 <hr>
                <div class="container-fluid">
                     <div class="table-responsive">
-                      <table id="detallePrecioProducto" class="table" >
+                      <table id="detallePrecioProducto" class="table table-striped" style="width:100%">
                         <thead>
                         <tr>
                           <th>Producto</th>

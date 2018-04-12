@@ -20,6 +20,7 @@ var route = $("#route").val();
         buttons: [
           {
             extend: 'pdfHtml5',
+            text: ' PDF',
             title: 'Productos',
             exportOptions: {
               columns: [ 0, 1, 2, 3 ]
@@ -139,10 +140,11 @@ if(route == "home/producto/edit"){
         buttons: [
           {
             extend: 'pdfHtml5',
+            text: ' PDF',
             title: 'Productos',
             exportOptions: {
               columns: [ 0, 1, 2, 3 ]
-            }
+            },
           }
         ],
         "ajax":

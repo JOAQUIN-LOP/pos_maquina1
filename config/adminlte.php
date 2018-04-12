@@ -146,6 +146,21 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'Inventario',
+            'icon'    => 'book',
+            'submenu' => [
+                [
+                    'text' => 'Crear Inventario',
+                    'icon' => 'book',
+                    'url'  => 'home/inventario/create',
+                ],
+                [
+                    'text' => 'Level One',
+                    'url'  => '#',
+                ],
+            ],
+        ],
         /*'ACCOUNT SETTINGS',
         [
             'text' => 'Articulos',

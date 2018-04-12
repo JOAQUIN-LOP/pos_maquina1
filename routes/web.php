@@ -30,9 +30,12 @@ Route::get('/home/factura', function(){
 });
 
 // ARTICULOS
-Route::get('/home/producto/all', 'ProductoController@ProductosAll')->name('allProducto');
 Route::get('/home/producto/edit', 'ProductoController@edit')->name('EditProducto');
 Route::get('/home/producto/{id}/active', 'ProductoController@active')->name('ActiveProducto');
 Route::resource('/home/producto', 'ProductoController');
-
 Route::resource('/home/detalle/precio', 'DetalleProductoController');
+
+// INVENTARIO
+Route::resource('/home/inventario', 'InventarioController');
+
+

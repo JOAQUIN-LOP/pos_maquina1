@@ -16,7 +16,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="EditProductos" class="display" >
+          <table id="EditProductos" class="table table-striped table-bordered" style="width:100%" >
             <thead>
             <tr>
               <th>id</th>

@@ -25,9 +25,11 @@
 
     @if(config('adminlte.plugins.datatables'))
         <!-- DataTables -->
-        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/jquery.dataTables.min.css') }}" />
+        {{--  <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/jquery.dataTables.min.css') }}" />  --}}
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/buttons.dataTables.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/responsive.dataTables.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/dataTables.bootstrap.min.css') }}" />
+        
     @endif
 
     @yield('adminlte_css')
@@ -56,12 +58,14 @@
 @if(config('adminlte.plugins.datatables'))
     <!-- DataTables -->
     <script src="{{ asset('vendor/adminlte/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatables/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatables/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatables/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatables/jszip.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatables/pdfmake.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatables/vfs_fonts.js') }}"></script>
+    
 @endif
 
 @if(config('adminlte.plugins.chartjs'))

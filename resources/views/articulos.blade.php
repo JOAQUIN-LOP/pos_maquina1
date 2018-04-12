@@ -16,11 +16,6 @@
   <div class="box-header with-border">
     <h3 class="box-title">Crear Articulo</h3>
   </div>
-  @if(Session::has('flash_message'))
-  <div class="alert alert-success">
-    <strong>Success!</strong> {{Session::get('flash_message')}}
-  </div> 
-  @endif
   <!-- box-body -->
     <div class="box-body">
         <input type="text" value="{!!Request::path()!!}" id="route" hidden>
@@ -61,7 +56,7 @@
         <div class="box-body">
           <div class="row">
             <div class="col-sm-12">
-              <table id="Productos" class="display" >
+              <table id="Productos" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                   <th>id</th>
