@@ -11,7 +11,7 @@
 @stop
 
 @section('content_header')
-    <h1>Factura</h1>
+    <h1>Facturas</h1>
 @stop
 
 @section('content')
@@ -33,7 +33,7 @@
     <div class="box-body">
         <input type="text" value="{!!Request::path()!!}" id="route" hidden>
       {{--  inicio form  --}}
-      <form id="ver_facturas" action="{{URL::to('/home/factura')}}" method="POST">
+      <form id="ver_facturas" name="ver_facturas">
         <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
         {{ csrf_field() }}      
         {{--  inicio row  --}}
@@ -42,7 +42,8 @@
             <div class="col-sm-3">
               <div class="form-group">                
                   <label for="nom_empresa">Nombre Empresa</label>
-                  <input type="text" class="form-control" name="nom_empresa"  id="nom_empresa" value="{{$facturas[0]->nom_empresa}}" readonly required>                
+                  <input type="text" class="form-control" name="nom_empresa"  id="nom_empresa" value="{{$facturas[0]->nom_empresa}}" readonly required>                  
+                  <input type="text" name="id_empresa" id="id_empresa" value="{{$facturas[0]->idEmpresa}}" readonly hidden>
               </div>
             </div>
             <div class="col-sm-4">
@@ -55,7 +56,7 @@
                       <option value="{{$sucursal->idSucursal}}">{{$sucursal->nom_sucursal}}</option>
                     @endforeach
                   </select>
-               
+                  <a href="#" class="tooltip-test">Debe Seleccionar una Sucursal</a>
               </div>
             </div>
             <div class="col-sm-2">
@@ -102,7 +103,7 @@
             <div class="col-sm-1">
               <div class="form-group">
                 <label>&nbsp;</label> 
-                <button type="submit" id="btn_ver" class="btn btn-primary btn-as-block"><i class="fa fa-search"></i></button>                            
+                <button type="button" id="btn_ver" class="btn btn-primary btn-as-block"><i class="fa fa-search"></i></button>                            
               </div>
             </div>
           </div>
@@ -110,30 +111,15 @@
         {{--  fin row  --}}
       </form>
       {{--  fin form  --}}
-      {{--  inici box body  --}}
-        <div class="box-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <table id="Productos" class="display" >
-                <thead>
-                <tr>
-                  <th>id</th>
-                  <th>Producto</th>
-                  <th>Descripcion</th>
-                  <th>Estado</th>
-                </tr>
-                </thead>
-                <tbody>
-                 
-                </tbody>
-              </table>
-            </div>
-          </div>
-          {{--  fin box body  --}}
-      </div>
+      
       
     </div>
   <!-- /.box-body -->
+  <div class="modal modal-info fade" id="modal-info">
+        
+      </div>
+
+  
   
 </div>
 <div class="alert" id="notification-container" style="display:none;">
@@ -145,7 +131,7 @@
 </div>
 @stop
 @section('js')
-  <script type="text/javascript" src="{{ asset('js/factura.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/datos_factura.js') }}"></script>
   @stack('js')
   @yield('js')
 @stop

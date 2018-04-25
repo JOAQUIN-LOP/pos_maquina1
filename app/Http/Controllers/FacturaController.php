@@ -21,21 +21,66 @@ class FacturaController extends Controller
         $facturas = DB::table('sucursal as suc')
         ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
             ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
-                ->select('emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
+                ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
                     ->where('inv.estado','=',1, 'and', 'suc.estado','=',1)
                         ->groupBy('suc.nom_sucursal')
                             ->orderBy('suc.nom_sucursal')
                                 ->get();
 
-
-
         return view('factura', compact('facturas', $facturas));
     }
 
-    //ver todos los productos
-    public function see(Request $request){
+    //ver todos las facturas
+    //POST
+    public function see(Request $request, $id){
 
-        return response()->json($facturas->toArray());
+        if ($request -> ajax()) {            
+            DB::connection()->enableQueryLog();
+
+            $facturas = DB::table('factura as fac')
+            ->join('sucursal as suc', 'suc.idSucursal','=','fac.idSucursal') 
+                ->join('usuario as us', 'us.idUsuario','=','fac.idUsuario')
+                    ->select('fac.idFactura','fac.num_factura','suc.nom_sucursal', 'us.nom_usuario', 'fac.fecha','fac.total_factura')
+                        ->where('fac.idSucursal',$id)
+                        ->where('fac.mes',$request->input('mes'))
+                        ->where('fac.anio','=', $request->input('anio'))                            
+                            ->orderBy('fac.num_factura')
+                                ->get();
+
+
+            //var_dump(DB::getQueryLog());
+
+            return view('datos_factura', compact('facturas'));
+        }        
+
+    }
+
+    //ver el detalle de la factura
+    //POST
+    public function detalles(Request $request, $id){
+
+         if ($request -> ajax()) {            
+            DB::connection()->enableQueryLog();
+
+            $head = DB::table('facturas as fac')
+            ->join('empresa as emp', )
+
+
+            $detalles = DB::table('factura as fac')
+            ->join('sucursal as suc', 'suc.idSucursal','=','fac.idSucursal') 
+                ->join('usuario as us', 'us.idUsuario','=','fac.idUsuario')
+                    ->select('fac.idFactura','fac.num_factura','suc.nom_sucursal', 'us.nom_usuario', 'fac.fecha','fac.total_factura')
+                        ->where('fac.idSucursal',$id)
+                        ->where('fac.mes',$request->input('mes'))
+                        ->where('fac.anio','=', $request->input('anio'))                            
+                            ->orderBy('fac.num_factura')
+                                ->get();
+
+
+            //var_dump(DB::getQueryLog());
+
+            return view('detalle_factura', compact('facturas'));
+        }        
 
     }
 
