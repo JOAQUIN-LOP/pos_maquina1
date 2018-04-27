@@ -28,6 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/home/factura', 'FacturaController');
 
+// Empresa
+Route::resource('/home/empresa', 'EmpresaController');
 
 // ARTICULOS
 Route::get('/home/producto/edit', 'ProductoController@edit')->name('EditProducto');
@@ -36,7 +38,10 @@ Route::resource('/home/producto', 'ProductoController');
 Route::resource('/home/detalle/precio', 'DetalleProductoController');
 
 // INVENTARIO
+Route::get('/home/inventario/contar/{anio}', 'InventarioController@contar');
+Route::get('/home/inventario/all/{anio}', 'InventarioController@All');
+Route::get('/home/inventario/create', 'InventarioController@create');
 Route::resource('/home/inventario', 'InventarioController');
-Route::get('/home/inventario/create', 'InventarioController@index')->name('crear');
+
 
 

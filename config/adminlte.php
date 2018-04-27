@@ -149,7 +149,7 @@ return [
             'icon'    => 'book',
             'submenu' => [
                 [
-                    'text' => 'Crear Inventario',
+                    'text' => 'Inicializar Inventario',
                     'icon' => 'book',
                     'url'  => 'home/inventario/create',
                 ],

@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Response;
 use Validator;
-use App\Inventario;
+use App\Empresa;
 
-class InventarioController extends Controller
+class EmpresaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        $inventario = Inventario::all();
+        $Empresa = Empresa::all();
         return response()->json(
-            $inventario->toArray()
+            $Empresa->toArray()
         );
     }
 
@@ -30,7 +30,7 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        return view('inventario');
+        //
     }
 
     /**
@@ -88,30 +88,4 @@ class InventarioController extends Controller
     {
         //
     }
-
-    public function All($anio)
-    {
-        $inventario = Inventario::where('anio',$anio)->get();
-        return response()->json(
-            $inventario->toArray()
-        );
-    }
-
-         /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function contar($anio)
-    {
-        $data = DB::table('inventario as inv')
-        ->select(DB::raw('sum(inv.idInventario + 1) as cantidad'))
-        ->where('estado','1')
-        ->where('anio',$anio)
-        ->get();
-        return response()->json(
-            $data->toArray()
-        );
-    }
-
 }
