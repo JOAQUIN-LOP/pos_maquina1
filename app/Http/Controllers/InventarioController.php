@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use DB;
 use Response;
 use Validator;
 use App\Inventario;
+use Carbon\Carbon;
 
 class InventarioController extends Controller
 {
@@ -41,7 +42,56 @@ class InventarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = DB::table('inventario as inv')
+        ->select('estado')
+        ->where('estado', 1)
+        ->get();
+
+        if(count($data)>=1){
+            return response()->json(['notification' => 'warning', 'data' => "Se Encuentra un Inventario Activo"]); 
+        }else{
+            
+            $validator = Validator::make($request->all(), [
+                '_token' => 'required',
+                'idInventario' => 'required',
+                'empresa' => 'required',
+                'mes' => 'required',
+                'anio' => 'required',
+            ]);
+            
+            if ($validator->fails()) {
+                $returnData = array(
+                    'status' => 400,
+                    'message' => 'Parametros Invalidos',
+                    'validator' => $validator->messages()->toJson()
+                );
+                return response()->json(['notification' => 'danger', 'data' => $returnData]); 
+            } else {
+                try {
+                    $newObject = new Inventario();
+                    $newObject->num_inventario = $request->get('idInventario');
+                    $newObject->idEmpresa = $request->get('empresa');;
+                    $newObject->mes = $request->get('mes');
+                    $newObject->anio = $request->get('anio');
+                    $newObject->fecha =  Carbon::now()->toDateString();
+                    $newObject->total_cantidad_productos = 0;
+                    $newObject->total_cantidad_inventario = 0;
+                    $newObject->save();
+
+                    return response()->json(['notification' => 'success', 'producto' => $newObject->nomProducto]); 
+                }
+                catch (\Illuminate\Database\QueryException $e) {
+                    $returnData = array(
+                        'status' => 500,
+                        'message' => $e->getMessage()
+                    );
+                    return response()->json(['notification' => 'warning', 'data' => $returnData]); 
+                }
+            }
+
+
+        
+        }
     }
 
     /**
@@ -95,6 +145,15 @@ class InventarioController extends Controller
         return response()->json(
             $inventario->toArray()
         );
+    }
+
+    public function FinalizarInventario($id)
+    {
+               
+       $data =  DB::table('inventario')->where('num_inventario',$id)->update(array('estado'=>0));
+
+       return response()->json(['notification' => 'success', 'producto' => $data]); 
+
     }
 
          /**
