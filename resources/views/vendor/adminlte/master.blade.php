@@ -29,6 +29,8 @@
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/buttons.dataTables.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/responsive.dataTables.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/dataTables.bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/datatables/responsive.bootstrap.min.css') }}" />
+        
         
     @endif
 
@@ -65,8 +67,20 @@
     <script src="{{ asset('vendor/adminlte/vendor/datatables/jszip.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatables/pdfmake.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatables/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatables/responsive.bootstrap.min.js') }}"></script>
+    
+
     
 @endif
+
+{{--  JSPDF LIBS  --}}
+
+    <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf.debug.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf.plugin.autotable.js') }}"></script>
+
+
 
 @if(config('adminlte.plugins.chartjs'))
     <!-- ChartJS -->

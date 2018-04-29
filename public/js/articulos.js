@@ -11,21 +11,33 @@ var route = $("#route").val();
 
   function index() {
     url =  $('#CrearProducto').attr('action');
-    console.log(url);
     
       tabla = $('#Productos').DataTable(
       {
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
-        // agregamos botones para exportar la informacion 
-        buttons: [
+        buttons: [ // agregamos botones para exportar la informacion 
           {
-            extend: 'pdfHtml5',
-            text: ' PDF',
-            title: 'Productos',
-            exportOptions: {
-              columns: [ 0, 1, 2, 3 ]
+            text: 'PDF',
+            action: function ( e, dt, button, config ) {
+                var data = dt.buttons.exportData();
+
+                var rows = [];
+
+                var columns = [ data.header[0], data.header[1], data.header[2] ];
+
+
+                $.each(data.body, function(i, item) {
+                  rows[i] = [ data.body[i][0], data.body[i][1], data.body[i][2] ];
+                });
+
+               
+                // Only pt supported (not mm or in)
+                var doc = new jsPDF('p', 'pt');
+                doc.text(210, 50, 'Listado de Productos');
+                doc.autoTable(columns, rows, {margin: {top: 60}});
+                doc.save('table.pdf')
             }
-          }
+          },
         ],
         "ajax":
 				{
@@ -136,16 +148,29 @@ if(route == "home/producto/edit"){
       tabla2 = $('#EditProductos').DataTable(
       {
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
-        // agregamos botones para exportar la informacion 
-        buttons: [
+        buttons: [ // agregamos botones para exportar la informacion 
           {
-            extend: 'pdfHtml5',
-            text: ' PDF',
-            title: 'Productos',
-            exportOptions: {
-              columns: [ 0, 1, 2, 3 ]
-            },
-          }
+            text: 'PDF',
+            action: function ( e, dt, button, config ) {
+                var data = dt.buttons.exportData();
+
+                var rows = [];
+
+                var columns = [ data.header[0], data.header[1], data.header[2] ];
+
+
+                $.each(data.body, function(i, item) {
+                  rows[i] = [ data.body[i][0], data.body[i][1], data.body[i][2] ];
+                });
+
+               
+                // Only pt supported (not mm or in)
+                var doc = new jsPDF('p', 'pt');
+                doc.text(210, 50, 'Listado de Productos');
+                doc.autoTable(columns, rows, {margin: {top: 60}});
+                doc.save('table.pdf')
+            }
+          },
         ],
         "ajax":
 				{
@@ -291,7 +316,6 @@ if(route == "home/producto/edit"){
                 }
                 if (response['notification'] == "warning") {
                   objeto = response["data"];
-                  console.log(objeto);
                   $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
                 } 
                // notificacion
@@ -350,7 +374,6 @@ if(route == "home/producto/edit"){
                     }
                     if (response['notification'] == "warning") {
                       objeto = response["data"];
-                      console.log(objeto);
                       $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
                     } 
                    // notificacion
