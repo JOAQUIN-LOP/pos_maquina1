@@ -61,26 +61,30 @@ class FacturaController extends Controller
 
          if ($request -> ajax()) {            
             DB::connection()->enableQueryLog();
+            $cabecera = DB::table('factura as fac')
+            ->join('empresa as emp', 'emp.idEmpresa','=','fac.idEmpresa' )
+                ->join('sucursal as suc', 'suc.idSucursal','=','fac.idSucursal')
+                    ->select('emp.nom_empresa', 'suc.nom_sucursal', 'fac.num_factura', 'fac.fecha')
+                        ->where('fac.idFactura', $id)
+                            ->get();
 
-            $head = DB::table('facturas as fac')
-            ->join('empresa as emp', )
-
-
-            $detalles = DB::table('factura as fac')
-            ->join('sucursal as suc', 'suc.idSucursal','=','fac.idSucursal') 
-                ->join('usuario as us', 'us.idUsuario','=','fac.idUsuario')
-                    ->select('fac.idFactura','fac.num_factura','suc.nom_sucursal', 'us.nom_usuario', 'fac.fecha','fac.total_factura')
-                        ->where('fac.idSucursal',$id)
-                        ->where('fac.mes',$request->input('mes'))
-                        ->where('fac.anio','=', $request->input('anio'))                            
-                            ->orderBy('fac.num_factura')
+            
+            $detalles = DB::table('detalle_factura as det')
+            ->join('producto as prod', 'det.idProducto','=','prod.id') 
+                ->select('det.idProducto','prod.nomProducto','det.cantidad', 'det.precio_unit', 'det.total_venta')
+                        ->where('det.idFactura',$id)                        
+                            ->orderBy('prod.nomProducto')
                                 ->get();
 
 
+             $cantidades = DB::table('detalle_factura as det')                            
+                        ->select(DB::raw("SUM(det.cantidad) as cantidades"))
+                            ->where('det.idFactura',$id)                      
+                                ->get();
             //var_dump(DB::getQueryLog());
 
-            return view('detalle_factura', compact('facturas'));
-        }        
+            return view('detalle_factura', compact('cabecera','detalles', 'cantidades'));
+        }       
 
     }
 

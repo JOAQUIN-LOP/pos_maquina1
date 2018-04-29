@@ -14,7 +14,27 @@ $("#facturas").DataTable({
 
 $(".detalles").on('click',function(){
 
+  $(".modal .modal-dialog").remove();
+
   var id_factura = $(this).parents("tr").find("td")[0].innerHTML;
+  var token = $("#token").val();
+
+  $.ajax({
+            url:"./detalle_factura/" + id_factura,
+            headers: {'X-CSRF-TOKEN': token},
+            type:"POST",
+            dataType: 'json',
+                    
+    })
+    .done(function(response){
+      $(".modal").append(response.responseText);
+      console.log(response);
+
+    })
+    .fail(function(response){
+      $(".modal").append(response.responseText);
+      console.log(response);
+    });
   //console.log(id_factura);
   //console.log($(this).text());
   $("#modal-info").modal();

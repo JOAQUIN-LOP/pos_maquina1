@@ -117,9 +117,7 @@
   <!-- /.box-body -->
   <div class="modal modal-info fade" id="modal-info">
         
-      </div>
-
-  
+  </div>
   
 </div>
 <div class="alert" id="notification-container" style="display:none;">
