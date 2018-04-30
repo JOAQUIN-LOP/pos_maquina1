@@ -34,7 +34,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Empresa</span>
-                    <select id="Empresa" name="empresa" class="form-control">
+                    <select id="Empresa" name="empresa" class="form-control select2">
                     </select>
                 </div>
               </div>
@@ -43,7 +43,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">mes</span>
-                  <select id="mes" name="mes" class="form-control">
+                  <select id="mes" name="mes" class="form-control select2">
                   </select>
                 </div>
               </div>
@@ -70,8 +70,9 @@
       <div class="col-sm-12">
         <div class="col-sm-2">
           <div class="form-group">
-            <select id="SelectAnio" class="form-control">
+            <select id="SelectAnio" class="form-control select2">
             </select>
+            
           </div>
         </div>
       </div>
@@ -99,6 +100,13 @@
       </div>
     </div>
   </div>
+</div>
+<div class="alert" id="notification-container" style="display:none;">
+    <div class="notification">
+        <button class="notification-close"></button>
+        <div class="notification-title"><span id="titulo"></span> !</div>
+        <div class="notification-message"><span id="mensaje"></span></div>
+    </div>
 </div>
 @stop
 @section('js')
