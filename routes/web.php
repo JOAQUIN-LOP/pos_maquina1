@@ -44,5 +44,8 @@ Route::get('/home/inventario/create', 'InventarioController@create');
 Route::get('/home/inventario/finalizar/{id}', 'InventarioController@FinalizarInventario');
 Route::resource('/home/inventario', 'InventarioController');
 
+// DETALLE INVENTARIO
+Route::resource('/home/detalle/inventario', 'DetalleInventarioController');
+
 
 

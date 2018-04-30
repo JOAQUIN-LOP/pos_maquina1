@@ -18,6 +18,8 @@ $('document').ready(function(){
        $("#SelectAnio").append("<option>"+(ann++)+"</option>");
     }
 
+    $('#SelectAnio').val(anio).trigger('change.select2');
+
     $("#idInventario").val(NumInventario[mes]);
 
     index(anio);
@@ -36,8 +38,6 @@ $('document').ready(function(){
     });
 
     var rutaInv = $('#rutaInv').val();
-
-  
 
 
     $("#SelectAnio").change(function(){
@@ -70,7 +70,7 @@ $('document').ready(function(){
                             value['total_cantidad_productos'],
                             value['total_cantidad_inventario'],
                             estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
-                            estado2 = (value['estado'] == 1) ? "<div class='btn-group'><a class='btn btn-danger btn-xs' name='"+value['num_inventario']+"'>Finalizar Inventario</a></div>":"" 
+                            estado2 = (value['estado'] == 1) ? "<div class='btn-group'><a class='btn btn-danger btn-xs'data-toggle='tooltip' data-placement='top' title='Finalizar Inventario!' name='"+value['num_inventario']+"'><i class='fa fa-times-circle'></i></a></div>":"" 
                         ]).draw(false);
                         $( ".odd" ).addClass("fila");
                         $( ".even" ).addClass("fila");
@@ -139,6 +139,8 @@ $('document').ready(function(){
         var url = $('#CrearInventario').attr('action');
 
         $.get(url+'/finalizar/'+id, headers = { 'X-CSRF-TOKEN': token }, function(response){ 
+
+                tabla.clear();
               
               if (response['notification'] == "success") {
                 $('#mensaje').text(' Se Modifico '+ response['producto']+' Exitosamente ');

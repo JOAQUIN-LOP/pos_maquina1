@@ -70,10 +70,9 @@
       <div class="col-sm-12">
         <div class="col-sm-2">
           <div class="form-group">
-            <div class="input-group">
-              <span class="input-group-addon">Busqueda</span>
-              <select id="SelectAnio" class="form-control select2">
-              </select>
+            <select id="SelectAnio" class="form-control select2">
+            </select>
+            
           </div>
         </div>
       </div>
