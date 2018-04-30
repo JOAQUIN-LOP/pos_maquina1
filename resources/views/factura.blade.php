@@ -56,7 +56,6 @@
                       <option value="{{$sucursal->idSucursal}}">{{$sucursal->nom_sucursal}}</option>
                     @endforeach
                   </select>
-                  <a href="#" class="tooltip-test">Debe Seleccionar una Sucursal</a>
               </div>
             </div>
             <div class="col-sm-2">
@@ -102,7 +101,7 @@
             </div>
             <div class="col-sm-1">
               <div class="form-group">
-                <label>&nbsp;</label> 
+                <label>&nbsp;</label>
                 <button type="button" id="btn_ver" class="btn btn-primary btn-as-block"><i class="fa fa-search"></i></button>                            
               </div>
             </div>
@@ -115,7 +114,7 @@
       
     </div>
   <!-- /.box-body -->
-  <div class="modal modal-info fade" id="modal-info">
+  <div class="modal fade" id="modal-info">
         
   </div>
   

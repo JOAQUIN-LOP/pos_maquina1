@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+  $("#nom_sucursal").select2();
+  $("#mes").select2();
+  $("#anio").select2();
+
   $("#btn_ver").click(function(e){
     e.preventDefault();
 

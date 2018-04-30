@@ -1,4 +1,5 @@
 $("#facturas").DataTable({
+  order: [[ 1, "asc" ]],
   dom: 'Bfrtip',//Definimos los elementos del control de tabla
   // agregamos botones para exportar la informacion 
   buttons: [
@@ -9,7 +10,7 @@ $("#facturas").DataTable({
         columns: [ 0, 1, 2, 3, 4, 5]
       }       
     }
-  ],
+  ]  
 });
 
 $(".detalles").on('click',function(){
@@ -28,19 +29,15 @@ $(".detalles").on('click',function(){
     })
     .done(function(response){
       $(".modal").append(response.responseText);
-      console.log(response);
+      //console.log(response);
 
     })
     .fail(function(response){
       $(".modal").append(response.responseText);
-      console.log(response);
+      //console.log(response);
     });
   //console.log(id_factura);
   //console.log($(this).text());
   $("#modal-info").modal();
 
-});
-
-$("#GuardarPrecio").click(function(){
-  alert("Guardando Precio");
 });

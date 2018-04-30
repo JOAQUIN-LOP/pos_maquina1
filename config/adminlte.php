@@ -170,7 +170,7 @@ return [
                 ],
                 [
                     'text'          => 'Agregar Factura',
-                    'url'           => '/home/factura/create',
+                    'url'           => '/home/crear/factura',
                     'icon'          => 'cubes',          
                 ],
                 

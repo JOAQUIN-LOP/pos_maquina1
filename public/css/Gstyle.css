@@ -145,4 +145,31 @@
     }
   }
 
+
+/* Detalle Factura Styles */
+#detalle_factura tbody tr td{
+    color:#000 !important;    
+}
+
+.dark-blue-button{
+    background-color: #00838F;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.dark-blue-button:hover{
+    background-color: #26C6DA;
+}
+
+
+.dark-blue-button:active{
+    background-color: #80DEEA;
+
+}
+
+.modal-title{
+    font-weight: bold !important;
+}
+
+
   

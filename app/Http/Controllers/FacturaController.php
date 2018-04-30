@@ -60,7 +60,7 @@ class FacturaController extends Controller
     public function detalles(Request $request, $id){
 
          if ($request -> ajax()) {            
-            DB::connection()->enableQueryLog();
+            
             $cabecera = DB::table('factura as fac')
             ->join('empresa as emp', 'emp.idEmpresa','=','fac.idEmpresa' )
                 ->join('sucursal as suc', 'suc.idSucursal','=','fac.idSucursal')
@@ -78,14 +78,28 @@ class FacturaController extends Controller
 
 
              $cantidades = DB::table('detalle_factura as det')                            
-                        ->select(DB::raw("SUM(det.cantidad) as cantidades"))
+                        ->select(DB::raw("SUM(det.cantidad) as cantidad"), DB::raw("SUM(det.total_venta) as total"))
                             ->where('det.idFactura',$id)                      
                                 ->get();
-            //var_dump(DB::getQueryLog());
+            
 
             return view('detalle_factura', compact('cabecera','detalles', 'cantidades'));
         }       
 
+    }
+
+    public function formFactura(){
+
+        $facturas = DB::table('sucursal as suc')
+        ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
+            ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
+                ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
+                    ->where('inv.estado','=',1, 'and', 'suc.estado','=',1)
+                        ->groupBy('suc.nom_sucursal')
+                            ->orderBy('suc.nom_sucursal')
+                                ->get();
+
+        return view('crear_factura', compact('facturas', $facturas));
     }
 
     /**

@@ -24,7 +24,7 @@
                     <td>{{ $factura -> num_factura }}</td>
                     <td>{{ $factura -> nom_sucursal }}</td>
                     <td>{{ $factura -> nom_usuario }}</td>
-                    <td>{{ $factura -> fecha }}</td>                    
+                    <td>{{ \Carbon\Carbon::parse($factura->fecha)->format('d/m/Y')}}</td>                    
                     <td>{{ $factura -> total_factura }} </td>
                     <td> <button type="button" class="btn btn-primary btn-as-block detalles"><i class="fa fa-search"></i>Ver Detalle</button> </td>
                   </tr>
