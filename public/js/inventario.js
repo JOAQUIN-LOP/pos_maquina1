@@ -54,21 +54,24 @@ $('document').ready(function(){
       {
         destroy: true,
         responsive: true,
+        "order": [[ 6, "asc" ]],
         "ajax":
 				{
                 url: url+'/all/'+anio,
                 type : "get",
                 success: function(r){
+                    console.log(r);
                     $(r).each(function (key, value) {
+                        
                         tabla.row.add([
                             value['num_inventario'],
-                            value['idEmpresa'],
-                            value['mes'],
+                            value.empresa['nom_empresa'],
+                            meses[value['mes']],
                             value['anio'],
                             value['total_cantidad_productos'],
                             value['total_cantidad_inventario'],
                             estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
-                            "<div class='btn-group'><a class='btn btn-danger btn-xs' name='"+value['num_inventario']+"'>Finalizar Inventario</a></div>"
+                            estado2 = (value['estado'] == 1) ? "<div class='btn-group'><a class='btn btn-danger btn-xs' name='"+value['num_inventario']+"'>Finalizar Inventario</a></div>":"" 
                         ]).draw(false);
                         $( ".odd" ).addClass("fila");
                         $( ".even" ).addClass("fila");
