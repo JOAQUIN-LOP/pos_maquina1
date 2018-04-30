@@ -141,10 +141,15 @@ class InventarioController extends Controller
 
     public function All($anio)
     {
-        $inventario = Inventario::where('anio',$anio)->get();
+        
+        $inventario = Inventario::with('empresa')->where('anio',$anio)->get();
         return response()->json(
             $inventario->toArray()
         );
+        return response()->json(['notification' => 'success', 'producto' => $inventario]); 
+        // return response()->json(
+        //     $inventario->toArray()
+        // );
     }
 
     public function FinalizarInventario($id)
