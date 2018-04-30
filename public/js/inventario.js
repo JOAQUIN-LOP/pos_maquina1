@@ -54,19 +54,18 @@ $('document').ready(function(){
       {
         destroy: true,
         responsive: true,
-        "order": [[ 6, "asc" ]],
+        "order": [[ 6, "asc" ],[ 2, "asc" ]],
         "ajax":
 				{
                 url: url+'/all/'+anio,
                 type : "get",
                 success: function(r){
-                    console.log(r);
                     $(r).each(function (key, value) {
                         
                         tabla.row.add([
-                            value['num_inventario'],
+                            value['idInventario'],
                             value.empresa['nom_empresa'],
-                            meses[value['mes']],
+                            meses[value['mes']-1],
                             value['anio'],
                             value['total_cantidad_productos'],
                             value['total_cantidad_inventario'],
@@ -85,13 +84,41 @@ $('document').ready(function(){
   }
    
 
-    $("CrearInventario").submit(function(e){
+    $("#CrearInventario").submit(function(e){
 
         e.preventDefault();
         var url = $('#CrearInventario').attr('action');
-        console.log("funciona");
-        // $.get(url)
 
+        $.ajax({
+            url: url,
+            headers: { 'X-CSRF-TOKEN': token },
+            type: 'POST',
+            dataType: 'json',
+            data: $("#CrearInventario").serialize(),
+            success: function (response) {
+            
+                tabla.clear();
+              if (response['notification'] == "success") {
+                $('#mensaje').text(' Se Creo Inventario No. '+ response['data']+' Exitosamente ');
+              }
+              if (response['notification'] == "danger") {
+                $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
+              }
+              if (response['notification'] == "warning") {
+                objeto = response["data"];
+                $('#mensaje').html( response.data  + "<br> error de servidor interno");
+              }
+              $('#modal-warning').modal('toggle');
+              // notificacion
+              tabla.ajax.reload();
+              $('div#notification-container').fadeIn(350);
+              $(".notification").addClass("notification-"+response['notification']);
+              $('#titulo').text(response['notification']);
+
+              $('div#notification-container').delay(3000).fadeOut(350);
+              
+            }
+        });
     });
     
     

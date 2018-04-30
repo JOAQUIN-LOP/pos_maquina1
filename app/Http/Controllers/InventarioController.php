@@ -46,9 +46,18 @@ class InventarioController extends Controller
         ->select('estado')
         ->where('estado', 1)
         ->get();
-
+        
+        $data2 = DB::table('inventario as inv')
+        ->select('estado')
+        ->where('mes', $request->get('mes'))
+        ->where('anio', $request->get('anio'))
+        ->get();
+        
         if(count($data)>=1){
             return response()->json(['notification' => 'warning', 'data' => "Se Encuentra un Inventario Activo"]); 
+        }
+        elseif(count($data2)>=1) {
+            return response()->json(['notification' => 'warning', 'data' => "no se puede duplicar inventario"]); 
         }else{
             
             $validator = Validator::make($request->all(), [
@@ -78,7 +87,7 @@ class InventarioController extends Controller
                     $newObject->total_cantidad_inventario = 0;
                     $newObject->save();
 
-                    return response()->json(['notification' => 'success', 'producto' => $newObject->nomProducto]); 
+                    return response()->json(['notification' => 'success', 'data' => $newObject->num_inventario]); 
                 }
                 catch (\Illuminate\Database\QueryException $e) {
                     $returnData = array(
