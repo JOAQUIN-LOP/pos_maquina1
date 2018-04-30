@@ -6,6 +6,7 @@ $('document').ready(function(){
     } );
     
     let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    let NumInventario = [1,2,3,4,5,6,7,8,9,10,11,12];
     
     var fecha = new Date();
     var mes = fecha.getMonth();
@@ -17,9 +18,11 @@ $('document').ready(function(){
        $("#SelectAnio").append("<option>"+(ann++)+"</option>");
     }
 
+    $("#idInventario").val(NumInventario[mes]);
+
     index(anio);
 
-    $('#mes').val(meses[mes]);
+    $('#mes').append( "<option value='"+NumInventario[mes]+"'>"+meses[mes]+"</option>" );
     $('#anio').val(anio);
     
     var token = $("#token").val();
@@ -28,17 +31,13 @@ $('document').ready(function(){
 
     $.get(urlEmp, headers = { 'X-CSRF-TOKEN': token }, function (result) {
         $.each(result, function(j, tem) {
-            $('#Empresa').append( "<option value='"+result[0].idEmpresa+"'>"+result[0].nom_empresa+"</option>" );
+            $('#Empresa').append( "<option value='"+result[0].idEmpresa+"' selected>"+result[0].nom_empresa+"</option>" );
         });
     });
 
     var rutaInv = $('#rutaInv').val();
 
-    $.get(rutaInv +'/'+anio,  headers = { 'X-CSRF-TOKEN': token }, function (data) {
-       
-        $('#idInventario').val(data[0].cantidad);
-
-    });
+  
 
 
     $("#SelectAnio").change(function(){
@@ -54,12 +53,12 @@ $('document').ready(function(){
       tabla = $('#All').DataTable(
       {
         destroy: true,
+        responsive: true,
         "ajax":
 				{
                 url: url+'/all/'+anio,
                 type : "get",
                 success: function(r){
-                    console.log(r);
                     $(r).each(function (key, value) {
                         tabla.row.add([
                             value['num_inventario'],
@@ -69,6 +68,7 @@ $('document').ready(function(){
                             value['total_cantidad_productos'],
                             value['total_cantidad_inventario'],
                             estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
+                            "<div class='btn-group'><a class='btn btn-danger btn-xs' name='"+value['num_inventario']+"'>Finalizar Inventario</a></div>"
                         ]).draw(false);
                         $( ".odd" ).addClass("fila");
                         $( ".even" ).addClass("fila");
@@ -81,7 +81,54 @@ $('document').ready(function(){
       });
   }
    
-   
 
-   
+    $("CrearInventario").submit(function(e){
+
+        e.preventDefault();
+        var url = $('#CrearInventario').attr('action');
+        console.log("funciona");
+        // $.get(url)
+
+    });
+    
+    
+    $('#All').on('click','tr.fila a', function(){
+        var iD = $(this).attr('name');
+        FinalizarInventario(iD);
+    });
+
+    $('#All').on('click','tr.child a', function(){
+        var iD = $(this).attr('name');
+        FinalizarInventario(iD);
+    });
+
+    
+
+    function FinalizarInventario(id){
+        var token = $("#token").val();
+        var url = $('#CrearInventario').attr('action');
+
+        $.get(url+'/finalizar/'+id, headers = { 'X-CSRF-TOKEN': token }, function(response){ 
+              
+              if (response['notification'] == "success") {
+                $('#mensaje').text(' Se Modifico '+ response['producto']+' Exitosamente ');
+              }
+              if (response['notification'] == "danger") {
+                objeto = response["data"];
+                $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> No existe");
+              }
+              if (response['notification'] == "warning") {
+                objeto = response["data"];
+                $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+              }
+              $('#modal-warning').modal('toggle');
+              // notificacion
+              tabla.ajax.reload();
+              $('div#notification-container').fadeIn(350);
+              $(".notification").addClass("notification-"+response['notification']);
+              $('#titulo').text(response['notification']);
+
+              $('div#notification-container').delay(3000).fadeOut(350);
+        })
+    }
 })

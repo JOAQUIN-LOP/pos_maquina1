@@ -43,7 +43,8 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">mes</span>
-                  <input type="text" class="form-control" name="mes" id="mes" readonly>
+                  <select id="mes" name="mes" class="form-control">
+                  </select>
                 </div>
               </div>
             </div>
@@ -90,6 +91,7 @@
             <th>Total Productos</th>
             <th>Total Inventario</th>
             <th>Estado</th>
+            <th></th>
           </thead>
           <tbody>
           </tbody>
