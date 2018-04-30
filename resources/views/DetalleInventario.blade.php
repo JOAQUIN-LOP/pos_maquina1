@@ -10,7 +10,7 @@
 {{--  div contenedor  --}}
 <div class="box box-success">
   <div class="box-header with-border">
-    <h3 class="box-title">Inventario</h3>
+    <h3 class="box-title">Agregar Producto a Inventario</h3>
   </div>
   <div class="box-body">
     <input type="text" value="{!!Request::path()!!}" id="route" hidden>
@@ -70,10 +70,9 @@
       <div class="col-sm-12">
         <div class="col-sm-2">
           <div class="form-group">
-            <div class="input-group">
-              <span class="input-group-addon">Busqueda</span>
-              <select id="SelectAnio" class="form-control select2">
-              </select>
+            <select id="SelectAnio" class="form-control select2">
+            </select>
+            
           </div>
         </div>
       </div>

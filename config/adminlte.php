@@ -154,8 +154,9 @@ return [
                     'url'  => 'home/inventario/create',
                 ],
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Agregar Producto Inventario',
+                    'icon' => 'cube',
+                    'url'  => '/home/detalle/inventario',
                 ],
             ], 
         ],
