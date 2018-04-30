@@ -19,10 +19,9 @@ class FacturaController extends Controller
     public function index()
     {
         $facturas = DB::table('sucursal as suc')
-        ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
-            ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
+        ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')            
                 ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
-                    ->where('inv.estado','=',1, 'and', 'suc.estado','=',1)
+                    ->where('suc.estado','=',1)
                         ->groupBy('suc.nom_sucursal')
                             ->orderBy('suc.nom_sucursal')
                                 ->get();
