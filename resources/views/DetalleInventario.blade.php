@@ -10,7 +10,7 @@
 {{--  div contenedor  --}}
 <div class="box box-success">
   <div class="box-header with-border">
-    <h3 class="box-title">Inventario</h3>
+    <h3 class="box-title">Agregar Producto a Inventario</h3>
   </div>
   <div class="box-body">
     <input type="text" value="{!!Request::path()!!}" id="route" hidden>

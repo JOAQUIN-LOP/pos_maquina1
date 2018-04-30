@@ -156,7 +156,7 @@ return [
                 [
                     'text' => 'Agregar Producto Inventario',
                     'icon' => 'cube',
-                    'url'  => '#',
+                    'url'  => '/home/detalle/inventario',
                 ],
             ], 
         ],
