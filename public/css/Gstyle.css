@@ -129,7 +129,7 @@
 
 /* color datatable dentro de modal  */
 
-#detallePrecioProducto tbody tr td{
+.table tbody tr.odd{
     color:#000 !important;    
 }
 /* modal xl */

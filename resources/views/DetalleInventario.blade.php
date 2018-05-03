@@ -70,7 +70,7 @@
 {{--  modal   --}}
 
 <div class="modal modal-success fade" id="modal-info">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -80,41 +80,43 @@
       <div class="modal-body">
         
         <div class="row">
-
-          <div class="col-sm-12">
+          
+          <div class="col-sm-6">
               <div class="form-group categoria">
-                    <label class="control-label letra-label" for="categoria"> Producto<span class="kv-reqd"> *</span></label>
-                  <select id="CodProducto" name="CodProducto" class="form-control select2">
+                    <label class="control-label letra-label" for="categoria"> Producto</label>
+                  <select id="CodProducto" name="CodProducto" class="form-control select2" style="width: 100%;">
                       <option value="">Seleccione Producto</option>
                   </select>
               </div>
-              <hr>
+          </div>
+          <div class="col-sm-12">
+            <hr>
           </div>
 
-          <div class="row">
             <div class="col-sm-12">
-              <table id="AllProd" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-               <thead>
-                <th>No.</th>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cant. Producto</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-              </thead>
-              <tbody>
-              </tbody>
-              </table>
+              <form id="formulario2">
+                <table id="AllProd" class="table table-striped dt-responsive nowrap" style="width:100%">
+                <thead>
+                  <th>No.</th>
+                  <th>Producto</th>
+                  <th>Precio Unitario</th>
+                  <th>Existencia</th>
+                  <th>Cantidad</th>
+                  <th>Subtotal</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                </tbody>
+                </table>
+              </form>
             </div>
-          </div>
+
 
         </div>
-        
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline">Save changes</button>
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -141,6 +143,7 @@
       </div>
     </div>
   </div>
+
 </div>
 <div class="alert" id="notification-container" style="display:none;">
     <div class="notification">

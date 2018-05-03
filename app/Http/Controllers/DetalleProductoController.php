@@ -99,6 +99,19 @@ class DetalleProductoController extends Controller
         );
     }
 
+
+    public function ProdInv($id, $anio, $mes)
+    {
+        $producto = DetalleProducto::with('producto')
+        ->where('idProducto',$id)
+        ->where('anio',$anio)
+        ->where('mes',$mes)
+        ->get();
+        return response()->json(
+            $producto->toArray()
+        );
+    }
+    
     /**
      * Show the form for editing the specified resource.
      *
