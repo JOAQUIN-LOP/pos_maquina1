@@ -10,74 +10,119 @@
 {{--  div contenedor  --}}
 <div class="box box-success">
   <div class="box-header with-border">
-    <h3 class="box-title">Agregar Producto a Inventario</h3>
+    <h3 class="box-title">Inventario</h3>
   </div>
   <div class="box-body">
-    <input type="text" value="{!!Request::path()!!}" id="route" hidden>
-    {{--  inicio form  --}}
-      <form id="CrearInventario" action="{{URL::to('/home/inventario')}}" method="POST">
-        <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
-        <input type="text" value="{{URL::to('home/empresa')}}" id="ruta-Emp" style="display:none" >
-        <input type="text" value="{{URL::to('home/inventario/contar')}}" id="rutaInv" style="display:none" >
 
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="col-sm-2">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">No.</span>
-                  <input type="text" class="form-control" name="idInventario"  id="idInventario" placeholder="Inventario" required>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Empresa</span>
-                    <select id="Empresa" name="empresa" class="form-control select2">
-                    </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">mes</span>
-                  <select id="mes" name="mes" class="form-control select2">
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Año</span>
-                  <input type="text" class="form-control" name="anio" id="anio" readonly>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-1">
-              <div class="form-group">
-                <button type="submit" id="btn-Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Crear</button>
+  <div class="row">  
+    <form id="CrearInventario" action="{{URL::to('')}}" method="POST">
+      <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">No.</span>
+                <input type="text" class="form-control" name="idInventario"  id="idInventario" placeholder="Inventario" required readonly>
               </div>
             </div>
           </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Empresa</span>
+                  <input type="text" class="form-control" name="empresa"  id="empresa" placeholder="Empresa" required readonly>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-2">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">mes</span>
+                <input type="text" class="form-control" name="mes"  id="mes" placeholder="Mes" required readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-2">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Año</span>
+                <input type="text" class="form-control" name="anio" id="anio" required readonly>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </form>
-  </div>
-  <div class="box-body">
+      </div>
+    </form>
     <div class="row">
       <div class="col-sm-12">
         <div class="col-sm-2">
-          <div class="form-group">
-            <select id="SelectAnio" class="form-control select2">
-            </select>
-            
-          </div>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modal-info"><i class="fa fa-plus"></i> Agregar Producto</button>
         </div>
       </div>
     </div>
+  <div>
+
+{{--  modal   --}}
+
+<div class="modal modal-success fade" id="modal-info">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Productos</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+          
+          <div class="col-sm-6">
+              <div class="form-group categoria">
+                    <label class="control-label letra-label" for="categoria"> Producto</label>
+                  <select id="CodProducto" name="CodProducto" class="form-control select2" style="width: 100%;">
+                      <option value="">Seleccione Producto</option>
+                  </select>
+              </div>
+          </div>
+          <div class="col-sm-12">
+            <hr>
+          </div>
+
+            <div class="col-sm-12">
+              <form id="formulario2">
+                <table id="AllProd" class="table table-striped dt-responsive nowrap" style="width:100%">
+                <thead>
+                  <th>No.</th>
+                  <th>Producto</th>
+                  <th>Precio Unitario</th>
+                  <th>Existencia</th>
+                  <th>Cantidad</th>
+                  <th>Subtotal</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                </tbody>
+                </table>
+              </form>
+            </div>
+
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
   </div>
+  <!-- /.modal-dialog -->
+</div>
 
   {{-- inicio datatable  --}}
   <div class="box-body">
@@ -86,13 +131,11 @@
         <table id="All" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
           <thead>
             <th>No.</th>
-            <th>Empresa</th>
+            <th>Producto</th>
             <th>Mes</th>
             <th>Año</th>
-            <th>Total Productos</th>
-            <th>Total Inventario</th>
-            <th>Estado</th>
-            <th></th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
           </thead>
           <tbody>
           </tbody>
@@ -100,6 +143,7 @@
       </div>
     </div>
   </div>
+
 </div>
 <div class="alert" id="notification-container" style="display:none;">
     <div class="notification">
@@ -110,7 +154,7 @@
 </div>
 @stop
 @section('js')
-  <script type="text/javascript" src="{{ asset('js/inventario.js') }}"></script>  
+  <script type="text/javascript" src="{{ asset('js/detalleInventario.js') }}"></script>  
   @stack('js')
   @yield('js')
 @stop

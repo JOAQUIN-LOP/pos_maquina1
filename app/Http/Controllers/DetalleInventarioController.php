@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Response;
+use Validator;
+use DB;
+use Carbon\Carbon;
 
 class DetalleInventarioController extends Controller
 {
@@ -14,6 +18,17 @@ class DetalleInventarioController extends Controller
     public function index()
     {
         return view('DetalleInventario');
+    }
+
+    public function VerInventarioActivo()
+    {
+        $data = DB::table('inventario As Inv')
+        ->join('empresa As Emp', 'Inv.idEmpresa', '=', 'Emp.idEmpresa')
+        ->select('Emp.nom_empresa as empresa', 'Inv.idInventario as idInventario', 'Inv.anio as anio','Inv.mes as mes')
+        ->where('Inv.estado', 1)
+        ->get();
+        return Response::json($data); 
+
     }
 
     /**
@@ -45,7 +60,14 @@ class DetalleInventarioController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = DB::table('detalle_inventario As Dti')
+        ->join('producto As Prod', 'Dti.idProducto', '=', 'Prod.id')
+        ->select('Prod.nomProducto as producto','Dti.mes as mes', 'Dti.anio as anio', 'Dti.cant_total as cant', 'Dti.subtotal_inventario as sub')
+        ->where('Dti.idInventario', $id)
+        ->get();
+        return response()->json(
+            $data->toArray()
+        );
     }
 
     /**

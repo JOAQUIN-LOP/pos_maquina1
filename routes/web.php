@@ -25,7 +25,6 @@ Route::resource('usuario','UsuarioController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::post('/home/datos_factura/{id}', 'FacturaController@see');
 Route::post('/home/detalle_factura/{id}','FacturaController@detalles');
 Route::get('/home/crear/factura', 'FacturaController@formFactura');
@@ -38,6 +37,9 @@ Route::resource('/home/empresa', 'EmpresaController');
 Route::get('/home/producto/edit', 'ProductoController@edit')->name('EditProducto');
 Route::get('/home/producto/{id}/active', 'ProductoController@active')->name('ActiveProducto');
 Route::resource('/home/producto', 'ProductoController');
+
+// DETALLE INVENTARIO
+Route::get('/home/detalle/precio/{id}/{anio}/{mes}', 'DetalleProductoController@ProdInv');
 Route::resource('/home/detalle/precio', 'DetalleProductoController');
 
 // INVENTARIO
@@ -48,7 +50,7 @@ Route::get('/home/inventario/finalizar/{id}', 'InventarioController@FinalizarInv
 Route::resource('/home/inventario', 'InventarioController');
 
 // DETALLE INVENTARIO
+
+Route::get('/home/detalle/inventario/ver/activo', 'DetalleInventarioController@VerInventarioActivo');
 Route::resource('/home/detalle/inventario', 'DetalleInventarioController');
-
-
 
