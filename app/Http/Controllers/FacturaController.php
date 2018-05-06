@@ -7,6 +7,7 @@ use Response;
 use Validator;
 use App\Factura;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class FacturaController extends Controller
@@ -93,12 +94,17 @@ class FacturaController extends Controller
         ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
             ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
                 ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
-                    ->where('inv.estado','=',1, 'and', 'suc.estado','=',1)
+                    ->where('suc.estado','=',1)
                         ->groupBy('suc.nom_sucursal')
                             ->orderBy('suc.nom_sucursal')
                                 ->get();
 
-        return view('crear_factura', compact('facturas', $facturas));
+        $date = Carbon::now();
+        $date2 = $date->toDateString();
+        $date = $date->format('d-m-Y');
+        
+
+        return view('crear_factura', compact('facturas', 'date', 'date2'));
     }
 
     /**
