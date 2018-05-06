@@ -41,7 +41,8 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon">mes</span>
-                <input type="text" class="form-control" name="mes"  id="mes" placeholder="Mes" required readonly>
+                 <select id="mes" name="mes" class="form-control" readonly>
+                  </select>
               </div>
             </div>
           </div>
@@ -61,7 +62,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="col-sm-2">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#modal-info"><i class="fa fa-plus"></i> Agregar Producto</button>
+          <button class="btn btn-primary" id="modalS"><i class="fa fa-plus"></i> Agregar Producto</button>
         </div>
       </div>
     </div>
@@ -69,7 +70,7 @@
 
 {{--  modal   --}}
 
-<div class="modal modal-success fade" id="modal-info">
+<div class="modal modal-success fade" id="modalSuccess">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">

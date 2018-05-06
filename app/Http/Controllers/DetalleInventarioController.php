@@ -49,7 +49,48 @@ class DetalleInventarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dump($request->request);exit();
+
+        if($request->ajax()){
+            
+            $validator = Validator::make($request->all(), [
+                'idInventario' => 'required',
+                'idProducto' => 'required',
+                'mes' => 'required',
+                'anio' => 'required',
+                'SubTotal' => 'required',
+                'cantidadT' => 'required'
+            ]);
+            
+            if ($validator->fails()) {
+                $returnData = array(
+                    'status' => 400,
+                    'message' => 'Invalid Parameters',
+                    'validator' => $validator->messages()->toJson()
+                );
+            return response()->json(['notification' => 'danger', 'data' => $returnData]); 
+            } else {
+                try {
+                    $newObject = new DetalleInventario();
+                    $newObject->idProducto = $request->get('IdProducto');
+                    $newObject->mes = $request->get('mesDetalle');
+                    $newObject->anio = $request->get('AnioDetalle');
+                    $newObject->fecha = Carbon::now()->toDateString();
+                    $newObject->idInventario = $request->get('idInventario');
+                    $newObject->subtotal_inventario = $request->get('SubTotal');
+                    $newObject->cant_total = $request->get('cantidadT');
+                    $newObject->save();
+            return response()->json(['notification' => 'success', 'producto' => $newObject->idProducto]); 
+                }
+                catch(Exception $e) {
+                    $returnData = array(
+                        'status' => 500,
+                        'message' => $e->getMessage()
+                    );
+            return response()->json(['notification' => 'warning', 'data' => $returnData]); 
+                }
+            }
+        }
     }
 
     /**
