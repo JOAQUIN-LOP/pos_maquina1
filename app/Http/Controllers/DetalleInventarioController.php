@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DetalleInventario;
 use Response;
 use Validator;
 use DB;
@@ -49,7 +50,6 @@ class DetalleInventarioController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request->request);exit();
 
         if($request->ajax()){
             
@@ -72,9 +72,9 @@ class DetalleInventarioController extends Controller
             } else {
                 try {
                     $newObject = new DetalleInventario();
-                    $newObject->idProducto = $request->get('IdProducto');
-                    $newObject->mes = $request->get('mesDetalle');
-                    $newObject->anio = $request->get('AnioDetalle');
+                    $newObject->idProducto = $request->get('idProducto');
+                    $newObject->mes = $request->get('mes');
+                    $newObject->anio = $request->get('anio');
                     $newObject->fecha = Carbon::now()->toDateString();
                     $newObject->idInventario = $request->get('idInventario');
                     $newObject->subtotal_inventario = $request->get('SubTotal');
@@ -110,6 +110,10 @@ class DetalleInventarioController extends Controller
             $data->toArray()
         );
     }
+
+    // SELECT prod.nomProducto FROM detalle_inventario as dtin
+    // inner join detalle_producto as dtP on dtP.idProducto = dtin.idProducto  
+    // inner join producto as prod on prod.id = dtP.idProducto
 
     /**
      * Show the form for editing the specified resource.

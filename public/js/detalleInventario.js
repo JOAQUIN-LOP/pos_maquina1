@@ -15,8 +15,6 @@ $('document').ready(function(){
     var mes = fecha.getMonth();
     var anio = fecha.getFullYear();
 
-    console.log(NumInventario[0]);
-
     $.get(url+'/home/detalle/inventario/ver/activo', headers = { 'X-CSRF-TOKEN': token }, function (result) {
         idInv = result[0].idInventario;
         $("#idInventario").val(result[0].idInventario);
@@ -54,6 +52,11 @@ $('document').ready(function(){
 
     $("#CodProducto").change(function(){
         id = $("#CodProducto").val();
+        cargarProd(id);
+    });
+
+
+    function cargarProd(id){
         AllProd.rows().remove().draw();
         $.get(url+'/home/detalle/precio/'+id+"/"+anio+"/"+mes, headers = { 'X-CSRF-TOKEN': token }, function (result) {
             
@@ -72,7 +75,8 @@ $('document').ready(function(){
                 $( ".even" ).addClass("fila");
             });
         });
-    });
+
+    };
 
 
     $('#AllProd').on('blur','tr.fila input.cantidad', function(){
@@ -116,7 +120,6 @@ $('document').ready(function(){
             var cod = $(this).attr('name');
             var total = $(this).parents("tr").find(".total").val();
             var cantidadT = $(this).parents("tr").find(".cantidad").val();
-            console.log(meses["Febrero"]);
 
             data = $("#CrearInventario").serialize() + "&SubTotal=" + total + "&idProducto=" + cod + "&cantidadT=" + cantidadT;
 
@@ -128,7 +131,25 @@ $('document').ready(function(){
                     dataType: 'json',
                     data: data,
                     success: function (response) {
-                        console.log(response);
+                        if (response['notification'] == "success") {
+                            $('#mensaje').text(' Se Creo Inventario No. '+ response['data']+' Exitosamente ');
+                          }
+                          if (response['notification'] == "danger") {
+                            $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
+                          }
+                          if (response['notification'] == "warning") {
+                            objeto = response["data"];
+                            $('#mensaje').html( response.data  + "<br> error de servidor interno");
+                          }
+                          $('#modal-warning').modal('toggle');
+                          // notificacion
+                          id = $("#CodProducto").val();
+                          cargarProd(id);
+                          $('div#notification-container').fadeIn(350);
+                          $(".notification").addClass("notification-"+response['notification']);
+                          $('#titulo').text(response['notification']);
+            
+                          $('div#notification-container').delay(3000).fadeOut(350);
                     }
                 });
                 
