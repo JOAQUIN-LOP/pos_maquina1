@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DetalleInventario;
 use Response;
 use Validator;
 use DB;
@@ -49,7 +50,47 @@ class DetalleInventarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if($request->ajax()){
+            
+            $validator = Validator::make($request->all(), [
+                'idInventario' => 'required',
+                'idProducto' => 'required',
+                'mes' => 'required',
+                'anio' => 'required',
+                'SubTotal' => 'required',
+                'cantidadT' => 'required'
+            ]);
+            
+            if ($validator->fails()) {
+                $returnData = array(
+                    'status' => 400,
+                    'message' => 'Invalid Parameters',
+                    'validator' => $validator->messages()->toJson()
+                );
+            return response()->json(['notification' => 'danger', 'data' => $returnData]); 
+            } else {
+                try {
+                    $newObject = new DetalleInventario();
+                    $newObject->idProducto = $request->get('idProducto');
+                    $newObject->mes = $request->get('mes');
+                    $newObject->anio = $request->get('anio');
+                    $newObject->fecha = Carbon::now()->toDateString();
+                    $newObject->idInventario = $request->get('idInventario');
+                    $newObject->subtotal_inventario = $request->get('SubTotal');
+                    $newObject->cant_total = $request->get('cantidadT');
+                    $newObject->save();
+            return response()->json(['notification' => 'success', 'producto' => $newObject->idProducto]); 
+                }
+                catch(Exception $e) {
+                    $returnData = array(
+                        'status' => 500,
+                        'message' => $e->getMessage()
+                    );
+            return response()->json(['notification' => 'warning', 'data' => $returnData]); 
+                }
+            }
+        }
     }
 
     /**
@@ -69,6 +110,10 @@ class DetalleInventarioController extends Controller
             $data->toArray()
         );
     }
+
+    // SELECT prod.nomProducto FROM detalle_inventario as dtin
+    // inner join detalle_producto as dtP on dtP.idProducto = dtin.idProducto  
+    // inner join producto as prod on prod.id = dtP.idProducto
 
     /**
      * Show the form for editing the specified resource.
