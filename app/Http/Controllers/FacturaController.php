@@ -99,12 +99,14 @@ class FacturaController extends Controller
                             ->orderBy('suc.nom_sucursal')
                                 ->get();
 
-        $date = Carbon::now();
+        $date = Carbon::now()->setTimezone('America/Guatemala');
+        $mt = $date->month;
+        $yr = $date->year;
         $date2 = $date->toDateString();
         $date = $date->format('d-m-Y');
         
 
-        return view('crear_factura', compact('facturas', 'date', 'date2'));
+        return view('crear_factura', compact('facturas', 'date', 'date2' , 'mt'));
     }
 
     /**
