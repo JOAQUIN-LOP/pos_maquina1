@@ -61,14 +61,15 @@
             <div class="col-sm-2">
               <div class="form-group">
                   <label for="fecha">Mes</label>
-                  <input type="text" class="form-control" name="fecha" id="fecha" value="{{$date2[0]}}" required/>
+                  <input type="text" class="form-control" name="fecha" id="fecha" value="{{$mt}}" required>
+                  <input type="text" name="fecha_bd" id="fecha_bd" value="{{$date2}}" hidden>
               </div>
             </div>
 
             <div class="col-sm-1">
               <div class="form-group">
                 <label>&nbsp;</label>
-                <button type="button" id="btn_ver" class="btn btn-primary btn-as-block"><i class="fa fa-search"></i>Iniciar Factura</button>                            
+                <button type="button" id="btn_iniciar" class="btn btn-primary btn-as-block"><i class="fa fa-search" style="margin-right: 3px;"></i>Iniciar Factura</button>                            
               </div>
             </div>
           </div>
