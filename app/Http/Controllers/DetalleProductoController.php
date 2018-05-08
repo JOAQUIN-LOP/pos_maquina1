@@ -93,7 +93,7 @@ class DetalleProductoController extends Controller
      */
     public function show($id)
     {
-        $producto = DetalleProducto::with('producto')->where('idProducto',$id)->get();
+        $producto = DetalleProducto::with('producto')->where('idProducto',$id)->where('cant_total','>',0)->get();
         return response()->json(
             $producto->toArray()
         );
