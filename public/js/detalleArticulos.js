@@ -11,6 +11,8 @@ $(document).ready(function () {
     this.value = this.value.replace(/[^a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ!/^\s/]/g,'');
   });
 
+  let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  let NumInventario = [1,2,3,4,5,6,7,8,9,10,11,12];
   
   // cargamos los productos activos al datatable
   index();
@@ -72,6 +74,7 @@ $(document).ready(function () {
 
 // carga los productos con precio 
   function ProductosPrecio(id) {
+   
     url =  $('#pathDetalleProd').val();   
       tabla2 = $('#detallePrecioProducto').DataTable(
       {
@@ -93,7 +96,7 @@ $(document).ready(function () {
                   value['precio_total_compras'],
                   value['mes'],
                   value['anio'],
-                  value['anio'],                  
+                  value['estado'],                  
                 ]).draw(false);
                 $( ".odd" ).addClass("fila");
                 $( ".even" ).addClass("fila");
@@ -234,8 +237,11 @@ var fecha = new Date();
         }
       });
     });
-    
-    
+
+    var UrlInv = $('#UrlInv').val();
+    $.get(UrlInv+'/home/detalle/inventario/ver/activo', function (result) {
+      $("#mesDetalle").append("<option value='"+NumInventario[result[0].mes - 1]+"'>"+meses[result[0].mes - 1]+"</option>");
+    }); 
 
 // fin document ready
 });
