@@ -187,29 +187,28 @@ $('document').ready(function(){
     });
 
     function VerMasProducto(IdProdDetalle){
-        
+        var idInv = $("#idInventario").val();
         VerMasTable = $('#VerMasProducto').DataTable( {
             responsive: true,
             destroy: true,
-            // "ajax": {
-            //     url: url+'/home/detalle/inventario/'+idInv,
-            //     type : "get",
-            //     success: function(result){
-            //         $(result).each(function (key, value) {
-            //             All.row.add([
-            //                 key+1,
-            //                 value['producto'],
-            //                 meses[value['mes']-1],
-            //                 value['anio'],
-            //                 value['cant'],
-            //                 value['sub'],
-            //                 '<a name="" class="btn btn-primary btn-xs modalVer" data-toggle="tooltip" title="Ver mas" ><i class="fa fa-search"></i></a>'
-            //             ]).draw(false);
-            //             $( ".odd" ).addClass("fila");
-            //             $( ".even" ).addClass("fila");
-            //         })
-            //     }
-            // },
+            "ajax": {
+                url: url+'/home/detalle/inventario/'+idInv+'/ver/mas/'+IdProdDetalle,
+                type : "get",
+                success: function(result){
+                    $(result).each(function (key, value) {
+                        VerMasTable.row.add([
+                            key+1,
+                            value['producto'],
+                            meses[value['mes']-1],
+                            value['anio'],
+                            value['cant'],
+                            value['sub'],
+                        ]).draw(false);
+                        $( ".odd" ).addClass("fila");
+                        $( ".even" ).addClass("fila");
+                    })
+                }
+            },
         });    
     }
 

@@ -155,7 +155,6 @@
                 <th>Año</th>
                 <th>Cantidad</th>
                 <th>Subtotal</th>
-                <th></th>
               </thead>
               <tbody>
               </tbody>

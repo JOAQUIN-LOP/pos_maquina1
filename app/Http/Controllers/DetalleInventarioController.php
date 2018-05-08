@@ -112,6 +112,20 @@ class DetalleInventarioController extends Controller
         );
     }
 
+
+    public function showDetalleProducto($id, $prod)
+    {
+        $data = DB::table('detalle_inventario As Dti')
+        ->join('producto As Prod', 'Dti.idProducto', '=', 'Prod.id')
+        ->select('Prod.nomProducto as producto', 'Dti.idProducto as idPro','Dti.mes as mes', 'Dti.anio as anio',  'Dti.cant_total  as cant',  'Dti.subtotal_inventario  as sub')
+        ->where('Dti.idInventario', $id)
+        ->where('Dti.idProducto', $prod)
+        ->get();
+        return response()->json(
+            $data->toArray()
+        );
+    }
+
     // SELECT prod.nomProducto FROM detalle_inventario as dtin
     // inner join detalle_producto as dtP on dtP.idProducto = dtin.idProducto  
     // inner join producto as prod on prod.id = dtP.idProducto
