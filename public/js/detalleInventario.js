@@ -181,7 +181,6 @@ $('document').ready(function(){
     $('#All').on('click','tr.fila a.modalVer', function(){
         var IdProdDetalle = $(this).attr('name');
         VerMasProducto(IdProdDetalle);
-        console.log(IdProdDetalle);
         $("#modal-info").modal();
         // tabla.rows().remove().draw();
     });
