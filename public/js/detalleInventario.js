@@ -21,12 +21,13 @@ $('document').ready(function(){
 
     $.get(url+'/home/detalle/inventario/ver/activo', headers = { 'X-CSRF-TOKEN': token }, function (result) {
         idInv = result[0].idInventario;
+        mesInvent = NumInventario[result[0].mes - 1];
         $("#idInventario").val(result[0].idInventario);
         $("#empresa").val(result[0].empresa);
         $("#anio").val(result[0].anio);
         $("#mes").append("<option value='"+NumInventario[result[0].mes - 1]+"'>"+meses[result[0].mes - 1]+"</option>");
         
-        AllInv(idInv);
+        AllInv();
     });
 
     $.get(url+'/home/producto', headers = { 'X-CSRF-TOKEN': token }, function (result) {
@@ -43,7 +44,7 @@ $('document').ready(function(){
 
     function cargarProd(id){
         AllProd.rows().remove().draw();
-        $.get(url+'/home/detalle/precio/'+id+"/"+anio+"/"+mes, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+        $.get(url+'/home/detalle/precio/'+id+"/"+anio+"/"+mesInvent, headers = { 'X-CSRF-TOKEN': token }, function (result) {
             
             $(result).each(function (key, value) {
             

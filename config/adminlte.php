@@ -133,14 +133,14 @@ return [
                     'icon'          => 'cube',
                 ],
                 [
-                    'text'          => 'Todos los Productos',
-                    'url'           => '/home/producto/edit',
-                    'icon'          => 'cubes',            
-                ],
-                [
                     'text'          => 'Agregar Precio Producto',
                     'url'           => '/home/detalle/precio',
                     'icon'          => 'cube',
+                ],
+                [
+                    'text'          => 'Todos los Productos',
+                    'url'           => '/home/producto/edit',
+                    'icon'          => 'cubes',            
                 ],
             ],
         ],

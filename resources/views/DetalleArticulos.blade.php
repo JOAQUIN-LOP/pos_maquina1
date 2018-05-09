@@ -80,8 +80,7 @@
                       <div class="col-sm-3">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Año</label>
-                              <select class="form-control" name="AnioDetalle" id="AnioDetalle">
-                                  <option value="">Seleccione Anio</option>  
+                              <select class="form-control" name="AnioDetalle" id="AnioDetalle"> 
                               </select>
                           </div>
                         </div>
