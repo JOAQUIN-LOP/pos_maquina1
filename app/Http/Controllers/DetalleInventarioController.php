@@ -103,8 +103,23 @@ class DetalleInventarioController extends Controller
     {
         $data = DB::table('detalle_inventario As Dti')
         ->join('producto As Prod', 'Dti.idProducto', '=', 'Prod.id')
-        ->select('Prod.nomProducto as producto','Dti.mes as mes', 'Dti.anio as anio', 'Dti.cant_total as cant', 'Dti.subtotal_inventario as sub')
+        ->select('Prod.nomProducto as producto', 'Dti.idProducto as idPro','Dti.mes as mes', 'Dti.anio as anio',  DB::raw('sum(Dti.cant_total)  as cant'),  DB::raw('sum(Dti.subtotal_inventario)  as sub'))
         ->where('Dti.idInventario', $id)
+        ->groupBy('Prod.nomProducto')
+        ->get();
+        return response()->json(
+            $data->toArray()
+        );
+    }
+
+
+    public function showDetalleProducto($id, $prod)
+    {
+        $data = DB::table('detalle_inventario As Dti')
+        ->join('producto As Prod', 'Dti.idProducto', '=', 'Prod.id')
+        ->select('Prod.nomProducto as producto', 'Dti.idProducto as idPro','Dti.mes as mes', 'Dti.anio as anio',  'Dti.cant_total  as cant',  'Dti.subtotal_inventario  as sub')
+        ->where('Dti.idInventario', $id)
+        ->where('Dti.idProducto', $prod)
         ->get();
         return response()->json(
             $data->toArray()

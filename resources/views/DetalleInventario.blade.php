@@ -120,12 +120,59 @@
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
       </div>
     </div>
+  
+  <div class="alert" id="notification-container" style="display:none;">
+    <div class="notification">
+        <button class="notification-close"></button>
+        <div class="notification-title"><span id="titulo"></span> !</div>
+        <div class="notification-message"><span id="mensaje"></span></div>
+    </div>
+  </div>
+
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
 
-  {{-- inicio datatable  --}}
+
+{{--  modal 2  --}}
+<div class="modal modal-info fade" id="modal-info">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Detalle</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <table id="VerMasProducto" class="table table-striped dt-responsive nowrap" style="width:100%">
+              <thead>
+                <th>No.</th>
+                <th>Producto</th>
+                <th>Mes</th>
+                <th>Año</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+ {{-- inicio datatable  --}}
   <div class="box-body">
     <div class="row">
       <div class="col-sm-12">
@@ -137,6 +184,7 @@
             <th>Año</th>
             <th>Cantidad</th>
             <th>Subtotal</th>
+            <th></th>
           </thead>
           <tbody>
           </tbody>
@@ -145,13 +193,6 @@
     </div>
   </div>
 
-</div>
-<div class="alert" id="notification-container" style="display:none;">
-    <div class="notification">
-        <button class="notification-close"></button>
-        <div class="notification-title"><span id="titulo"></span> !</div>
-        <div class="notification-message"><span id="mensaje"></span></div>
-    </div>
 </div>
 @stop
 @section('js')

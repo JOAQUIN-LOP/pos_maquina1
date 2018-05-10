@@ -10,8 +10,19 @@ $(document).ready(function () {
   $('.OnlyChart').on('input', function () { 
     this.value = this.value.replace(/[^a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ!/^\s/]/g,'');
   });
-
+  var mesInventario;
+  var anioInventario;
+  let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  let NumInventario = [1,2,3,4,5,6,7,8,9,10,11,12];
   
+  var UrlInv = $('#UrlInv').val();
+    $.get(UrlInv+'/home/detalle/inventario/ver/activo', function (result) {
+      mesInventario = NumInventario[result[0].mes - 1];
+      anioInventario = result[0].anio;
+      $("#mesDetalle").append("<option value='"+NumInventario[result[0].mes - 1]+"'>"+meses[result[0].mes - 1]+"</option>");
+      $("#AnioDetalle").append(" <option value='"+result[0].anio +"' selected>"+ result[0].anio +"</option>");
+    }); 
+
   // cargamos los productos activos al datatable
   index();
   var tabla;
@@ -72,12 +83,13 @@ $(document).ready(function () {
 
 // carga los productos con precio 
   function ProductosPrecio(id) {
+   
     url =  $('#pathDetalleProd').val();   
       tabla2 = $('#detallePrecioProducto').DataTable(
       {
         "ajax":
 				{
-					url: url + "/" + id,
+					url: url + "/" + id + "/" + anioInventario+ "/" + mesInventario,
           type : "get",
           success: function(r){
             // agregamos los datos al datatable
@@ -93,7 +105,7 @@ $(document).ready(function () {
                   value['precio_total_compras'],
                   value['mes'],
                   value['anio'],
-                  value['anio'],                  
+                  value['estado'],                  
                 ]).draw(false);
                 $( ".odd" ).addClass("fila");
                 $( ".even" ).addClass("fila");
@@ -123,33 +135,6 @@ $(document).ready(function () {
     ProductosPrecio(idProducto);
    
 });
-
-var fecha = new Date();
-    var ano = fecha.getFullYear();
-    var mes = fecha.getMonth();
-
-    // selecciona el mes actual
-    $("#mesDetalle option").each(function(){
-        
-        if((mes+1)==$(this).attr('value')){
-            $(this).attr('selected', 'selected');
-        }
-
-     });
-     
-    //  mostrar anio actual y 5 anios atras y 5 adelante     
-
-    var actual = ano;
-     ano = ano - 5;
-    for(i=0;i<=10;i++){
-        if(actual == ano){
-            $("#AnioDetalle").append(" <option value='"+ano +"' selected>"+ ano +"</option>");
-        }else{
-            $("#AnioDetalle").append(" <option value='"+ano +"'>"+ ano +"</option>"); 
-        }
-        
-        ano++;
-    }
 
     //  Calcular precio unitario
 
@@ -234,7 +219,7 @@ var fecha = new Date();
         }
       });
     });
-    
+
     
 
 // fin document ready
