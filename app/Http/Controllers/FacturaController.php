@@ -93,8 +93,9 @@ class FacturaController extends Controller
         $facturas = DB::table('sucursal as suc')
         ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
             ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
-                ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
-                    ->where('suc.estado','=',1)
+                ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal', 'inv.mes', 'inv.anio')
+                    ->where('suc.estado',1)
+                    ->where('inv.estado',1)
                         ->groupBy('suc.nom_sucursal')
                             ->orderBy('suc.nom_sucursal')
                                 ->get();

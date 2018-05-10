@@ -43,7 +43,6 @@
           {{--  fin row  --}}                
         </form>
         
-        <hr>
        <div class="container-fluid">
             <div class="table-responsive">
               <table id="detalle_factura" class="display table table-striped table-responsive table-bordered table-hover" style="width:100%">

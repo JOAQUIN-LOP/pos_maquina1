@@ -58,11 +58,18 @@
                   </select>
               </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-1">
               <div class="form-group">
                   <label for="fecha">Mes</label>
-                  <input type="text" class="form-control" name="fecha" id="fecha" value="{{$mt}}" required>
-                  <input type="text" name="fecha_bd" id="fecha_bd" value="{{$date2}}" hidden>
+                  <input type="text" class="form-control" name="mes" id="mes" value="{{$facturas[0]->mes}}" required readonly="true">
+                  <input type="text" name="mes_db" id="mes_db" value="{{$facturas[0]->mes}}" hidden>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-group">
+                  <label for="fecha">Año</label>
+                  <input type="text" class="form-control" name="anio" id="anio" value="{{$facturas[0]->anio}}" required readonly="true">
+                  <input type="text" name="anio_db" id="anio_db" value="{{$date2}}" hidden>
               </div>
             </div>
 
@@ -84,8 +91,61 @@
   <div class="modal fade" id="modal-info">
         
   </div>
+
   
-</div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Realizar Factura</h3>
+      </div>
+
+      <div class="panel-body">
+        <form id="FormPrecioProd">
+          {{ csrf_field() }}   
+          <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="col-sm-1">
+                <div class="form-group">
+                  <label for="no_factura">No. Factura</label>
+                  <input type="text" class="form-control" name="no_factura" id="no_factura" readonly="true">
+                </div>                      
+              </div>  
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="">Producto</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="">Precio</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="">Cantidad</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>        
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label>&nbsp;</label>
+                  <button type="button" id="btn_ver" class="btn btn-primary btn-as-block"><i class="fa fa-arrow-circle-right" style="margin-right: 3px;"></i>Ver</button>                            
+                </div>
+              </div>                 
+            </div>
+
+          </div>  
+        </form>
+
+        <form action="">
+          
+        </form>
+      </div>          
+    </div>
+  
+
 <div class="alert" id="notification-container" style="display:none;">
     <div class="notification">
         <button class="notification-close"></button>
