@@ -81,7 +81,8 @@ $('document').ready(function(){
                             value['anio'],
                             value['cant'],
                             value['sub'],
-                            '<a name="'+value['idPro']+'" class="btn btn-primary btn-xs modalVer" data-toggle="tooltip" title="Ver mas" ><i class="fa fa-search"></i></a>'
+                            '<div class="btn-group"><a name="'+value['idPro']+'" class="btn btn-primary btn-xs modalVer" data-toggle="tooltip" title="Ver mas" ><i class="fa fa-search"></i></a>'+
+                            '<a name="'+value['idPro']+'" class="btn btn-warning btn-xs modalVer" data-toggle="tooltip" title="Ver mas" ><i class="fa fa-pencil"></i></a></div>'
                         ]).draw(false);
                         $( ".odd" ).addClass("fila");
                         $( ".even" ).addClass("fila");
