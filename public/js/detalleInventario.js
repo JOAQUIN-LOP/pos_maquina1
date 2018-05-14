@@ -283,7 +283,6 @@ $('document').ready(function(){
         total = $("#EditTotal").val();
         Nueva = $("#CantidadNueva").val();
 
-        console.log(IdProd+ " " +total+ " " +Nueva);
     });
 
 
