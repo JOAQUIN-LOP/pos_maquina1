@@ -45,6 +45,7 @@ Route::resource('/home/detalle/precio', 'DetalleProductoController');
 
 // INVENTARIO
 Route::get('/home/inventario/contar/{anio}', 'InventarioController@contar');
+Route::get('/home/ver/inventario', 'InventarioController@verInventario');
 Route::get('/home/inventario/all/{anio}', 'InventarioController@All');
 Route::get('/home/inventario/create', 'InventarioController@create');
 Route::get('/home/inventario/finalizar/{id}', 'InventarioController@FinalizarInventario');

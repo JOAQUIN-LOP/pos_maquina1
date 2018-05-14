@@ -161,7 +161,7 @@ return [
                 [
                     'text' => 'Lista de Inventario',
                     'icon' => 'list-ul',
-                    'url'  => '/home/detalle/inventario',
+                    'url'  => '/home/ver/inventario',
                 ],
             ], 
         ],

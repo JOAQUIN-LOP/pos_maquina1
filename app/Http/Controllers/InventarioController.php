@@ -187,4 +187,7 @@ class InventarioController extends Controller
         );
     }
 
+    public function verInventario(){
+        return view('Inventarios');   
+    }
 }
