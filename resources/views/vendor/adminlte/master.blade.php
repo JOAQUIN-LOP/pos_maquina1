@@ -53,9 +53,10 @@
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
 @if(config('adminlte.plugins.select2'))
-    <!-- Select2 -->
+    <!-- Select2 -->    
     <script src="{{ asset('vendor/adminlte/vendor/select2/js/select2.min.js') }}"></script>
-    <script src="{{ asset('js/select2.js') }}"></script>
+    
+    
 @endif
 
 @if(config('adminlte.plugins.datatables'))

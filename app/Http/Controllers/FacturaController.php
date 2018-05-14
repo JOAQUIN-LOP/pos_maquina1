@@ -175,4 +175,8 @@ class FacturaController extends Controller
     {
         //
     }
+
+    public function cargaFactura(){
+        return view('sin_contenido');
+    }
 }
