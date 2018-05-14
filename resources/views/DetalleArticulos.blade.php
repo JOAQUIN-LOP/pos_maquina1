@@ -131,6 +131,7 @@
                           <th>Mes</th>
                           <th>Anio</th>
                           <th>estado</th>
+                          <th>Opciones</th>
                         </tr>
                         </thead>
                         <tbody>

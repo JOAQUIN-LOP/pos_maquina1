@@ -117,7 +117,7 @@ class DetalleInventarioController extends Controller
     {
         $data = DB::table('detalle_inventario As Dti')
         ->join('producto As Prod', 'Dti.idProducto', '=', 'Prod.id')
-        ->select('Prod.nomProducto as producto', 'Dti.idProducto as idPro','Dti.mes as mes', 'Dti.anio as anio',  'Dti.cant_total  as cant',  'Dti.subtotal_inventario  as sub')
+        ->select('Prod.nomProducto as producto', 'Dti.idProducto as idPro','Dti.mes as mes', 'Dti.anio as anio',  'Dti.cant_total  as cant',  'Dti.subtotal_inventario  as sub','Dti.id_detalle_inventario')
         ->where('Dti.idInventario', $id)
         ->where('Dti.idProducto', $prod)
         ->get();

@@ -38,8 +38,9 @@ Route::get('/home/producto/edit', 'ProductoController@edit')->name('EditProducto
 Route::get('/home/producto/{id}/active', 'ProductoController@active')->name('ActiveProducto');
 Route::resource('/home/producto', 'ProductoController');
 
-// DETALLE INVENTARIO
+// DETALLE ARTICULO
 Route::get('/home/detalle/precio/{id}/{anio}/{mes}', 'DetalleProductoController@ProdInv');
+Route::get('/home/detalle/precio/delete/{id}', 'DetalleProductoController@delete');
 Route::resource('/home/detalle/precio', 'DetalleProductoController');
 
 // INVENTARIO
