@@ -78,13 +78,6 @@
   <!-- /.box-body -->
   
 </div>
-<div class="alert" id="notification-container" style="display:none;">
-    <div class="notification">
-        <button class="notification-close"></button>
-        <div class="notification-title"><span id="titulo"></span> !</div>
-        <div class="notification-message"><span id="mensaje"></span></div>
-    </div>
-</div>
 @stop
 @section('js')
   <script type="text/javascript" src="{{ asset('js/articulos.js') }}"></script>

@@ -20,51 +20,7 @@
         <input type="text" value="{{URL::to('home/empresa')}}" id="ruta-Emp" style="display:none" >
         <input type="text" value="{{URL::to('home/inventario/contar')}}" id="rutaInv" style="display:none" >
 
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="col-sm-2">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">No.</span>
-                  <input type="text" class="form-control" name="idInventario"  id="idInventario" placeholder="Inventario" required>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Empresa</span>
-                    <select id="Empresa" name="empresa" class="form-control select2">
-                    </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">mes</span>
-                  <select id="mes" name="mes" class="form-control select2">
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Año</span>
-                  <input type="text" class="form-control" name="anio" id="anio" readonly>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-1">
-              <div class="form-group">
-                <button type="submit" id="btn-Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Crear</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-  </div>
+        
   <div class="box-body">
     <div class="row">
       <div class="col-sm-12">

@@ -155,8 +155,13 @@ return [
                 ],
                 [
                     'text' => 'Agregar Producto Inventario',
-                    'icon' => 'cube',
+                    'icon' => 'paste',
                     'url'  => '/home/detalle/inventario',
+                ],
+                [
+                    'text' => 'Lista de Inventario',
+                    'icon' => 'list-ul',
+                    'url'  => '/home/ver/inventario',
                 ],
             ], 
         ],

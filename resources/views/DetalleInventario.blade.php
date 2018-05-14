@@ -120,15 +120,6 @@
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
       </div>
     </div>
-  
-  <div class="alert" id="notification-container" style="display:none;">
-    <div class="notification">
-        <button class="notification-close"></button>
-        <div class="notification-title"><span id="titulo"></span> !</div>
-        <div class="notification-message"><span id="mensaje"></span></div>
-    </div>
-  </div>
-
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
@@ -142,7 +133,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Detalle</h4>
+        <h4 class="modal-title">Detalle Productos</h4>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -155,6 +146,7 @@
                 <th>Año</th>
                 <th>Cantidad</th>
                 <th>Subtotal</th>
+                <th></th>
               </thead>
               <tbody>
               </tbody>
@@ -163,7 +155,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Salir</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -194,6 +186,69 @@
   </div>
 
 </div>
+
+{{--  modal editar cantidad y precio producto en el inventario  --}}
+<div class="modal modal-warning fade" id="modal-warning">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar Registro</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                      <label class="control-label letra-label" for="EditNombre"> Nombre<span class="kv-reqd"> </span></label>
+                    <input type="text" id="EditNombre" name="EditNombre" class="form-control " readonly>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                      <label class="control-label letra-label" for="EditMes"> Mes<span class="kv-reqd"> </span></label>
+                    <input type="text" id="EditMes" name="EditMes" class="form-control " readonly>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                      <label class="control-label letra-label" for="EditAnio"> Año<span class="kv-reqd"> </span></label>
+                    <input type="text" id="EditAnio" name="EditAnio" class="form-control " readonly>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group ">
+                      <label class="control-label letra-label" for="CantidadP"> Cantidad Anterior<span class="kv-reqd"> </span></label>
+                    <input type="text" id="CantidadP" name="CantidadP" class="form-control " readonly>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group ">
+                      <label class="control-label letra-label" for="CantidadNueva"> Cantidad Nueva<span class="kv-reqd"> </span></label>
+                    <input type="number" id="CantidadNueva" name="CantidadNueva" class="form-control " placeholder="Ingrese Nueva Cantidad" onkeypress="return event.charCode >= 48" min="0" maxlength="4">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group ">
+                      <label class="control-label letra-label" for="EditTotal"> Total<span class="kv-reqd"> </span></label>
+                    <input type="text" id="EditTotal" name="EditTotal" class="form-control " readonly>
+                </div>
+            </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Salir</button>
+        <button type="button" class="btn btn-outline"  id="Btn-G">Guardar Cambios</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 @stop
 @section('js')
   <script type="text/javascript" src="{{ asset('js/detalleInventario.js') }}"></script>  

@@ -82,7 +82,15 @@
     <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf.plugin.autotable.js') }}"></script>
 
-
+{{--  notificacion  --}}
+  <div class="alert" id="notification-container" style="display:none;">
+    <div class="notification">
+        <button class="notification-close"></button>
+        <div class="notification-title"><span id="titulo"></span> !</div>
+        <div class="notification-message"><span id="mensaje"></span></div>
+    </div>
+  </div>
+  
 
 @if(config('adminlte.plugins.chartjs'))
     <!-- ChartJS -->

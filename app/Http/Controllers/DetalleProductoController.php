@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use Response;
 use Validator;
 use App\DetalleProducto;
@@ -93,7 +94,7 @@ class DetalleProductoController extends Controller
      */
     public function show($id)
     {
-        $producto = DetalleProducto::with('producto')->whereRaw('idProducto = ? and cantidad_unidades >= ?',[$id,1])->get();
+        $producto = DetalleProducto::with('producto')->whereRaw('idProducto = ? and cantidad_unidades > ?',[$id, (float) 0 ])->get();
         return response()->json(
             $producto->toArray()
         );
@@ -106,6 +107,7 @@ class DetalleProductoController extends Controller
         ->where('idProducto',$id)
         ->where('anio',$anio)
         ->where('mes',$mes)
+        ->where('cantidad_unidades', '>', (float) 0)
         ->get();
         return response()->json(
             $producto->toArray()
@@ -162,6 +164,23 @@ class DetalleProductoController extends Controller
         }
     }
 
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        
+        $data =  DB::table('detalle_producto')->where('id_detalle_producto',$id)->update(array('cantidad_unidades'=>0));
+        return response()->json(['notification' => 'success']); 
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -170,6 +189,6 @@ class DetalleProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

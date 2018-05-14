@@ -131,6 +131,7 @@
                           <th>Mes</th>
                           <th>Anio</th>
                           <th>estado</th>
+                          <th>Opciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -140,13 +141,6 @@
                     </div>
                     {{--  fin box body  --}}
                     
-                    <div class="alert" id="notification-container" style="display:none;">
-                        <div class="notification">
-                            <button class="notification-close"></button>
-                            <div class="notification-title"><span id="titulo"></span> !</div>
-                            <div class="notification-message"><span id="mensaje"></span></div>
-                        </div>
-                    </div>
                                         
                 </div>
 

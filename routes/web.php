@@ -40,12 +40,14 @@ Route::get('/home/producto/edit', 'ProductoController@edit')->name('EditProducto
 Route::get('/home/producto/{id}/active', 'ProductoController@active')->name('ActiveProducto');
 Route::resource('/home/producto', 'ProductoController');
 
-// DETALLE INVENTARIO
+// DETALLE ARTICULO
 Route::get('/home/detalle/precio/{id}/{anio}/{mes}', 'DetalleProductoController@ProdInv');
+Route::get('/home/detalle/precio/delete/{id}', 'DetalleProductoController@delete');
 Route::resource('/home/detalle/precio', 'DetalleProductoController');
 
 // INVENTARIO
 Route::get('/home/inventario/contar/{anio}', 'InventarioController@contar');
+Route::get('/home/ver/inventario', 'InventarioController@verInventario');
 Route::get('/home/inventario/all/{anio}', 'InventarioController@All');
 Route::get('/home/inventario/create', 'InventarioController@create');
 Route::get('/home/inventario/finalizar/{id}', 'InventarioController@FinalizarInventario');
@@ -55,5 +57,6 @@ Route::resource('/home/inventario', 'InventarioController');
 
 Route::get('/home/detalle/inventario/ver/activo', 'DetalleInventarioController@VerInventarioActivo');
 Route::get('/home/detalle/inventario/{id}/ver/mas/{prod}', 'DetalleInventarioController@showDetalleProducto');
+Route::post('/home/detalle/inventario/editar/cantidad', 'DetalleInventarioController@EditCantidad');
 Route::resource('/home/detalle/inventario', 'DetalleInventarioController');
 

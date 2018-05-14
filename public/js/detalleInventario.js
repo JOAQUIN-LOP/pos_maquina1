@@ -79,9 +79,9 @@ $('document').ready(function(){
                             value['producto'],
                             meses[value['mes']-1],
                             value['anio'],
-                            value['cant'],
+                            parseInt(value['cant']),
                             value['sub'],
-                            '<a name="'+value['idPro']+'" class="btn btn-primary btn-xs modalVer" data-toggle="tooltip" title="Ver mas" ><i class="fa fa-search"></i></a>'
+                            '<div class="btn-group"><a name="'+value['idPro']+'" class="btn btn-primary btn-xs modalVer" data-toggle="tooltip" title="Ver mas" ><i class="fa fa-search"></i></a>'
                         ]).draw(false);
                         $( ".odd" ).addClass("fila");
                         $( ".even" ).addClass("fila");
@@ -91,8 +91,9 @@ $('document').ready(function(){
         });    
     }
 
-    $('#AllProd').on('blur','tr.fila input.cantidad', function(){
+    $('#AllProd').on('keypress','tr.fila input.cantidad', function(){
         
+        if ( event.which == 13 ) {
         
         var valor = $(this).val();
         var codigo = $(this).parents("tr").find(".precio").val();
@@ -113,6 +114,7 @@ $('document').ready(function(){
                 $(this).val("");
                 // do something in the background
                 $(this).parents("tr").find(".total").val("");
+                $(this).parents("tr").find(".Agregar").hide();
                 setTimeout(function(){ dialog.modal('hide'); }, 3000);
             }
             
@@ -124,7 +126,10 @@ $('document').ready(function(){
             
             // do something in the background
             $(this).parents("tr").find(".total").val("");
+            $(this).parents("tr").find(".Agregar").hide();
             setTimeout(function(){ dialog.modal('hide'); }, 3000);
+            }
+
         }
     });
 
@@ -143,8 +148,11 @@ $('document').ready(function(){
                     dataType: 'json',
                     data: data,
                     success: function (response) {
+
+                        $("#modalSuccess").modal('hide');
+
                         if (response['notification'] == "success") {
-                        $('#mensaje').text(' Se Creo Inventario No. '+ response['data']+' Exitosamente ');
+                        $('#mensaje').text(' Creado Exitosamente ');
                         }
                         if (response['notification'] == "danger") {
                         $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
@@ -153,10 +161,10 @@ $('document').ready(function(){
                         objeto = response["data"];
                         $('#mensaje').html( response.data  + "<br> error de servidor interno");
                         }
-                        $('#modal-warning').modal('toggle');
                         // notificacion
                         All.clear();
                         id = $("#CodProducto").val();
+                        // aquiiii
                         cargarProd(id);
                         All.ajax.reload();
     
@@ -195,14 +203,16 @@ $('document').ready(function(){
                 url: url+'/home/detalle/inventario/'+idInv+'/ver/mas/'+IdProdDetalle,
                 type : "get",
                 success: function(result){
+        
                     $(result).each(function (key, value) {
                         VerMasTable.row.add([
                             key+1,
                             value['producto'],
                             meses[value['mes']-1],
                             value['anio'],
-                            value['cant'],
+                            parseInt(value['cant']),
                             value['sub'],
+                            '<a name="'+value['id_detalle_inventario']+'" class="btn btn-warning btn-xs EditarProd" data-toggle="tooltip" title="Editar" ><i class="fa fa-pencil"></i></a>'
                         ]).draw(false);
                         $( ".odd" ).addClass("fila");
                         $( ".even" ).addClass("fila");
@@ -212,6 +222,112 @@ $('document').ready(function(){
         });    
     }
 
+    var count;
+    let T;
+    let PrecioUnitario;
+
+    $('#VerMasProducto').on('click','tr.fila a.EditarProd', function(){
+        var Producto = $(this).closest('tr').find('td').get(1).innerHTML;
+        var mes = $(this).closest('tr').find('td').get(2).innerHTML;
+        var anio = $(this).closest('tr').find('td').get(3).innerHTML;
+        var cantidad = $(this).closest('tr').find('td').get(4).innerHTML;
+        var total = $(this).closest('tr').find('td').get(5).innerHTML;
+        var IdProd = $(this).attr('name');
+        
+        count = 0;
+        T=0;
+        PrecioUnitario=0;
+
+        $("#Btn-G").attr('name', IdProd);
+        $("#EditNombre").val(Producto);
+        $("#EditMes").val(mes);
+        $("#EditAnio").val(anio);
+        $("#CantidadP").val(cantidad);
+        $("#EditTotal").val(total);
+        $("#modal-warning").modal("toggle");
+    });
+
+    // editar cantidad producto
+            
+    $("#CantidadNueva").on('keypress', function(){
+        
+        if ( event.which == 13 ) {
+
+            let IdProd = 0;
+            let total = 0;
+            let Nueva = 0;
+            let vieja = 0;
+            let NuevoTotal;
+            
+
+            Nueva = $("#CantidadNueva").val();
+            vieja = $("#CantidadP").val();
+            total = $("#EditTotal").val();
+
+            
+            if(count == 0){
+                T = total;
+                PrecioUnitario = T/vieja;
+            }
+            count++;           
+
+            NuevoTotal = PrecioUnitario * Nueva;
+            
+            $("#EditTotal").val(NuevoTotal);
+
+        }        
+
+    });
+
+    $("#Btn-G").click(function(){
+        let IdProd = 0;
+        let total = 0;
+        let Nueva = 0;
+
+        IdDetalle = $(this).attr('name');
+        total = $("#EditTotal").val();
+        Nueva = $("#CantidadNueva").val();
+
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': token },
+            url: url+"/home/detalle/inventario/editar/cantidad",
+            method: "POST",
+            data: { id : IdDetalle, Total : total, NuevaCant : Nueva  },
+            success: function(response){
+                    
+                if (response['notification'] == "success") {
+                    $('#mensaje').text(' Actualizado Exitosamente ');
+
+                    }
+                    if (response['notification'] == "danger") {
+                    $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
+                    }
+                    if (response['notification'] == "warning") {
+                    objeto = response["data"];
+                    $('#mensaje').html( response.data  + "<br> error de servidor interno");
+                    }
+                
+                    VerMasTable.clear();
+                
+                    VerMasTable.ajax.reload();
+                
+                    $("#modal-warning").modal('hide');
+                
+                    $("#modal-info").modal('hide');
+
+                    $('div#notification-container').fadeIn(350);
+                    
+                    $(".notification").addClass("notification-"+response['notification']);                
+                    $('#titulo').text(response['notification']);
+                    $('div#notification-container').delay(3000).fadeOut(350);
+            }
+        });
+    
+
+    });
+
 });
+
+
 
 // nomProducto id

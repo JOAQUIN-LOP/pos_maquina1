@@ -83,7 +83,7 @@ $(document).ready(function () {
 
 // carga los productos con precio 
   function ProductosPrecio(id) {
-   
+   console.log(url + "/" + id + "/" + anioInventario+ "/" + mesInventario);
     url =  $('#pathDetalleProd').val();   
       tabla2 = $('#detallePrecioProducto').DataTable(
       {
@@ -100,12 +100,13 @@ $(document).ready(function () {
               $(r).each(function (key, value) {
                 tabla2.row.add([
                   value.producto['nomProducto'],
-                  value['cantidad_unidades'],
+                  parseInt(value['cantidad_unidades']),
                   value['precio_unidad'],
                   value['precio_total_compras'],
-                  value['mes'],
+                  meses[value['mes']-1],
                   value['anio'],
-                  value['estado'],                  
+                  estado = (value['estado'] == 1) ? "<span class='label label-success'>Activo</span>" : "<span class='label label-danger'>Inactivo</span>",
+                  "<button type='button' name='"+value['id_detalle_producto']+"' class='btn btn-danger btn-sm EliminarProd' title='Eliminar'><i class='fa fa-trash'></i></button>"
                 ]).draw(false);
                 $( ".odd" ).addClass("fila");
                 $( ".even" ).addClass("fila");
@@ -156,7 +157,7 @@ $(document).ready(function () {
       
       bootbox.confirm({
         size: 'small',
-        message: "Esta seguro de crear el producto "+ Producto+" con el",
+        message: "Esta seguro de crear el producto "+ Producto+"",
         buttons: {
             confirm: {
                 label: 'Aceptar',
@@ -211,6 +212,68 @@ $(document).ready(function () {
 
                 // oculta notificacion
 
+                $('div#notification-container').delay(3000).fadeOut(350);    
+              
+              }
+            });
+          }
+        }
+      });
+    });
+
+    $('#detallePrecioProducto').on('click', 'tr button.EliminarProd', function(){
+      let cod = $(this).attr('name');
+      console.log(url+"/delete/"+cod);
+
+      bootbox.confirm({
+        size: 'small',
+        message: "Esta seguro de eliminar el registro",
+        buttons: {
+            confirm: {
+                label: 'Aceptar',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'Cancelar',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+        
+          if(result == true){
+            $.ajax({
+              url: url+"/delete/"+cod,
+              headers: { 'X-CSRF-TOKEN': token },
+              type: 'GET',
+              success: function (response) {
+                tabla2.ajax.reload();
+                // limpia el formulario
+                $('#cantidad_unidades').val("");
+                $('#precio_total_compras').val("");
+                $('#precio_total_compras').val("");
+      
+                // notificacion
+                
+      
+                if (response['notification'] == "success") {
+                  $('#mensaje').text(' Se Elimino Exitosamente ');
+                }
+                if (response['notification'] == "warning") {
+                  objeto = response["data"];
+                  $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> Los Campos no pueden ir vacios");
+                }
+                if (response['notification'] == "danger") {
+                  objeto = response["data"];
+                  $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+                }
+                
+                $('div#notification-container').fadeIn(350);
+                $(".notification").addClass("notification-"+response['notification']);
+                $('#titulo').text(response['notification']);
+                
+      
+                // oculta notificacion
+      
                 $('div#notification-container').delay(3000).fadeOut(350);    
               
               }
