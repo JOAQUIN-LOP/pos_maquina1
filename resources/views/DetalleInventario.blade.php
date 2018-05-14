@@ -120,15 +120,6 @@
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
       </div>
     </div>
-  
-  <div class="alert" id="notification-container" style="display:none;">
-    <div class="notification">
-        <button class="notification-close"></button>
-        <div class="notification-title"><span id="titulo"></span> !</div>
-        <div class="notification-message"><span id="mensaje"></span></div>
-    </div>
-  </div>
-
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
@@ -245,7 +236,6 @@
                 </div>
             </div>
         </div>
-      
 
       </div>
       <div class="modal-footer">
@@ -258,7 +248,6 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
 
 @stop
 @section('js')

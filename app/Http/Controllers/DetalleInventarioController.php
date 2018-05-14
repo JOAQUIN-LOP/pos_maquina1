@@ -126,9 +126,12 @@ class DetalleInventarioController extends Controller
         );
     }
 
-    // SELECT prod.nomProducto FROM detalle_inventario as dtin
-    // inner join detalle_producto as dtP on dtP.idProducto = dtin.idProducto  
-    // inner join producto as prod on prod.id = dtP.idProducto
+    public function EditCantidad(Request $request){
+
+        $data =  DB::table('detalle_inventario')->where('id_detalle_inventario',$request->get('id'))->update(array('cant_total'=>$request->get('NuevaCant'), 'subtotal_inventario' => $request->get('Total')));
+        return response()->json(['notification' => 'success', 'producto' => $data]); 
+
+    }
 
     /**
      * Show the form for editing the specified resource.

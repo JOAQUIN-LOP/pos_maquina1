@@ -148,8 +148,11 @@ $('document').ready(function(){
                     dataType: 'json',
                     data: data,
                     success: function (response) {
+
+                        $("#modalSuccess").modal('hide');
+
                         if (response['notification'] == "success") {
-                        $('#mensaje').text(' Se Creo Inventario No. '+ response['data']+' Exitosamente ');
+                        $('#mensaje').text(' Creado Exitosamente ');
                         }
                         if (response['notification'] == "danger") {
                         $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
@@ -161,6 +164,7 @@ $('document').ready(function(){
                         // notificacion
                         All.clear();
                         id = $("#CodProducto").val();
+                        // aquiiii
                         cargarProd(id);
                         All.ajax.reload();
     
@@ -199,7 +203,7 @@ $('document').ready(function(){
                 url: url+'/home/detalle/inventario/'+idInv+'/ver/mas/'+IdProdDetalle,
                 type : "get",
                 success: function(result){
-                    console.log(result);
+        
                     $(result).each(function (key, value) {
                         VerMasTable.row.add([
                             key+1,
@@ -221,6 +225,7 @@ $('document').ready(function(){
     var count;
     let T;
     let PrecioUnitario;
+
     $('#VerMasProducto').on('click','tr.fila a.EditarProd', function(){
         var Producto = $(this).closest('tr').find('td').get(1).innerHTML;
         var mes = $(this).closest('tr').find('td').get(2).innerHTML;
@@ -279,12 +284,47 @@ $('document').ready(function(){
         let total = 0;
         let Nueva = 0;
 
-        IdProd = $(this).attr('name');
+        IdDetalle = $(this).attr('name');
         total = $("#EditTotal").val();
         Nueva = $("#CantidadNueva").val();
 
-    });
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': token },
+            url: url+"/home/detalle/inventario/editar/cantidad",
+            method: "POST",
+            data: { id : IdDetalle, Total : total, NuevaCant : Nueva  },
+            success: function(response){
+                    
+                if (response['notification'] == "success") {
+                    $('#mensaje').text(' Actualizado Exitosamente ');
 
+                    }
+                    if (response['notification'] == "danger") {
+                    $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
+                    }
+                    if (response['notification'] == "warning") {
+                    objeto = response["data"];
+                    $('#mensaje').html( response.data  + "<br> error de servidor interno");
+                    }
+                
+                    VerMasTable.clear();
+                
+                    VerMasTable.ajax.reload();
+                
+                    $("#modal-warning").modal('hide');
+                
+                    $("#modal-info").modal('hide');
+
+                    $('div#notification-container').fadeIn(350);
+                    
+                    $(".notification").addClass("notification-"+response['notification']);                
+                    $('#titulo').text(response['notification']);
+                    $('div#notification-container').delay(3000).fadeOut(350);
+            }
+        });
+    
+
+    });
 
 });
 

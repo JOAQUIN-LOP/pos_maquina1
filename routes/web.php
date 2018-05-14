@@ -54,5 +54,6 @@ Route::resource('/home/inventario', 'InventarioController');
 
 Route::get('/home/detalle/inventario/ver/activo', 'DetalleInventarioController@VerInventarioActivo');
 Route::get('/home/detalle/inventario/{id}/ver/mas/{prod}', 'DetalleInventarioController@showDetalleProducto');
+Route::post('/home/detalle/inventario/editar/cantidad', 'DetalleInventarioController@EditCantidad');
 Route::resource('/home/detalle/inventario', 'DetalleInventarioController');
 
