@@ -60,7 +60,7 @@
                       <!-- /.form group -->
                      <!-- textarea -->
                     <div class="form-group">
-                      <label>Textarea</label>
+                      <label>Descripcion</label>
                       <textarea class="form-control" name="descripcion_producto" id="descripcion_producto" rows="3" placeholder="Enter ..."></textarea>
                     </div>  
                
