@@ -191,73 +191,95 @@ $('document').ready(function(){
 
     $('#TablaAll').on('click', '.DescargarPDF', function(){
         let id = $(this).attr("name");
-        $.get(url+"/PDF/"+id, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+
+        bootbox.confirm({
+            size: 'small',
+            message: "Desea Descargar el Documento",
+            buttons: {
+                confirm: {
+                    label: 'Aceptar',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Cancelar',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
             
-            let rows = [];
-
-            let columns = ['Producto','Mes','Año','Cantidad','Subtotal'];
-
-            $.each(result[1], function(i, item) {
-            rows[i] = [item.producto, meses[item.mes-1], item.anio, parseInt(item.cant), item.sub];
-            });
-                   
-            // fecha actual
-            var hoy = new Date();
-            dia = hoy.getDate(); 
-            mes = hoy.getMonth();
-            anio= hoy.getFullYear();
-            fecha_actual = String(dia+"/"+mes+"/"+anio);
-            let F = result[0][0].fecha;
-            let FC = F.split("-");
-
-            let Fcreacion = String(FC[2]+"/"+FC[1]+"/"+FC[0]);
+              if(result == true){
+              
+                $.get(url+"/PDF/"+id, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+            
+                    let rows = [];
         
-            let doc = new jsPDF('p', 'pt');
-            // nombre de la empresa
-            doc.setFontSize(14);
-            doc.setFont("arial", "bold");
-            doc.text(250, 40, ''+result[0][0].empresa['nom_empresa']+'');
-            doc.setFontSize(11);
+                    let columns = ['Producto','Mes','Año','Cantidad','Subtotal'];
+        
+                    $.each(result[1], function(i, item) {
+                    rows[i] = [item.producto, meses[item.mes-1], item.anio, parseInt(item.cant), item.sub];
+                    });
+                           
+                    // fecha actual
+                    var hoy = new Date();
+                    dia = hoy.getDate(); 
+                    mes = hoy.getMonth();
+                    anio= hoy.getFullYear();
+                    fecha_actual = String(dia+"/"+mes+"/"+anio);
+                    let F = result[0][0].fecha;
+                    let FC = F.split("-");
+        
+                    let Fcreacion = String(FC[2]+"/"+FC[1]+"/"+FC[0]);
+                
+                    let doc = new jsPDF('p', 'pt');
+                    // nombre de la empresa
+                    doc.setFontSize(14);
+                    doc.setFont("arial", "bold");
+                    doc.text(250, 40, ''+result[0][0].empresa['nom_empresa']+'');
+                    doc.setFontSize(11);
+        
+                    // Direccion    
+                    doc.setFont("arial", "bold");
+                    doc.text(40, 65, 'Direccion: ');
+                    doc.setFont("arial", "normal");
+                    doc.text(140, 65, ''+result[0][0].empresa['direccion']+'');
+        
+                    // numero de inventario
+                    doc.setFont("arial", "bold");
+                    doc.text(40, 80, 'Inventario No. ');
+                    doc.setFont("arial", "normal");
+                    doc.text(140, 80, ''+result[0][0].num_inventario+'');
+        
+                    //Fecha
+                    doc.setFont("arial", "bold");
+                    doc.text(40, 95, 'Fecha Creación: ');
+                    doc.setFont("arial", "normal");
+                    doc.text(140, 95, ''+Fcreacion+'');
+                   
+                    //Fecha
+                    doc.setFont("arial", "bold");
+                    doc.text(300, 95, 'Fecha Emisión: ');
+                    doc.setFont("arial", "normal");
+                    doc.text(390, 95, ''+fecha_actual+'');
+        
+                     //cantidad producto
+                     doc.setFont("arial", "bold");
+                     doc.text(40, 110, 'Cant. Productos: ');
+                     doc.setFont("arial", "normal");
+                     doc.text(140, 110, ''+parseInt(result[0][0].total_cantidad_productos)+'');
+         
+                     //Total inventario Q.
+                     doc.setFont("arial", "bold");
+                     doc.text(300, 110, 'Total:  Q.');
+                     doc.setFont("arial", "normal");
+                     doc.text(350, 110, ''+result[0][0].total_cantidad_inventario+'');
+        
+                    // Agregamos los datos a la tabla
+                    doc.autoTable(columns, rows, {margin: {top: 120}});
+                    doc.save('Inventario.pdf')
+                });
 
-            // Direccion    
-            doc.setFont("arial", "bold");
-            doc.text(40, 65, 'Direccion: ');
-            doc.setFont("arial", "normal");
-            doc.text(140, 65, ''+result[0][0].empresa['direccion']+'');
-
-            // numero de inventario
-            doc.setFont("arial", "bold");
-            doc.text(40, 80, 'Inventario No. ');
-            doc.setFont("arial", "normal");
-            doc.text(140, 80, ''+result[0][0].num_inventario+'');
-
-            //Fecha
-            doc.setFont("arial", "bold");
-            doc.text(40, 95, 'Fecha Creación: ');
-            doc.setFont("arial", "normal");
-            doc.text(140, 95, ''+Fcreacion+'');
-           
-            //Fecha
-            doc.setFont("arial", "bold");
-            doc.text(300, 95, 'Fecha Emisión: ');
-            doc.setFont("arial", "normal");
-            doc.text(390, 95, ''+fecha_actual+'');
-
-             //cantidad producto
-             doc.setFont("arial", "bold");
-             doc.text(40, 110, 'Cant. Productos: ');
-             doc.setFont("arial", "normal");
-             doc.text(140, 110, ''+parseInt(result[0][0].total_cantidad_productos)+'');
- 
-             //Total inventario Q.
-             doc.setFont("arial", "bold");
-             doc.text(300, 110, 'Total:  Q.');
-             doc.setFont("arial", "normal");
-             doc.text(350, 110, ''+result[0][0].total_cantidad_inventario+'');
-
-            // Agregamos los datos a la tabla
-            doc.autoTable(columns, rows, {margin: {top: 120}});
-            doc.save('Inventario.pdf')
+                }
+            }
         });
     });
 
@@ -265,74 +287,95 @@ $('document').ready(function(){
     
     $('#TablaAll').on('click', '.ImprimirPDF', function(){
         let id = $(this).attr("name");
-        $.get(url+"/PDF/"+id, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+
+        bootbox.confirm({
+            size: 'small',
+            message: "Desea Imprimir el Documento",
+            buttons: {
+                confirm: {
+                    label: 'Aceptar',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Cancelar',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
             
-            let rows = [];
-
-            let columns = ['Producto','Mes','Año','Cantidad','Subtotal'];
-
-            $.each(result[1], function(i, item) {
-            rows[i] = [item.producto, meses[item.mes-1], item.anio, parseInt(item.cant), item.sub];
-            });
-                   
-            // fecha actual
-            var hoy = new Date();
-            dia = hoy.getDate(); 
-            mes = hoy.getMonth();
-            anio= hoy.getFullYear();
-            fecha_actual = String(dia+"/"+mes+"/"+anio);
-            let F = result[0][0].fecha;
-            let FC = F.split("-");
-
-            let Fcreacion = String(FC[2]+"/"+FC[1]+"/"+FC[0]);
+              if(result == true){
+                $.get(url+"/PDF/"+id, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+            
+                    let rows = [];
         
-            let doc = new jsPDF('p', 'pt');
-            // nombre de la empresa
-            doc.setFontSize(14);
-            doc.setFont("arial", "bold");
-            doc.text(250, 40, ''+result[0][0].empresa['nom_empresa']+'');
-            doc.setFontSize(11);
+                    let columns = ['Producto','Mes','Año','Cantidad','Subtotal'];
+        
+                    $.each(result[1], function(i, item) {
+                    rows[i] = [item.producto, meses[item.mes-1], item.anio, parseInt(item.cant), item.sub];
+                    });
+                           
+                    // fecha actual
+                    var hoy = new Date();
+                    dia = hoy.getDate(); 
+                    mes = hoy.getMonth();
+                    anio= hoy.getFullYear();
+                    fecha_actual = String(dia+"/"+mes+"/"+anio);
+                    let F = result[0][0].fecha;
+                    let FC = F.split("-");
+        
+                    let Fcreacion = String(FC[2]+"/"+FC[1]+"/"+FC[0]);
+                
+                    let doc = new jsPDF('p', 'pt');
+                    // nombre de la empresa
+                    doc.setFontSize(14);
+                    doc.setFont("arial", "bold");
+                    doc.text(250, 40, ''+result[0][0].empresa['nom_empresa']+'');
+                    doc.setFontSize(11);
+        
+                    // Direccion    
+                    doc.setFont("arial", "bold");
+                    doc.text(40, 65, 'Direccion: ');
+                    doc.setFont("arial", "normal");
+                    doc.text(140, 65, ''+result[0][0].empresa['direccion']+'');
+        
+                    // numero de inventario
+                    doc.setFont("arial", "bold");
+                    doc.text(40, 80, 'Inventario No. ');
+                    doc.setFont("arial", "normal");
+                    doc.text(140, 80, ''+result[0][0].num_inventario+'');
+        
+                    //Fecha
+                    doc.setFont("arial", "bold");
+                    doc.text(40, 95, 'Fecha Creación: ');
+                    doc.setFont("arial", "normal");
+                    doc.text(140, 95, ''+Fcreacion+'');
+                   
+                    //Fecha
+                    doc.setFont("arial", "bold");
+                    doc.text(300, 95, 'Fecha Emisión: ');
+                    doc.setFont("arial", "normal");
+                    doc.text(390, 95, ''+fecha_actual+'');
+        
+                    //cantidad producto
+                    doc.setFont("arial", "bold");
+                    doc.text(40, 110, 'Cant. Productos: ');
+                    doc.setFont("arial", "normal");
+                    doc.text(140, 110, ''+parseInt(result[0][0].total_cantidad_productos)+'');
+        
+                    //Total inventario Q.
+                    doc.setFont("arial", "bold");
+                    doc.text(300, 110, 'Total:  Q.');
+                    doc.setFont("arial", "normal");
+                    doc.text(350, 110, ''+result[0][0].total_cantidad_inventario+'');
+        
+                    doc.autoTable(columns, rows, {margin: {top: 120}});
+                    doc.autoPrint();
+                    doc.save('Inventario.pdf')
+                });
 
-            // Direccion    
-            doc.setFont("arial", "bold");
-            doc.text(40, 65, 'Direccion: ');
-            doc.setFont("arial", "normal");
-            doc.text(140, 65, ''+result[0][0].empresa['direccion']+'');
-
-            // numero de inventario
-            doc.setFont("arial", "bold");
-            doc.text(40, 80, 'Inventario No. ');
-            doc.setFont("arial", "normal");
-            doc.text(140, 80, ''+result[0][0].num_inventario+'');
-
-            //Fecha
-            doc.setFont("arial", "bold");
-            doc.text(40, 95, 'Fecha Creación: ');
-            doc.setFont("arial", "normal");
-            doc.text(140, 95, ''+Fcreacion+'');
-           
-            //Fecha
-            doc.setFont("arial", "bold");
-            doc.text(300, 95, 'Fecha Emisión: ');
-            doc.setFont("arial", "normal");
-            doc.text(390, 95, ''+fecha_actual+'');
-
-            //cantidad producto
-            doc.setFont("arial", "bold");
-            doc.text(40, 110, 'Cant. Productos: ');
-            doc.setFont("arial", "normal");
-            doc.text(140, 110, ''+parseInt(result[0][0].total_cantidad_productos)+'');
-
-            //Total inventario Q.
-            doc.setFont("arial", "bold");
-            doc.text(300, 110, 'Total:  Q.');
-            doc.setFont("arial", "normal");
-            doc.text(350, 110, ''+result[0][0].total_cantidad_inventario+'');
-
-            doc.autoTable(columns, rows, {margin: {top: 120}});
-            doc.autoPrint();
-            doc.save('Inventario.pdf')
-        });
+              }
+            }
+        });        
     });
     
 
