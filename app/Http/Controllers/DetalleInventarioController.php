@@ -166,4 +166,5 @@ class DetalleInventarioController extends Controller
     {
         //
     }
-}
+
+    }

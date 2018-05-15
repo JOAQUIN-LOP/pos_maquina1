@@ -20,27 +20,12 @@
         <input type="text" value="{{URL::to('home/empresa')}}" id="ruta-Emp" style="display:none" >
         <input type="text" value="{{URL::to('home/inventario/contar')}}" id="rutaInv" style="display:none" >
 
-        
-  <div class="box-body">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="col-sm-2">
-          <div class="form-group">
-            <div class="input-group">
-              <span class="input-group-addon">Busqueda</span>
-              <select id="SelectAnio" class="form-control select2">
-              </select>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+    
   {{-- inicio datatable  --}}
   <div class="box-body">
     <div class="row">
       <div class="col-sm-12">
-        <table id="All" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+        <table id="TablaAll" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
           <thead>
             <th>No.</th>
             <th>Empresa</th>

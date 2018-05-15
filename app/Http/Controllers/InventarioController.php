@@ -18,7 +18,8 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        $inventario = Inventario::all();
+
+        $inventario = Inventario::with('empresa')->get();
         return response()->json(
             $inventario->toArray()
         );
@@ -155,10 +156,6 @@ class InventarioController extends Controller
         return response()->json(
             $inventario->toArray()
         );
-        return response()->json(['notification' => 'success', 'producto' => $inventario]); 
-        // return response()->json(
-        //     $inventario->toArray()
-        // );
     }
 
     public function FinalizarInventario($id)
@@ -190,4 +187,21 @@ class InventarioController extends Controller
     public function verInventario(){
         return view('Inventarios');   
     }
+
+    public function PDF($id){
+
+        $inventario = Inventario::with('empresa')->where('idInventario',$id)->get();
+
+        $detalle = DB::table('detalle_inventario As Dti')
+        ->join('producto As Prod', 'Dti.idProducto', '=', 'Prod.id')
+        ->select('Prod.nomProducto as producto','Dti.mes as mes', 'Dti.anio as anio',  'Dti.cant_total  as cant',  'Dti.subtotal_inventario  as sub','Dti.id_detalle_inventario')
+        ->where('Dti.idInventario', $id)
+        ->get();
+
+        return response()->json([
+            $inventario->toArray(), $detalle->toArray()
+        ]
+        );
+    }
+
 }
