@@ -44,6 +44,83 @@
   </div>
 </div>
 
+{{--  modal ver inventario  --}}
+
+        <div class="modal modal-primary fade" id="modal-primary">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Inventario</h4>
+              </div>
+              <div class="modal-body">
+                
+              <div class="row">
+                  <div class="col-sm-12">
+                      <div class="form-group">
+                            <label class="control-label letra-label" for="EditNombre"> Nombre<span class="kv-reqd"> </span></label>
+                          <input type="text" id="EditNombre" name="EditNombre" class="form-control " readonly>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                            <label class="control-label letra-label" for="EditMes"> Mes<span class="kv-reqd"> </span></label>
+                          <input type="text" id="EditMes" name="EditMes" class="form-control " readonly>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                            <label class="control-label letra-label" for="EditAnio"> Año<span class="kv-reqd"> </span></label>
+                          <input type="text" id="EditAnio" name="EditAnio" class="form-control " readonly>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group ">
+                            <label class="control-label letra-label" for="CantidadNueva"> Cantidad<span class="kv-reqd"> </span></label>
+                          <input type="text" id="CantidadNueva" name="CantidadNueva" class="form-control " readonly>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group ">
+                            <label class="control-label letra-label" for="EditTotal"> Total<span class="kv-reqd"> </span></label>
+                          <input type="text" id="EditTotal" name="EditTotal" class="form-control " readonly>
+                      </div>
+                  </div>
+                   <div class="col-sm-12">
+                    <hr>
+                   </div>
+                  <div class="col-sm-12">
+                    <form id="formulario2">
+                      <table id="AllDetalle" class="table table-striped dt-responsive nowrap" style="width:100%">
+                      <thead>
+                        <th>No.</th>
+                        <th>Producto</th>
+                        <th>Precio Unitario</th>
+                        <th>Existencia</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                      </table>
+                    </form>
+                  </div>
+
+              </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+
 @stop
 @section('js')
   <script type="text/javascript" src="{{ asset('js/inventario.js') }}"></script>  

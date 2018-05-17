@@ -10,6 +10,12 @@ $('document').ready(function(){
         
     } );
 
+
+    var AllDetalle = $("#AllDetalle").DataTable({
+        responsive: true
+
+    });
+
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     let NumInventario = [1,2,3,4,5,6,7,8,9,10,11,12];
     
@@ -181,8 +187,11 @@ $('document').ready(function(){
                 parseInt(value['total_cantidad_productos']),
                 value['total_cantidad_inventario'],
                 estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
-                "<div class='btn-group'><a class='btn btn-danger btn-xs DescargarPDF' data-toggle='tooltip' data-placement='top' title='Descar Inventario!' name='"+value['num_inventario']+"'><i class='fa fa-file-pdf-o'></i></a>"+ 
-                "<a target='_blank' class='btn btn-info btn-xs ImprimirPDF' name='"+value['num_inventario']+"' data-toggle='tooltip' title='Imprimir Inventario!' ><i class='fa fa-print' ></i></a></div>"
+                "<div class='btn-group'>"+
+                "<a class='btn btn-primary btn-xs VerInventario' data-toggle='tooltip' data-placement='top' title='Ver Inventario!' name='"+value['num_inventario']+"'><i class='fa fa-search'></i></a>"+ 
+                "<a class='btn btn-danger btn-xs DescargarPDF' data-toggle='tooltip' data-placement='top' title='Descar Inventario!' name='"+value['num_inventario']+"'><i class='fa fa-file-pdf-o'></i></a>"+ 
+                "<a class='btn btn-info btn-xs ImprimirPDF' name='"+value['num_inventario']+"' data-toggle='tooltip' title='Imprimir Inventario!' ><i class='fa fa-print' ></i></a>"+
+                "</div>"
             ]).draw(false);
        
         });
@@ -379,4 +388,36 @@ $('document').ready(function(){
     });
     
 
+    
+    $('#TablaAll').on('click', '.VerInventario', function(){
+        let id = $(this).attr("name");
+        $("#modal-primary").modal("toggle");
+        $.get(url+"/PDF/"+id, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+            console.log(result[0][0]);
+            // encabezado
+
+            $("#EditNombre").val(result[0][0].empresa.nom_empresa);
+            $("#EditAnio").val(result[0][0].anio);
+            $("#CantidadNueva").val(parseInt(result[0][0].total_cantidad_productos));
+            $("#EditTotal").val(result[0][0].total_cantidad_inventario);
+            $("#EditMes").val(meses[result[0][0].mes - 1]);
+                       
+
+            // detalle
+            $(result[1]).each(function (key, value) {
+                
+                AllDetalle.row.add([
+                    key+1,
+                    value['producto'],
+                    meses[value['mes']-1],
+                    value['anio'],
+                    parseInt(value['cant']),
+                    value['sub']
+                ]).draw(false);
+            });
+            
+            
+        });
+        
+    });
 });
