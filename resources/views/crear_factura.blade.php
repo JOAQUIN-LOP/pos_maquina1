@@ -122,24 +122,24 @@
              
             <div class="col-sm-2">
               <div class="form-group">
+                <label for="">Cantidad</label>
+                <input type="text" class="form-control">                
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
                 <label for="">Producto</label>
                 <select name="nom_producto" id="nom_producto" class="form-control">
                   
-                </select>
+                </select>                              
               </div>
             </div>
             <div class="col-sm-2">
               <div class="form-group">
-                <label for="">Precio</label>
+                 <label for="">Precio</label>
                 <select name="precio_prod" id="precio_prod" class="form-control">
                   
-                </select>                  
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <label for="">Cantidad</label>
-                <input type="text" class="form-control">
+                </select>  
               </div>
             </div>
              <div class="col-sm-2">
@@ -244,7 +244,7 @@
         <div class="col-sm-12">
           <div class="col-sm-2">
             <div class="form-group">
-              <label for="total_cantidad">Total Cantidad</label>                        
+              <label for="total_cantidad">Total Productos</label>                        
               <input type="text" class="form-control" name="total_cantidad" id="total_cantidad" readonly="true">
             </div>
           </div>
