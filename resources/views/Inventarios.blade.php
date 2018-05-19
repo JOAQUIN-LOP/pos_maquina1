@@ -96,8 +96,8 @@
                       <thead>
                         <th>No.</th>
                         <th>Producto</th>
-                        <th>Precio Unitario</th>
-                        <th>Existencia</th>
+                        <th>mes</th>
+                        <th>anio</th>
                         <th>Cantidad</th>
                         <th>Subtotal</th>
                       </thead>
