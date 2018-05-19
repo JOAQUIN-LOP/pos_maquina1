@@ -106,7 +106,6 @@ class DetalleInventarioController extends Controller
         ->select('Prod.nomProducto as producto', 'Dti.idProducto as idPro','Dti.mes as mes', 'Dti.anio as anio',  DB::raw('sum(Dti.cant_total)  as cant'),  DB::raw('sum(Dti.subtotal_inventario)  as sub'))
         ->where('Dti.idInventario', $id)
         ->groupBy('Prod.nomProducto')
-        ->groupBy('Dti.idInventario')
         ->get();
         return response()->json(
             $data->toArray()
