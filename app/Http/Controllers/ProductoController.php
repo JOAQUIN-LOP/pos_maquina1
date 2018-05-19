@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use Response;
 use Validator;
 use App\Producto;
@@ -86,7 +87,27 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $producto = Producto::where('estado',$id)->get();
+        $producto = DB::table('producto as Prod')
+        ->where('Prod.estado', 1)
+        ->get();
+
+        return response()->json(
+            $producto->toArray()
+        );
+    }
+
+    public function viewList(){
+        return view('ListArticulos');
+    }
+
+    public function list($id)
+    {
+        $producto = DB::table('producto as Prod')
+        ->join('detalle_producto as DP','Prod.id','=','DP.idProducto')
+        ->select('Prod.nomProducto as nomProducto', 'Prod.descripcion_producto as descripcion_producto', 'Prod.estado as estado', 'DP.cantidad_unidades as cantidad_unidades', 'DP.precio_total_compras as precio_total_compras')
+        ->where('Prod.estado', 1)
+        ->get();
+
         return response()->json(
             $producto->toArray()
         );

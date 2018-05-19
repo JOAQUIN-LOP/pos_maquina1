@@ -34,25 +34,29 @@ $(document).ready(function () {
       {
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
         // agregamos botones para exportar la informacion 
-        buttons: [
+        buttons: [ // agregamos botones para exportar la informacion 
           {
-            extend: 'pdfHtml5',
-            text: ' PDF',
-            title: 'Detalle Articulos',
-            exportOptions: {
-              columns: [ 0, 1, 2, 3 ]
-            },
-            customize: function (doc) {
-            
-              $(doc.document.body).find('table')
-                  .addClass('compact')
-                  .css('font-size', '10px')
-                  .attr('align', 'center')
-                  .css('width', '870px');
-              
-            }       
-            
-          }
+            text: 'PDF',
+            action: function ( e, dt, button, config ) {
+                var data = dt.buttons.exportData();
+
+                var rows = [];
+
+                var columns = [ data.header[0], data.header[1], data.header[2] ];
+
+
+                $.each(data.body, function(i, item) {
+                  rows[i] = [ data.body[i][0], data.body[i][1], data.body[i][2] ];
+                });
+
+               
+                // Only pt supported (not mm or in)
+                var doc = new jsPDF('p', 'pt', 'letter');
+                doc.text(210, 50, 'Listado de Productos');
+                doc.autoTable(columns, rows, {margin: {top: 60}});
+                doc.save('table.pdf')
+            }
+          },
         ],
         "ajax":
 				{
@@ -83,7 +87,6 @@ $(document).ready(function () {
 
 // carga los productos con precio 
   function ProductosPrecio(id) {
-   console.log(url + "/" + id + "/" + anioInventario+ "/" + mesInventario);
     url =  $('#pathDetalleProd').val();   
       tabla2 = $('#detallePrecioProducto').DataTable(
       {
@@ -223,9 +226,7 @@ $(document).ready(function () {
 
     $('#detallePrecioProducto').on('click', 'tr button.EliminarProd', function(){
       let cod = $(this).attr('name');
-      console.log(url+"/delete/"+cod);
-
-      bootbox.confirm({
+        bootbox.confirm({
         size: 'small',
         message: "Esta seguro de eliminar el registro",
         buttons: {
@@ -283,7 +284,72 @@ $(document).ready(function () {
       });
     });
 
+    // listado de productos   
+
+     // cargamos los productos activos al datatable
+  index2();
+  var TablaList;
+  function index2() {
+    url = $('#pathProd').val();
     
+    TablaList = $('#TablaList').DataTable(
+      {
+        destroy:true,
+        dom: 'Bfrtip',//Definimos los elementos del control de tabla
+        // agregamos botones para exportar la informacion 
+        buttons: [ // agregamos botones para exportar la informacion 
+          {
+            text: 'PDF',
+            action: function ( e, dt, button, config ) {
+                var data = dt.buttons.exportData();
+
+                var rows = [];
+
+                var columns = [ data.header[0], data.header[1], data.header[2], data.header[3], data.header[4] ];
+
+
+                $.each(data.body, function(i, item) {
+                  rows[i] = [ data.body[i][0], data.body[i][1], data.body[i][2], data.body[i][3], data.body[i][4] ];
+                });
+
+               
+                // Only pt supported (not mm or in)
+                var doc = new jsPDF('p', 'pt', 'letter');
+                doc.text(210, 50, 'Listado de Productos');
+                doc.autoTable(columns, rows, {margin: {top: 60}});
+                doc.save('table.pdf')
+            }
+          },
+        ],
+        "ajax":
+				{
+					url: url + "/list/1",
+          type : "get",
+          success: function(r){
+            TablaList.clear();
+            // agregamos los datos al datatable 
+            $(r).each(function (key, value) {
+              TablaList.row.add([
+                key+1,
+                parseInt(value['cantidad_unidades']),
+                value['nomProducto'],
+                value['precio_total_compras'],
+                value['descripcion_producto'],
+                estado = (value['estado'] == 1) ? "<span class='label label-success'>Activo</span>" : "<span class='label label-danger'>Inactivo</span>"
+              ]).draw(false);
+              $( ".odd" ).addClass("fila");
+              $( ".even" ).addClass("fila");
+            })
+      
+            
+          },
+					error: function(e){
+						console.log(e.responseText);	
+					}
+				},
+      });
+  }
+
 
 // fin document ready
 });

@@ -142,6 +142,11 @@ return [
                     'url'           => '/home/producto/edit',
                     'icon'          => 'cubes',            
                 ],
+                [
+                    'text'          => 'Listado Productos',
+                    'url'           => '/home/producto/ver',
+                    'icon'          => 'list-ul',            
+                ],
             ],
         ],
         [
