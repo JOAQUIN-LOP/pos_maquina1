@@ -176,7 +176,21 @@ class FacturaController extends Controller
         //
     }
 
-    public function cargaFactura(){
+
+    /*POST*/
+    public function cargaFactura(Request $request, $id){
+
+        $factura =   DB::table('factura as fact')
+        ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
+            ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
+                ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal', 'inv.mes', 'inv.anio')
+                    ->where('suc.estado',1)
+                    ->where('inv.estado',1)
+                        ->groupBy('suc.nom_sucursal')
+                            ->orderBy('suc.nom_sucursal')
+                                ->get();       
+
+
         return view('sin_contenido');
     }
 }
