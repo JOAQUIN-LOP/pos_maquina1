@@ -401,7 +401,8 @@ $('document').ready(function(){
             $("#CantidadNueva").val(parseInt(result[0][0].total_cantidad_productos));
             $("#EditTotal").val(result[0][0].total_cantidad_inventario);
             $("#EditMes").val(meses[result[0][0].mes - 1]);
-                       
+            AllDetalle.clear();
+            AllDetalle.rows().remove().draw();
 
             // detalle
             $(result[1]).each(function (key, value) {
