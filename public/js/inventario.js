@@ -188,9 +188,9 @@ $('document').ready(function(){
                 value['total_cantidad_inventario'],
                 estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
                 "<div class='btn-group'>"+
-                "<a class='btn btn-primary btn-xs VerInventario' data-toggle='tooltip' data-placement='top' title='Ver Inventario!' name='"+value['num_inventario']+"'><i class='fa fa-search'></i></a>"+ 
-                "<a class='btn btn-danger btn-xs DescargarPDF' data-toggle='tooltip' data-placement='top' title='Descar Inventario!' name='"+value['num_inventario']+"'><i class='fa fa-file-pdf-o'></i></a>"+ 
-                "<a class='btn btn-info btn-xs ImprimirPDF' name='"+value['num_inventario']+"' data-toggle='tooltip' title='Imprimir Inventario!' ><i class='fa fa-print' ></i></a>"+
+                "<a class='btn btn-primary btn-xs VerInventario' data-toggle='tooltip' data-placement='top' title='Ver Inventario!' name='"+value['idInventario']+"'><i class='fa fa-search'></i></a>"+ 
+                "<a class='btn btn-danger btn-xs DescargarPDF' data-toggle='tooltip' data-placement='top' title='Descar Inventario!' name='"+value['idInventario']+"'><i class='fa fa-file-pdf-o'></i></a>"+ 
+                "<a class='btn btn-info btn-xs ImprimirPDF' name='"+value['idInventario']+"' data-toggle='tooltip' title='Imprimir Inventario!' ><i class='fa fa-print' ></i></a>"+
                 "</div>"
             ]).draw(false);
        
@@ -392,8 +392,9 @@ $('document').ready(function(){
     $('#TablaAll').on('click', '.VerInventario', function(){
         let id = $(this).attr("name");
         $("#modal-primary").modal("toggle");
+        console.log(id);
         $.get(url+"/PDF/"+id, headers = { 'X-CSRF-TOKEN': token }, function (result) {
-            console.log(result[0][0]);
+            console.log(result);
             // encabezado
 
             $("#EditNombre").val(result[0][0].empresa.nom_empresa);
