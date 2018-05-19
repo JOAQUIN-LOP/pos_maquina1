@@ -43,6 +43,7 @@ $('document').ready(function(){
     });
 
     function cargarProd(id){
+        console.log("funciona", anio,id, mesInvent)
         AllProd.rows().remove().draw();
         $.get(url+'/home/detalle/precio/'+id+"/"+anio+"/"+mesInvent, headers = { 'X-CSRF-TOKEN': token }, function (result) {
             

@@ -191,11 +191,12 @@ class InventarioController extends Controller
     public function PDF($id){
 
         $inventario = Inventario::with('empresa')->where('idInventario',$id)->get();
-
+        
         $detalle = DB::table('detalle_inventario As Dti')
         ->join('producto As Prod', 'Dti.idProducto', '=', 'Prod.id')
         ->select('Prod.nomProducto as producto','Dti.mes as mes', 'Dti.anio as anio',  DB::raw('sum(Dti.cant_total)  as cant'),  DB::raw('sum(Dti.subtotal_inventario)  as sub'),'Dti.id_detalle_inventario')
         ->where('Dti.idInventario', $id)
+        ->where('mes',$inventario[0]->mes)
         ->groupBy('Prod.nomProducto')
         ->groupBy('Dti.idInventario')
         ->get();
