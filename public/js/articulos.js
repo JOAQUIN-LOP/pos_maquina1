@@ -8,7 +8,6 @@ var route = $("#route").val();
   index();
   var tabla;
   var tabla2;
-
   function index() {
     url =  $('#CrearProducto').attr('action');
     
@@ -32,7 +31,7 @@ var route = $("#route").val();
 
                
                 // Only pt supported (not mm or in)
-                var doc = new jsPDF('p', 'pt');
+                var doc = new jsPDF('p', 'pt', 'letter');
                 doc.text(210, 50, 'Listado de Productos');
                 doc.autoTable(columns, rows, {margin: {top: 60}});
                 doc.save('table.pdf')
@@ -47,6 +46,7 @@ var route = $("#route").val();
             tabla.clear();
             // agregamos los datos al datatable 
             $(r).each(function (key, value) {
+              
               tabla.row.add([
                 value['id'],
                 value['nomProducto'],
@@ -165,7 +165,7 @@ if(route == "home/producto/edit"){
 
                
                 // Only pt supported (not mm or in)
-                var doc = new jsPDF('p', 'pt');
+                var doc = new jsPDF('p', 'pt', 'letter');
                 doc.text(210, 50, 'Listado de Productos');
                 doc.autoTable(columns, rows, {margin: {top: 60}});
                 doc.save('table.pdf')
@@ -390,7 +390,5 @@ if(route == "home/producto/edit"){
             }
           });
         });
-}
-
-
+      }
 });

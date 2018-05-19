@@ -12,6 +12,8 @@ $('document').ready(function(){
 
 
     var AllDetalle = $("#AllDetalle").DataTable({
+        "bLengthChange": false,
+        "searching": false,
         responsive: true
 
     });
@@ -231,7 +233,7 @@ $('document').ready(function(){
                     // fecha actual
                     var hoy = new Date();
                     dia = hoy.getDate(); 
-                    mes = hoy.getMonth();
+                    mes = hoy.getMonth()+1;
                     anio= hoy.getFullYear();
                     fecha_actual = String(dia+"/"+mes+"/"+anio);
                     let F = result[0][0].fecha;
@@ -239,7 +241,7 @@ $('document').ready(function(){
         
                     let Fcreacion = String(FC[2]+"/"+FC[1]+"/"+FC[0]);
                 
-                    let doc = new jsPDF('p', 'pt');
+                    var doc = new jsPDF('p', 'pt', 'letter');
                     // nombre de la empresa
                     doc.setFontSize(14);
                     doc.setFont("arial", "bold");
@@ -326,7 +328,7 @@ $('document').ready(function(){
                     // fecha actual
                     var hoy = new Date();
                     dia = hoy.getDate(); 
-                    mes = hoy.getMonth();
+                    mes = hoy.getMonth()+1;
                     anio= hoy.getFullYear();
                     fecha_actual = String(dia+"/"+mes+"/"+anio);
                     let F = result[0][0].fecha;
@@ -334,7 +336,7 @@ $('document').ready(function(){
         
                     let Fcreacion = String(FC[2]+"/"+FC[1]+"/"+FC[0]);
                 
-                    let doc = new jsPDF('p', 'pt');
+                    var doc = new jsPDF('p', 'pt', 'letter');
                     // nombre de la empresa
                     doc.setFontSize(14);
                     doc.setFont("arial", "bold");
@@ -387,7 +389,6 @@ $('document').ready(function(){
         });        
     });
     
-
     
     $('#TablaAll').on('click', '.VerInventario', function(){
         let id = $(this).attr("name");
