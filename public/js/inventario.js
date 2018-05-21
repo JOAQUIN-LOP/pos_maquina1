@@ -33,7 +33,7 @@ $('document').ready(function(){
 
     $('#SelectAnio').val(anio).trigger('change.select2');
 
-    $("#idInventario").val(NumInventario[mes]);
+
 
     index(anio);
 
@@ -44,7 +44,7 @@ $('document').ready(function(){
     var urlEmp = $('#ruta-Emp').val();
     
 
-    $.get(urlEmp, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+    $.get(urlEmp, headers = { 'X-CSRF-TOKEN': token }, function (result) {        
         $.each(result, function(j, tem) {
             $('#Empresa').append( "<option value='"+result[0].idEmpresa+"' selected>"+result[0].nom_empresa+"</option>" );
         });
@@ -67,14 +67,16 @@ $('document').ready(function(){
       {
         destroy: true,
         responsive: true,
-        "order": [[ 6, "asc" ],[ 2, "asc" ]],
         "ajax":
 				{
                 url: url+'/all/'+anio,
                 type : "get",
                 success: function(r){
                     $(r).each(function (key, value) {
-                        
+                            if(value['estado']==1){
+                                $("#idInventario").val(value['idInventario']);
+                            }
+                            
                         tabla.row.add([
                             value['idInventario'],
                             value.empresa['nom_empresa'],
@@ -393,11 +395,8 @@ $('document').ready(function(){
     $('#TablaAll').on('click', '.VerInventario', function(){
         let id = $(this).attr("name");
         $("#modal-primary").modal("toggle");
-        console.log(id);
         $.get(url+"/PDF/"+id, headers = { 'X-CSRF-TOKEN': token }, function (result) {
-            console.log(result);
             // encabezado
-
             $("#EditNombre").val(result[0][0].empresa.nom_empresa);
             $("#EditAnio").val(result[0][0].anio);
             $("#CantidadNueva").val(parseInt(result[0][0].total_cantidad_productos));

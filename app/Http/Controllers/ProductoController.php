@@ -17,7 +17,10 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $producto = Producto::all();
+        // $producto = Producto::orderBy('nomProducto', 'asc')->get();
+        $producto = DB::table('producto')
+        ->orderByRaw('estado DESC, nomProducto ASC')
+        ->get();
         return response()->json(
             $producto->toArray()
         );
@@ -87,8 +90,9 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $producto = DB::table('producto as Prod')
-        ->where('Prod.estado', 1)
+        $producto = DB::table('producto')
+        ->where('estado', 1)
+        ->orderBy('nomProducto', 'ASC')
         ->get();
 
         return response()->json(
@@ -104,8 +108,10 @@ class ProductoController extends Controller
     {
         $producto = DB::table('producto as Prod')
         ->join('detalle_producto as DP','Prod.id','=','DP.idProducto')
-        ->select('Prod.nomProducto as nomProducto', 'Prod.descripcion_producto as descripcion_producto', 'Prod.estado as estado', 'DP.cantidad_unidades as cantidad_unidades', 'DP.precio_total_compras as precio_total_compras')
+        ->select('Prod.nomProducto as nomProducto' , 'Prod.descripcion_producto as descripcion_producto', 'Prod.estado as estado', 'DP.cantidad_unidades as cantidad_unidades', 'DP.precio_total_compras as precio_total_compras')
+        ->selectRaw("DATE_FORMAT(DP.fecha,'%d-%m-%Y') as fecha")
         ->where('Prod.estado', 1)
+        ->orderBy('Prod.nomProducto', 'asc')
         ->get();
 
         return response()->json(

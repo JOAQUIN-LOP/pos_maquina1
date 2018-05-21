@@ -31,6 +31,7 @@
                 <th>Producto</th>
                 <th>Precio Costo</th>
                 <th>Descripcion</th>
+                <th>Fecha</th>
                 <th>Estado</th>
               </tr>
             </thead>
