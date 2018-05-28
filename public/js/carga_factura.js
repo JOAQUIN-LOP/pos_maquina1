@@ -1,24 +1,35 @@
 $(document).ready(function(){
 
-	$("#btn_iniciar").click(function(){
+	var id_producto;
 
-		if($("#no_existe").length){
-			$("#no_existe").remove();
+	$(".seleccionar").select2({
+		language: {
+		    noResults: function() {
+		      return "No hay resultado";        
+	    	}
+	    }
+	});
+
+	/*Valida que se haya seleccionado un producto*/
+	$("#nom_producto").change(function(){
+		
+		if($(this).val()==0){
+			return false;
 		}
 
-		$.ajax({
-	        url:"./carga_factura/",
-	        
-	        type:"GET",                       
-	    })
-	    .done(function(response){
-			$(".box").append(response);
-			console.log(response);
-	    })
-	    .fail(function(response){
-	    	$(".box").append(response.responseText);
-	    	console.log(response);
-	    });
+		id_producto = $(this).val();
+		console.log(id_producto);
 	});
+
+
+	$("#btn_agregar").click(function(){
+
+		if ($("#nom_producto").val()==0 || $("#precio_prod").val()=="a") {
+			return false;
+		}
+		
+
+	});
+		
 
 });

@@ -94,8 +94,7 @@ class FacturaController extends Controller
         ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
             ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
                 ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal', 'inv.mes', 'inv.anio')
-                    ->where('suc.estado',1)
-                    ->where('inv.estado',1)
+                    ->where('suc.estado',1)                    
                         ->groupBy('suc.nom_sucursal')
                             ->orderBy('suc.nom_sucursal')
                                 ->get();
@@ -180,17 +179,26 @@ class FacturaController extends Controller
     /*POST*/
     public function cargaFactura(Request $request, $id){
 
-        $factura =   DB::table('factura as fact')
-        ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
-            ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
-                ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal', 'inv.mes', 'inv.anio')
-                    ->where('suc.estado',1)
-                    ->where('inv.estado',1)
-                        ->groupBy('suc.nom_sucursal')
-                            ->orderBy('suc.nom_sucursal')
-                                ->get();       
 
+        if ($request -> ajax()) {            
+            $num_factura =   DB::table('factura as fact')
+                ->join('sucursal as suc', 'suc.idSucursal','=','fact.idSucursal')            
+                    ->select(DB::raw("COUNT(fact.idFactura) as numero"))
+                        ->where('suc.idSucursal',$id)                        
+                            ->get();
 
-        return view('sin_contenido');
+            $productos = DB::table('detalle_producto as det')
+                ->join('producto as prod', 'det.idProducto','=','prod.id')            
+                    ->select("det.idProducto", "prod.nomProducto")
+                        ->groupBy('prod.nomProducto')
+                            ->orderBy('prod.nomProducto')
+                            ->get();
+
+       
+            $numero = $num_factura[0]->numero + 1;
+
+            return view('nueva_factura', compact('numero', 'productos'));
+        }
+        
     }
 }

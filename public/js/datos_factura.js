@@ -20,7 +20,7 @@ $(document).ready(function(){
       
     var data = $("#ver_facturas").serialize();
 
-    console.log(data);
+    //console.log(data);
 
 
     $.ajax({
@@ -32,16 +32,13 @@ $(document).ready(function(){
     })
     .done(function(response){
       $(".box").append(response);
-      console.log(response);
+      //console.log(response);
 
     })
     .fail(function(response){
       $(".box").append(response.responseText);
-      console.log(response);
+      //console.log(response);
     });
   });     
-
-
-
 
 });
