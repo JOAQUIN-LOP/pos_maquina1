@@ -51,7 +51,7 @@
                 
                   <label for="nom_sucursal">Sucursal</label>
                   <select type="text" class="form-control" name="nom_sucursal" id="nom_sucursal" required>
-                    <option value="">Seleccione Sucursal</option>
+                    <option value="0">Seleccione Sucursal</option>
                     @foreach($facturas as $sucursal)
                       <option value="{{$sucursal->idSucursal}}">{{$sucursal->nom_sucursal}}</option>
                     @endforeach
@@ -112,8 +112,7 @@
 
 @stop
 @section('js')
-  <script type="text/javascript" src="{{ asset('js/crear_factura.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/carga_factura.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/crear_factura.js') }}"></script>  
   @stack('js')
   @yield('js')
 @stop
