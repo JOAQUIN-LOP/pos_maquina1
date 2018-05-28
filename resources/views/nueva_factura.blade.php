@@ -143,6 +143,12 @@
               <button type="button" id="btn_guardar" class="btn btn-primary btn-as-block"><i class="fa fa-download" style="margin-right: 5px;"></i>Guardar</button>
             </div>
           </div>
+          <div class="col-sm-2 pull-right">
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <button type="button" id="btn_cancelar" class="btn btn-warning btn-as-block"><i class="fa fa-trash" style="margin-right: 5px;"></i>Cancelar</button>
+            </div>
+          </div>
         </div>
       </div>
 
