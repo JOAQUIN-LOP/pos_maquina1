@@ -10,7 +10,6 @@ var route = $("#route").val();
   var tabla2;
   function index() {
     url =  $('#CrearProducto').attr('action');
-    
       tabla = $('#Productos').DataTable(
       {
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
@@ -48,7 +47,7 @@ var route = $("#route").val();
             $(r).each(function (key, value) {
               
               tabla.row.add([
-                value['id'],
+                key+1,
                 value['nomProducto'],
                 value['descripcion_producto'],
                 estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
@@ -180,8 +179,8 @@ if(route == "home/producto/edit"){
             tabla2.clear();
             // agregamos los datos al datatable 
             $(r).each(function (key, value) {
-              tabla2.row.add([
-                value['id'],
+                tabla2.row.add([
+                key+1,
                 value['nomProducto'],
                 value['descripcion_producto'],
                 estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",

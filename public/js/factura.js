@@ -11,8 +11,7 @@ var route = $("#route").val();
 
   function index() {
     url =  $('#CrearProducto').attr('action');
-    console.log(url);
-    
+   
       tabla = $('#Productos').DataTable(
       {
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
@@ -348,7 +347,7 @@ if(route == "home/producto/edit"){
                     }
                     if (response['notification'] == "warning") {
                       objeto = response["data"];
-                      console.log(objeto);
+          
                       $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
                     } 
                    // notificacion

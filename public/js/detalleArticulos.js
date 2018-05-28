@@ -66,7 +66,7 @@ $(document).ready(function () {
             // agregamos los datos al datatable 
             $(r).each(function (key, value) {
               tabla.row.add([
-                value['id'],
+                key+1,
                 value['nomProducto'],
                 value['descripcion_producto'],
                 estado = (value['estado'] == 1) ? "<span class='label label-success'>Activo</span>" : "<span class='label label-danger'>Inactivo</span>",
@@ -317,7 +317,7 @@ $(document).ready(function () {
                 var doc = new jsPDF('p', 'pt', 'letter');
                 doc.text(210, 50, 'Listado de Productos');
                 doc.autoTable(columns, rows, {margin: {top: 60}});
-                doc.save('table.pdf')
+                doc.save('Listado-Productos.pdf')
             }
           },
         ],
@@ -329,12 +329,14 @@ $(document).ready(function () {
             TablaList.clear();
             // agregamos los datos al datatable 
             $(r).each(function (key, value) {
+
               TablaList.row.add([
                 key+1,
                 parseInt(value['cantidad_unidades']),
                 value['nomProducto'],
-                value['precio_total_compras'],
                 value['descripcion_producto'],
+                value['precio_total_compras'],  
+                value['fecha'],
                 estado = (value['estado'] == 1) ? "<span class='label label-success'>Activo</span>" : "<span class='label label-danger'>Inactivo</span>"
               ]).draw(false);
               $( ".odd" ).addClass("fila");
