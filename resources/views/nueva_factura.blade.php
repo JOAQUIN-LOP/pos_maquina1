@@ -25,7 +25,7 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label for="">Cantidad*</label>
-                <input type="text" class="form-control">                
+                <input type="text" class="form-control" id="cantidad">                
               </div>
             </div>
             <div class="col-sm-2">
@@ -41,7 +41,7 @@
             </div>
             <div class="col-sm-2">
               <div class="form-group">
-                <label for="">Precio*</label>
+                <label for="">Precio Unitario*</label>
                 <select name="precio_prod" id="precio_prod" class="form-control seleccionar">
                   <option value="a">Precio</option>
                 </select>  
