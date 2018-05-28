@@ -47,6 +47,13 @@ $(document).ready(function(){
 	    });	
 	});
 
+	$("#precio_prod").change(function(){
+		if ($("#cantidad").val()=="" || $("#cantidad").val() == 0) {
+			console.log($("#cantidad").val());
+			return false;
+		}
+	});
+
 
 	$("#btn_agregar").click(function(){
 
@@ -60,7 +67,7 @@ $(document).ready(function(){
 	$("#btn_guardar").click(function(){
 
 
-		var id = $("#").val();	
+		//var id = $("#").val();
 
 		var token = $("#token").val();		
 
@@ -83,7 +90,5 @@ $(document).ready(function(){
 	    });	
 
 	});
-	});
-		
 
 });
