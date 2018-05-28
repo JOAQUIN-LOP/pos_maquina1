@@ -22,14 +22,20 @@ $(document).ready(function(){
 
 	$("#btn_iniciar").click(function(){
 
+
+
 		if($("#nom_sucursal").val() == 0){
 
 			if($("#no_existe").length){
 				$("#no_existe").remove();
 			}
 
+
+
 			return false;
 		}
+
+		$("#nom_sucursal").attr('disabled', 'true');		
 
 		if($("#no_existe").length){
 			$("#no_existe").remove();
