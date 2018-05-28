@@ -201,4 +201,20 @@ class FacturaController extends Controller
         }
         
     }
+
+    public function cargaPrecios(Request $request, $id){
+
+        if ($request -> ajax()) {
+            $precios = DB::table('detalle_producto as det')
+                ->select('det.precio_unidad')
+                    ->where('det.idProducto',$id)
+                        ->orderBy('det.precio_unidad')
+                        ->get();
+
+            $data = json_encode($precios);
+
+            return $data;
+        }
+
+    }
 }

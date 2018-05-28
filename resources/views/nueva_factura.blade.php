@@ -24,13 +24,13 @@
              
             <div class="col-sm-2">
               <div class="form-group">
-                <label for="">Cantidad</label>
+                <label for="">Cantidad*</label>
                 <input type="text" class="form-control">                
               </div>
             </div>
             <div class="col-sm-2">
               <div class="form-group">
-                <label for="">Producto</label>
+                <label for="">Producto*</label>
                 <select name="nom_producto" id="nom_producto" class="form-control seleccionar">
                   <option value="0">Producto</option>
                   @foreach($productos as $producto)
@@ -41,7 +41,7 @@
             </div>
             <div class="col-sm-2">
               <div class="form-group">
-                <label for="">Precio</label>
+                <label for="">Precio*</label>
                 <select name="precio_prod" id="precio_prod" class="form-control seleccionar">
                   <option value="a">Precio</option>
                 </select>  
