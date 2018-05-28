@@ -92,10 +92,7 @@
   </div>
   
 
-@if(config('adminlte.plugins.chartjs'))
-    <!-- ChartJS -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-@endif
+
 {{--  bootbox lib  --}}
 
 <script src="{{ asset('js/bootbox.min.js') }}"></script>
