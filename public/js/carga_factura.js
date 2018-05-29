@@ -61,6 +61,10 @@ $(document).ready(function(){
 			return false;
 		}
 
+		if ($("#cantidad").val()<=0) {
+			return false;
+		}
+
 	});
 
 
@@ -89,6 +93,15 @@ $(document).ready(function(){
 	    	console.log(response);
 	    });	
 
+	});
+
+	$("#btn_cancelar").click(function(){
+		var desactivar = document.getElementById("nom_sucursal");
+		desactivar.removeAttribute("disabled");
+
+		if($("#no_existe").length){
+			$("#no_existe").remove();
+		}
 	});
 
 });
