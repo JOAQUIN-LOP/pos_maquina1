@@ -37,6 +37,7 @@ Route::resource('/home/empresa', 'EmpresaController');
 
 // ARTICULOS
 Route::get('/home/producto/edit', 'ProductoController@edit')->name('EditProducto');
+Route::get('/home/producto/agregar', 'ProductoController@Agregar');
 Route::get('/home/producto/list/{id}', 'ProductoController@list');
 Route::get('/home/producto/ver', 'ProductoController@viewList');
 Route::get('/home/producto/{id}/active', 'ProductoController@active')->name('ActiveProducto');

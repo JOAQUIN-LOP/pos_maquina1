@@ -70,10 +70,10 @@
 
 {{--  modal   --}}
 
-<div class="modal modal-success fade" id="modalSuccess">
+<div class="modal modal-default fade" id="modalSuccess">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-success">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Agregar Productos A Inventario</h4>
@@ -117,7 +117,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -127,10 +127,10 @@
 
 
 {{--  modal 2  --}}
-<div class="modal modal-info fade" id="modal-info">
+<div class="modal modal-default fade" id="modal-info">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-info">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Detalle Productos</h4>
@@ -155,7 +155,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Salir</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -188,10 +188,10 @@
 </div>
 
 {{--  modal editar cantidad y precio producto en el inventario  --}}
-<div class="modal modal-warning fade" id="modal-warning">
+<div class="modal modal-default fade" id="modal-warning">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-warning">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Editar Registro</h4>
@@ -239,8 +239,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Salir</button>
-        <button type="button" class="btn btn-outline"  id="Btn-G">Guardar Cambios</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
+        <button type="button" class="btn btn-success"  id="Btn-G">Guardar Cambios</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -252,6 +252,7 @@
 @stop
 @section('js')
   <script type="text/javascript" src="{{ asset('js/detalleInventario.js') }}"></script>  
+  <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>  
   @stack('js')
   @yield('js')
 @stop

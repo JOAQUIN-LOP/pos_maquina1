@@ -70,11 +70,9 @@
       <div class="col-sm-12">
         <div class="col-sm-2">
           <div class="form-group">
-            <div class="input-group">
-              <span class="input-group-addon">Busqueda</span>
+              <label >Busqueda</label>
               <select id="SelectAnio" class="form-control select2">
               </select>
-          </div>
         </div>
       </div>
     </div>
@@ -105,7 +103,8 @@
 
 @stop
 @section('js')
-  <script type="text/javascript" src="{{ asset('js/inventario.js') }}"></script>  
+  <script type="text/javascript" src="{{ asset('js/inventario.js') }}"></script> 
+  <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>  
   @stack('js')
   @yield('js')
 @stop

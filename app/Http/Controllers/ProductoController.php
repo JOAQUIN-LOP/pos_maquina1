@@ -230,4 +230,20 @@ class ProductoController extends Controller
                 return response()->json(['notification' => 'danger', 'data' => $returnData]); 
         }    
     }    
+
+    public function Agregar()
+    {
+        // $producto = Producto::orderBy('nomProducto', 'asc')->get();
+        $producto = DB::table('detalle_producto as DP')
+        ->join('producto as P','P.id','=','DP.idProducto')
+        ->select('P.nomProducto', 'P.id')
+        ->where('P.estado', 1)
+        ->where('DP.cantidad_unidades', '>=', 1)
+        ->orderByRaw('P.nomProducto ASC')
+        ->groupBy('P.nomProducto')
+        ->get();
+        return response()->json(
+            $producto->toArray()
+        );
+    }
 }

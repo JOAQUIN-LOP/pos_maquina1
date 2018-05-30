@@ -107,7 +107,7 @@ class DetalleProductoController extends Controller
         $producto = DetalleProducto::with('producto')
         ->where('idProducto',$id)
         ->where('anio',$anio)
-        ->where('mes',$mes)
+        ->where('estado', 1)
         ->where('cantidad_unidades', '>', (float) 0)
         ->get();
         return response()->json(

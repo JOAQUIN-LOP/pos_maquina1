@@ -3,7 +3,7 @@
 @section('title', 'Articulos')
 
 @section('content_header')
-    <h1>Detalle Articulos</h1>
+    <h1>Agregar Precio Articulo</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
 <div class="box box-success">
 
   <div class="box-header with-border">
-    <h3 class="box-title">Detalle Articulo</h3>
+    <h1 class="box-title">Agregar Precio Articulo</h1>
   </div>
   <input type="text" value="{{URL::to('/home/detalle/precio')}}" id="pathDetalleProd" class="form-control" style="display:none">
   <input type="text" value="{{URL::to('/home/producto')}}" id="pathProd" class="form-control" style="display:none">
@@ -42,10 +42,10 @@
     </div>
 
     {{--  /box-body   --}}
-    <div class="modal modal-info fade" id="modal-info">
+    <div class="modal modal-default fade" id="modal-info">
         <div class="modal-dialog modal-xl">
           <div class="modal-content ">
-            <div class="modal-header">
+            <div class="modal-header  bg-info">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Crear Precio Producto</h4>
@@ -101,7 +101,7 @@
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group" style="padding-top:25px">
-                          <input type ="button" id="calcular" class="btn btn-outline" value="Calcular">
+                          <input type ="button" id="calcular" class="btn bg-navy" value="Calcular">
                         </div>
                       </div>
                       <div class="col-sm-2">
@@ -112,7 +112,7 @@
                       </div>
                       <div class="col-sm-3 text-center">
                         <div class="form-group" style="padding-top:25px"s>
-                          <button type ="submit" id="GuardarPrecio" class="btn btn-outline"><i class="fa fa-save"></i> Guardar</button>
+                          <button type ="submit" id="GuardarPrecio" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
                         </div>
                       </div>
                   </div>
@@ -146,7 +146,7 @@
 
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Salir</button>
+              <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
             </div>
           </div>
           <!-- /.modal-content -->

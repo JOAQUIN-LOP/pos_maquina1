@@ -20,17 +20,20 @@ $('document').ready(function(){
     var VerMasTable;
 
     $.get(url+'/home/detalle/inventario/ver/activo', headers = { 'X-CSRF-TOKEN': token }, function (result) {
-        idInv = result[0].idInventario;
-        mesInvent = NumInventario[result[0].mes - 1];
-        $("#idInventario").val(result[0].idInventario);
-        $("#empresa").val(result[0].empresa);
-        $("#anio").val(result[0].anio);
-        $("#mes").append("<option value='"+NumInventario[result[0].mes - 1]+"'>"+meses[result[0].mes - 1]+"</option>");
-        
-        AllInv();
+    
+        if(result.length >= 1){
+            idInv = result[0].idInventario;
+            mesInvent = NumInventario[result[0].mes - 1];
+            $("#idInventario").val(result[0].idInventario);
+            $("#empresa").val(result[0].empresa);
+            $("#anio").val(result[0].anio);
+            $("#mes").append("<option value='"+NumInventario[result[0].mes - 1]+"'>"+meses[result[0].mes - 1]+"</option>");
+            
+            AllInv();
+        }
     });
 
-    $.get(url+'/home/producto', headers = { 'X-CSRF-TOKEN': token }, function (result) {
+    $.get(url+'/home/producto/agregar', headers = { 'X-CSRF-TOKEN': token }, function (result) {
         $(result).each(function (key, value) {
             $("#CodProducto").append("<option value='"+value['id']+"'>"+value['nomProducto']+"</option>");
         });
@@ -46,6 +49,8 @@ $('document').ready(function(){
         AllProd.rows().remove().draw();
         $.get(url+'/home/detalle/precio/'+id+"/"+anio+"/"+mesInvent, headers = { 'X-CSRF-TOKEN': token }, function (result) {
             
+            if(result.length >= 1){
+
             $(result).each(function (key, value) {
             
                 AllProd.row.add([
@@ -60,6 +65,10 @@ $('document').ready(function(){
                 $( ".odd" ).addClass("fila");
                 $( ".even" ).addClass("fila");
             });
+            }else{ 
+                $(".dataTables_empty").text('No se encontraron resultados');
+            }
+
         });
 
     };
