@@ -25,7 +25,7 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label for="">Cantidad*</label>
-                <input type="text" class="form-control" id="cantidad">                
+                <input type="text" class="form-control" id="cantidad" placeholder="0">                
               </div>
             </div>
             <div class="col-sm-2">
@@ -50,7 +50,7 @@
              <div class="col-sm-2">
               <div class="form-group">
                 <label for="">Sub Total</label>
-                <input type="text" class="form-control" readonly="true">
+                <input type="text" class="form-control" id="sub_total" name="sub_total" readonly="true">
               </div>
             </div>            
             <div class="col-sm-2">
@@ -152,7 +152,7 @@
         </div>
       </div>
 
-    </div>          
-  </div>
+    </div>         
+</div>
   
   <script type="text/javascript" src="{{ asset('js/carga_factura.js') }}"></script>
