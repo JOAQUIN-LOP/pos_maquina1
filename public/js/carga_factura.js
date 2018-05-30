@@ -2,6 +2,26 @@ $(document).ready(function(){
 
 	var id_producto;
 
+	/*configuración del touchspin*/
+	$("#cantidad").TouchSpin({
+		verticalbuttons: true
+	});
+
+	/*subir y bajar valores en cantidad*/
+	$(".input-group-btn-vertical > .btn").click(function(){
+		if ($("#cantidad").val() == 0 || $("#precio_prod").val() == "a") {
+			$("#sub_total").val("");
+			return false;
+		}
+
+		var suma = $("#cantidad").val() * $("#precio_prod").val();
+
+
+		$("#sub_total").val(parseFloat(suma).toFixed(2)); //colocar 2 decimales
+	});
+
+
+	/*---- cambio de lenguaje al no encontrar valores en los select */
 	$(".seleccionar").select2({
 		language: {
 		    noResults: function() {
@@ -14,6 +34,7 @@ $(document).ready(function(){
 	$("#nom_producto").change(function(){
 		
 		if($(this).val()==0){
+			$("#cantidad").val("");
 			return false;
 		}
 
@@ -30,7 +51,7 @@ $(document).ready(function(){
 	    .done(function(response){
 			//var datos = JSON.parse(response); 
 
-			console.log(response[0].precio_unidad);
+			//console.log(response[0].precio_unidad);
 
 	    	$("#precio_prod").html("");
 			$("#precio_prod").append("<option value='a'>Precio</option>");
@@ -47,14 +68,56 @@ $(document).ready(function(){
 	    });	
 	});
 
+	/*-----select precio unitario */
 	$("#precio_prod").change(function(){
-		if ($("#cantidad").val()=="" || $("#cantidad").val() == 0) {
-			console.log($("#cantidad").val());
+
+
+		if ($(this).val()=="a") {
+			
+		var msg = "<h4>Alerta!</h4>" +
+		      "<p>* Campos obligatorios</p>";
+
+		    //alertify.logPosition("top right");
+			alertify.closeLogOnClick(true).error(msg);
+			
+			return false;
+		}		
+
+		if ($("#cantidad").val()=="" || $("#cantidad").val() == 0) {			
 			return false;
 		}
+
+		var cantidad = $("#cantidad").val();
+		var precio = $("#precio_prod").val();
+
+		var sub_total = (cantidad * precio);
+
+		$("#sub_total").val(sub_total);
+
+	});
+
+	/*input cantidad al perder el foco*/
+	$("#cantidad").focusout(function(){
+		
+		if ($(this).val()=="" || $(this).val()<=0) {
+			return false;
+		}
+
+		if ($("#nom_producto").val()==0 || $("#precio_prod").val()=="a") {
+			return false;
+		}
+
+		var cantidad = $("#cantidad").val();
+		var precio = $("#precio_prod").val();
+
+		var sub_total = (cantidad * precio);
+
+		$("#sub_total").val(sub_total);		
+
 	});
 
 
+	/* boton agregar al cuerpo de la factura*/
 	$("#btn_agregar").click(function(){
 
 		if ($("#nom_producto").val()==0 || $("#precio_prod").val()=="a") {
@@ -68,10 +131,13 @@ $(document).ready(function(){
 	});
 
 
+	/*-- boton guardar factura*/
 	$("#btn_guardar").click(function(){
 
 
-		//var id = $("#").val();
+		$(this).attr('disabled', true);
+		
+
 
 		var token = $("#token").val();		
 
@@ -93,8 +159,11 @@ $(document).ready(function(){
 	    	console.log(response);
 	    });	
 
+	    $(this).removeAttribute("disabled");
+
 	});
 
+	/*boton cancelar, remueve factura y habilita las sucursales*/
 	$("#btn_cancelar").click(function(){
 		var desactivar = document.getElementById("nom_sucursal");
 		desactivar.removeAttribute("disabled");
