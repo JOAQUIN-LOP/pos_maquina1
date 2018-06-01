@@ -184,8 +184,8 @@ if(route == "home/producto/edit"){
                 value['nomProducto'],
                 value['descripcion_producto'],
                 estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
-                "<div class='btn-group'><button class='btnEdit btn btn-warning btn-sm ' data-toggle='modal' data-target='#modal-warning'><i class='fa fa-pencil'></i> Editar</button> "+
-                (estado = (value['estado'] == 1) ?"<button type='button' class='btn btn-danger btn-sm btn-Eliminar'><i class='fa fa-circle-o'></i> Desactivar</button></div>":"<button type='button' class='btn btn-success btn-sm btn-Activar'><i class='fa fa-dot-circle-o'></i> Activar</button></div>"),                
+                "<div class='btn-group'><button class='btnEdit btn btn-warning btn-sm BtnEditar' data-toggle='modal' data-target='#modal-warning' value='"+value["id"]+"'><i class='fa fa-pencil'></i> Editar</button> "+
+                (estado = (value['estado'] == 1) ?"<button type='button' class='btn btn-danger btn-sm btn-Eliminar' value='"+value["id"]+"'><i class='fa fa-circle-o'></i> Desactivar</button></div>":"<button type='button' class='btn btn-success btn-sm btn-Activar' value='"+value["id"]+"'><i class='fa fa-dot-circle-o'></i> Activar</button></div>"),                
               ]).draw(false);
               $( ".odd" ).addClass("fila");
               $( ".even" ).addClass("fila");
@@ -200,8 +200,8 @@ if(route == "home/producto/edit"){
       });
   }   
   
-  $('#EditProductos').on('click','tr.fila button.btnEdit', function(){
-        var idProducto = $(this).closest('tr').find('td').get(0).innerHTML;
+  $('#EditProductos').on('click','button.btnEdit', function(){
+        var idProducto = $(this).attr("value");
         var nomProducto = $(this).closest('tr').find('td').get(1).innerHTML;
         var descripcion_producto = $(this).closest('tr').find('td').get(2).innerHTML;
       
@@ -277,10 +277,10 @@ if(route == "home/producto/edit"){
 
     // ---------------------------------- Seccion Desactivar producto --------------------------------------
 
-    $('#EditProductos').on('click','tr.fila button.btn-Eliminar', function(){
+    $('#EditProductos').on('click','button.btn-Eliminar', function(){
       var url = $('#EditarProducto').attr('action');
       var token = $("#token").val();
-      var idProducto = $(this).closest('tr').find('td').get(0).innerHTML;
+      var idProducto = $(this).attr('value');
       var Producto = $(this).closest('tr').find('td').get(1).innerHTML;
 
 
@@ -335,10 +335,10 @@ if(route == "home/producto/edit"){
 
         // ---------------------------------- Seccion Activar producto --------------------------------------
 
-        $('#EditProductos').on('click','tr.fila button.btn-Activar', function(){
+        $('#EditProductos').on('click','button.btn-Activar', function(){
           var url = $('#EditarProducto').attr('action');
           var token = $("#token").val();
-          var idProducto = $(this).closest('tr').find('td').get(0).innerHTML;
+          var idProducto = $(this).attr("value");
           var Producto = $(this).closest('tr').find('td').get(1).innerHTML;
     
     

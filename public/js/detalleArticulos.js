@@ -17,10 +17,23 @@ $(document).ready(function () {
   
   var UrlInv = $('#UrlInv').val();
     $.get(UrlInv+'/home/detalle/inventario/ver/activo', function (result) {
-      mesInventario = NumInventario[result[0].mes - 1];
-      anioInventario = result[0].anio;
-      $("#mesDetalle").append("<option value='"+NumInventario[result[0].mes - 1]+"'>"+meses[result[0].mes - 1]+"</option>");
-      $("#AnioDetalle").append(" <option value='"+result[0].anio +"' selected>"+ result[0].anio +"</option>");
+      if(result.length >= 1 ){
+      
+          mesInventario = NumInventario[result[0].mes - 1];
+          anioInventario = result[0].anio;
+
+          $(NumInventario).each(function (key, value) {
+            
+            if(NumInventario[key] == NumInventario[result[0].mes - 1]){
+              $("#mesDetalle").append("<option value='"+NumInventario[key]+"' selected>"+meses[value-1]+"</option>");
+            }else{
+              $("#mesDetalle").append("<option value='"+NumInventario[key]+"'>"+meses[value-1]+"</option>");
+            }
+            
+          });
+          
+          $("#AnioDetalle").append(" <option value='"+result[0].anio +"' selected>"+ result[0].anio +"</option>");
+        }
     }); 
 
   // cargamos los productos activos al datatable
@@ -63,20 +76,25 @@ $(document).ready(function () {
 					url: url + "/1",
           type : "get",
           success: function(r){
-            // agregamos los datos al datatable 
-            $(r).each(function (key, value) {
-              tabla.row.add([
-                key+1,
-                value['nomProducto'],
-                value['descripcion_producto'],
-                estado = (value['estado'] == 1) ? "<span class='label label-success'>Activo</span>" : "<span class='label label-danger'>Inactivo</span>",
-                "<button type='button' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modal-info'>Agregar Precio</button>"
-              ]).draw(false);
-              $( ".odd" ).addClass("fila");
-              $( ".even" ).addClass("fila");
-            })
+              if(r.length >= 1){
+
+                // agregamos los datos al datatable 
+                $(r).each(function (key, value) {
+                  tabla.row.add([
+                    key+1,
+                    value['nomProducto'],
+                    value['descripcion_producto'],
+                    estado = (value['estado'] == 1) ? "<span class='label label-success'>Activo</span>" : "<span class='label label-danger'>Inactivo</span>",
+                    "<button type='button' role='"+value["id"]+"' class='btn btn-info btn-sm AgregarPrecioPro' data-toggle='modal' data-target='#modal-info'>Agregar Precio</button>"
+                  ]).draw(false);
+                  $( ".odd" ).addClass("fila");
+                  $( ".even" ).addClass("fila");
+                })
+
+              }else{
+                  $(".dataTables_empty").text("No se encontro ningun registros"); 
+              }
       
-            
           },
 					error: function(e){
 						console.log(e.responseText);	
@@ -96,8 +114,8 @@ $(document).ready(function () {
           type : "get",
           success: function(r){
             // agregamos los datos al datatable
-            if(r[0] == null){
-              $("#detallePrecioProducto tbody tr td.dataTables_empty").text('No se encontraron resultados');
+            if(r.length == 0){
+              $(".dataTables_empty").text('No se encontraron resultados');
             }else{
               tabla2.clear();
               $(r).each(function (key, value) {
@@ -127,8 +145,9 @@ $(document).ready(function () {
   }
   
 // al precionar el boton agregar precio abre un modal  
-  $('#TablaDetalle').on('click','tr.fila button.btn-sm', function(){
-    var idProducto = $(this).closest('tr').find('td').get(0).innerHTML;
+  $('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
+    var idProducto = $(this).attr('role');
+    console.log(idProducto);
     var nomProducto = $(this).closest('tr').find('td').get(1).innerHTML;
     var descripcion_producto = $(this).closest('tr').find('td').get(2).innerHTML;
   

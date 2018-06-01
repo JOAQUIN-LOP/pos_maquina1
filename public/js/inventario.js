@@ -1,11 +1,8 @@
 $('document').ready(function(){
    
-    $('#All').DataTable( {
-        responsive: true
-        
-    } );
     
     var TablaAll = $('#TablaAll').DataTable( {
+        "bLengthChange": false,
         responsive: true
         
     } );
@@ -33,9 +30,13 @@ $('document').ready(function(){
 
     $('#SelectAnio').val(anio).trigger('change.select2');
 
+    routePage = $('#route').val();
 
 
-    index(anio);
+    if(routePage == 'home/inventario/create'){
+        index(anio);
+    }
+    
 
     $('#mes').append( "<option value='"+NumInventario[mes]+"'>"+meses[mes]+"</option>" );
     $('#anio').val(anio);
@@ -65,6 +66,7 @@ $('document').ready(function(){
     
       tabla = $('#All').DataTable(
       {
+        "bLengthChange": false,
         destroy: true,
         responsive: true,
         "ajax":
@@ -82,8 +84,8 @@ $('document').ready(function(){
                             value.empresa['nom_empresa'],
                             meses[value['mes']-1],
                             value['anio'],
-                            value['total_cantidad_productos'],
-                            value['total_cantidad_inventario'],
+                            parseInt(value['total_cantidad_productos']),
+                            parseFloat(value['total_cantidad_inventario']).toFixed(2),
                             estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
                             estado2 = (value['estado'] == 1) ? "<div class='btn-group'><a class='btn btn-danger btn-xs'data-toggle='tooltip' data-placement='top' title='Finalizar Inventario!' name='"+value['num_inventario']+"'><i class='fa fa-times-circle'></i></a></div>":"" 
                         ]).draw(false);
@@ -179,28 +181,39 @@ $('document').ready(function(){
         })
     }
 
-    // AllInventario
-    var url = $('#CrearInventario').attr('action');
-    $.get(url, headers = { 'X-CSRF-TOKEN': token }, function (result) {
-        $(result).each(function (key, value) {
-            TablaAll.row.add([
-                value['idInventario'],
-                value.empresa['nom_empresa'],
-                meses[value['mes']-1],
-                value['anio'],
-                parseInt(value['total_cantidad_productos']),
-                value['total_cantidad_inventario'],
-                estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
-                "<div class='btn-group'>"+
-                "<a class='btn btn-primary btn-xs VerInventario' data-toggle='tooltip' data-placement='top' title='Ver Inventario!' name='"+value['idInventario']+"'><i class='fa fa-search'></i></a>"+ 
-                "<a class='btn btn-danger btn-xs DescargarPDF' data-toggle='tooltip' data-placement='top' title='Descar Inventario!' name='"+value['idInventario']+"'><i class='fa fa-file-pdf-o'></i></a>"+ 
-                "<a class='btn btn-info btn-xs ImprimirPDF' name='"+value['idInventario']+"' data-toggle='tooltip' title='Imprimir Inventario!' ><i class='fa fa-print' ></i></a>"+
-                "</div>"
-            ]).draw(false);
-       
-        });
-    });
+    // ver inventario lista de inventario
 
+    if(routePage == 'home/ver/inventario'){
+        // AllInventario
+        var url = $('#CrearInventario').attr('action');
+        $.get(url, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+
+                if(result.length >= 1){
+                    $(result).each(function (key, value) {
+                        TablaAll.row.add([
+                            value['idInventario'],
+                            value.empresa['nom_empresa'],
+                            meses[value['mes']-1],
+                            value['anio'],
+                            parseInt(value['total_cantidad_productos']),
+                            parseFloat(value['total_cantidad_inventario']).toFixed(2),
+                            estado = (value['estado'] == 1) ?"<span class='label label-success'>Activo</span>" :"<span class='label label-danger'>Inactivo</span>",
+                            "<div class='btn-group'>"+
+                            "<a class='btn btn-primary btn-xs VerInventario' data-toggle='tooltip' data-placement='top' title='Ver Inventario!' name='"+value['idInventario']+"'><i class='fa fa-search'></i></a>"+ 
+                            "<a class='btn btn-danger btn-xs DescargarPDF' data-toggle='tooltip' data-placement='top' title='Descar Inventario!' name='"+value['idInventario']+"'><i class='fa fa-file-pdf-o'></i></a>"+ 
+                            "<a class='btn btn-info btn-xs ImprimirPDF' name='"+value['idInventario']+"' data-toggle='tooltip' title='Imprimir Inventario!' ><i class='fa fa-print' ></i></a>"+
+                            "</div>"
+                        ]).draw(false);
+                
+                    });
+                }else{
+                    $(".dataTables_empty").text("No se encontraron resultados");
+                }
+        });
+
+    }
+
+    
 
     $('#TablaAll').on('click', '.DescargarPDF', function(){
         let id = $(this).attr("name");
@@ -405,6 +418,8 @@ $('document').ready(function(){
             AllDetalle.clear();
             AllDetalle.rows().remove().draw();
 
+            
+            if(result[1] >= 1){
             // detalle
             $(result[1]).each(function (key, value) {
                 
@@ -417,6 +432,9 @@ $('document').ready(function(){
                     value['sub']
                 ]).draw(false);
             });
+        }else{
+            $(".dataTables_empty").text("No se encontraron resultados");
+        }
             
             
         });

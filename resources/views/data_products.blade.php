@@ -35,10 +35,10 @@
       
       <input type="text" value="{!!Request::path()!!}" id="route" hidden>
 
-      <div class="modal modal-warning fade" id="modal-warning">
+      <div class="modal modal-default fade" id="modal-warning">
           <div class="modal-dialog">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header bg-warning">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Actualizar Producto</h4>
@@ -66,8 +66,8 @@
                
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Salir</button>
-                <button type="submit" class="btn btn-outline" id="btn-Editar">Guardar Cambios</button>
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
+                <button type="submit" class="btn btn-success" id="btn-Editar">Guardar Cambios</button>
               </div>
             </form>
             </div>

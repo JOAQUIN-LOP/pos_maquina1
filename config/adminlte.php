@@ -138,7 +138,7 @@ return [
                     'icon'          => 'cube',
                 ],
                 [
-                    'text'          => 'Todos los Productos',
+                    'text'          => 'Editar Productos',
                     'url'           => '/home/producto/edit',
                     'icon'          => 'cubes',            
                 ],

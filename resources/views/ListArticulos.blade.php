@@ -29,8 +29,8 @@
                 <th>No.</th>
                 <th>Contiene</th>
                 <th>Producto</th>
-                <th>Precio Costo</th>
                 <th>Descripcion</th>
+                <th>Precio Costo</th>
                 <th>Fecha</th>
                 <th>Estado</th>
               </tr>
