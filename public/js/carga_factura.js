@@ -2,6 +2,9 @@ $(document).ready(function(){
 
 	var id_producto;
 
+	var msg = "<h4>Alerta!</h4>" +
+		      "<p>* Campos obligatorios</p>";
+
 	/*configuración del touchspin*/
 	$("#cantidad").TouchSpin({
 		verticalbuttons: true
@@ -9,8 +12,10 @@ $(document).ready(function(){
 
 	/*subir y bajar valores en cantidad*/
 	$(".input-group-btn-vertical > .btn").click(function(){
+
 		if ($("#cantidad").val() == 0 || $("#precio_prod").val() == "a") {
 			$("#sub_total").val("");
+			alertify.closeLogOnClick(true).error(msg);
 			return false;
 		}
 
@@ -33,8 +38,11 @@ $(document).ready(function(){
 	/*Valida que se haya seleccionado un producto*/
 	$("#nom_producto").change(function(){
 		
-		if($(this).val()==0){
-			$("#cantidad").val("");
+		$("#sub_total").val("");
+		$("#cantidad").val("");
+
+		if($(this).val()==0){			
+			alertify.closeLogOnClick(true).error(msg);
 			return false;
 		}
 
@@ -49,18 +57,14 @@ $(document).ready(function(){
 	        dataType: 'json'
 	    })
 	    .done(function(response){
-			//var datos = JSON.parse(response); 
-
-			//console.log(response[0].precio_unidad);
-
+			
 	    	$("#precio_prod").html("");
 			$("#precio_prod").append("<option value='a'>Precio</option>");
 	    
 	    	for(i in response){
 				$("#precio_prod").append("<option value='"+response[i].precio_unidad+"'>"+response[i].precio_unidad+"</option>");
 			}
-			//$(".box").append(response);
-			//console.log(response);
+			
 	    })
 	    .fail(function(response){
 	    	//var datos = JSON.parse(response); 
@@ -73,17 +77,17 @@ $(document).ready(function(){
 
 
 		if ($(this).val()=="a") {
-			
-		var msg = "<h4>Alerta!</h4>" +
-		      "<p>* Campos obligatorios</p>";
 
+			$("#sub_total").val("");
+			$("#cantidad").val("");
 		    //alertify.logPosition("top right");
 			alertify.closeLogOnClick(true).error(msg);
 			
 			return false;
 		}		
 
-		if ($("#cantidad").val()=="" || $("#cantidad").val() == 0) {			
+		if ($("#cantidad").val()=="" || $("#cantidad").val() == 0) {
+			alertify.closeLogOnClick(true).error(msg);			
 			return false;
 		}
 
@@ -92,7 +96,7 @@ $(document).ready(function(){
 
 		var sub_total = (cantidad * precio);
 
-		$("#sub_total").val(sub_total);
+		$("#sub_total").val(parseFloat(sub_total).toFixed(2));
 
 	});
 
@@ -100,10 +104,12 @@ $(document).ready(function(){
 	$("#cantidad").focusout(function(){
 		
 		if ($(this).val()=="" || $(this).val()<=0) {
+			alertify.closeLogOnClick(true).error(msg);
 			return false;
 		}
 
 		if ($("#nom_producto").val()==0 || $("#precio_prod").val()=="a") {
+			alertify.closeLogOnClick(true).error(msg);
 			return false;
 		}
 
@@ -112,7 +118,7 @@ $(document).ready(function(){
 
 		var sub_total = (cantidad * precio);
 
-		$("#sub_total").val(sub_total);		
+		$("#sub_total").val(parseFloat(sub_total).toFixed(2));		
 
 	});
 
@@ -121,12 +127,29 @@ $(document).ready(function(){
 	$("#btn_agregar").click(function(){
 
 		if ($("#nom_producto").val()==0 || $("#precio_prod").val()=="a") {
+			alertify.closeLogOnClick(true).error(msg);
 			return false;
 		}
 
 		if ($("#cantidad").val()<=0) {
+			alertify.closeLogOnClick(true).error(msg);
 			return false;
 		}
+
+		if ($("#sub_total").val()=="" || $("#sub_total").val()==0) {
+			alertify.closeLogOnClick(true).error(msg);
+			return false;
+		}
+
+		var cantidad = $("#cantidad").val();
+		var id_prod = $("#nom_producto").val();
+		var nom_prod = $("#nom_producto :selected").text();
+		var precio = $("#precio_prod").val();
+		var sub = $("#sub_total").val();
+
+		//console.log(cantidad +"+"+id_prod+"+"+nom_prod+"+"+precio+"+"+sub);
+
+		$("#creacion_factura > tbody").append("<tr><td><input type='text' class='columnas' name='id_producto[]' value='"+id_prod+"' hidden='true'>"+nom_prod+"</td><td><input type='text' class='columnas' name='cantidad[]' value='"+cantidad+"' hidden='true'>"+cantidad+"</td><td><input type='text' class='columnas' name='precio[]' value='"+precio+"' hidden='true'>"+precio+"</td><td><input type='text' class='columnas' name='sub_total[]' value='"+sub+"' hidden='true'>"+sub+"</td><td><button type='button' class='btn btn-danger btn-as-block btn-sm btn_borrar_linea' onclick='borrar_linea(this)'><i class='fa fa-trash' style='margin-right: 5px;''></i>Borrar</button></td></tr>");
 
 	});
 
@@ -173,4 +196,12 @@ $(document).ready(function(){
 		}
 	});
 
+
+		
+
 });
+
+/*----función botón para borrar linea*/
+function borrar_linea(btn){
+	btn.closest("tr").remove();
+}

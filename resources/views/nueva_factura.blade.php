@@ -67,57 +67,23 @@
       <form id="factura_body" class="head-factura">
         <div class="row">
           <div class="col-sm-12">
-            <table id="creacion_factura" class="display table table-responsive table-bordered table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Nombre</th>
-                  <th>Cantidad</th>
-                  <th>Precio Unitario</th>
-                  <th>Subtotal</th>                  
-                  <th>Opción</th>
-                </tr>
-              </thead>
+            <div class="scrollable">                          
+              <table id="creacion_factura" class="display table table-responsive table-bordered table-striped table-hover">
+                <thead>
+                  <tr>                  
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>                  
+                    <th>Opción</th>
+                  </tr>
+                </thead>
 
-              <tbody>               
-                <tr>                
-                  <td>
-                    <div class="form-group" style="width:100% !important;" hidden="true">                                              
-                      <input type="text" class="form-control" name="test[]" style="width:100% !important;" readonly="true" >
-                    </div>
-                    prueba
-                  </td>
-                  <td>
-                    <div class="form-group" style="width:100% !important;" hidden="true">                                              
-                      <input type="text" class="form-control" name="test[]" style="width:100% !important;" readonly="true" >
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group" style="width:100% !important;" hidden="true">                                              
-                      <input type="text" class="form-control" name="test[]" style="width:100% !important;" readonly="true">
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group" style="width:100% !important;" hidden="true">                                              
-                      <input type="text" class="form-control" name="test[]" style="width:100% !important;" readonly="true">
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group" style="width:100% !important;" hidden="true">                                              
-                      <input type="text" class="form-control" name="test[]" style="width:100% !important;" readonly="true">
-                    </div>
-                  </td>                                
-                  <td> 
-                    <button type="button" class="btn btn-danger btn-as-block btn-sm btn_borrar_linea">
-                      <i class="fa fa-trash" style="margin-right: 5px;">                        
-                      </i>
-                      Borrar
-                    </button> 
-                  </td>
-                </tr>
-              
-              </tbody>
-            </table>
+                <tbody>               
+
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         

@@ -60,14 +60,4 @@ $(document).ready(function(){
 	    });
 	});	
 
-	/*----seccion donde carga los datos al panel donde luego se cargará la factura completa*/
-
-
-
-
-	/*---- section for factura header*/
-
-	$(".btn_borrar_linea").on('click', function(){
-		$(this).closest("tr").remove();
-	});	
 });

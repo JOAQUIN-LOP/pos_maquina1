@@ -47,9 +47,9 @@
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="form-group">
-                
+              <div class="form-group">                
                   <label for="nom_sucursal">Sucursal</label>
+                  <label>&nbsp;</label>
                   <select type="text" class="form-control" name="nom_sucursal" id="nom_sucursal" required>
                     <option value="0">Seleccione Sucursal</option>
                     @foreach($facturas as $sucursal)
