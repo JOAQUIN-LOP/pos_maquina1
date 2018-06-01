@@ -171,5 +171,11 @@
     font-weight: bold !important;
 }
 
+/*tabla con scroll*/
+.scrollable{
+    height: 300px;
+    overflow-y: auto;
+}
+
 
   
