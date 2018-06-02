@@ -39,8 +39,8 @@ $('document').ready(function(){
     
 
     $('#mes').append( "<option value='"+NumInventario[mes]+"'>"+meses[mes]+"</option>" );
+    $('#idInventario').val(NumInventario[mes]);
     $('#anio').val(anio);
-    
     var token = $("#token").val();
     var urlEmp = $('#ruta-Emp').val();
     
@@ -76,11 +76,11 @@ $('document').ready(function(){
                 success: function(r){
                     $(r).each(function (key, value) {
                             if(value['estado']==1){
-                                $("#idInventario").val(value['idInventario']);
+                                $("#idInventario").val(value['num_inventario']);
                             }
                             
                         tabla.row.add([
-                            value['idInventario'],
+                            key+1,
                             value.empresa['nom_empresa'],
                             meses[value['mes']-1],
                             value['anio'],
@@ -409,6 +409,9 @@ $('document').ready(function(){
         let id = $(this).attr("name");
         $("#modal-primary").modal("toggle");
         $.get(url+"/PDF/"+id, headers = { 'X-CSRF-TOKEN': token }, function (result) {
+
+            
+
             // encabezado
             $("#EditNombre").val(result[0][0].empresa.nom_empresa);
             $("#EditAnio").val(result[0][0].anio);
@@ -418,8 +421,7 @@ $('document').ready(function(){
             AllDetalle.clear();
             AllDetalle.rows().remove().draw();
 
-            
-            if(result[1] >= 1){
+            if(result[1].length >= 1){
             // detalle
             $(result[1]).each(function (key, value) {
                 

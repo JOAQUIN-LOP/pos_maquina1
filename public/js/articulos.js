@@ -107,19 +107,22 @@ var route = $("#route").val();
                 tabla.ajax.reload();
                 if (response['notification'] == "success") {
                   $('#mensaje').text(' Se Creo '+ response['producto']+' Exitosamente ');
+                  $('#titulo').text('Exito');
                 }
                 if (response['notification'] == "warning") {
                   objeto = response["data"];
                   $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> Los Campos no pueden ir vacios");
+                  $('#titulo').text('Alerta');
                 }
                 if (response['notification'] == "danger") {
                   objeto = response["data"];
                   $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+                  $('#titulo').text('Peligro');
                 }
                 
                 $('div#notification-container').fadeIn(350);
                 $(".notification").addClass("notification-"+response['notification']);
-                $('#titulo').text(response['notification']);
+                
                 
                 // oculta notificacion
 

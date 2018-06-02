@@ -25,7 +25,7 @@ class DetalleInventarioController extends Controller
     {
         $data = DB::table('inventario As Inv')
         ->join('empresa As Emp', 'Inv.idEmpresa', '=', 'Emp.idEmpresa')
-        ->select('Emp.nom_empresa as empresa', 'Inv.idInventario as idInventario', 'Inv.anio as anio','Inv.mes as mes')
+        ->select('Emp.nom_empresa as empresa', 'Inv.idInventario as idInventario', 'Inv.anio as anio','Inv.mes as mes', 'Inv.num_inventario')
         ->where('Inv.estado', 1)
         ->get();
         return Response::json($data); 

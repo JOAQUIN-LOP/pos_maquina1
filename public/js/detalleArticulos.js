@@ -10,31 +10,30 @@ $(document).ready(function () {
   $('.OnlyChart').on('input', function () { 
     this.value = this.value.replace(/[^a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ!/^\s/]/g,'');
   });
+
+
+  var anioActual = (new Date).getFullYear();
+  var mesActual = (new Date).getMonth();
+  
   var mesInventario;
   var anioInventario;
   let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   let NumInventario = [1,2,3,4,5,6,7,8,9,10,11,12];
-  
-  var UrlInv = $('#UrlInv').val();
-    $.get(UrlInv+'/home/detalle/inventario/ver/activo', function (result) {
-      if(result.length >= 1 ){
-      
-          mesInventario = NumInventario[result[0].mes - 1];
-          anioInventario = result[0].anio;
 
-          $(NumInventario).each(function (key, value) {
+  $(NumInventario).each(function (key, value) {
             
-            if(NumInventario[key] == NumInventario[result[0].mes - 1]){
-              $("#mesDetalle").append("<option value='"+NumInventario[key]+"' selected>"+meses[value-1]+"</option>");
-            }else{
-              $("#mesDetalle").append("<option value='"+NumInventario[key]+"'>"+meses[value-1]+"</option>");
-            }
-            
-          });
-          
-          $("#AnioDetalle").append(" <option value='"+result[0].anio +"' selected>"+ result[0].anio +"</option>");
-        }
-    }); 
+    if(NumInventario[key] == NumInventario[mesActual]){  
+    $("#mesDetalle").append("<option value='"+NumInventario[key]+"' selected>"+meses[value-1]+"</option>");
+    }else{
+      $("#mesDetalle").append("<option value='"+NumInventario[key]+"'>"+meses[value-1]+"</option>");
+    }
+
+    });
+
+    $("#AnioDetalle").append(" <option value='"+ anioActual +"' >"+ anioActual +"</option>");
+
+
+  
 
   // cargamos los productos activos al datatable
   index();
@@ -103,6 +102,20 @@ $(document).ready(function () {
       });
   }
 
+// al precionar el boton agregar precio abre un modal  
+$('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
+  var idProducto = $(this).attr('role');
+  var nomProducto = $(this).closest('tr').find('td').get(1).innerHTML;
+  var descripcion_producto = $(this).closest('tr').find('td').get(2).innerHTML;
+
+  $("#IdProducto").val(idProducto);
+  $("#nomProducto").val(nomProducto);
+  //limpiamos el datatable
+  $('#detallePrecioProducto').DataTable().destroy();
+  ProductosPrecio(idProducto);
+ 
+});
+
 // carga los productos con precio 
   function ProductosPrecio(id) {
     url =  $('#pathDetalleProd').val();   
@@ -110,7 +123,7 @@ $(document).ready(function () {
       {
         "ajax":
 				{
-					url: url + "/" + id + "/" + anioInventario+ "/" + mesInventario,
+					url: url + "/" + id + "/" + anioActual + "/" + NumInventario[mesActual],
           type : "get",
           success: function(r){
             // agregamos los datos al datatable
@@ -144,20 +157,6 @@ $(document).ready(function () {
       });
   }
   
-// al precionar el boton agregar precio abre un modal  
-  $('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
-    var idProducto = $(this).attr('role');
-    console.log(idProducto);
-    var nomProducto = $(this).closest('tr').find('td').get(1).innerHTML;
-    var descripcion_producto = $(this).closest('tr').find('td').get(2).innerHTML;
-  
-    $("#IdProducto").val(idProducto);
-    $("#nomProducto").val(nomProducto);
-    //limpiamos el datatable
-    $('#detallePrecioProducto').DataTable().destroy();
-    ProductosPrecio(idProducto);
-   
-});
 
     //  Calcular precio unitario
 

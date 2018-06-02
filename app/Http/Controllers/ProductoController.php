@@ -51,6 +51,8 @@ class ProductoController extends Controller
                 'descripcion_producto' => 'required',
             
             ]);
+
+            
             
             if ($validator->fails()) {
                 $returnData = array(
@@ -60,6 +62,7 @@ class ProductoController extends Controller
                 );
                 return response()->json(['notification' => 'danger', 'data' => $returnData]); 
             } else {
+                
                 try {
                     $newObject = new Producto();
                     $newObject->tipo_id = 1;
@@ -67,7 +70,7 @@ class ProductoController extends Controller
                     $newObject->nomProducto = $request->get('nomProducto');
                     $newObject->descripcion_producto = $request->get('descripcion_producto');
                     $newObject->save();
-
+                    
                     return response()->json(['notification' => 'success', 'producto' => $newObject->nomProducto]); 
                 }
                 catch (\Illuminate\Database\QueryException $e) {

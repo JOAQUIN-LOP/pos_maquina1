@@ -23,7 +23,8 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon">No.</span>
-                <input type="text" class="form-control" name="idInventario"  id="idInventario" placeholder="Inventario" required readonly>
+                <input type="text" class="form-control" name="NoInventario"  id="NoInventario" placeholder="NoInventario" required readonly>
+                <input type="text" class="form-control" name="idInventario"  id="idInventario" placeholder="Inventario" required readonly style="display:none;">
               </div>
             </div>
           </div>
