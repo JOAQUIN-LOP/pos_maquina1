@@ -36,4 +36,16 @@ $(document).ready(function(){
             }
         }
     });
+
+    $("#mesDetalle").select2({
+        language: {
+    
+            noResults: function() {
+    
+              return "No hay resultado";        
+            }
+        }
+    });
+
+    
 });

@@ -34,7 +34,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Empresa</span>
-                    <select id="Empresa" name="empresa" class="form-control select2">
+                    <select id="Empresa" name="empresa" class="form-control select2" style="width:100%">
                     </select>
                 </div>
               </div>
@@ -43,7 +43,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">mes</span>
-                  <select id="mes" name="mes" class="form-control select2">
+                  <select id="mes" name="mes" class="form-control select2" style="width:100%">
                   </select>
                 </div>
               </div>

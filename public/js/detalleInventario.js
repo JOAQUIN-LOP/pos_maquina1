@@ -25,6 +25,7 @@ $('document').ready(function(){
             idInv = result[0].idInventario;
             mesInvent = NumInventario[result[0].mes - 1];
             $("#idInventario").val(result[0].idInventario);
+            $("#NoInventario").val(result[0].num_inventario);            
             $("#empresa").val(result[0].empresa);
             $("#anio").val(result[0].anio);
             $("#mes").append("<option value='"+NumInventario[result[0].mes - 1]+"'>"+meses[result[0].mes - 1]+"</option>");
@@ -148,7 +149,6 @@ $('document').ready(function(){
             var cantidadT = $(this).parents("tr").find(".cantidad").val();
 
             data = $("#CrearInventario").serialize() + "&SubTotal=" + total + "&idProducto=" + cod + "&cantidadT=" + cantidadT;
-
             if(total != ""){
                 $.ajax({
                     headers: { 'X-CSRF-TOKEN': token },

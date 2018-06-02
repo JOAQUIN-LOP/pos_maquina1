@@ -72,7 +72,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mes</label>
-                            <select class="form-control" name="mesDetalle" id="mesDetalle">
+                            <select class="form-control" name="mesDetalle" id="mesDetalle" style="width:100%">
                                 
                             </select>
                         </div>
@@ -157,6 +157,7 @@
 @stop
 @section('js')
   <script type="text/javascript" src="{{ asset('js/detalleArticulos.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>
   @stack('js')
   @yield('js')
 @stop
