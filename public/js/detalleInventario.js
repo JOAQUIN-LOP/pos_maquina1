@@ -101,14 +101,14 @@ $('document').ready(function(){
         });    
     }
 
-    $('#AllProd').on('keypress','tr.fila input.cantidad', function(){
-        
-        if ( event.which == 13 ) {
+    $('#AllProd').on('blur keypress change keydown','tr.fila input.cantidad', function(){
+        var exist = $(this).closest('tr').find("td").get(3).innerHTML;
+        if ( event.which == 13 || event.type == 'blur' || event.which == 9) {
         
         var valor = $(this).val();
         var codigo = $(this).parents("tr").find(".precio").val();
 
-        var exist = $(this).closest('tr').find("td").get(3).innerHTML;
+        
         var existencia = parseInt(exist);
         if(valor != ""){
             if(valor <= existencia){
@@ -162,13 +162,16 @@ $('document').ready(function(){
 
                         if (response['notification'] == "success") {
                         $('#mensaje').text(' Creado Exitosamente ');
+                        $('#titulo').text('Exito');
                         }
                         if (response['notification'] == "danger") {
                         $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
+                        $('#titulo').text('Peligro');
                         }
                         if (response['notification'] == "warning") {
                         objeto = response["data"];
                         $('#mensaje').html( response.data  + "<br> error de servidor interno");
+                        $('#titulo').text('Alerta');
                         }
                         // notificacion
                         All.clear();
@@ -179,7 +182,6 @@ $('document').ready(function(){
     
                         $('div#notification-container').fadeIn(350);
                         $(".notification").addClass("notification-"+response['notification']);
-                        $('#titulo').text(response['notification']);
         
                         $('div#notification-container').delay(3000).fadeOut(350);
                     }
@@ -308,14 +310,16 @@ $('document').ready(function(){
                     
                 if (response['notification'] == "success") {
                     $('#mensaje').text(' Actualizado Exitosamente ');
-
+                    $('#titulo').text('Exito');
                     }
                     if (response['notification'] == "danger") {
                     $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
+                    $('#titulo').text('Peligro');
                     }
                     if (response['notification'] == "warning") {
                     objeto = response["data"];
                     $('#mensaje').html( response.data  + "<br> error de servidor interno");
+                    $('#titulo').text('Alerta');
                     }
                 
                     VerMasTable.clear();
@@ -329,7 +333,6 @@ $('document').ready(function(){
                     $('div#notification-container').fadeIn(350);
                     
                     $(".notification").addClass("notification-"+response['notification']);                
-                    $('#titulo').text(response['notification']);
                     $('div#notification-container').delay(3000).fadeOut(350);
             }
         });

@@ -253,21 +253,23 @@ if(route == "home/producto/edit"){
               
               if (response['notification'] == "success") {
                 $('#mensaje').text(' Se Modifico '+ response['producto']+' Exitosamente ');
+                $('#titulo').text('Exito');
               }
               if (response['notification'] == "danger") {
                 objeto = response["data"];
                 $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> No existe");
+                $('#titulo').text('Peligro');
               }
               if (response['notification'] == "warning") {
                 objeto = response["data"];
                 $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+                $('#titulo').text('Alerta');
               }
               $('#modal-warning').modal('toggle');
               // notificacion
               tabla2.ajax.reload();
               $('div#notification-container').fadeIn(350);
               $(".notification").addClass("notification-"+response['notification']);
-              $('#titulo').text(response['notification']);
 
               $('div#notification-container').delay(3000).fadeOut(350);
 
@@ -311,21 +313,22 @@ if(route == "home/producto/edit"){
               success : function(response){
                 if (response['notification'] == "success") {
                   $('#mensaje').text(' Se Desactivo '+ Producto +' Exitosamente ');
+                  $('#titulo').text('Exito');
                 }
                 if (response['notification'] == "danger") {
                   objeto = response["data"];
                   $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> No existe");
+                  $('#titulo').text('Peligro');
                 }
                 if (response['notification'] == "warning") {
                   objeto = response["data"];
                   $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+                  $('#titulo').text('Alerta');
                 } 
                // notificacion
                tabla2.ajax.reload();
                 $('div#notification-container').fadeIn(350);
-                $(".notification").addClass("notification-"+response['notification']);
-                $('#titulo').text(response['notification']);
-                
+                $(".notification").addClass("notification-"+response['notification']);              
       
                 $('div#notification-container').delay(3000).fadeOut(350); 
 
@@ -369,20 +372,22 @@ if(route == "home/producto/edit"){
                   success : function(response){
                     if (response['notification'] == "success") {
                       $('#mensaje').text(' Se Activo '+ Producto +' Exitosamente ');
+                      $('#titulo').text('Exito');
                     }
                     if (response['notification'] == "danger") {
                       objeto = response["data"];
                       $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> No existe");
+                      $('#titulo').text('Peligro');
                     }
                     if (response['notification'] == "warning") {
                       objeto = response["data"];
                       $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+                      $('#titulo').text('Alerta');
                     } 
                    // notificacion
           
                     $('div#notification-container').fadeIn(350);
                     $(".notification").addClass("notification-"+response['notification']);
-                    $('#titulo').text(response['notification']);
                     tabla2.ajax.reload();          
                     $('div#notification-container').delay(3000).fadeOut(350); 
     
