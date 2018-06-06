@@ -117,21 +117,22 @@ $('document').ready(function(){
                 tabla.clear();
               if (response['notification'] == "success") {
                 $('#mensaje').text(' Se Creo Inventario No. '+ response['data']+' Exitosamente ');
+                $('#titulo').text('Exito');
               }
               if (response['notification'] == "danger") {
                 $('#mensaje').html(objeto.message + "<br>" + response.data  + "<br> No existe");
+                $('#titulo').text('Peligro');
               }
               if (response['notification'] == "warning") {
                 objeto = response["data"];
                 $('#mensaje').html( response.data  + "<br> error de servidor interno");
+                $('#titulo').text('Alerta');
               }
               $('#modal-warning').modal('toggle');
               // notificacion
               tabla.ajax.reload();
               $('div#notification-container').fadeIn(350);
               $(".notification").addClass("notification-"+response['notification']);
-              $('#titulo').text(response['notification']);
-
               $('div#notification-container').delay(3000).fadeOut(350);
               
             }
@@ -161,22 +162,24 @@ $('document').ready(function(){
               
               if (response['notification'] == "success") {
                 $('#mensaje').text(' Se Modifico '+ response['producto']+' Exitosamente ');
+                $('#titulo').text('Exito');
               }
               if (response['notification'] == "danger") {
                 objeto = response["data"];
                 $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> No existe");
+                $('#titulo').text('Peligro');
               }
               if (response['notification'] == "warning") {
                 objeto = response["data"];
                 $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+                $('#titulo').text('Alerta');
               }
               $('#modal-warning').modal('toggle');
               // notificacion
               tabla.ajax.reload();
               $('div#notification-container').fadeIn(350);
               $(".notification").addClass("notification-"+response['notification']);
-              $('#titulo').text(response['notification']);
-
+    
               $('div#notification-container').delay(3000).fadeOut(350);
         })
     }
