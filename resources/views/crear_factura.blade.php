@@ -69,7 +69,7 @@
               <div class="form-group">
                   <label for="fecha">Año</label>
                   <input type="text" class="form-control" name="anio" id="anio" value="{{$facturas[0]->anio}}" required readonly="true">
-                  <input type="text" name="anio_db" id="anio_db" value="{{$date2}}" hidden>
+                  <input type="text" name="anio_db" id="anio_db" value="{{$facturas[0]->anio}}" hidden>
               </div>
             </div>
 

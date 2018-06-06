@@ -132,7 +132,10 @@ class FacturaController extends Controller
         $dy = $date->day;
         $mes = $request->get("mes_db");
         $anio = $request->get("anio_db");
-        $fecha = $anio + "/"+ $mes + "/" + $dy;
+        $fecha = $anio."-".$mes."-".$dy;
+        var_dump($dy);
+        var_dump($mes);
+        var_dump($anio);
         var_dump($fecha);
 
         if ($request -> ajax()) {
@@ -155,8 +158,7 @@ class FacturaController extends Controller
                 
                 if ($newObject->save()) {
 
-                    $idFact = $newObject->idFactura;
-                    var_dump($idFact);
+                    $idFact = $newObject->idFactura;                    
                     $idProd = $request->get("id_producto");
                     $cantidad = $request->get("cantidad");
                     $precio = $request->get("precio");

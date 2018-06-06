@@ -226,14 +226,28 @@ $(document).ready(function(){
 
 			var guardar = document.getElementById("btn_guardar");
 			guardar.removeAttribute("disabled");
+
+			var desactivar = document.getElementById("nom_sucursal");
+			desactivar.removeAttribute("disabled");
+
+			if($("#no_existe").length){
+				$("#no_existe").remove();
+			}
 			//$(".box").append(response);
 			console.log(response);
 	    })
 	    .fail(function(response){
 	    	alertify.closeLogOnClick(true).success(msgFactura);
-	    	
+
 	    	var guardar = document.getElementById("btn_guardar");
 			guardar.removeAttribute("disabled");
+
+			var desactivar = document.getElementById("nom_sucursal");
+			desactivar.removeAttribute("disabled");
+
+			if($("#no_existe").length){
+				$("#no_existe").remove();
+			}
 	    	//$(".box").append(response.responseText);	    	
 	    	console.log(response);
 	    });	    
