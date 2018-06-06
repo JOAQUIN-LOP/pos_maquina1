@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Response;
 use Validator;
 use App\Factura;
+USE APP\DetalleFactura;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -127,7 +128,59 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date = Carbon::now()->setTimezone('America/Guatemala');
+        $dy = $date->day;
+        $mes = $request->get("mes_db");
+        $anio = $request->get("anio_db");
+        $fecha = $anio + "-"+ $mes + "-" + $dy;
+
+        if ($request -> ajax()) {
+
+            try {
+
+                $newObject = new Factura();
+                $newObject->num_factura  = $request->get("no_factura");
+                $newObject->idEmpresa = $request->get("id_empresa");
+                $newObject->idSucursal = $request->get("nom_sucursal");
+                $newObject->idUsuario = 1;
+                $newObject->dia = $dy;
+                $newObject->mes = $request->get("mes_db");
+                $newObject->anio = $request->get("anio_db");
+                $newObject->fecha = $fecha;
+                $newObject->hora = $date;
+                $newObject->direccion = "ubicación";
+                $newObject->total_factura = 0;
+                $newObject->estado = 1;
+                
+                if ($newObject->save()) {
+
+                    $factDet = $request->get("id_producto");
+                    $cantidad = $request->get("cantidad");
+                    $precio = $request->get("precio");
+                    $sub_total = $request->get("sub_total");
+                    var_dump($factDet);
+
+                    /*
+                    foreach ($factDet as $key => $value) {
+                        
+                    }*/                            
+
+                    return response()->json(['notification' => 'success', 'producto' => $newObject->idFactura]);
+                }else{
+                    return true;
+                }
+                            
+
+            } catch (Exception $e) {
+                 $returnData = array(
+                    'status' => 500,
+                    'message' => $e->getMessage()
+                );
+                
+                return response()->json(['notification' => 'warning', 'data' => $returnData]);
+            }
+            return true;
+        }
     }
 
     /**

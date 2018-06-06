@@ -33,7 +33,7 @@
     <div class="box-body">
         <input type="text" value="{!!Request::path()!!}" id="route" hidden>
       {{--  inicio form  --}}
-      <form id="ver_facturas" name="ver_facturas">
+      <form id="ver_facturas" name="ver_facturas" class="head-factura">
         <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
         {{ csrf_field() }}      
         {{--  inicio row  --}}

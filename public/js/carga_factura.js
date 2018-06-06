@@ -5,12 +5,15 @@ $(document).ready(function(){
 	var msg = "<h4>Alerta!</h4>" +
 		      "<p>* Campos obligatorios</p>";
 
+	var msgFactura = "<h4>Exito!</h4>" +
+		      "<p>Factura Guardada</p>";
+
 	/*configuración del touchspin*/
 	$("#cantidad").TouchSpin({
 		verticalbuttons: true
 	});
 
-	/*subir y bajar valores en cantidad*/
+	/*subir y bajar valores en cantidad
 	$(".input-group-btn-vertical > .btn").click(function(){
 
 		if ($("#cantidad").val() == 0 || $("#precio_prod").val() == "a") {
@@ -23,7 +26,7 @@ $(document).ready(function(){
 
 
 		$("#sub_total").val(parseFloat(suma).toFixed(2)); //colocar 2 decimales
-	});
+	});*/
 
 
 	/*---- cambio de lenguaje al no encontrar valores en los select */
@@ -38,8 +41,7 @@ $(document).ready(function(){
 	/*Valida que se haya seleccionado un producto*/
 	$("#nom_producto").change(function(){
 		
-		$("#sub_total").val("");
-		$("#cantidad").val("");
+		$("#sub_total").val("");		
 
 		if($(this).val()==0){			
 			alertify.closeLogOnClick(true).error(msg);
@@ -100,7 +102,7 @@ $(document).ready(function(){
 
 	});
 
-	/*input cantidad al perder el foco*/
+	/*input cantidad al perder el foco
 	$("#cantidad").focusout(function(){
 		
 		if ($(this).val()=="" || $(this).val()<=0) {
@@ -120,18 +122,43 @@ $(document).ready(function(){
 
 		$("#sub_total").val(parseFloat(sub_total).toFixed(2));		
 
-	});
+	});*/
 
-
-	/* boton agregar al cuerpo de la factura*/
-	$("#btn_agregar").click(function(){
-
-		if ($("#nom_producto").val()==0 || $("#precio_prod").val()=="a") {
+/*------ cuando cambia la cantidad del input----------*/
+	$("#cantidad").change(function(){
+		
+		if ($(this).val()=="" || $(this).val()<=0) {
 			alertify.closeLogOnClick(true).error(msg);
 			return false;
 		}
 
-		if ($("#cantidad").val()<=0) {
+		/*
+		if ($("#nom_producto").val()==0 || $("#precio_prod").val()=="a") {
+			alertify.closeLogOnClick(true).error(msg);
+			return false;
+		}*/
+
+		if ($("#cantidad").val()=="" || $("#precio_prod").val()=="a") {
+			return false
+		}else{
+			var cantidad = $("#cantidad").val();
+			var precio = $("#precio_prod").val();
+
+			var sub_total = (cantidad * precio);
+
+			$("#sub_total").val(parseFloat(sub_total).toFixed(2));	
+		}			
+	});
+
+/*------ boton agregar al cuerpo de la factura----------*/
+	$("#btn_agregar").click(function(){
+
+		if ($("#nom_producto").val() == 0 || $("#precio_prod").val() == "a") {
+			alertify.closeLogOnClick(true).error(msg);
+			return false;
+		}
+
+		if ($("#cantidad").val() == "" || $("#cantidad").val() <= 0) {
 			alertify.closeLogOnClick(true).error(msg);
 			return false;
 		}
@@ -141,52 +168,79 @@ $(document).ready(function(){
 			return false;
 		}
 
-		var cantidad = $("#cantidad").val();
+		var cantidad = parseFloat($("#cantidad").val());
 		var id_prod = $("#nom_producto").val();
 		var nom_prod = $("#nom_producto :selected").text();
 		var precio = $("#precio_prod").val();
-		var sub = $("#sub_total").val();
+		var sub = parseFloat($("#sub_total").val()).toFixed(2);
 
 		//console.log(cantidad +"+"+id_prod+"+"+nom_prod+"+"+precio+"+"+sub);
 
 		$("#creacion_factura > tbody").append("<tr><td><input type='text' class='columnas' name='id_producto[]' value='"+id_prod+"' hidden='true'>"+nom_prod+"</td><td><input type='text' class='columnas' name='cantidad[]' value='"+cantidad+"' hidden='true'>"+cantidad+"</td><td><input type='text' class='columnas' name='precio[]' value='"+precio+"' hidden='true'>"+precio+"</td><td><input type='text' class='columnas' name='sub_total[]' value='"+sub+"' hidden='true'>"+sub+"</td><td><button type='button' class='btn btn-danger btn-as-block btn-sm btn_borrar_linea' onclick='borrar_linea(this)'><i class='fa fa-trash' style='margin-right: 5px;''></i>Borrar</button></td></tr>");
 
+		if ($("#total_cantidad").val() == "") {
+	
+			$("#total_cantidad").val(cantidad);
+			$("#total_importe").val(sub);	
+	
+		}else{
+	
+			var total_prod = parseFloat($("#total_cantidad").val()) + parseFloat(cantidad);
+			var total_fact = parseFloat($("#total_importe").val()) + parseFloat(sub);
+
+			$("#total_cantidad").val(parseFloat(total_prod).toFixed(2));
+			$("#total_importe").val(parseFloat(total_fact).toFixed(2));
+		}
+
+		$("#cantidad").val("");
+		$("#sub_total").val("");
+
 	});
 
 
-	/*-- boton guardar factura*/
+	/*----- boton guardar factura-----------*/
 	$("#btn_guardar").click(function(){
 
+		var boton = $(this);
 
 		$(this).attr('disabled', true);
 		
+		var desactivar = document.getElementById("nom_sucursal");
+		desactivar.removeAttribute("disabled");
 
+		var data = $(".head-factura").serialize();
 
+		$("#nom_sucursal").attr('disabled', 'true');
 		var token = $("#token").val();		
 
+		var alerta = 
 		$.ajax({
-	        url:"./ver_precio/"+id,
+	        url:"/pos_inventory/public/home/factura",
 	        headers: {'X-CSRF-TOKEN': token},
 	        type:"POST",                       
-	        dataType: 'json'
+	        dataType: 'json',
+	        data: data
 	    })
 	    .done(function(response){
-	    	var datos = JSON.parse(response); 
+			alertify.closeLogOnClick(true).success(msgFactura);
 
-	    	
+			var guardar = document.getElementById("btn_guardar");
+			guardar.removeAttribute("disabled");
 			//$(".box").append(response);
 			console.log(response);
 	    })
 	    .fail(function(response){
-	    	//$(".box").append(response.responseText);
+	    	alertify.closeLogOnClick(true).success(msgFactura);
+	    	
+	    	var guardar = document.getElementById("btn_guardar");
+			guardar.removeAttribute("disabled");
+	    	//$(".box").append(response.responseText);	    	
 	    	console.log(response);
-	    });	
-
-	    $(this).removeAttribute("disabled");
+	    });	    
 
 	});
 
-	/*boton cancelar, remueve factura y habilita las sucursales*/
+/*----------boton cancelar, remueve factura y habilita las sucursales---------------*/
 	$("#btn_cancelar").click(function(){
 		var desactivar = document.getElementById("nom_sucursal");
 		desactivar.removeAttribute("disabled");
@@ -194,14 +248,22 @@ $(document).ready(function(){
 		if($("#no_existe").length){
 			$("#no_existe").remove();
 		}
-	});
-
-
-		
+	});		
 
 });
 
-/*----función botón para borrar linea*/
-function borrar_linea(btn){
-	btn.closest("tr").remove();
-}
+/*----función botón para borrar linea-------------*/
+	function borrar_linea(btn){
+
+		var cant_prod = $(btn).closest("tr").find("td")[1].firstChild.value;
+		var cant_sub = $(btn).closest("tr").find("td")[3].firstChild.value;
+						
+		var total = parseFloat($("#total_importe").val()) - parseFloat(cant_sub).toFixed(2);
+		var cantidades = parseFloat($("#total_cantidad").val()) - parseFloat(cant_prod).toFixed(2);
+
+		$("#total_importe").val(parseFloat(total).toFixed(2));
+		$("#total_cantidad").val(parseFloat(cantidades).toFixed(2));
+
+		btn.closest("tr").remove();
+
+	}
