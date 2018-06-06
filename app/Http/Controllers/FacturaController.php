@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Response;
 use Validator;
 use App\Factura;
-USE APP\DetalleFactura;
+USE App\DetalleFactura;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -132,7 +132,8 @@ class FacturaController extends Controller
         $dy = $date->day;
         $mes = $request->get("mes_db");
         $anio = $request->get("anio_db");
-        $fecha = $anio + "-"+ $mes + "-" + $dy;
+        $fecha = $anio + "/"+ $mes + "/" + $dy;
+        var_dump($fecha);
 
         if ($request -> ajax()) {
 
@@ -154,16 +155,23 @@ class FacturaController extends Controller
                 
                 if ($newObject->save()) {
 
-                    $factDet = $request->get("id_producto");
+                    $idFact = $newObject->idFactura;
+                    var_dump($idFact);
+                    $idProd = $request->get("id_producto");
                     $cantidad = $request->get("cantidad");
                     $precio = $request->get("precio");
-                    $sub_total = $request->get("sub_total");
-                    var_dump($factDet);
+                    $sub_total = $request->get("sub_total");                    
 
-                    /*
-                    foreach ($factDet as $key => $value) {
-                        
-                    }*/                            
+                    for ($i=0; $i <sizeof($idProd) ; $i++) {
+                    
+                        $factDetalle = new DetalleFactura();
+                        $factDetalle->idFactura = $idFact;
+                        $factDetalle->idProducto = $idProd[$i];
+                        $factDetalle->cantidad = $cantidad[$i];
+                        $factDetalle->precio_unit = $precio[$i];
+                        $factDetalle->total_venta = $sub_total[$i];
+                        $factDetalle->save();
+                    }                        
 
                     return response()->json(['notification' => 'success', 'producto' => $newObject->idFactura]);
                 }else{
