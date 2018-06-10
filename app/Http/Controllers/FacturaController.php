@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Response;
 use Validator;
 use App\Factura;
+USE App\DetalleFactura;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -94,8 +95,7 @@ class FacturaController extends Controller
         ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')
             ->join('inventario as inv', 'emp.idEmpresa','=','inv.idEmpresa')
                 ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal', 'inv.mes', 'inv.anio')
-                    ->where('suc.estado',1)
-                    ->where('inv.estado',1)
+                    ->where('suc.estado',1)                    
                         ->groupBy('suc.nom_sucursal')
                             ->orderBy('suc.nom_sucursal')
                                 ->get();
@@ -128,7 +128,69 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date = Carbon::now()->setTimezone('America/Guatemala');
+        $dy = $date->day;
+        $mes = $request->get("mes_db");
+        $anio = $request->get("anio_db");
+        $fecha = $anio."-".$mes."-".$dy;
+        var_dump($dy);
+        var_dump($mes);
+        var_dump($anio);
+        var_dump($fecha);
+
+        if ($request -> ajax()) {
+
+            try {
+
+                $newObject = new Factura();
+                $newObject->num_factura  = $request->get("no_factura");
+                $newObject->idEmpresa = $request->get("id_empresa");
+                $newObject->idSucursal = $request->get("nom_sucursal");
+                $newObject->idUsuario = 1;
+                $newObject->dia = $dy;
+                $newObject->mes = $request->get("mes_db");
+                $newObject->anio = $request->get("anio_db");
+                $newObject->fecha = $fecha;
+                $newObject->hora = $date;
+                $newObject->direccion = "ubicación";
+                $newObject->total_factura = 0;
+                $newObject->estado = 1;
+                
+                if ($newObject->save()) {
+
+                    $idFact = $newObject->idFactura;                    
+                    $idProd = $request->get("id_producto");
+                    $cantidad = $request->get("cantidad");
+                    $precio = $request->get("precio");
+                    $sub_total = $request->get("sub_total");                    
+
+                    for ($i=0; $i <sizeof($idProd) ; $i++) {
+                    
+                        $factDetalle = new DetalleFactura();
+                        $factDetalle->idFactura = $idFact;
+                        $factDetalle->idProducto = $idProd[$i];
+                        $factDetalle->cantidad = $cantidad[$i];
+                        $factDetalle->precio_unit = $precio[$i];
+                        $factDetalle->total_venta = $sub_total[$i];
+                        $factDetalle->save();
+                    }                        
+
+                    return response()->json(['notification' => 'success', 'producto' => $newObject->idFactura]);
+                }else{
+                    return true;
+                }
+                            
+
+            } catch (Exception $e) {
+                 $returnData = array(
+                    'status' => 500,
+                    'message' => $e->getMessage()
+                );
+                
+                return response()->json(['notification' => 'warning', 'data' => $returnData]);
+            }
+            return true;
+        }
     }
 
     /**
@@ -176,7 +238,46 @@ class FacturaController extends Controller
         //
     }
 
-    public function cargaFactura(){
-        return view('sin_contenido');
+
+    /*POST*/
+    public function cargaFactura(Request $request, $id){
+
+
+        if ($request -> ajax()) {            
+            $num_factura =   DB::table('factura as fact')
+                ->join('sucursal as suc', 'suc.idSucursal','=','fact.idSucursal')            
+                    ->select(DB::raw("COUNT(fact.idFactura) as numero"))
+                        ->where('suc.idSucursal',$id)                        
+                            ->get();
+
+            $productos = DB::table('detalle_producto as det')
+                ->join('producto as prod', 'det.idProducto','=','prod.id')            
+                    ->select("det.idProducto", "prod.nomProducto")
+                        ->groupBy('prod.nomProducto')
+                            ->orderBy('prod.nomProducto')
+                            ->get();
+
+       
+            $numero = $num_factura[0]->numero + 1;
+
+            return view('nueva_factura', compact('numero', 'productos'));
+        }
+        
+    }
+
+    public function cargaPrecios(Request $request, $id){
+
+        if ($request -> ajax()) {
+            $precios = DB::table('detalle_producto as det')
+                ->select('det.precio_unidad')
+                    ->where('det.idProducto',$id)
+                        ->orderBy('det.precio_unidad')
+                        ->get();
+
+            $data = json_encode($precios);
+
+            return $data;
+        }
+
     }
 }

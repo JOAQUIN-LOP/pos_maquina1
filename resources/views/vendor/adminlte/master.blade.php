@@ -45,6 +45,10 @@
     {{--  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">  --}}
     
     <link rel="stylesheet" href="{{ asset('css/Gstyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/alertify/css/alertify.css')}}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/touchspin/css/jquery.bootstrap-touchspin.min.css') }}">
+    
+
 </head>
 <body class="hold-transition @yield('body_class')">
 @yield('body')
@@ -91,14 +95,16 @@
     </div>
   </div>
   
-
-@if(config('adminlte.plugins.chartjs'))
-    <!-- ChartJS -->
-    {{--  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>  --}}
-@endif
 {{--  bootbox lib  --}}
 
 <script src="{{ asset('js/bootbox.min.js') }}"></script>
+
+{{-- alertify lib --}}
+
+<script src="{{ asset('vendor/adminlte/vendor/alertify/js/alertify.js') }}"></script>
+
+{{-- alertify lib --}}
+<script src="{{ asset('vendor/adminlte/vendor/touchspin/js/jquery.bootstrap-touchspin.min.js') }}"></script>
 
 @yield('adminlte_js')
 
