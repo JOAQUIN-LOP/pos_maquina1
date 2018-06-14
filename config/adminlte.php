@@ -171,6 +171,27 @@ return [
             ], 
         ],
         [
+            'text'      => 'Sucursal',
+            'icon'      => 'cubes',
+            'submenu'   => [
+                [
+                    'text' => 'Inicializar Inventario',
+                    'icon' => 'book',
+                    'url'  => 'home/Sucursal/crear',
+                ],
+                [
+                    'text' => 'Agregar Producto Inventario',
+                    'icon' => 'paste',
+                    'url'  => '/home/agregar/inventario'
+                ],
+                [
+                    'text' => 'Lista de Inventarios',
+                    'icon' => 'list-ul',
+                    'url'  => '/home/sucursal/ver',
+                ],
+            ],
+        ],
+        [
             'text'  => 'Facturas',
             'icon'  => 'cubes',
             'submenu' => [

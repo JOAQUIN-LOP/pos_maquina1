@@ -212,10 +212,9 @@ $(document).ready(function(){
 
 		$("#nom_sucursal").attr('disabled', 'true');
 		var token = $("#token").val();		
-
-		var alerta = 
+		
 		$.ajax({
-	        url:"/pos_inventory/public/home/factura",
+	        url:"./save_factura",
 	        headers: {'X-CSRF-TOKEN': token},
 	        type:"POST",                       
 	        dataType: 'json',

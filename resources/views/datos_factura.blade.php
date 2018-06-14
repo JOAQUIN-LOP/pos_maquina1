@@ -26,7 +26,7 @@
                     <td>{{ $factura -> nom_usuario }}</td>
                     <td>{{ \Carbon\Carbon::parse($factura->fecha)->format('d/m/Y')}}</td>                    
                     <td>{{ $factura -> total_factura }} </td>
-                    <td> <button type="button" class="btn btn-primary btn-as-block detalles"><i class="fa fa-search"></i>Ver Detalle</button> </td>
+                    <td> <button type="button" class="btn btn-primary btn-as-block detalles" onclick="verDetalle(this)"><i class="fa fa-search"></i>Ver Detalle</button> </td>
                   </tr>
 
                  @endforeach

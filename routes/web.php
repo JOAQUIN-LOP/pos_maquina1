@@ -31,6 +31,7 @@ Route::post('/home/detalle_factura/{id}','FacturaController@detalles');
 Route::get('/home/crear/factura', 'FacturaController@formFactura');
 Route::post('/home/crear/carga_factura/{id}', 'FacturaController@cargaFactura');
 Route::post('/home/crear/ver_precio/{id}', 'FacturaController@cargaPrecios');
+Route::post('/home/crear/save_factura','FacturaController@saveFactura');
 Route::resource('/home/factura', 'FacturaController');
 
 // Empresa
@@ -65,3 +66,9 @@ Route::get('/home/detalle/inventario/{id}/ver/mas/{prod}', 'DetalleInventarioCon
 Route::post('/home/detalle/inventario/editar/cantidad', 'DetalleInventarioController@EditCantidad');
 Route::resource('/home/detalle/inventario', 'DetalleInventarioController');
 
+
+// INVENTARIO SUCURSAL
+
+
+
+// DETALLA INV. SUCURSAL
