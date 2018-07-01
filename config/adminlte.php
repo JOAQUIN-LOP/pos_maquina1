@@ -177,7 +177,7 @@ return [
                 [
                     'text' => 'Inicializar Inventario',
                     'icon' => 'book',
-                    'url'  => 'home/Sucursal/crear',
+                    'url'  => 'home/inv_sucursal',
                 ],
                 [
                     'text' => 'Agregar Producto Inventario',

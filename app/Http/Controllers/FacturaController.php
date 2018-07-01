@@ -27,7 +27,7 @@ class FacturaController extends Controller
                         ->groupBy('suc.nom_sucursal')
                             ->orderBy('suc.nom_sucursal')
                                 ->get();
-
+        
         return view('factura', compact('facturas', $facturas));
     }
 
@@ -284,5 +284,5 @@ class FacturaController extends Controller
             }//end try catch            
         }//end request ajax
     }
-    
+
 }

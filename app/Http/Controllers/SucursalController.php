@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Response;
 use Validator;
 use App\Sucursal;
+use App\InvSucursal;
 USE App\DetalleInventarioSucursal;
 use DB;
 use Carbon\Carbon;
@@ -20,7 +21,22 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        //
+        $sucursal = DB::table('sucursal as suc')
+        ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')            
+                ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
+                    ->where('suc.estado','=',1)
+                        ->groupBy('suc.nom_sucursal')
+                            ->orderBy('suc.nom_sucursal')
+                                ->get();
+
+        if (count($sucursal) > 0) {
+        
+            return view('inventario_sucursal', compact('sucursal'));    
+        
+        }else{
+            return view('sin_contenido');
+        }
+        
     }
 
     /**
@@ -88,4 +104,94 @@ class SucursalController extends Controller
     {
         //
     }
+
+    public function verNumero(Request $request, $id){        
+
+        if($request -> ajax()){
+
+            $numero = DB::table('inventario_sucursal')        
+            ->select(DB::raw('COUNT(idInventarioSucursal) as numero_inv'))
+                ->where('idSucursal',$id)                            
+                ->where('anio', $request->input('anio'))
+                    ->get();            
+
+            //var_dump(count($numero));
+
+            //var_dump($numero[0]->numero_inv);
+
+            $mes = $numero[0]->numero_inv + 1;
+
+            //var_dump($mes);
+            if ($mes > 0 && $mes < 13) {
+
+                $data = json_encode($mes);
+
+                return $data;        
+            }
+
+            else{
+                return view('already');
+            }         
+        }        
+    }
+
+    public function listarInventario(Request $request, $id){
+
+        if ($request -> $ajax()) {
+            $lista = DB::table('inventario_sucursal')        
+            //->select())
+                ->where('idSucursal',$id)                            
+                ->where('anio', $request->input('anio'))
+                    ->get();
+        }
+
+    }
+
+    public function listaAll(Request $request, $id){
+
+        if ($request -> $ajax()) {
+            $lista = DB::table('inventario_sucursal')        
+            ->select('idInventarioSucursal', 'num_inventario_sucursal', 'idSucursal', 'mes', 'anio', 'fecha','total_cantidad_productos', 'total_cantidad_inventario', 'estado')
+                ->where('idSucursal',$id)                            
+                ->where('anio', $request->input('anio'))
+                    ->get();
+
+
+            return view('lista_inventario');
+        }
+    }
+
+/*
+    public function listaTodo(){
+
+        
+            $lista = DB::table('inventario_sucursal')        
+            ->select('idInventarioSucursal', 'num_inventario_sucursal', 'idSucursal', 'mes', 'anio', 'fecha','total_cantidad_productos', 'total_cantidad_inventario', 'estado')
+                ->where('idSucursal',$id)                            
+                ->where('anio', $request->input('anio'))
+                    ->get();
+
+
+            return view('lista_inventario');
+        
+    }*/
+
+    public function listaInventarios(){
+        $sucursal = DB::table('sucursal as suc')
+        ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')            
+                ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
+                    ->where('suc.estado','=',1)
+                        ->groupBy('suc.nom_sucursal')
+                            ->orderBy('suc.nom_sucursal')
+                                ->get();
+
+        if (count($sucursal) > 0) {
+        
+            return view('listado_sucursal', compact('sucursal'));    
+        
+        }else{
+            return view('sin_contenido');
+        }
+    }
+
 }
