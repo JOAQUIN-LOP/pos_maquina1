@@ -137,7 +137,7 @@ class SucursalController extends Controller
 
     public function listarInventario(Request $request, $id){
 
-        if ($request -> $ajax()) {
+        if ($request -> ajax()) {
             $lista = DB::table('inventario_sucursal')        
             //->select())
                 ->where('idSucursal',$id)                            
@@ -149,7 +149,7 @@ class SucursalController extends Controller
 
     public function listaAll(Request $request, $id){
 
-        if ($request -> $ajax()) {
+        if ($request -> ajax()) {
             $lista = DB::table('inventario_sucursal')        
             ->select('idInventarioSucursal', 'num_inventario_sucursal', 'idSucursal', 'mes', 'anio', 'fecha','total_cantidad_productos', 'total_cantidad_inventario', 'estado')
                 ->where('idSucursal',$id)                            
@@ -161,22 +161,36 @@ class SucursalController extends Controller
         }
     }
 
-/*
-    public function listaTodo(){
 
+    // LISTADO PARA LA VISUALIZACION DE TODOS LOS INVENTARIOS SEGUN LA SUCURSAL
+    public function listaTodo(Request $request, $id){
         
-            $lista = DB::table('inventario_sucursal')        
-            ->select('idInventarioSucursal', 'num_inventario_sucursal', 'idSucursal', 'mes', 'anio', 'fecha','total_cantidad_productos', 'total_cantidad_inventario', 'estado')
-                ->where('idSucursal',$id)                            
-                ->where('anio', $request->input('anio'))
+        if ($request -> ajax()) {
+            $listado = DB::table('inventario_sucursal as inv')      
+            ->join('sucursal as suc', 'inv.idSucursal','=','suc.idSucursal')
+            ->select('inv.idInventarioSucursal', 'inv.num_inventario_sucursal', 'inv.idSucursal','suc.nom_sucursal', 'inv.mes', 'inv.anio', 'inv.fecha','inv.total_cantidad_productos', 'inv.total_cantidad_inventario', 'inv.estado')
+                ->where('inv.idSucursal',$id)                            
+                ->where('inv.anio', $request->input('anio'))
                     ->get();
+    
+
+            if (count($listado) > 0) {
+            
+                return view('carga_listado', compact('listado'));
+            
+            }else{
+           
+                return view('sin_contenido');
+           
+            }    
+        }                
+    
+    }
 
 
-            return view('lista_inventario');
-        
-    }*/
 
     public function listaInventarios(){
+
         $sucursal = DB::table('sucursal as suc')
         ->join('empresa as emp', 'suc.idEmpresa','=','emp.idEmpresa')            
                 ->select('emp.idEmpresa','emp.nom_empresa', 'suc.idSucursal', 'suc.nom_sucursal')
@@ -192,6 +206,28 @@ class SucursalController extends Controller
         }else{
             return view('sin_contenido');
         }
+    }
+
+    //VER DETALLE DE INVENTARIO SUCURSAL
+    public function verDetalleInventario(Request $request, $id){
+
+        $listado = DB::table('inventario_sucursal as inv')      
+            ->join('sucursal as suc', 'inv.idSucursal','=','suc.idSucursal')
+            ->select('inv.idInventarioSucursal', 'inv.num_inventario_sucursal', 'inv.idSucursal','suc.nom_sucursal', 'inv.mes', 'inv.anio', 'inv.fecha','inv.total_cantidad_productos', 'inv.total_cantidad_inventario', 'inv.estado')
+                ->where('inv.idSucursal',$id)                            
+                ->where('inv.anio', $request->input('anio'))
+                    ->get();
+    
+
+        if (count($listado) > 0) {
+        
+            return view('carga_listado', compact('listado'));
+        
+        }else{
+       
+            return view('sin_contenido');
+       
+        } 
     }
 
 }

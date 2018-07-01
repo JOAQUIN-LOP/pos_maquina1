@@ -45,7 +45,7 @@ $(".detalles").on('click',function(){
 });*/
 
 
-function  verDetalle(btn){
+function verDetalle(btn){
 
   $(".modal .modal-dialog").remove();
 

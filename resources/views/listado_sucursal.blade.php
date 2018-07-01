@@ -74,6 +74,9 @@
   </div>
 </div>
   
+<div class="modal fade" id="modal-info">
+        
+</div>
 
 @stop
 @section('js')

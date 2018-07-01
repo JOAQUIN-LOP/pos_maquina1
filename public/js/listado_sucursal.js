@@ -22,8 +22,12 @@ $(document).ready(function(){
 	
 	$("#btn_ver").click(function(){
 
-		if($("#already").length){
-			$("#already").remove();
+		if($("#lista-cargada").length){
+			$("#lista-cargada").remove();
+		}
+
+		if($("#no_existe").length){
+			$("#no_existe").remove();
 		}
 		
 		var id = $("#nom_sucursal").val();
@@ -45,7 +49,7 @@ $(document).ready(function(){
 		var data = $(".form-numero").serialize();
 
 		$.ajax({
-			url: "./inv_sucursal/" + id,
+			url: "./carga/" + id,
 			headers: {'X-CSRF-TOKEN' : token },
 			type:"POST",
 			dataType: 'json',
@@ -53,12 +57,13 @@ $(document).ready(function(){
 		})
 		.done(function(response){			
 
+			$(".box").append(response);
 			//console.log(response);			
 
 		})
 		.fail(function(response){
-
-			alertify.closeLogOnClick(true).error(msg_error);
+			$(".box").append(response.responseText);
+			//alertify.closeLogOnClick(true).error(msg_error);
 			console.log(response);
 
 		});
