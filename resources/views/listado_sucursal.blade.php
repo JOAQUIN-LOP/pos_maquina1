@@ -31,7 +31,7 @@
              <div class="form-group">
                   <label for="nom_sucursal">Sucursal</label>
                   <select type="text" class="form-control selector" name="nom_sucursal" id="nom_sucursal" required>
-                    <option value="0">Seleccione Sucursal</option>
+                    <option value="0">Seleccionar</option>
                     @foreach($sucursal as $suc)
                       <option value="{{$suc->idSucursal}}">{{$suc->nom_sucursal}}</option>
                     @endforeach

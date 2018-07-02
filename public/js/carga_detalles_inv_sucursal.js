@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	$("#inventarios").DataTable({
 		autoWitdh: true,
-	 	order: [[ 1, "asc" ]],
+	 	order: [[ 0, "asc" ]],
 	  	dom: 'Bfrtip',//Definimos los elementos del control de tabla
 	  	// agregamos botones para exportar la informacion 
 	  	buttons: [
@@ -21,18 +21,33 @@ $(document).ready(function(){
 
 function verDetalle(btn){
 
+	$(".modal .modal-dialog").remove();
+	
+	var token = $("#token").val();
+
+
 	var id_detalle = $(btn).closest("tr").find("td")[0].innerHTML;
 	var id_sucursal= $(btn).closest("tr").find("td")[2].firstChild.value;
 
-	var cant_sub = $(btn).closest("tr").find("td")[3].firstChild.value;
-					
-	var total = parseFloat($("#total_importe").val()) - parseFloat(cant_sub).toFixed(2);
-	var cantidades = parseFloat($("#total_cantidad").val()) - parseFloat(cant_prod).toFixed(2);
+	$.ajax({
+	            url:"./detalle/" + id_detalle + "/"+ id_sucursal,
+	            headers: {'X-CSRF-TOKEN': token},
+	            type:"POST",
+	            dataType: 'json',
+	                    
+	    })
+	    .done(function(response){
+	      $(".modal").append(response.responseText);
+	      //console.log(response);
 
-	$("#total_importe").val(parseFloat(total).toFixed(2));
-	$("#total_cantidad").val(parseFloat(cantidades).toFixed(2));
-
-	btn.closest("tr").remove();
+	    })
+	    .fail(function(response){
+	      $(".modal").append(response.responseText);
+	      //console.log(response);
+	    });
+	  //console.log(id_factura);
+	  //console.log($(this).text());
+	$("#modal-info").modal();
 }
 
 

@@ -201,7 +201,7 @@ class SucursalController extends Controller
 
         if (count($sucursal) > 0) {
         
-            return view('listado_sucursal', compact('sucursal'));    
+            return view('listado_sucursal', compact('sucursal'));
         
         }else{
             return view('sin_contenido');
@@ -209,25 +209,39 @@ class SucursalController extends Controller
     }
 
     //VER DETALLE DE INVENTARIO SUCURSAL
-    public function verDetalleInventario(Request $request, $id){
+    public function verDetalleInventario(Request $request, $id,$suc){
 
-        $listado = DB::table('inventario_sucursal as inv')      
-            ->join('sucursal as suc', 'inv.idSucursal','=','suc.idSucursal')
-            ->select('inv.idInventarioSucursal', 'inv.num_inventario_sucursal', 'inv.idSucursal','suc.nom_sucursal', 'inv.mes', 'inv.anio', 'inv.fecha','inv.total_cantidad_productos', 'inv.total_cantidad_inventario', 'inv.estado')
-                ->where('inv.idSucursal',$id)                            
-                ->where('inv.anio', $request->input('anio'))
-                    ->get();
+        if($request -> ajax()){
+
+            $sucursal = DB::table('sucursal')
+            ->select('nom_sucursal')
+                ->where('idSucursal', $suc)
+                ->get();
+
+            $suma = DB::table('detalle_inventario_sucursal')
+            ->select(DB::raw("SUM(cantidad_total) as cantidad"), DB::raw("SUM(subtotal_inventario) as total"))
+                ->where('idInventarioSucursal', $id)
+                ->get();
+
+            $detalles = DB::table('detalle_inventario_sucursal as det')
+            ->join('producto as prod', 'det.idProducto','=','prod.id')
+            ->select('prod.nomProducto', 'prod.descripcion_producto', 'det.fecha','det.cantidad_total', 'det.subtotal_inventario')
+                ->where('det.idInventarioSucursal',$id)
+                    ->groupBy('prod.nomProducto')
+                        ->get();
     
 
-        if (count($listado) > 0) {
+            if (count($detalles) > 0) {
+            
+                return view('detalle_inv_sucursal', compact('detalles', 'suma', 'sucursal'));
+            
+            }else{
+           
+                return view('sin_contenido');
+           
+            }     
+        }
         
-            return view('carga_listado', compact('listado'));
-        
-        }else{
-       
-            return view('sin_contenido');
-       
-        } 
     }
 
 }

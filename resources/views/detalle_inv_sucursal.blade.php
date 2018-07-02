@@ -4,52 +4,40 @@
     <div class="modal-header bg-info">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title">Detalle de Factura</h4>
+      <h4 class="modal-title">Detalle de Inventario</h4>
     </div>
-    <div class="modal-body">
-      
-        <form id="FormPrecioProd">
+    <div class="modal-body">        
+        
+      <form id="formDetalle">
           {{ csrf_field() }}   
           <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">   
           {{--  inicio row  --}}
           <div class="row">
             <div class="col-sm-3">
               <div class="form-group">
-                  <label for="empresa">Empresa:</label>
-                  <input type="text" class="form-control" name="empresa" id="empresa" value="{{ $cabecera[0]->nom_empresa }}" readonly>
-                  <input type="text" name="id_factura" id="id_factura" hidden>
+                  <label for="total_prod">Total Productos:</label>
+                  <input type="text" class="form-control" name="total_prod" id="total_prod" value="{{ $suma[0]->cantidad }}" readonly>
+                  <input type="text" name="sucursal" id="sucursal" value="{{ $sucursal[0]->nom_sucursal }}" hidden>
               </div>
             </div>
             <div class="col-sm-3">
               <div class="form-group">
-                  <label for="sucursal">Sucursal:</label>
-                  <input type="text" class="form-control" name="sucursal" id="sucursal" value="{{ $cabecera[0]->nom_sucursal }}" readonly >
+                  <label for="total_cantidad">Total Inventario:</label>
+                  <input type="text" class="form-control" name="total_cantidad" id="total_cantidad" value="{{ $suma[0]->total }}" readonly >
               </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                  <label for="numero">Número Factura:</label>
-                  <input type="text" class="form-control" name="numero" id="numero" value="{{ $cabecera[0]->num_factura }}" readonly >
-              </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Fecha:</label>
-                    <input type="text" class="form-control" name="fecha" id="fecha" value="{{ \Carbon\Carbon::parse($cabecera[0]->fecha)->format('d/m/Y') }}" readonly>
-                </div>
-              </div>                   
+            </div>                                    
           </div>
           {{--  fin row  --}}                
         </form>
-        
+
        <div class="container-fluid">
             <div class="table-responsive">
-              <table id="detalle_factura" class="display table table-striped table-responsive table-bordered table-hover" style="width:100%">
+              <table id="detalle_sucursal" class="display table table-striped table-responsive table-bordered table-hover" style="width:100%">
                 <thead>
                 <tr>
-                  <th>IdProducto</th>
                   <th>Nombre</th>
-                  <th>Cantidad Unidades</th>
+                  <th>Descripcion</th>
+                  <th>Fecha</th>
                   <th>Precio Unitario</th>
                   <th>Sub Total</th>                  
                 </tr>
@@ -57,36 +45,18 @@
                 <tbody>
                   @foreach($detalles as $detalle)
                   <tr>
-                    <td>{{ $detalle -> idProducto}}</td>
-                    <td>{{ $detalle -> nomProducto}}</td>
-                    <td>{{ $detalle -> cantidad}}</td>
-                    <td>{{ $detalle -> precio_unit}}</td>
-                    <td>{{ $detalle -> total_venta}}</td>
+                    <td>{{ $detalle -> nomProducto }}</td>
+                    <td>{{ $detalle -> descripcion_producto }}</td>
+                    <td>{{ \Carbon\Carbon::parse($detalle->fecha)->format('d/m/Y') }}</td>
+                    <td>{{ $detalle -> cantidad_total }}</td>
+                    <td>{{ $detalle -> subtotal_inventario }}</td>
                   </tr>                                                                                                            
                   @endforeach      
                 </tbody>
               </table>
             </div>
             {{--  fin box body  --}}
-
-            <form>
-              <div class="form-row">
-                <div class="form-group col-md-3">
-                  <label for="total_cantidad">Total Productos:</label>
-                  <input type="text" class="form-control" id="total_cantidad" value="{{ $cantidades[0]->cantidad }}" readonly>
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="total_quetzales">Total Factura:</label>
-                  <input type="text" class="form-control" id="total_quetzales" value="{{ $cantidades[0]->total }}" readonly>
-                </div>
-                <div class="form-group col-md-2">              
-                  <label>&nbsp;</label>    
-                  <input type="button" class="btn btn-warning btn-as-block" id="imprimir_factura" value="Imprimir Factura">
-                </div>
-              </div>                
-            </form>
-          
-                                
+                                                   
         </div>
 
     </div>
@@ -98,8 +68,22 @@
 </div>
 
 <script type="text/javascript">
-  $("#detalle_factura").DataTable({
-    "lengthChange": false ,
-    "order": [[ 1, "asc" ]]
+
+  var nombre = $("#sucursal").val();
+
+  $("#detalle_sucursal").DataTable({
+    autoWitdh: true,
+    order: [[ 0, "asc" ]],
+      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+      // agregamos botones para exportar la informacion 
+      buttons: [
+        {
+            extend: 'pdfHtml5',
+            title: 'Inventarios Sucursal: ' + nombre,     
+            exportOptions:{
+            columns: [0, 1, 2, 3, 4]
+          }       
+      }
+    ]  
   });
 </script>
