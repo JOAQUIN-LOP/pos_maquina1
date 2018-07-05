@@ -49,7 +49,7 @@ $(document).ready(function(){
 		var data = $(".form-numero").serialize();
 
 		$.ajax({
-			url: "./carga/" + id,
+			url: "./sucursal/" + id,
 			headers: {'X-CSRF-TOKEN' : token },
 			type:"POST",
 			dataType: 'json',

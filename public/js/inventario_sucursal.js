@@ -10,6 +10,10 @@ $(document).ready(function(){
 		      		"<p>Error Interno.</p>"+
 		      		"<p>Contacte con Administrador.</p>";
 
+	var msg_success = "<h4>Exito!</h4>" +
+		      		"<p>Datos Guardados.</p>";
+
+
 	$(".selector").select2({
 		language: {
 
@@ -19,15 +23,8 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#nom_sucursal").change(function(){			
 
-	});
-
-	$("btn_agregar").click(function(){
-
-	});
-
-	
+	//BOTON PARA VER QUE INVENTARIO ES EL QUE TOCA
 	$("#btn_ver").click(function(){
 
 		if($("#already").length){
@@ -148,9 +145,106 @@ $(document).ready(function(){
 		});
 	});
 
+	
+	//BOTON PARA AGREGAR EL NUEVO INVENTARIO SUCURSAL SI ES QUE NO EXISTE UNO YA CERRADO
+	//DEBERIA DE PERMITER MOSTRAR LA TABLA DE LOS INVENTARIOS DE LA SUCURSAL
+	$("#btn_crear").click(function(){
 
-	$("#btn_listar").click(function(){
+		var id = $("#nom_sucursal").val();		
+		var anio = $("#anio").val();
+		var mes = $("#mes").val();
+		var numero = $("#no_inventario").val();
+
+		if (id == 0 || anio == 0 || numero == "" || mes == "") {
+			alertify.closeLogOnClick(true).error(msg2);
+			return false;			
+		}
 		
+		var date = new Date();
+
+		var valida = date.getFullYear();
+
+		if(anio > valida){
+			$("#mes").val("");
+			$("#no_inventario").val("");
+			alertify.closeLogOnClick(true).error(msg);
+			return false;
+		}
+
+		var token = $("token").val();
+
+		var data = $(".form-numero").serialize();
+
+		$.ajax({
+			url: "./inv_sucursal/save/" + id,
+			headers: {'X-CSRF-TOKEN' : token },
+			type:"POST",
+			dataType: 'json',
+			data:data,
+		})
+		.done(function(response){		
+
+			if (response == 1) {
+				alertify.closeLogOnClick(true).error("<h4>Alerta!</h4>" +
+		      "<p>Existe inventario abierto, cierrelo antes de iniciar otro.</p>");
+			}else{
+				$("#mes").val("");
+				$("#no_inventario").val("");
+
+				alertify.closeLogOnClick(true).success("<h4>Exito!</h4>" +
+		      "<p>Se ha abierto un nuevo Inventario</p>");			
+			}		
+		})
+		.fail(function(response){
+
+			alertify.closeLogOnClick(true).error(msg_error);
+			console.log(response);
+
+		});
+
+	});
+
+
+	//BOTON PARA LISTAR INVENTARIO SIN CREARLO Y PARA DESPUES DE CREARLO
+	$("#btn_listar").click(function(){
+
+		if($("#lista-cargada").length){
+			$("#lista-cargada").remove();
+		}
+
+		if($("#no_existe").length){
+			$("#no_existe").remove();
+		}
+
+		var id = $("#nom_sucursal").val();		
+		var anio = $("#anio").val();
+		
+		if (id == 0 || anio == 0) {
+			alertify.closeLogOnClick(true).error(msg2);
+			return false;			
+		}
+				
+		var token = $("token").val();
+
+		var data = $(".form-numero").serialize();
+
+		$.ajax({
+			url: "./inv_sucursal/listar/" + id,
+			headers: {'X-CSRF-TOKEN' : token },
+			type:"POST",
+			dataType: 'json',
+			data:data,
+		})
+		.done(function(response){		
+
+			$(".box").append(response.responseText);
+		})
+		.fail(function(response){
+
+			$(".box").append(response.responseText);
+			
+
+		});
 		
 	});
 

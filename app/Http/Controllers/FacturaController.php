@@ -226,15 +226,15 @@ class FacturaController extends Controller
         $mes = $request->get("mes_db");
         $anio = $request->get("anio_db");
         $fecha = $anio."-".$mes."-".$dy;
-        var_dump($dy);
+        /*var_dump($dy);
         var_dump($mes);
         var_dump($anio);
-        var_dump($fecha);
+        var_dump($fecha);*/
 
         if ($request -> ajax()) {
 
             try {
-
+            
                 $newObject = new Factura();
                 $newObject->num_factura  = $request->get("no_factura");
                 $newObject->idEmpresa = $request->get("id_empresa");

@@ -69,14 +69,13 @@
               <div class="form-group">
                   <label for="mes">Mes</label>
                   <input type="text" class="form-control" name="mes" id="mes" required readonly="true"/>
-
+                  <input type="text" name="mes_db" id="mes_db" readonly="true" hidden="true">
               </div>
             </div>
             <div class="col-sm-1">
               <div class="form-group">
-                  <label for="nom_empresa">No. Inv.</label>
-                  <input type="text" class="form-control" name="no_inventario"  id="no_inventario" value="" readonly required>
-                  <input type="text" name="no_inventario" id="no_inventario" value="" readonly hidden>
+                  <label for="nom_inventario">No. Inv.</label>
+                  <input type="text" class="form-control" name="no_inventario"  id="no_inventario" value="" readonly required>                  
               </div>
             </div>
             <div class="col-sm-1">
@@ -102,6 +101,10 @@
   </div>
 </div>
   
+
+<div class="modal fade" id="modal-info">
+        
+</div>
 
 @stop
 @section('js')

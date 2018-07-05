@@ -244,4 +244,90 @@ class SucursalController extends Controller
         
     }
 
+
+
+    //FUNCION PARA GUARDAR EL INVENTARIO
+    //SE VERIFICA QUE NO EXISTA INVENTARIO ABIERTO PARA LA SUCURSAL BAJO NINGUN AñO
+    public function saveInventarioSuc(Request $request, $id){
+
+        if ($request -> ajax()) {
+            $activo = DB::table('inventario_sucursal')
+                ->select('idInventarioSucursal')
+                    ->where('idSucursal', $id)
+                    ->where('estado', 1)
+                        ->count();
+
+            
+            if($activo > 0){
+                $activo = 1;
+                return $activo;
+            }
+
+            $date = Carbon::now()->setTimezone('America/Guatemala');
+            $dy = $date->day;
+            $mes = $request->get("no_inventario");
+            $anio = $request->get("anio");
+            $fecha = $anio."-".$mes."-".$dy;                     
+            
+            try{
+
+                $newObject = new InvSucursal();
+                $newObject->num_inventario_sucursal  = $request->get("no_inventario");                
+                $newObject->idSucursal = $request->get("nom_sucursal");            
+                $newObject->mes = $mes;       
+                $newObject->anio = $anio;     
+                $newObject->fecha = $fecha;                
+                $newObject->total_cantidad_productos = 0;
+                $newObject->total_cantidad_inventario = 0;                
+                $newObject->estado = 1;
+                $newObject->save();
+
+                return response()->json(['notification' => 'success', 'inventaio' => $newObject->idInventarioSucursal]);
+
+            }catch(Exception $e){
+                $returnData = array(
+                    'status' => 500,
+                    'kmessage' => $e->getMessage()
+                );
+
+                return response()->json(['notification' => 'warning', 'data' => $returnData]);
+            }//end tray catch
+
+        }//end request ajax
+    }
+
+    public function listarActivos(Request $request, $id){
+
+        if ($request -> ajax()) {
+            $listado = DB::table('inventario_sucursal as inv')      
+            ->join('sucursal as suc', 'inv.idSucursal','=','suc.idSucursal')
+            ->select('inv.idInventarioSucursal', 'inv.num_inventario_sucursal', 'inv.idSucursal','suc.nom_sucursal', 'inv.mes', 'inv.anio', 'inv.fecha','inv.total_cantidad_productos', 'inv.total_cantidad_inventario', 'inv.estado')
+                ->where('inv.idSucursal',$id)                            
+                ->where('inv.anio', $request->input('anio'))
+                    ->get();
+    
+
+            if (count($listado) > 0) {
+            
+                return view('carga_listado_iniciar', compact('listado'));
+            
+            }else{
+           
+                return view('sin_contenido');
+           
+            }    
+        }
+
+    }
+
+    public function cerrarInventario(Request $request, $id){
+        
+        if ($request -> ajax()) {
+            
+            $data =  DB::table('inventario_sucursal')->where('idInventarioSucursal',$id)->update(array('estado'=>0));
+
+            return 1;
+        }
+    }
+
 }

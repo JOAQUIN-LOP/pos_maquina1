@@ -72,8 +72,11 @@ Route::resource('/home/detalle/inventario', 'DetalleInventarioController');
 Route::post('/home/inv_sucursal/{id}', 'SucursalController@verNumero');
 Route::post('/home/sucursal/carga/{id}', 'SucursalController@listaTodo');
 Route::post('/home/sucursal/detalle/{id}/{suc}', 'SucursalController@verDetalleInventario');
+Route::post('/home/detalle/{id}/{suc}', 'SucursalController@verDetalleInventario');
 Route::get('/home/sucursal/ver', 'SucursalController@listaInventarios');
 Route::post('/home/inv_sucursal/save/{id}', 'SucursalController@saveInventarioSuc');
+Route::post('/home/inv_sucursal/listar/{id}', 'SucursalController@listarActivos');
+Route::post('/home/de_baja/{id}', 'SucursalController@cerrarInventario');
 Route::resource('/home/inv_sucursal','SucursalController');
 
 
