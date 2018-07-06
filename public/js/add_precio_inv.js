@@ -126,7 +126,7 @@ $(document).ready(function(){
 
 			$("#no_inventario").val(response[0].num_inventario_sucursal);
 			$("#id_inv_sucursal").val(response[0].idInventarioSucursal);
-			console.log(response[0].idInventarioSucursal);
+			//console.log(response[0].idInventarioSucursal);
 		
 
 		})
@@ -149,7 +149,8 @@ $(document).ready(function(){
 		var anio = $("#anio").val();
 		var mes = $("#mes_db").val();		
 		var noInv = $("#no_inventario").val();
-		var id = $("#id_inv_sucursal").val();		
+		var idInv = $("#id_inv_sucursal").val();		
+		var id = suc;
 
 		if (suc == "" || anio == 0 || mes == "" || noInv == "" || id == "") {
 			alertify.closeLogOnClick(true).error(msg2);
@@ -161,19 +162,19 @@ $(document).ready(function(){
 
 
 		$.ajax({
-            url:"./detalle/" + id_detalle + "/"+ id_sucursal,
+            url:"./carga_detalle/" + id,
             headers: {'X-CSRF-TOKEN': token},
             type:"POST",
             dataType: 'json',
 	                    
 	    })
 	    .done(function(response){
-			$(".modal").append(response.responseText);
+			$(".box").append(response.responseText);
 		    //console.log(response);
 
 	    })
 	    .fail(function(response){
-	    	$(".modal").append(response.responseText);
+	    	$(".box").append(response.responseText);
 	    	//console.log(response);
 	    });
 	

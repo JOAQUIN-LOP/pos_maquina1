@@ -128,9 +128,10 @@ class DetalleInvSucursalController extends Controller
 
          if ($request -> ajax()) {            
             $num_inventario = DB::table('inventario_sucursal')                
-                ->select(DB::raw("num_inventario_sucursal"))
-                    ->where('idSucursal',$id)                        
-                        ->get();
+                ->select("num_inventario_sucursal")
+                    ->where('idSucursal',$id)
+                    ->where('estado',1)                        
+                        ->get();                      
 
             $productos = DB::table('detalle_producto as det')
                 ->join('producto as prod', 'det.idProducto','=','prod.id')            
@@ -140,13 +141,27 @@ class DetalleInvSucursalController extends Controller
                             ->get();
 
        
-            $numero = $num_factura[0]->num_inventario_sucursal;
+            $numero = $num_inventario[0]->num_inventario_sucursal;
 
             return view('precio_detalle_inventario', compact('numero', 'productos'));
         }
         
     }
 
+    public function cargaPrecios(Request $request, $id){
 
+        if ($request -> ajax()) {
+            $precios = DB::table('detalle_producto as det')
+                ->select('det.precio_unidad')
+                    ->where('det.idProducto',$id)
+                        ->orderBy('det.precio_unidad')
+                        ->get();
+
+            $data = json_encode($precios);
+
+            return $data;
+        }
+
+    }
 
 }

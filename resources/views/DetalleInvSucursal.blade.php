@@ -54,7 +54,7 @@
             </div>
             <div class="col-sm-1">
               <div class="form-group">
-                  <label for="nom_inventario">No. Inv.</label>
+                  <label for="no_inventario">No. Inv.</label>
                   <input type="text" class="form-control" name="no_inventario"  id="no_inventario" value="" readonly required> 
                   <input type="text" name="id_inv_sucursal" id="id_inv_sucursal" value="" hidden="true">                
               </div>

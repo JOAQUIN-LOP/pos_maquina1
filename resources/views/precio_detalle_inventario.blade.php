@@ -4,7 +4,7 @@
     </div>
 
     <div class="panel-body">
-      <form id="factura" class="head-factura">
+      <form id="inventario" class="head-inventario">
         {{ csrf_field() }}   
         <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
         
@@ -56,7 +56,7 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label>&nbsp;</label>
-                <button type="button" id="btn_agregar" class="btn btn-primary btn-as-block"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Agregar</button>                            
+                <button type="button" id="btn_add_fila" class="btn btn-primary btn-as-block form-control"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Agregar</button>                            
               </div>
             </div>                 
           </div>
@@ -64,11 +64,11 @@
         </div>  
       </form>
 
-      <form id="factura_body" class="head-factura">
+      <form id="inventario_body" class="head-inventario">
         <div class="row">
           <div class="col-sm-12">
             <div class="scrollable">                          
-              <table id="creacion_factura" class="display table table-responsive table-bordered table-striped table-hover">
+              <table id="creacion_producto" class="display table table-responsive table-bordered table-striped table-hover">
                 <thead>
                   <tr>                  
                     <th>Nombre</th>
@@ -99,20 +99,20 @@
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label for="total_importe">Total Factura Q.</label>
+              <label for="total_importe">Total Q.</label>
               <input type="text" class="form-control" name="total_importe" id="total_importe" readonly="true">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
               <label>&nbsp;</label>
-              <button type="button" id="btn_guardar" class="btn btn-primary btn-as-block"><i class="fa fa-download" style="margin-right: 5px;"></i>Guardar</button>
+              <button type="button" id="btn_guardar" class="btn btn-primary btn-as-block form-control"><i class="fa fa-download" style="margin-right: 5px;"></i>Guardar</button>
             </div>
           </div>
           <div class="col-sm-2 pull-right">
             <div class="form-group">
               <label>&nbsp;</label>
-              <button type="button" id="btn_cancelar" class="btn btn-warning btn-as-block"><i class="fa fa-trash" style="margin-right: 5px;"></i>Cancelar</button>
+              <button type="button" id="btn_cancelar" class="btn btn-warning btn-as-block form-control"><i class="fa fa-trash" style="margin-right: 5px;"></i>Cancelar</button>
             </div>
           </div>
         </div>
