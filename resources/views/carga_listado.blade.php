@@ -37,7 +37,7 @@
                     </td>
                     <td> <button type="button" class="btn btn-primary btn-as-block detalles" onclick="verDetalle(this)"><i class="fa fa-search"></i></button>
                         @if ($lista->estado == 1)
-                          <button type="button" class="btn btn-warning btn-as-block edita" onclick="darBaja(this)"><i class="fa fa-edit"></i></button>
+                          <button type="button" class="btn btn-warning btn-as-block edita" onclick="editar(this)"><i class="fa fa-edit"></i></button>
                         @endif
                     </td>
                   </tr>

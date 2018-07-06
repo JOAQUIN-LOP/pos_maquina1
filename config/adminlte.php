@@ -182,7 +182,7 @@ return [
                 [
                     'text' => 'Agregar Producto Inventario',
                     'icon' => 'paste',
-                    'url'  => '/home/agregar/inventario'
+                    'url'  => '/home/det_inv_sucursal'
                 ],
                 [
                     'text' => 'Lista de Inventarios',
