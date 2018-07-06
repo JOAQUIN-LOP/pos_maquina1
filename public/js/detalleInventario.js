@@ -101,13 +101,12 @@ $('document').ready(function(){
         });    
     }
 
-    $('#AllProd').on('blur keypress change keydown','tr.fila input.cantidad', function(){
+    $('#AllProd').on('blur keypress change keydown','tr.fila input.cantidad', function(event){
         var exist = $(this).closest('tr').find("td").get(3).innerHTML;
+        var valor = $(this).val();
         if ( event.which == 13 || event.type == 'blur' || event.which == 9) {
         
-        var valor = $(this).val();
         var codigo = $(this).parents("tr").find(".precio").val();
-
         
         var existencia = parseInt(exist);
         if(valor != ""){
@@ -128,7 +127,8 @@ $('document').ready(function(){
                 setTimeout(function(){ dialog.modal('hide'); }, 3000);
             }
             
-        }else{
+        }
+        if(valor==""){
             var dialog = bootbox.dialog({
                 message: '<p class="text-center">El campo no puede ir vacio</p>',
                 closeButton: false
