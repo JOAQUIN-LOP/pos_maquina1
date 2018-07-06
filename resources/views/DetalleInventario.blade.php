@@ -42,7 +42,7 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon">mes</span>
-                 <select id="mes" name="mes" class="form-control" readonly>
+                 <select id="mes" name="mes" class="form-control" readonly style="width:100%">
                   </select>
               </div>
             </div>
