@@ -65,7 +65,7 @@ class FacturaController extends Controller
             $cabecera = DB::table('factura as fac')
             ->join('empresa as emp', 'emp.idEmpresa','=','fac.idEmpresa' )
                 ->join('sucursal as suc', 'suc.idSucursal','=','fac.idSucursal')
-                    ->select('emp.nom_empresa', 'suc.nom_sucursal', 'fac.num_factura', 'fac.fecha')
+                    ->select('emp.nom_empresa', 'suc.nom_sucursal', 'fac.num_factura', 'fac.fecha','fac.idFactura')
                         ->where('fac.idFactura', $id)
                             ->get();
 
@@ -288,9 +288,7 @@ class FacturaController extends Controller
 
     //ver el detalle de la factura para el reporte
     //POST
-    public function detalleReporte(Request $request, $id){
-
-         if ($request -> ajax()) {            
+    public function detalleReporte($id){    
             
             $cabecera = DB::table('factura as fac')
             ->join('empresa as emp', 'emp.idEmpresa','=','fac.idEmpresa' )
@@ -313,9 +311,11 @@ class FacturaController extends Controller
                             ->where('det.idFactura',$id)                      
                                 ->get();
             
-            return response()->json($cabecera, $detalles, $cantidades);            
+            $result["cabecera"] = $cabecera;
+            $result["detalles"] = $detalles;
+            $result["cantidades"] = $cantidades;        
+            return response()->json($result);            
         }       
-    }
 
 
 }
