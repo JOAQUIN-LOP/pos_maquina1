@@ -82,7 +82,7 @@
                 </div>
                 <div class="form-group col-md-2">              
                   <label>&nbsp;</label>    
-                  <input type="button" class="btn btn-warning btn-as-block" id="imprimir_factura" value="Imprimir Factura">
+                  <input type="button" class="btn btn-warning btn-as-block" id="imprimir_factura" idFactura="{{$cabecera[0]->idFactura}}" value="Imprimir Factura">
                 </div>
               </div>                
             </form>
@@ -97,11 +97,17 @@
   </div>
   <!-- /.modal-content -->
 </div>
+<input type="text" value="{{URL::to('/home/detalle_factura/reporte/')}}" id="rutaURL" hidden >
+<object   height="0" width="0" id="iframePDF"></object>
         <!-- /.modal-dialog -->
+@section('js')
+  <script type="text/javascript" src="{{ asset('js/FacturaPDF.js') }}"></script>  
+  @stack('js')
+@yield('js')
 <script type="text/javascript">
   $("#detalle_factura").DataTable({
     "lengthChange": false ,
     "order": [[ 1, "asc" ]]
-  });
+  });  
 </script>
 

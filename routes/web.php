@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // FACTURAS
 Route::post('/home/datos_factura/{id}', 'FacturaController@see');
 Route::post('/home/detalle_factura/{id}','FacturaController@detalles');
+Route::get('/home/detalle_factura/reporte/{id}','FacturaController@detalleReporte');
 Route::get('/home/crear/factura', 'FacturaController@formFactura');
 Route::post('/home/crear/carga_factura/{id}', 'FacturaController@cargaFactura');
 Route::post('/home/crear/ver_precio/{id}', 'FacturaController@cargaPrecios');

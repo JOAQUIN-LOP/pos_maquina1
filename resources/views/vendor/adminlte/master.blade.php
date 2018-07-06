@@ -85,6 +85,8 @@
     <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf.debug.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf.plugin.autotable.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/jsPDF/jspdf-plugin-text-align.js') }}"></script>
+    
 
 {{--  notificacion  --}}
   <div class="alert" id="notification-container" style="display:none;">
