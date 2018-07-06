@@ -225,7 +225,7 @@ class SucursalController extends Controller
 
             $detalles = DB::table('detalle_inventario_sucursal as det')
             ->join('producto as prod', 'det.idProducto','=','prod.id')
-            ->select('prod.nomProducto', 'prod.descripcion_producto', 'det.fecha','det.cantidad_total', 'det.subtotal_inventario')
+            ->select('prod.nomProducto', 'prod.descripcion_producto', 'det.fecha', DB::raw("SUM(det.cantidad_total) as cantidad_total"), DB::raw("SUM(det.subtotal_inventario) as subtotal_inventario"))
                 ->where('det.idInventarioSucursal',$id)
                     ->groupBy('prod.nomProducto')
                         ->get();

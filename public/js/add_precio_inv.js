@@ -177,8 +177,9 @@ $(document).ready(function(){
 	    	$(".box").append(response.responseText);
 	    	//console.log(response);
 	    });
-	
-
 	});
+
+
+	
 
 });

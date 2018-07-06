@@ -85,4 +85,5 @@ Route::resource('/home/inv_sucursal','SucursalController');
 Route::post('/home/det_inv_sucursal/{ad}', 'DetalleInvSucursalController@verInventarioActivo');
 Route::post('/home/carga_detalle/{id}', 'DetalleInvSucursalController@cargarDetalle');
 Route::post('/home/det_inv_sucursal/ver_precio/{id}', 'DetalleInvSucursalController@cargaPrecios');
+Route::post('/home/save_productos', 'DetalleInvSucursalController@saveProductos');
 Route::resource('/home/det_inv_sucursal','DetalleInvSucursalController');

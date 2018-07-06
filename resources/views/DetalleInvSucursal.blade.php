@@ -15,7 +15,7 @@
   <div class="box-body">
     
     {{--  inicio form  --}}
-      <form id="crear_inventario" class="form-numero">
+      <form id="crear_inventario" class="head-inventario">
         <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
         <div class="row">
           <div class="col-sm-12">

@@ -214,7 +214,7 @@ $(document).ready(function(){
 		var token = $("#token").val();		
 		
 		$.ajax({
-	        url:"./save_factura",
+	        url:"./save_productos",
 	        headers: {'X-CSRF-TOKEN': token},
 	        type:"POST",                       
 	        dataType: 'json',

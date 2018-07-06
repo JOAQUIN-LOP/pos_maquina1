@@ -164,4 +164,59 @@ class DetalleInvSucursalController extends Controller
 
     }
 
+
+    //FUNCION PARA ALMACENAR EL PRODUCTO AL INVENTARIO DE LA SUCURSAL
+    public function saveProductos(Request $request){
+
+        $date = Carbon::now()->setTimezone('America/Guatemala');
+        $dy = $date->day;
+        $mes = $request->get("mes_db");
+        $anio = $request->get("anio");
+        $fecha = $anio."-".$mes."-".$dy;
+
+        $idProd = $request->get("id_producto");              
+        $cantidad = $request->get("cantidad");
+        //$precio = $request->get("precio");
+        $sub_total = $request->get("sub_total");  
+
+        /*var_dump($dy);
+        var_dump($mes);
+        var_dump($anio);
+        var_dump($fecha);*/
+
+        if ($request -> ajax()) {
+         
+
+            for ($i=0; $i <sizeof($idProd) ; $i++) {
+            
+                try {
+
+                    $newObject = new DetalleInventarioSucursal();
+                    $newObject->idInventarioSucursal  = $request->get("id_inv_sucursal");
+                    $newObject->idProducto = $idProd[$i];                
+                    $newObject->mes = $request->get("mes_db");
+                    $newObject->anio = $request->get("anio");
+                    $newObject->fecha = $fecha;                            
+                    $newObject->cantidad_total = $cantidad[$i];
+                    $newObject->subtotal_inventario = $sub_total[$i];
+                    $newObject->save();                
+                                          
+                } catch (Exception $e) {
+                     $returnData = array(
+                        'status' => 500,
+                        'message' => $e->getMessage()
+                    );
+                    
+                    return response()->json(['notification' => 'warning', 'data' => $returnData]);
+                }//end try catch 
+
+            }    
+            
+            return response()->json(['notification' => 'success', 'data' => 1]);
+                                      
+                           
+        }//end request ajax
+
+    }
+
 }

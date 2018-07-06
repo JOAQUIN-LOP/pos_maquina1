@@ -115,14 +115,14 @@ return [
             'text' => 'Blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
-        ],
+        ],/*
         [
             'text'        => 'Pages',
             'url'         => 'admin/pages',
             'icon'        => 'file',
             'label'       => 4,
             'label_color' => 'success',
-        ],
+        ],*/
         [
             'text'    => 'Producto',
             'icon'    => 'cubes',
@@ -226,6 +226,8 @@ return [
             'icon' => 'lock',
         ],
         */
+       
+       /*
         [
             'text'    => 'Multilevel',
             'icon'    => 'share',
@@ -263,7 +265,9 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],/*
+        ],*/
+
+        /*
         'LABELS',
         [
             'text'       => 'Important',

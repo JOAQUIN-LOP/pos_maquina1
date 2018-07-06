@@ -70,6 +70,8 @@
 <script type="text/javascript">
 
   var nombre = $("#sucursal").val();
+  var cantidad = $("#total_prod").val();
+  var total = $("#total_cantidad").val();
 
   $("#detalle_sucursal").DataTable({
     autoWitdh: true,
@@ -79,7 +81,7 @@
       buttons: [
         {
             extend: 'pdfHtml5',
-            title: 'Inventarios Sucursal: ' + nombre,     
+            title: 'Inventario Sucursal: ' + nombre,            
             exportOptions:{
             columns: [0, 1, 2, 3, 4]
           }       

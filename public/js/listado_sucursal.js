@@ -64,7 +64,7 @@ $(document).ready(function(){
 		.fail(function(response){
 			$(".box").append(response.responseText);
 			//alertify.closeLogOnClick(true).error(msg_error);
-			console.log(response);
+			//console.log(response);
 
 		});
 	});
