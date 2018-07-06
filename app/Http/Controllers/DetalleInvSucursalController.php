@@ -142,10 +142,9 @@ class DetalleInvSucursalController extends Controller
        
             $numero = $num_factura[0]->num_inventario_sucursal;
 
-            return view('nueva_factura', compact('numero', 'productos'));
+            return view('precio_detalle_inventario', compact('numero', 'productos'));
         }
-
-        return view('precio_detalle_inventario');
+        
     }
 
 

@@ -141,19 +141,42 @@ $(document).ready(function(){
 
 	$("#btn_agregar").click(function(){
 
+		if($("#no_existe").length){
+			$("#no_existe").remove();
+		}
+
 		var suc = $("#nom_sucursal").val();		
 		var anio = $("#anio").val();
 		var mes = $("#mes_db").val();		
 		var noInv = $("#no_inventario").val();
-		var id = $("#id_inv_sucursal").val();
-		console.log(id);
+		var id = $("#id_inv_sucursal").val();		
 
 		if (suc == "" || anio == 0 || mes == "" || noInv == "" || id == "") {
 			alertify.closeLogOnClick(true).error(msg2);
 			return false;
 		}
 
-		console.log(agregando precio)
+		var token = $("#token").val();
+
+
+
+		$.ajax({
+            url:"./detalle/" + id_detalle + "/"+ id_sucursal,
+            headers: {'X-CSRF-TOKEN': token},
+            type:"POST",
+            dataType: 'json',
+	                    
+	    })
+	    .done(function(response){
+			$(".modal").append(response.responseText);
+		    //console.log(response);
+
+	    })
+	    .fail(function(response){
+	    	$(".modal").append(response.responseText);
+	    	//console.log(response);
+	    });
+	
 
 	});
 

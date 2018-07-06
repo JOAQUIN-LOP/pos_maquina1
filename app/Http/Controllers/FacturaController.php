@@ -285,4 +285,37 @@ class FacturaController extends Controller
         }//end request ajax
     }
 
+
+    //ver el detalle de la factura para el reporte
+    //POST
+    public function detalleReporte(Request $request, $id){
+
+         if ($request -> ajax()) {            
+            
+            $cabecera = DB::table('factura as fac')
+            ->join('empresa as emp', 'emp.idEmpresa','=','fac.idEmpresa' )
+                ->join('sucursal as suc', 'suc.idSucursal','=','fac.idSucursal')
+                    ->select('emp.nom_empresa', 'suc.nom_sucursal', 'fac.num_factura', 'fac.fecha')
+                        ->where('fac.idFactura', $id)
+                            ->get();
+
+            
+            $detalles = DB::table('detalle_factura as det')
+            ->join('producto as prod', 'det.idProducto','=','prod.id') 
+                ->select('det.idProducto','prod.nomProducto','det.cantidad', 'det.precio_unit', 'det.total_venta')
+                        ->where('det.idFactura',$id)                        
+                            ->orderBy('prod.nomProducto')
+                                ->get();
+
+
+             $cantidades = DB::table('detalle_factura as det')                            
+                        ->select(DB::raw("SUM(det.cantidad) as cantidad"), DB::raw("SUM(det.total_venta) as total"))
+                            ->where('det.idFactura',$id)                      
+                                ->get();
+            
+            return response()->json($cabecera, $detalles, $cantidades);            
+        }       
+    }
+
+
 }
