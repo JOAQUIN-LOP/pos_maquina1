@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Inicio')
 
 @section('content_header')
     <h1>Administrador</h1>
@@ -8,6 +8,6 @@
 
 @section('content')
     <div class="jumbotron text-center">
-		<h1>Bienvenido!</h1>		
+		<h1>¡Bienvenido!</h1>		
 	</div>
 @stop
