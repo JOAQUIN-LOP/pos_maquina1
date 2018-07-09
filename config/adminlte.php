@@ -172,7 +172,7 @@ return [
         ],
         [
             'text'      => 'Sucursal',
-            'icon'      => 'cubes',
+            'icon'      => 'building',
             'submenu'   => [
                 [
                     'text' => 'Inicializar Inventario',
@@ -193,17 +193,17 @@ return [
         ],
         [
             'text'  => 'Facturas',
-            'icon'  => 'cubes',
+            'icon'  => 'list-alt',
             'submenu' => [
                 [
                     'text'          => 'Ver Facturas',
                     'url'           => '/home/factura',
-                    'icon'          => 'cube'
+                    'icon'          => 'list'
                 ],
                 [
                     'text'          => 'Agregar Factura',
                     'url'           => '/home/crear/factura',
-                    'icon'          => 'cubes',          
+                    'icon'          => 'file-text',          
                 ],
                 
             ],
