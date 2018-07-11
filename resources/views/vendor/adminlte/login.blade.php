@@ -21,14 +21,14 @@
                 <div class="form-group has-feedback {{ $errors->has('user') ? 'has-error' : '' }}">
                     <input type="user" name="user" class="form-control" value="{{ old('user') }}"
                            placeholder="{{ trans('adminlte::adminlte.user') }}">
-                    
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     @if ($errors->has('user'))
                         <span class="help-block">
                             <strong>{{ $errors->first('user') }}</strong>
                         </span>
                     @endif
-                    
+
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                     <input type="password" name="password" class="form-control"
@@ -41,7 +41,7 @@
                     @endif
                 </div>
                 <div class="row text-center">
-                    
+
                     <!-- /.col -->
                     <div class="form-group">
                         <button type="submit"
@@ -50,13 +50,13 @@
                     <!-- /.col -->
                 </div>
             </form>
-            
+
         </div>
         <!-- /.login-box-body -->
     </div><!-- /.login-box -->
 @stop
 
 @section('adminlte_js')
-    
+
     @yield('js')
 @stop
