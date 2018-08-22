@@ -332,7 +332,7 @@ $('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
                 columns = [ data.header[0], data.header[1], data.header[2], data.header[3], data.header[4] ],
                 pageHeight = doc.internal.pageSize.height || doc.internal.pageSize.getHeight(),
                 pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth(),
-                Ancho = pageWidth - 115;
+                Ancho = pageWidth - 125;
 
                 pageContent = function (data) {
                   // HEADER
@@ -341,7 +341,7 @@ $('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
                   doc.setFontSize(12).writeText(20, 50, `SAN JOSE LA MAQUINA`, { align: 'center' });
                   doc.setFontSize(12).writeText(20, 70, 'LISTADO DE ARTICULOS', { align: 'center' });
       
-                  FActual = fecha.getDate() + "/" +  Mes + "/" + Dia;
+                  FActual = Dia + "/" +  Mes + "/" + fecha.getFullYear();
                   doc.setFontSize(10).writeText(Ancho, 90, `FECHA: ${FActual}  `);
                 //doc.writeText(Ancho, 70, `PAGINA: ${data.pageCount}`); 
                   // FOOTER
