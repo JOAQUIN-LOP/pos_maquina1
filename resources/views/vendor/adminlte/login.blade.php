@@ -18,7 +18,7 @@
             <form action="{{ url('do_login') }}" method="post">
                 {!! csrf_field() !!}
 
-                <div class="form-group has-feedback {{ $errors->has('user') ? 'has-error' : '' }}">
+                <div class="form-group has-feedback {{ $errors->has('user') ? 'has-errcor' : '' }}">
                     <input type="user" name="user" class="form-control" value="{{ old('user') }}"
                            placeholder="{{ trans('adminlte::adminlte.user') }}">
 
