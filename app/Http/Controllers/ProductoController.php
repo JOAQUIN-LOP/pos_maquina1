@@ -114,6 +114,7 @@ class ProductoController extends Controller
         ->select('Prod.nomProducto as nomProducto' , 'Prod.descripcion_producto as descripcion_producto', 'Prod.estado as estado', 'DP.cantidad_unidades as cantidad_unidades', 'DP.precio_total_compras as precio_total_compras')
         ->selectRaw("DATE_FORMAT(DP.fecha,'%d-%m-%Y') as fecha")
         ->where('Prod.estado', 1)
+        ->where('DP.cantidad_unidades','>',0.0)
         ->orderBy('Prod.nomProducto', 'asc')
         ->get();
 

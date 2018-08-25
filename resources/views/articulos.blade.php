@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="col-sm-4">
-              <div class="form-group">
+              <div class="form-group nomProducto">
                 <div class="input-group">
                   <span class="input-group-addon">Producto</span>
                   <input type="text" class="form-control" name="nomProducto"  id="nomProducto" required>
