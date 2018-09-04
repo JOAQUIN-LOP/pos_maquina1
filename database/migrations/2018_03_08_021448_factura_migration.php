@@ -15,7 +15,7 @@ class FacturaMigration extends Migration
     {
         Schema::create('factura', function (Blueprint $table) {
             $table->increments('idFactura');
-            $table->integer('num_factura')->unique();
+            $table->integer('num_factura');
             $table->integer('idEmpresa')->unsigned();
             $table->integer('idSucursal')->unsigned();
             $table->integer('idUsuario')->unsigned();
