@@ -166,7 +166,7 @@ $('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
 
            if(precio > 0){
             Total = (precio / cantidad);
-           $('#precio_unidad').val(Total);
+           $('#precio_unidad').val(parseFloat(Total).toFixed(2));
            }
            
     })   
@@ -321,23 +321,87 @@ $('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
           {
             text: 'PDF',
             action: function ( e, dt, button, config ) {
-                var data = dt.buttons.exportData();
+                var data = dt.buttons.exportData(),
+                totalPagesExp = "{total_pages_count_string}",
+                pageContent,
+                fecha = new Date(),
+                Mes =("00" + (fecha.getMonth()+1)).slice (-2),
+                Dia =("00" + fecha.getDate()).slice (-2),            
+                doc = new jsPDF('p', 'pt', 'letter'),
+                rows = [],
+                columns = [ data.header[0], data.header[1], data.header[2], data.header[3], data.header[4] ],
+                pageHeight = doc.internal.pageSize.height || doc.internal.pageSize.getHeight(),
+                pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth(),
+                Ancho = pageWidth - 125;
 
-                var rows = [];
-
-                var columns = [ data.header[0], data.header[1], data.header[2], data.header[3], data.header[4] ];
-
-
+                pageContent = function (data) {
+                  // HEADER
+                  doc.setFontSize(16).setFontType("bold");
+                  doc.writeText(20, 30, `TIENDA MALDONADO`, { align: 'center' });
+                  doc.setFontSize(12).writeText(20, 50, `SAN JOSE LA MAQUINA`, { align: 'center' });
+                  doc.setFontSize(12).writeText(20, 70, 'LISTADO DE ARTICULOS', { align: 'center' });
+      
+                  FActual = Dia + "/" +  Mes + "/" + fecha.getFullYear();
+                  doc.setFontSize(10).writeText(Ancho, 90, `FECHA: ${FActual}  `);
+                //doc.writeText(Ancho, 70, `PAGINA: ${data.pageCount}`); 
+                  // FOOTER
+                  str = "Pagina " + data.pageCount;
+                  // Total page number plugin only available in jspdf v1.0+
+                  if (typeof doc.putTotalPages === 'function') {
+                      doc.setFontSize(8);
+                      doc.setFontType("normal");
+                       str = str + " de " + totalPagesExp;
+                      //str = "ORIGINAL: UNIDAD DE BODEGA DE PROVEEDURIA";
+                  }
+              
+                  doc.text(str, data.settings.margin.left, pageHeight  - 25);
+                  
+              };
                 $.each(data.body, function(i, item) {
-                  rows[i] = [ data.body[i][0], data.body[i][1], data.body[i][2], data.body[i][3], data.body[i][4] ];
+                  rows[i] = [ data.body[i][0], data.body[i][1], data.body[i][2], data.body[i][3], `Q. ${parseFloat(data.body[i][4]).toFixed(2)}`];
                 });
 
-               
-                // Only pt supported (not mm or in)
-                var doc = new jsPDF('p', 'pt', 'letter');
-                doc.text(210, 50, 'Listado de Productos');
-                doc.autoTable(columns, rows, {margin: {top: 60}});
-                doc.save('Listado-Productos.pdf')
+  
+                doc.autoTable(columns, rows,{
+                  addPageContent: pageContent,
+                  headerStyles:   {
+                    textColor: 255,
+                    fillColor:[41, 128, 185],
+                    halign: 'center',
+                    valign: 'middle',
+                    fontSize: 12,
+                    fontStyle: 'bold'
+                        },
+                    margin: { 
+                      top: 100, bottom: 80 
+                    },
+                    styles: {
+                        textColor: 0,
+                        fontSize: 12,
+                        lineWidth: 0,
+                        fillColor: false,
+                        tableWidth: 'auto',
+                    },
+                   columnStyles: {
+                    textColor: 0,
+                    width: 'wrap',
+                    overflow: 'linebreak', 
+                    0: {columnWidth: 55 },
+                    1: {width: 'wrap', overflow: 'linebreak', halign: 'center', columnWidth: 80 },
+                    2: {width: 'wrap', overflow: 'linebreak', halign: 'center', columnWidth: 150 },
+                    3: {width: 'wrap', overflow: 'linebreak', halign: 'center', columnWidth: 150 },
+                    4: {halign: 'right', columnWidth: 100 }
+                  }
+                });
+
+                 // Total page number plugin only available in jspdf v1.0+
+                if (typeof doc.putTotalPages === 'function') {
+                    doc.putTotalPages(totalPagesExp);
+                }
+                doc.autoPrint();
+                var iframe = document.getElementById('iframePDF');
+              
+                iframe.data = doc.output('dataurlstring');
             }
           },
         ],

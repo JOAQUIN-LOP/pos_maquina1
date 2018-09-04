@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-
 <div class="box box-success">
 
   <div class="box-header with-border">
@@ -18,7 +17,7 @@
   <input type="text" class="form-control" name="UrlInv" id="UrlInv" value="{{URL::to('')}}" style="display:none">  
   <!-- box-body -->
     <div class="box-body">
-
+  
       {{--  inici box body  --}}
       <div class="box-body">
         <div class="row">

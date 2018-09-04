@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-
+<object  height="0" width="0" id="iframePDF"></object>
 <div class="box box-success">
 
   <div class="box-header with-border">

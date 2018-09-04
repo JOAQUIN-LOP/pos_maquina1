@@ -70,73 +70,98 @@ var route = $("#route").val();
     $('#btn-Guardar').click(function (e) {
       e.preventDefault();
       Producto = $("#nomProducto").val();
-      
-      bootbox.confirm({
-        size: 'small',
-        message: "Esta seguro de Crear "+ Producto,
-        buttons: {
-            confirm: {
-                label: 'Aceptar',
-                className: 'btn-success'
-            },
-            cancel: {
-                label: 'Cancelar',
-                className: 'btn-danger'
-            }
-        },
-        callback: function (result) {
-        
-          if(result == true){
-
-            var dato = $("#idProducto").val();
-            var url = $('#CrearProducto').attr('action');
-            var token = $("#token").val();
-            var method = $('#CrearProducto').attr('method');
-            
-            $.ajax({
-              url: url,
-              headers: { 'X-CSRF-TOKEN': token },
-              type: method,
-              dataType: 'json',
-              data: $("#CrearProducto").serialize(),
-              success: function (response) {
-                // limpia el formulario
-                $('#CrearProducto').trigger("reset");
-
-                // notificacion
-                tabla.ajax.reload();
-                if (response['notification'] == "success") {
-                  $('#mensaje').text(' Se Creo '+ response['producto']+' Exitosamente ');
-                  $('#titulo').text('Exito');
-                }
-                if (response['notification'] == "warning") {
-                  objeto = response["data"];
-                  $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> Los Campos no pueden ir vacios");
-                  $('#titulo').text('Alerta');
-                }
-                if (response['notification'] == "danger") {
-                  objeto = response["data"];
-                  $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
-                  $('#titulo').text('Peligro');
-                }
-                
-                $('div#notification-container').fadeIn(350);
-                $(".notification").addClass("notification-"+response['notification']);
-                
-                
-                // oculta notificacion
-
-                $('div#notification-container').delay(3000).fadeOut(350);    
-              
+      let resp = validacion();
+      if(resp == true){
+        bootbox.confirm({
+          size: 'small',
+          message: "Esta seguro de Crear "+ Producto,
+          buttons: {
+              confirm: {
+                  label: 'Aceptar',
+                  className: 'btn-success'
+              },
+              cancel: {
+                  label: 'Cancelar',
+                  className: 'btn-danger'
               }
-            });
+          },
+          callback: function (result) {
+          
+            if(result == true){
+
+              var dato = $("#idProducto").val();
+              var url = $('#CrearProducto').attr('action');
+              var token = $("#token").val();
+              var method = $('#CrearProducto').attr('method');
+              
+              $.ajax({
+                url: url,
+                headers: { 'X-CSRF-TOKEN': token },
+                type: method,
+                dataType: 'json',
+                data: $("#CrearProducto").serialize(),
+                success: function (response) {
+                  // limpia el formulario
+                  $('#CrearProducto').trigger("reset");
+
+                  // notificacion
+                  tabla.ajax.reload();
+                  if (response['notification'] == "success") {
+                    $('#mensaje').text(' Se Creo '+ response['producto']+' Exitosamente ');
+                    $('#titulo').text('Exito');
+                  }
+                  if (response['notification'] == "warning") {
+                    objeto = response["data"];
+                    $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> Los Campos no pueden ir vacios");
+                    $('#titulo').text('Alerta');
+                  }
+                  if (response['notification'] == "danger") {
+                    objeto = response["data"];
+                    $('#mensaje').html(objeto.message + "<br>" + objeto.status  + "<br> error de servidor interno");
+                    $('#titulo').text('Peligro');
+                  }
+                  
+                  $('div#notification-container').fadeIn(350);
+                  $(".notification").addClass("notification-"+response['notification']);
+                  
+                  
+                  // oculta notificacion
+
+                  $('div#notification-container').delay(3000).fadeOut(350);    
+                
+                }
+              });
+            }
           }
-        }
-      });
+        });
+      }
     });
 
 }
 
+function validacion(){
+
+  //validaciones 
+  $(".icon-danger").fadeOut().remove();
+  
+      if ($("#nomProducto").val() == "") {  
+          $("label[for='nomProducto']").focus().before('<span class="control-label icon-danger"> <span>&nbsp;');  
+          $(".nomProducto").addClass("has-error");
+              
+          return false;  
+      }
+
+          return true;
+  }
+
+   //elimina el icono rojo de validacion 
+   $("#nomProducto").bind('blur keyup change', function(){  
+    if ($(this).val() != "") { 
+    $(".form-group").removeClass("has-error");
+    $(".icon-danger").fadeOut().remove();
+        return false;  
+    }  
+});	     
 
 // ---------------------------------- Seccion Modificar producto --------------------------------------
 

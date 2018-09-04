@@ -103,8 +103,8 @@
 
 @stop
 @section('js')
-  <script type="text/javascript" src="{{ asset('js/inventario.js') }}"></script> 
-  <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>  
+  <script type="text/javascript" src="{{ asset('js/inventario.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/select2.js') }}"></script>
   @stack('js')
   @yield('js')
 @stop

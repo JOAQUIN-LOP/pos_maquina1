@@ -5,9 +5,9 @@
 
     <div class="panel-body">
       <form id="factura" class="head-factura">
-        {{ csrf_field() }}   
+        {{ csrf_field() }}
         <input type="text" class="form-control" name="_token" id="token" value="{{ csrf_token() }}" style="display:none">
-        
+
         <div class="row">
           <div class="col-sm-12">
             <div class="col-sm-1">
@@ -16,16 +16,16 @@
                 <input type="text" class="form-control" name="no_factura" id="no_factura" value="{{$numero}}" readonly="true">
               </div>
             </div>
-          </div>            
+          </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12">
-             
+
             <div class="col-sm-2">
               <div class="form-group">
                 <label for="">Cantidad*</label>
-                <input type="text" class="form-control" id="cantidad" placeholder="0">                
+                <input type="text" class="form-control" id="cantidad" placeholder="0">
               </div>
             </div>
             <div class="col-sm-2">
@@ -36,7 +36,7 @@
                   @foreach($productos as $producto)
                     <option value="{{$producto->idProducto}}">{{$producto->nomProducto}}</option>
                   @endforeach
-                </select>                              
+                </select>
               </div>
             </div>
             <div class="col-sm-2">
@@ -44,56 +44,56 @@
                 <label for="">Precio Unitario*</label>
                 <select name="precio_prod" id="precio_prod" class="form-control seleccionar">
                   <option value="a">Precio</option>
-                </select>  
+                </select>
               </div>
             </div>
-             <div class="col-sm-2">
+            <div class="col-sm-2">
               <div class="form-group">
                 <label for="">Sub Total</label>
                 <input type="text" class="form-control" id="sub_total" name="sub_total" readonly="true">
               </div>
-            </div>            
+            </div>
             <div class="col-sm-2">
               <div class="form-group">
                 <label>&nbsp;</label>
-                <button type="button" id="btn_agregar" class="btn btn-primary btn-as-block"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Agregar</button>                            
+                <button type="button" id="btn_agregar" class="btn btn-primary btn-as-block"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Agregar</button>
               </div>
-            </div>                 
+            </div>
           </div>
 
-        </div>  
+        </div>
       </form>
 
       <form id="factura_body" class="head-factura">
         <div class="row">
           <div class="col-sm-12">
-            <div class="scrollable">                          
+            <div class="scrollable">
               <table id="creacion_factura" class="display table table-responsive table-bordered table-striped table-hover">
                 <thead>
-                  <tr>                  
+                  <tr>
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Precio Unitario</th>
-                    <th>Subtotal</th>                  
+                    <th>Subtotal</th>
                     <th>Opción</th>
                   </tr>
                 </thead>
 
-                <tbody>               
+                <tbody>
 
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        
+
       </form>
 
       <div class="row">
         <div class="col-sm-12">
           <div class="col-sm-2">
             <div class="form-group">
-              <label for="total_cantidad">Total Productos</label>                        
+              <label for="total_cantidad">Total Productos</label>
               <input type="text" class="form-control" name="total_cantidad" id="total_cantidad" readonly="true">
             </div>
           </div>
@@ -118,7 +118,7 @@
         </div>
       </div>
 
-    </div>         
+    </div>
 </div>
-  
+
   <script type="text/javascript" src="{{ asset('js/carga_factura.js') }}"></script>
