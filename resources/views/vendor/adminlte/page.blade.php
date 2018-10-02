@@ -3,8 +3,8 @@
 @section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 'blue') . '.min.css')}} ">
     <!-- icheck -->
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/icheck/skins/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/icheck/skins/square/blue.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/icheck/skins/all.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/icheck/skins/square/blue.css') }}"> --}}
     <!-- Personal Css -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/articulos.css') }}">
     @stack('css')

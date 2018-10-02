@@ -96,7 +96,20 @@
         <div class="notification-message"><span id="mensaje"></span></div>
     </div>
   </div>
-  
+
+
+  <!-- Modal -->
+<div id="ModalCargando" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header callout callout-warning" style="border-radius:0px; padding-top:30px; padding-bottom:30px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div id="MensajeModal" class="modal-title"></div>
+            </div>
+        </div>
+    </div>
+</div>
 {{--  bootbox lib  --}}
 
 <script src="{{ asset('js/bootbox.min.js') }}"></script>
@@ -107,7 +120,15 @@
 
 {{-- alertify lib --}}
 <script src="{{ asset('vendor/adminlte/vendor/touchspin/js/jquery.bootstrap-touchspin.min.js') }}"></script>
-
+<script >
+function MsjAlertShow(mensaje){
+    $("#MensajeModal").html(mensaje);
+    $('#ModalCargando').modal('show');
+}
+function MsjAlertHide(){
+    $('#ModalCargando').modal('hide');
+}
+</script>
 @yield('adminlte_js')
 
 </body>
