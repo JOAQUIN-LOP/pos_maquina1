@@ -44,6 +44,7 @@ $(document).ready(function () {
     
       tabla = $('#TablaDetalle').DataTable(
       {
+        responsive:true,
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
         // agregamos botones para exportar la informacion 
         buttons: [ // agregamos botones para exportar la informacion 
@@ -121,6 +122,7 @@ $('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
     url =  $('#pathDetalleProd').val();   
       tabla2 = $('#detallePrecioProducto').DataTable(
       {
+        responsive:true,
         "ajax":
 				{
 					url: url + "/" + id + "/" + anioActual + "/" + NumInventario[mesActual],
@@ -314,6 +316,7 @@ $('#TablaDetalle').on('click','button.AgregarPrecioPro', function(){
     
     TablaList = $('#TablaList').DataTable(
       {
+        responsive:true,
         destroy:true,
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
         // agregamos botones para exportar la informacion 
