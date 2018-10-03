@@ -9,7 +9,9 @@ $(document).ready(function(){
 		      "<p>Factura Guardada</p>";
 
 	/*configuración del touchspin*/
-	$("#cantidad").TouchSpin({
+	$("#cantidad").TouchSpin({		
+		min: 0,
+		max: 100000,
 		verticalbuttons: true
 	});
 
