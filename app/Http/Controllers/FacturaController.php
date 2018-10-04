@@ -209,7 +209,7 @@ class FacturaController extends Controller
             $precios = DB::table('detalle_producto as det')
                 ->select('det.precio_unidad')
                     ->where('det.idProducto',$id)
-                    ->where('det.estado',1),
+                    ->where('det.estado',1)
                         ->orderBy('det.precio_unidad')
                         ->get();
 
