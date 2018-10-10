@@ -71,7 +71,7 @@
 
 {{--  modal   --}}
 
-<div class="modal modal-default fade" id="modalSuccess">
+<div class="modal modal-default fade" id="modalSuccess"  style="overflow-y: scroll; background-color: rgba(0,0,0,0.8);">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header bg-success">
@@ -128,7 +128,7 @@
 
 
 {{--  modal 2  --}}
-<div class="modal modal-default fade" id="modal-info">
+<div class="modal modal-default fade" id="modal-info" style="overflow-y: scroll; background-color: rgba(0,0,0,0.8);">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header bg-info">

@@ -12,6 +12,7 @@ var route = $("#route").val();
     url =  $('#CrearProducto').attr('action');
       tabla = $('#Productos').DataTable(
       {
+        responsive:true,
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
         buttons: [ // agregamos botones para exportar la informacion 
           {
@@ -174,6 +175,7 @@ if(route == "home/producto/edit"){
     
       tabla2 = $('#EditProductos').DataTable(
       {
+        responsive:true,
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
         buttons: [ // agregamos botones para exportar la informacion 
           {
