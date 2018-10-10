@@ -10,6 +10,8 @@ $(document).ready(function(){
 
 	/*configuración del touchspin*/
 	$("#cantidad").TouchSpin({
+		min: 0,
+		max: 100000,
 		verticalbuttons: true
 	});
 
