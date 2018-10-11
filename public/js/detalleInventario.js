@@ -109,19 +109,10 @@ $('document').ready(function(){
         
         var existencia = parseInt(exist);
         if(valor != ""){
-            if(valor <= existencia){
+            
                 var total = valor*codigo;
                 $(this).parents("tr").find(".total").val(parseFloat(total).toFixed(2));
                 $(this).parents("tr").find(".Agregar").show();
-            }else{
-                $(this).parents("tr").find(".Agregar").hide();
-                MsjAlertShow('<p class="text-center">La cantidad exede el numero de existencia</p>');
-                setTimeout(function(){ MsjAlertHide(); }, 1500);
-                //$(this).val("");
-                // do something in the background
-                $(this).parents("tr").find(".total").val("");
-                $(this).parents("tr").find(".Agregar").hide();
-            }
             
         }
         if(valor==""){
