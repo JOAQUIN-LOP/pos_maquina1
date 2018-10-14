@@ -58,7 +58,7 @@ $('document').ready(function(){
                     value.producto['nomProducto'],
                     '<input type="text" class="form-control input-sm precio" value="'+value['precio_unidad']+'" readonly>',
                     parseInt(value['cantidad_unidades']),
-                    '<input type="number" class="form-control input-sm cantidad" max="'+parseInt(value['cantidad_unidades'])+'" value="" onkeypress="return event.charCode >= 48" min="0">',
+                    '<input type="number" class="form-control input-sm cantidad" max="'+parseInt(value['cantidad_unidades'])+'" value="" min="0">',
                     '<input type="text" class="form-control input-sm total" readonly>',
                     '<a name="'+value['idProducto']+'" class="btn btn-primary btn-xs Agregar" data-toggle="tooltip" title="Agregar Producto" style="display:none"><i class="fa fa-plus"></i></a>'
                 ]).draw(false);
