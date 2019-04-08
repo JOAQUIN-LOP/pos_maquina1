@@ -177,7 +177,7 @@ class DetalleProductoController extends Controller
     public function delete($id)
     {
         
-        $data =  DB::table('detalle_producto')->where('id_detalle_producto',$id)->update(array('cantidad_unidades'=>0));
+        $data =  DB::table('detalle_producto')->where('id_detalle_producto',$id)->update(array('estado'=>0));
         return response()->json(['notification' => 'success']); 
 
     }
