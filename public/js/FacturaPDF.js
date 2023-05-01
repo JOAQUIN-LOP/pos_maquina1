@@ -6,9 +6,9 @@ $("#imprimir_factura").on('click', function(){
     
     $.get(urlEmp+"/"+idVal, function (result) {        
    
-    var doc = new jsPDF('l', 'pt', 'letter');
+    var doc = new jsPDF('2', 'pt', 'letter');
 
-    var totalPagesExp = "{total_pages_count_string}";
+   var totalPagesExp = "{total_pages_count_string}";
 
     var pageContent = function (data) {
         // HEADER
@@ -16,45 +16,45 @@ $("#imprimir_factura").on('click', function(){
         doc.setFontSize(20);
         doc.setTextColor(40);
         doc.setFontStyle('normal');
-        doc.setDrawColor(48, 55, 62);
+        doc.setDrawColor(38, 45, 52);
         var fecha = new Date();
         let FActual = fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear();
         // encabezado 
-        doc.setFontSize(8);
-        doc.writeText(-50, 60, `Fecha Impresión: ${FActual}`, { align: 'right' });
+        doc.setFontSize(10);
+        doc.writeText(-7, 15, `Fecha Impresión: ${FActual}`, { align: 'right' });
         doc.setFontSize(16);
         doc.setFont("times");
         doc.setFontType("bold");
-        doc.writeText(20, 60, `${result.cabecera[0].nom_empresa}`, { align: 'center' });
+        doc.writeText(10, 20, `${result.cabecera[0].nom_empresa}`, { align: 'center' });
         doc.setFontSize(14);
         doc.setFontType("normal");
-        doc.writeText(20, 80, `${result.cabecera[0].nom_sucursal}`, { align: 'center' });
+        doc.writeText(10, 40, `${result.cabecera[0].nom_sucursal}`, { align: 'center' });
         doc.setFontSize(11);
-        doc.writeText(120, 120,`${result.cabecera[0].num_factura}`, { align: 'lefth' });
-        doc.writeText(40, 120, `No. Factura:`, { align: 'lefth' });
-        doc.line(110, 127, 285, 127);
-        doc.writeText(-150, 120,`${result.cabecera[0].fecha}`, { align: 'right' });
-        doc.writeText(-230, 120, `Fecha:`, { align: 'right' });
-        doc.line(570, 127, 745, 127);
+        doc.writeText(70, 20,`${result.cabecera[0].num_factura}`, { align: 'lefth' });
+        doc.writeText(8, 18, `No. Factura:`, { align: 'lefth' });
+        //doc.line(7, 20, 140, 20);
+        doc.writeText(45, 35,`${result.cabecera[0].fecha}`, { align: 'left' });
+        doc.writeText(15, 35, `Fecha:`, { align: 'lefth' });
+       // doc.line(570, 127, 745, 127);
         
 
         // FOOTER
         var str = "Pagina " + data.pageCount;
-        // Total page number plugin only available in jspdf v1.0+
+        //Total page number plugin only available in jspdf v1.0+
         if (typeof doc.putTotalPages === 'function') {
-            doc.setFontSize(12);
+            doc.setFontSize(11);
             doc.setFontType("normal");
-            doc.writeText(150, 548, `${parseInt(result.cantidades[0].cantidad)}` , { align: 'lefth' });
-            doc.writeText(430, 548, `${result.cantidades[0].total}`, { align: 'lefth' });
+            doc.writeText(185, 775, `${parseInt(result.cantidades[0].cantidad)}` , { align: 'lefth' });
+            doc.writeText(-120, 775, `${result.cantidades[0].total}`, { align: 'right' });
             doc.setFontType("bold");
-            doc.writeText(40, 550, `Total Productos: ________________________________ Total Factura: __________________________________`, { align: 'lefth' }); 
-            doc.setFontSize(9);
+            doc.writeText(15, 775, `Total Productos: _______________________________ Total a Facturar: _______________________________`, { align: 'lefth' }); 
+            doc.setFontSize(0);
             doc.setFontType("normal");
             str = str + " de " + totalPagesExp;
         }
        
         var pageHeight = doc.internal.pageSize.height || doc.internal.pageSize.getHeight();
-        doc.text(str, data.settings.margin.left, pageHeight  - 25);
+        doc.text(str, data.settings.margin.left, pageHeight  - 50);
         
     };
     let rows = [];
@@ -66,7 +66,7 @@ $("#imprimir_factura").on('click', function(){
         theme: 'grid',
         headerStyles: {fillColor: [48, 55, 62]},
         addPageContent: pageContent,
-        margin: { top: 170, bottom: 100 },
+        margin: { top: 50, bottom: 25},
 
     });
 
